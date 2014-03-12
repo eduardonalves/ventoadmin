@@ -9,7 +9,7 @@ if($_GET['an'] != ""){ $ano = $_GET['an']; } else {$ano = date("Y");}
 switch ($mes) {
         case "01":    $m = Janeiro;     break;
         case "02":    $m = Fevereiro;   break;
-        case "03":    $m = Março;       break;
+        case "03":    $m = MarÃ§o;       break;
         case "04":    $m = Abril;       break;
         case "05":    $m = Maio;        break;
         case "06":    $m = Junho;       break;
@@ -36,7 +36,7 @@ foreach ($dias as $d){
 	}
 	
 
-//// Números de dias não trabalhados
+//// NÃºmeros de dias nÃ£o trabalhados
 
 $dnt = explode(' | ',$dias_nt);
 
@@ -100,12 +100,12 @@ window.location = '?p=<?= $_GET['p'];?>&pro=<?= $produto;?>&m=<?= $mes;?>&an=<?=
 
 ?>
 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <style type="text/css">
 
 
-/* ------ CALENDÁRIO ----- */
+/* ------ CALENDÃRIO ----- */
 #calendariodnt{ position:absolute; width:420px;  padding:5px; border:1px solid #CCC;
 
 background: #f9f9f9; /* Old browsers */
@@ -175,8 +175,8 @@ input[type="submit"]:active{ background:#ededed;}
 
 
 
- /*Cria uma função de nome mascara, onde o primeiro argumento passado é um dos
-     objetos input O segundo é especificando o tipo de método no qual será tratado*/
+ /*Cria uma funÃ§Ã£o de nome mascara, onde o primeiro argumento passado Ã© um dos
+     objetos input O segundo Ã© especificando o tipo de mÃ©todo no qual serÃ¡ tratado*/
     function mascara(o,f){
         v_obj=o;
         v_fun=f;
@@ -184,13 +184,13 @@ input[type="submit"]:active{ background:#ededed;}
     }
     
     function execmascara(){
-        /*Pegue o valor do objeto e atribua o resultado da função v_fun; cujo o conteúdo
-        da mesma é a função que foi referida e que será utilizada para tratar dos dados*/
+        /*Pegue o valor do objeto e atribua o resultado da funÃ§Ã£o v_fun; cujo o conteÃºdo
+        da mesma Ã© a funÃ§Ã£o que foi referida e que serÃ¡ utilizada para tratar dos dados*/
         v_obj.value=v_fun(v_obj.value);
     }
     
     function soNumeros(v){
-        return v.replace(/\D/g,"");//Exclua tudo que não for numeral e retorne o valor
+        return v.replace(/\D/g,"");//Exclua tudo que nÃ£o for numeral e retorne o valor
     }
     	
 	
@@ -230,7 +230,7 @@ function uncheckdia(d){
 <table border="0" width="1000px">
 
 <tr valign="bottom" height="40px" align="left">
-<td style="font-size:14px; color:#999;" colspan="2">DEFINIR METAS PARA O MÊS DE <b><?= strtoupper($m).' DE '.$ano;?></b></td>
+<td style="font-size:14px; color:#999;" colspan="2">DEFINIR METAS PARA O MÃŠS DE <b><?= strtoupper($m).' DE '.$ano;?></b></td>
 
 </tr>
 
@@ -271,11 +271,11 @@ function uncheckdia(d){
 <td>
 &nbsp; &nbsp; &nbsp;
 
-Mês: 
+MÃªs: 
 <select name="m">
 <option value="01" <? if($mes == '01'){ ?> selected="selected" <? } ?>>JANEIRO</option>
 <option value="02" <? if($mes == '02'){ ?> selected="selected" <? } ?>>FEVEREIRO</option>
-<option value="03" <? if($mes == '03'){ ?> selected="selected" <? } ?>>MARÇO</option>
+<option value="03" <? if($mes == '03'){ ?> selected="selected" <? } ?>>MARÃ‡O</option>
 <option value="04" <? if($mes == '04'){ ?> selected="selected" <? } ?>>ABRIL</option>
 <option value="05" <? if($mes == '05'){ ?> selected="selected" <? } ?>>MAIO</option>
 <option value="06" <? if($mes == '06'){ ?> selected="selected" <? } ?>>JUNHO</option>
@@ -342,7 +342,7 @@ Mês:
 
 <tr height="340px" valign="top">
 <td colspan="2">
-<b>Selecione os dias em que não haverá expediente:</b><br />
+<b>Selecione os dias em que nÃ£o haverÃ¡ expediente:</b><br />
 <br />
 
 <div id="calendariodnt">

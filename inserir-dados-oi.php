@@ -1,6 +1,6 @@
 <?
 
-// Verificar se está logado
+// Verificar se estÃ¡ logado
 if(!isset($_SESSION['usuario'])){ ?>
 	
 <script type="text/javascript">
@@ -34,7 +34,7 @@ $telefone3 = $_POST['itelefone3'];
 $tipo_tel3 = $_POST['tipotel3'];
 
 
-// Ensereço Instalação
+// EnsereÃ§o InstalaÃ§Ã£o
 $endereco = $_POST['endereco'];
 $numero = $_POST['numero'];
 $lote = $_POST['lote'];
@@ -70,7 +70,7 @@ $vencimento = $_POST['vencimento'];
 $valor = $_POST['valor'];
 
 
-$status = "PRÉ-ANÁLISE";
+$status = "PRÃ‰-ANÃLISE";
 
 $obs = $_POST['obs'];
 
@@ -102,13 +102,13 @@ window.location = '?p=inserir-dados-oi&i=<?= $_POST['redir'];?>';
 
 
 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <script type="text/javascript" src="js/jquery-ui-1.7.3.custom.min.js"></script>
 <script type="text/javascript" src="js/calendario.js"></script>
 <script type="text/javascript" src="js/cep.js"></script>
 <script type="text/javascript" charset="utf-8"></script>
-<link rel="stylesheet" type=text/css href="css/ui-lightness/jquery-ui-1.7.3.custom.css" />
+<link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.7.3.custom.css" />
 <script type="text/javascript">
 
 
@@ -137,8 +137,8 @@ $('#escolherproduto').animate({paddingTop:'10px',paddingBottom:'10px'},1000, fun
 }
 
 
- /*Cria uma função de nome mascara, onde o primeiro argumento passado é um dos
-     objetos input O segundo é especificando o tipo de método no qual será tratado*/
+ /*Cria uma funÃ§Ã£o de nome mascara, onde o primeiro argumento passado Ã© um dos
+     objetos input O segundo Ã© especificando o tipo de mÃ©todo no qual serÃ¡ tratado*/
     function mascara(o,f){
         v_obj=o;
         v_fun=f;
@@ -146,21 +146,21 @@ $('#escolherproduto').animate({paddingTop:'10px',paddingBottom:'10px'},1000, fun
     }
     
     function execmascara(){
-        /*Pegue o valor do objeto e atribua o resultado da função v_fun; cujo o conteúdo
-        da mesma é a função que foi referida e que será utilizada para tratar dos dados*/
+        /*Pegue o valor do objeto e atribua o resultado da funÃ§Ã£o v_fun; cujo o conteÃºdo
+        da mesma Ã© a funÃ§Ã£o que foi referida e que serÃ¡ utilizada para tratar dos dados*/
         v_obj.value=v_fun(v_obj.value);
     }
     
     function soNumeros(v){
-        return v.replace(/\D/g,"");//Exclua tudo que não for numeral e retorne o valor
+        return v.replace(/\D/g,"");//Exclua tudo que nÃ£o for numeral e retorne o valor
     }
     
     function telefone(v){
-        //Remove tudo o que não é dígito
+        //Remove tudo o que nÃ£o Ã© dÃ­gito
         v=v.replace(/\D/g,"");
-        //Coloca parênteses em volta dos dois primeiros dígitos
+        //Coloca parÃªnteses em volta dos dois primeiros dÃ­gitos
         v=v.replace(/^(\d\d)(\d)/g,"($1) $2");
-        //Coloca hífen entre o quarto e o quinto dígitos
+        //Coloca hÃ­fen entre o quarto e o quinto dÃ­gitos
         v=v.replace(/(\d{4})(\d)/,"$1-$2");
         //retorne o resultado
         return v;
@@ -168,11 +168,11 @@ $('#escolherproduto').animate({paddingTop:'10px',paddingBottom:'10px'},1000, fun
 	
 
     function cpf(v){
-        //Remove tudo o que não é dígito
+        //Remove tudo o que nÃ£o Ã© dÃ­gito
         v=v.replace(/\D/g,"");
-        //Coloca parênteses em volta dos dois primeiros dígitos
+        //Coloca parÃªnteses em volta dos dois primeiros dÃ­gitos
         v=v.replace(/^(\d{3})(\d)/g,"$1.$2");
-        //Coloca hífen entre o quarto e o quinto dígitos
+        //Coloca hÃ­fen entre o quarto e o quinto dÃ­gitos
         v=v.replace(/(\d{3})(\d)/,"$1.$2");
         //retorne o resultado
 		v=v.replace(/(\d{3})(\d)/,"$1-$2");
@@ -180,11 +180,11 @@ $('#escolherproduto').animate({paddingTop:'10px',paddingBottom:'10px'},1000, fun
     }
 	
 	    function cnpj(v){
-        //Remove tudo o que não é dígito
+        //Remove tudo o que nÃ£o Ã© dÃ­gito
         v=v.replace(/\D/g,"");
-        //Coloca parênteses em volta dos dois primeiros dígitos
+        //Coloca parÃªnteses em volta dos dois primeiros dÃ­gitos
         v=v.replace(/^(\d{2})(\d)/g,"$1.$2");
-        //Coloca hífen entre o quarto e o quinto dígitos
+        //Coloca hÃ­fen entre o quarto e o quinto dÃ­gitos
         v=v.replace(/(\d{3})(\d)/,"$1.$2");
         //retorne o resultado
 		v=v.replace(/(\d{3})(\d)/,"$1/$2");
@@ -194,20 +194,20 @@ $('#escolherproduto').animate({paddingTop:'10px',paddingBottom:'10px'},1000, fun
     }
 	
     function cep(v){
-        //Remove tudo o que não é dígito
+        //Remove tudo o que nÃ£o Ã© dÃ­gito
         v=v.replace(/\D/g,"");
-        //Coloca hífen entre o quarto e o quinto dígitos
+        //Coloca hÃ­fen entre o quarto e o quinto dÃ­gitos
         v=v.replace(/(\d{5})(\d)/,"$1-$2");
         //retorne o resultado
         return v;
     }	
 	
     function data(v){
-        //Remove tudo o que não é dígito
+        //Remove tudo o que nÃ£o Ã© dÃ­gito
         v=v.replace(/\D/g,"");
-        //Coloca parênteses em volta dos dois primeiros dígitos
+        //Coloca parÃªnteses em volta dos dois primeiros dÃ­gitos
         v=v.replace(/^(\d{2})(\d)/g,"$1/$2");
-        //Coloca hífen entre o quarto e o quinto dígitos
+        //Coloca hÃ­fen entre o quarto e o quinto dÃ­gitos
         v=v.replace(/(\d{2})(\d)/,"$1/$2");
         return v;
     }	
@@ -218,9 +218,9 @@ $('#escolherproduto').animate({paddingTop:'10px',paddingBottom:'10px'},1000, fun
 
 function verificapessoa(v){
 	
-if(v == 'Pessoa Jurídica') {
+if(v == 'Pessoa JurÃ­dica') {
 	
-     document.getElementById('nomel').innerHTML = 'Razão Social:';
+     document.getElementById('nomel').innerHTML = 'RazÃ£o Social:';
      document.getElementById('nomemael').style.display = 'none';
      document.getElementById('cpfl').style.display = 'none';
 	 document.getElementById('idcpf').value = '';
@@ -232,7 +232,7 @@ if(v == 'Pessoa Jurídica') {
 	 document.getElementById('inpsexo').style.display = 'none';
 	 document.getElementById('inpestadocivil').style.display = 'none';
 	 
-} else if(v == 'Pessoa Física') {
+} else if(v == 'Pessoa FÃ­sica') {
 	
      document.getElementById('nomel').innerHTML = 'Nome:';
      document.getElementById('nomemael').style.display = '';	 
@@ -298,7 +298,7 @@ if(document.getElementById('tel1').value == ''){ document.getElementById('etelef
 
 
 
-/////// -- ENDEREÇO CLIENTE -- ////////
+/////// -- ENDEREÃ‡O CLIENTE -- ////////
 
 if(document.getElementById('endereco').value == '' || document.getElementById('numero').value == ''){ document.getElementById('eendereco').style.display = ''; e=(e+1)} else { document.getElementById('eendereco').style.display = 'none';}		
 	
@@ -323,7 +323,7 @@ if(document.getElementById('plano').value == ''){ document.getElementById('eplan
 if(document.getElementById('calendario2').value == ''){ document.getElementById('evenda').style.display = ''; e=(e+1)} else { document.getElementById('evenda').style.display = 'none';}
 
 /*	
-if( document.getElementById('pagamento').value == 'DÉBITO' && (document.getElementById('idbanco').value == '' || document.getElementById('agencia').value == '' || document.getElementById('contacorrente').value == '')){ document.getElementById('ebanco').style.display = ''; e=(e+1)} else { document.getElementById('ebanco').style.display = 'none';}
+if( document.getElementById('pagamento').value == 'DÃ‰BITO' && (document.getElementById('idbanco').value == '' || document.getElementById('agencia').value == '' || document.getElementById('contacorrente').value == '')){ document.getElementById('ebanco').style.display = ''; e=(e+1)} else { document.getElementById('ebanco').style.display = 'none';}
 	
 if(!document.getElementById('venci1').checked && !document.getElementById('venci2').checked && !document.getElementById('venci3').checked && !document.getElementById('venci4').checked ){ document.getElementById('evencimento').style.display = ''; e=(e+1)} else { document.getElementById('evencimento').style.display = 'none';}
 	*/
@@ -513,8 +513,8 @@ Escolha um produto:
 <option value="<?= $MONITORES['id']?>"><?= $MONITORES['nome']?></option>
 <? } ?>
 </select> 
-<span class="campoobrigatorio" title="Campo Obrigatório">*</span>
-<span class="erro" id="emonitor" style="display:none">Por favor, selecione o monitor responsável pelo operador que fez a venda!</span>
+<span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
+<span class="erro" id="emonitor" style="display:none">Por favor, selecione o monitor responsÃ¡vel pelo operador que fez a venda!</span>
 </td>
 </tr>
 
@@ -532,9 +532,9 @@ Escolha um produto:
 <tr align="left">
 <td>Tipo:</td>
 <td>
-<input type="radio" name="pessoa" id="pessoa1" value="Pessoa Física" onchange="verificapessoa(this.value)" /> Pessoa Física
-<input type="radio" name="pessoa" id="pessoa2" value="Pessoa Jurídica" onchange="verificapessoa(this.value)" /> Pessoa Jurídica
-<span class="campoobrigatorio" title="Campo Obrigatório">*</span>
+<input type="radio" name="pessoa" id="pessoa1" value="Pessoa FÃ­sica" onchange="verificapessoa(this.value)" /> Pessoa FÃ­sica
+<input type="radio" name="pessoa" id="pessoa2" value="Pessoa JurÃ­dica" onchange="verificapessoa(this.value)" /> Pessoa JurÃ­dica
+<span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
 <span class="erro" id="epessoa" style="display:none">Por favor, selecione o tipo do cliente!</span>
 </td>
 </tr>
@@ -542,7 +542,7 @@ Escolha um produto:
 <tr align="left">
 <td id="nomel">Nome:</td>
 <td><input type="text" id="nome" name="nome" size="40" />
-<span class="campoobrigatorio" title="Campo Obrigatório">*</span>
+<span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
 <span class="erro" id="enome" style="display:none">Por favor, digite o nome do cliente!</span>
 </td>
 </tr>
@@ -571,8 +571,8 @@ Escolha um produto:
 <option value="<?= $an; ?>"> <?= $an; ?></option>
 <? } ?>
 </select>
-<span class="campoobrigatorio" title="Campo Obrigatório">*</span>
-<span class="erro" id="enasc" style="display:none">Por favor, selecione uma data de nascimento válida!</span>
+<span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
+<span class="erro" id="enasc" style="display:none">Por favor, selecione uma data de nascimento vÃ¡lida!</span>
 </td>
 </tr>
 
@@ -595,31 +595,31 @@ Escolha um produto:
 
 <tr align="left" id="inprg">
 <td>RG:</td>
-<td id="rginp"><input type="text" id="rg" name="rg" size="20" /> Org. Exp: <input type="text" title="Orgão Expedidor" id="orgexp" name="orgexp" size="20" />
+<td id="rginp"><input type="text" id="rg" name="rg" size="20" /> Org. Exp: <input type="text" title="OrgÃ£o Expedidor" id="orgexp" name="orgexp" size="20" />
 <span class="erro" id="erg" style="display:none">Por favor, digite o RG do cliente!</span>
 </td>
 </tr>
 
 
 <tr align="left">
-<td>Nome da Mãe:</td>
+<td>Nome da MÃ£e:</td>
 <td><input type="text" id="nomemae" name="nomemae" size="40" />
-<span class="campoobrigatorio" title="Campo Obrigatório">*</span>
-<span class="erro" id="enomemae" style="display:none">Por favor, digite o nome da mãe do cliente!</span>
+<span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
+<span class="erro" id="enomemae" style="display:none">Por favor, digite o nome da mÃ£e do cliente!</span>
 </td>
 </tr>
 
 <tr align="left" id="inpprofissao">
-<td class="t1">Profissão:</td>
+<td class="t1">ProfissÃ£o:</td>
 <td><input type="text" name="profissao" id="profissao" size="50" /> 
-<span class="campoobrigatorio" title="Campo Obrigatório">*</span> 
-<span class="erro" id="eprofissao" style="display:none">Por favor, preencha a profissão do cliente!</span></td>
+<span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span> 
+<span class="erro" id="eprofissao" style="display:none">Por favor, preencha a profissÃ£o do cliente!</span></td>
 </tr>
 
 <tr align="left" id="inpsexo">
 <td class="t1">Sexo:</td>
 <td><input type="radio" name="sexo" id="sexo1" value="Masculino" /> Masculino <input type="radio" name="sexo" id="sexo2" value="Feminino" /> Feminino
-<span class="campoobrigatorio" title="Campo Obrigatório">*</span>
+<span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
 <span class="erro" id="esexo" style="display:none">Por favor, selecione o sexo do cliente!</span>
 </td>
 </tr>
@@ -634,9 +634,9 @@ Escolha um produto:
 <option value="Desquitado">Desquitado</option>
 <option value="Separado">Separado</option>
 <option value="Divorciado">Divorciado</option> 
-<option value="Viúvo">Viúvo</option> 
+<option value="ViÃºvo">ViÃºvo</option> 
 </select>
-<span class="campoobrigatorio" title="Campo Obrigatório">*</span>
+<span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
 <span class="erro" id="eestadocivil" style="display:none">Por favor, selecione o Estado Civil do cliente!</span>
 </td>
 </tr>
@@ -645,7 +645,7 @@ Escolha um produto:
 <tr align="left">
 <td>Email:</td>
 <td><input type="text" id="email" name="email"  size="30" />
-<span class="campoobrigatorio" title="Campo Obrigatório">*</span>
+<span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
 <span class="erro" id="eemail" style="display:none">Por favor, digite o Email do cliente!</span>
 </td>
 </tr>
@@ -658,7 +658,7 @@ Escolha um produto:
 <option value="Celular">Celular</option>
 <option value="Comercial">Comercial</option>
 </select> 
-<span class="campoobrigatorio" title="Campo Obrigatório">*</span>
+<span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
 <span class="erro" id="etelefone" style="display:none">Por favor, digite pelo menos um telefone do cliente!</span>
 </td>
 </tr>
@@ -686,21 +686,21 @@ Escolha um produto:
 </tr>
 
 <tr height="30px" valign="bottom" align="left">
-<td style="color:#069; font-size:12px">Endereço de Instalação</td>
+<td style="color:#069; font-size:12px">EndereÃ§o de InstalaÃ§Ã£o</td>
 </tr>
 
 <tr align="left">
 <td>CEP:</td>
-<td><input type="text" id="idcep" name="icep" size="30" onkeyup="return getEndereco()" onchange="return getEndereco()" onKeyPress="mascara(this,cep)" maxlength="9" > <span class="erro" id="ecep" style="display:none">Por favor, digite o CEP da instalação!</span></td>
+<td><input type="text" id="idcep" name="icep" size="30" onkeyup="return getEndereco()" onchange="return getEndereco()" onKeyPress="mascara(this,cep)" maxlength="9" > <span class="erro" id="ecep" style="display:none">Por favor, digite o CEP da instalaÃ§Ã£o!</span></td>
 </tr>
 
 <tr align="left">
-<td>Endereço:</td>
-<td><input type="text" id="endereco" name="endereco" size="40" > <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
- Nº: <input type="text" name="numero" id="numero" size="5" /> <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
+<td>EndereÃ§o:</td>
+<td><input type="text" id="endereco" name="endereco" size="40" > <span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
+ NÂº: <input type="text" name="numero" id="numero" size="5" /> <span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
  Lote: <input type="text" name="lote" id="lote" size="5" /> 
  Quadra: <input type="text" name="quadra" id="quadra" size="5" /> <br /> 
- <span class="erro" id="eendereco" style="display:none">Por favor, digite pelo menos o logradouro e o número do endereço de instalação!</span>
+ <span class="erro" id="eendereco" style="display:none">Por favor, digite pelo menos o logradouro e o nÃºmero do endereÃ§o de instalaÃ§Ã£o!</span>
  </td>
 </tr>
 
@@ -712,8 +712,8 @@ Escolha um produto:
 <tr align="left">
 <td>Bairro:</td>
 <td><input type="text" id="bairro" name="bairro" size="30" > 
-<span class="campoobrigatorio" title="Campo Obrigatório">*</span>
-<span class="erro" id="ebairro" style="display:none">Por favor, digite o bairro da instalação!</span></td>
+<span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
+<span class="erro" id="ebairro" style="display:none">Por favor, digite o bairro da instalaÃ§Ã£o!</span></td>
 </tr>
 
 
@@ -730,21 +730,21 @@ Escolha um produto:
 
 <? } ?>
 </select> 
-<span class="campoobrigatorio" title="Campo Obrigatório">*</span>
-<span class="erro" id="euf" style="display:none">Por favor, selecione o estado da instalação!</span>
+<span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
+<span class="erro" id="euf" style="display:none">Por favor, selecione o estado da instalaÃ§Ã£o!</span>
 </td>
 </tr>
 
 <tr align="left">
 <td>Cidade:</td>
 <td>
-<input type="text" id="cidade" name="cidade" size="30" /> <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
+<input type="text" id="cidade" name="cidade" size="30" /> <span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
 
-<span class="erro" id="ecidade" style="display:none">Por favor, selecione a cidade da instalação!</span></td>
+<span class="erro" id="ecidade" style="display:none">Por favor, selecione a cidade da instalaÃ§Ã£o!</span></td>
 </tr>
 
 <tr align="left">
-<td>Ponto de Referência:</td>
+<td>Ponto de ReferÃªncia:</td>
 <td><textarea name="pontoref" rows="3" cols="30"></textarea>
 </td>
 </tr>

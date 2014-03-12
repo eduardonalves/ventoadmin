@@ -69,12 +69,13 @@
 			}
 			
 			
-			if(!in_array($esn, $duplicado))
+			if(!in_array("$esn", $duplicado))
 			{
-				array_push($duplicado, $esn);
+				array_push($duplicado, "$esn");
 			}else{
 				
-				$erro["duplicado"] = 1;
+				$erro["duplicado"] = 0;
+				$esnDuplicada = $esn;
 			}
 			
 			
@@ -92,7 +93,7 @@
 				}		
 				if($erro["duplicado"]!=0)
 				{
-				echo "<script>alert(\"ERRO: Saida com numeros de seriais duplicados.\");</script>";
+				echo "<script>alert(\"ERRO: Saida com numeros de seriais duplicados: " . $esnDuplicada . "\");</script>";
 				}
 				if($erro["inexistente"]!=0)
 				{

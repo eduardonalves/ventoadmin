@@ -3,7 +3,7 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.7.3.custom.min.js"></script>
-<link rel="stylesheet" type=text/css href="css/ui-lightness/jquery-ui-1.7.3.custom.css" />
+<link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.7.3.custom.css" />
 <script type="text/javascript" charset="utf-8"></script>
 <script src="js/jquery.maskedinput.js" type="text/javascript"></script>
 
@@ -161,7 +161,7 @@
                 if (n3 < n2) 
                 {
 
-                    $("#campoDinamico").append("<tr class='ap"+ n1 +"' align='left'><td style='width:158px;'><label id='serial' class='diagramacaoSerial' class='diagramacaoSerial2'>Serial "+n4+":</label></td><td><input type='text' name='serial"+n1+n4+"'  maxlength=\"20\" class='codigo' id='serial"+n1+n4+"'/><span class='campoobrigatorio' title='Campo Obrigat�rio'>*</span><span class='erro' id='epessoa' style='display:none'>Por favor, selecione o tipo do cliente!</span></td></tr>");
+                    $("#campoDinamico").append("<tr class='ap"+ n1 +"' align='left'><td style='width:158px;'><label id='serial' class='diagramacaoSerial' class='diagramacaoSerial2'>Serial "+n4+":</label></td><td><input type='text' name='serial"+n1+n4+"'  maxlength=\"20\" class='codigo' id='serial"+n1+n4+"'/><span class='campoobrigatorio' title='Campo Obrigatório'>*</span><span class='erro' id='epessoa' style='display:none'>Por favor, selecione o tipo do cliente!</span></td></tr>");
 					$("#serial"+n1+n4).focus();
 					
                 }
@@ -180,7 +180,7 @@
                 n4 = n3+1;
                 if (n3 < n2) 
                 {
-                    $("#campoDinamico").append("<tr class='ap"+ n1 +"' align='left'><td id='diag'style='width:158px;'><label id='serial'>Serial "+n4+":</label></td><td><input type='text'  maxlength=\"20\" name='serial"+n1+n4+"' class='codigo' id='serial"+n1+n4+"'/><span class='campoobrigatorio' title='Campo Obrigat�rio'>*</span><span class='erro' id='epessoa' style='display:none'>Por favor, selecione o tipo do cliente!</span></td></tr>");
+                    $("#campoDinamico").append("<tr class='ap"+ n1 +"' align='left'><td id='diag'style='width:158px;'><label id='serial'>Serial "+n4+":</label></td><td><input type='text'  maxlength=\"20\" name='serial"+n1+n4+"' class='codigo' id='serial"+n1+n4+"'/><span class='campoobrigatorio' title='Campo Obrigatório'>*</span><span class='erro' id='epessoa' style='display:none'>Por favor, selecione o tipo do cliente!</span></td></tr>");
 					$("#serial"+n1+n4).focus();
                 }
                 else{
@@ -253,7 +253,7 @@
 <tr align="left">
 <td>Nota Fiscal:</td>
 <td><input type="text" id="textBoxNotaFiscal" name="textBoxNotaFiscal" size="40" />
-<span class="campoobrigatorio" title="Campo Obrigat�rio">*</span>
+<span class="campoobrigatorio" title="Campo Obrigatório">*</span>
 <span class="erro" id="enome" style="display:none">Por favor, digite o nome do cliente!</span>
 </td>
 </tr>
@@ -282,7 +282,7 @@ echo"<option value=".$USUARIO['id'].">".$USUARIO['nome']."</option>";
 <option value="Parceiro">Parceiro</option>
 
 </select>   
-<span class="campoobrigatorio" title="Campo Obrigat�rio">*</span>
+<span class="campoobrigatorio" title="Campo Obrigatório">*</span>
 <span class="erro" id="enome" style="display:none">Por favor, digite o nome do cliente!</span>
 </td>
 </tr>

@@ -82,15 +82,26 @@ $numero = $_POST['numero'];
 
 $lote = $_POST['lote'];
 
-$quadra = $_POST['quadra'];	
+$quadra = $_POST['quadra'];
 
-$complemento = $_POST['complemento'];
+$loja = $_POST['loja'];
 
-$bairro = $_POST['bairro'];		
+$bloco = $_POST['bloco'];
 
-$cidade = $_POST['cidade'];	
+$sala = $_POST['sala'];
 
-$uf = $_POST['uf'];	
+$apto = $_POST['apto'];
+
+$casa = $_POST['casa'];
+
+if($_POST['complemento'] == 'fundos')
+	$fundos = $_POST['complemento'];
+
+$bairro = $_POST['bairro'];
+
+$cidade = $_POST['cidade'];
+
+$uf = $_POST['uf'];
 
 $cep = $_POST['icep'];
 
@@ -98,7 +109,7 @@ $ponto_referencia = $_POST['pontoref'];
 
 
 
-// Dados da Venda	
+// Dados da Venda
 
 $operador = $_POST['operador'];
 
@@ -202,11 +213,11 @@ if  (strstr(strtolower($USUARIO['login']), 'internet'))
 
 
 
-	
 
 
 
-$inserir = $conexao->query("INSERT INTO vendas_clarotv (protocolo,produto,tipoVenda,pessoa,nome,nome_mae,nascimento,cpf,rg,org_exp,data_exp,profissao,sexo,estado_civil,email,telefone,tipo_tel1,telefone2,tipo_tel2,telefone3,tipo_tel3,endereco,numero,lote,quadra,complemento,bairro,cidade,uf,cep,ponto_referencia,operador,monitor,os,esn,tipoLinha,tipoAssinatura,tipoPlano,plano,valorPlano,aparelho,valorAparelho,pagamento,tipoEntrega,data,data_venda,vencimento,status, numchip) VALUES ('".$protocolo."','3','".$tipoVenda."','".$pessoa."','".$nome."','".$nome_mae."','".$nascimento."','".$cpf."','".$rg."','".$org_exp."','".$data_exp."','".$profissao."','".$sexo."','".$estado_civil."','".$email."','".$telefone."','".$tipo_tel1."','".$telefone2."','".$tipo_tel2."','".$telefone3."','".$tipo_tel3."','".$endereco."','".$numero."','".$lote."','".$quadra."','".$complemento."','".$bairro."','".$cidade."','".$uf."','".$cep."','".$ponto_referencia."','".$operador."','".$monitor."','".$os."','".$esn."','".$tipoLinha."','".$tipoAssinatura."','".$tipoPlano."','".$plano."','".$valorPlano."','".$aparelho."','".$valorAparelho."','".$pagamento."','".$tipoEntrega."','".$data."','".$data."','".$vencimento."','".$status."', '".$numchip."')") or die('Ocorreu um Erro ao inserir os dados!');
+
+$inserir = $conexao->query("INSERT INTO vendas_clarotv (protocolo,produto,tipoVenda,pessoa,nome,nome_mae,nascimento,cpf,rg,org_exp,data_exp,profissao,sexo,estado_civil,email,telefone,tipo_tel1,telefone2,tipo_tel2,telefone3,tipo_tel3,endereco,numero,lote,quadra,loja,bloco,apto,sala,casa,fundos,bairro,cidade,uf,cep,ponto_referencia,operador,monitor,os,esn,tipoLinha,tipoAssinatura,tipoPlano,plano,valorPlano,aparelho,valorAparelho,pagamento,tipoEntrega,data,data_venda,vencimento,status, numchip) VALUES ('".$protocolo."','3','".$tipoVenda."','".$pessoa."','".$nome."','".$nome_mae."','".$nascimento."','".$cpf."','".$rg."','".$org_exp."','".$data_exp."','".$profissao."','".$sexo."','".$estado_civil."','".$email."','".$telefone."','".$tipo_tel1."','".$telefone2."','".$tipo_tel2."','".$telefone3."','".$tipo_tel3."','".$endereco."','".$numero."','".$lote."','".$quadra."','".$loja."','".$bloco."','".$apto."','".$sala."','".$casa."','".$fundos."','".$bairro."','".$cidade."','".$uf."','".$cep."','".$ponto_referencia."','".$operador."','".$monitor."','".$os."','".$esn."','".$tipoLinha."','".$tipoAssinatura."','".$tipoPlano."','".$plano."','".$valorPlano."','".$aparelho."','".$valorAparelho."','".$pagamento."','".$tipoEntrega."','".$data."','".$data."','".$vencimento."','".$status."', '".$numchip."')") or die('Ocorreu um Erro ao inserir os dados!');
 
 
 
@@ -923,6 +934,20 @@ if(document.getElementById('tel2').value == ''){ document.getElementById('etelef
 
 if(document.getElementById('endereco').value == ''){ document.getElementById('eendereco').style.display = ''; e=(e+1)} else { document.getElementById('eendereco').style.display = 'none';}
 
+//COMPLEMENTO
+
+if((document.getElementById('lote').value == '' || document.getElementById('quadra').value == '') && document.getElementById('complemento').value == 'lotequadra'){ document.getElementById('elotequadra').style.display = ''; e=(e+1)} else { document.getElementById('elotequadra').style.display = 'none';}
+
+if(document.getElementById('apto').value == '' && document.getElementById('complemento').value == 'apto'){ document.getElementById('eapto').style.display = ''; e=(e+1)} else { document.getElementById('eapto').style.display = 'none';}
+
+if(document.getElementById('casa').value == '' && document.getElementById('complemento').value == 'casa'){ document.getElementById('ecasa').style.display = ''; e=(e+1)} else { document.getElementById('ecasa').style.display = 'none';}
+
+if(document.getElementById('loja').value == '' && document.getElementById('complemento').value == 'loja'){ document.getElementById('eloja').style.display = ''; e=(e+1)} else { document.getElementById('eloja').style.display = 'none';}
+
+if(document.getElementById('sala').value == '' && document.getElementById('complemento').value == 'sala'){ document.getElementById('esala').style.display = ''; e=(e+1)} else { document.getElementById('esala').style.display = 'none';}
+
+///
+
 if(document.getElementById('bairro').value == ''){ document.getElementById('ebairro').style.display = ''; e=(e+1)} else { document.getElementById('ebairro').style.display = 'none';}
 
 if(document.getElementById('uf').value == ''){ document.getElementById('euf').style.display = ''; e=(e+1)} else { document.getElementById('euf').style.display = 'none';}	
@@ -1138,7 +1163,87 @@ $('#pagamento').live('change', function(){
 });
 	});
 
-
+function verificacomplemento(v)
+	{
+	
+	if(v == 'lotequadra'){
+		document.getElementById('tdlotequadra').style.display = '';
+		document.getElementById('tdapto').style.display = 'none';
+		document.getElementById('tdcasa').style.display = 'none';
+		document.getElementById('tdloja').style.display = 'none';
+		document.getElementById('tdsala').style.display = 'none';
+		document.getElementById('apto').value = '';
+		document.getElementById('bloco').value = '';
+		document.getElementById('casa').value = '';
+		document.getElementById('loja').value = '';
+		document.getElementById('sala').value = '';
+	}
+	else if(v == 'apto'){
+		document.getElementById('tdapto').style.display = '';
+		document.getElementById('tdlotequadra').style.display = 'none';
+		document.getElementById('tdcasa').style.display = 'none';
+		document.getElementById('tdloja').style.display = 'none';
+		document.getElementById('tdsala').style.display = 'none';
+		document.getElementById('lote').value = '';
+		document.getElementById('quadra').value = '';
+		document.getElementById('casa').value = '';
+		document.getElementById('loja').value = '';
+		document.getElementById('sala').value = '';
+	}
+	else if(v == 'loja'){
+		document.getElementById('tdloja').style.display = '';
+		document.getElementById('tdapto').style.display = 'none';
+		document.getElementById('tdlotequadra').style.display = 'none';
+		document.getElementById('tdcasa').style.display = 'none';
+		document.getElementById('tdsala').style.display = 'none';
+		document.getElementById('apto').value = '';
+		document.getElementById('bloco').value = '';
+		document.getElementById('lote').value = '';
+		document.getElementById('quadra').value = '';
+		document.getElementById('casa').value = '';
+		document.getElementById('sala').value = '';
+	}
+	else if(v == 'casa'){
+		document.getElementById('tdcasa').style.display = '';
+		document.getElementById('tdloja').style.display = 'none';
+		document.getElementById('tdapto').style.display = 'none';
+		document.getElementById('tdlotequadra').style.display = 'none';
+		document.getElementById('tdsala').style.display = 'none';
+		document.getElementById('loja').value = '';
+		document.getElementById('apto').value = '';
+		document.getElementById('bloco').value = '';
+		document.getElementById('lote').value = '';
+		document.getElementById('quadra').value = '';
+		document.getElementById('sala').value = '';
+	}
+	else if(v == 'sala'){
+		document.getElementById('tdsala').style.display = '';
+		document.getElementById('tdloja').style.display = 'none';
+		document.getElementById('tdapto').style.display = 'none';
+		document.getElementById('tdlotequadra').style.display = 'none';
+		document.getElementById('tdcasa').value = 'none';
+		document.getElementById('loja').value = '';
+		document.getElementById('apto').value = '';
+		document.getElementById('bloco').value = '';
+		document.getElementById('lote').value = '';
+		document.getElementById('quadra').value = '';
+		document.getElementById('sala').value = '';
+	}
+	else{
+		document.getElementById('tdlotequadra').style.display = 'none';
+		document.getElementById('tdapto').style.display = 'none';
+		document.getElementById('tdcasa').style.display = 'none';
+		document.getElementById('tdloja').style.display = 'none';
+		document.getElementById('tdsala').style.display = 'none';
+		document.getElementById('lote').value = '';
+		document.getElementById('quadra').value = '';
+		document.getElementById('apto').value = '';
+		document.getElementById('bloco').value = '';
+		document.getElementById('casa').value = '';
+		document.getElementById('loja').value = '';
+		document.getElementById('sala').value = '';
+	}
+	}
 
 </script>
 
@@ -1216,7 +1321,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 
 <td style="font-size:14px; color:#999;">NOVA VENDA</td>
 
-<td align="right"><img src="img/voltar.png" style="cursor:pointer" onclick="window.location = '?p=clarotv'" /></td>
+<td align="right"><img src="img/voltar.png" style="cursor:pointer" onclick="window.location = '?p=clarofixo'" /></td>
 
 </tr>
 
@@ -1269,7 +1374,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	
 	}else{
 	
-		$conMONITORES = $conexao->query("SELECT * FROM usuarios WHERE tipo_usuario = 'MONITOR' && grupo LIKE '%0003%' && status='ATIVO' order by nome");
+		$conMONITORES = $conexao->query("SELECT * FROM usuarios WHERE tipo_usuario = 'MONITOR' || tipo_usuario = 'MONITORBO' && grupo LIKE '%0003%' && status='ATIVO' order by nome");
 	}
 
    while($MONITORES = mysql_fetch_array($conMONITORES)){
@@ -1723,10 +1828,6 @@ $(document).ready( function() {
 
  Nº: <input type="text" name="numero" id="numero" size="5" maxlength="10" onKeyPress="mascara(this,soNumeros);"/> <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
 
- Lote: <input type="text" name="lote" id="lote" size="5" /> 
-
- Quadra: <input type="text" name="quadra" id="quadra" size="5" /> <br /> 
-
  <span class="erro" id="eendereco" style="display:none">Por favor, digite pelo menos o logradouro e o número do endereço de instalação! Se não houver número, por favor preencha lote e quadra.</span>
 
  </td>
@@ -1739,7 +1840,64 @@ $(document).ready( function() {
 
 <td>Complemento:</td>
 
-<td><input type="text" id="complemento" name="complemento" size="30" ></td>
+<td>
+<div style="float: left;">
+<select id="complemento" name="complemento" onchange="verificacomplemento(this.value)">
+<option></option>
+<option value="lotequadra">Lote - Quadra</option>
+<option value="apto">Apto.</option>
+<option value="casa">Casa</option>
+<option value="loja">Loja</option>
+<option value="sala">Sala</option>
+<option value="fundos">Fundos</option>
+</select>
+</div>
+<div id='tdlotequadra' style="display: none; float: left; padding-left: 5px;">
+ 
+ Lote: <input type="text" name="lote" id="lote" size="2" /> Quadra: <input type="text" name="quadra" id="quadra" size="2" /> <br /> 
+
+ <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
+ <span class="erro" id="elotequadra" style="display:none">Por favor, preencha lote e quadra.</span>
+
+</div>
+
+<div id='tdapto' style="display: none; float: left; padding-left: 5px;">
+ 
+ Apto: <input type="text" name="apto" id="apto" size="5" /> Bloco: <input type="text" name="bloco" id="bloco" size="5" /> <br /> 
+
+ <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
+ <span class="erro" id="eapto" style="display:none">Por favor, preencha ao menos o apartamento.</span>
+
+</div>
+
+<div id='tdcasa' style="display: none; float: left; padding-left: 5px;">
+ 
+ Casa: <input type="text" name="casa" id="casa" size="5" /> 
+
+ <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
+ <span class="erro" id="ecasa" style="display:none">Por favor, preencha a casa.</span>
+
+</div>
+
+<div id='tdloja' style="display: none; float: left; padding-left: 5px;">
+ 
+ Loja: <input type="text" name="loja" id="loja" size="5" /> 
+
+ <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
+ <span class="erro" id="eloja" style="display:none">Por favor, preencha a loja.</span>
+
+</div>
+
+<div id='tdsala' style="display: none; float: left; padding-left: 5px;">
+ 
+ Sala: <input type="text" name="sala" id="sala" size="5" /> 
+
+ <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
+ <span class="erro" id="esala" style="display:none">Por favor, preencha a sala.</span>
+
+</div>
+
+</td>
 
 </tr>
 

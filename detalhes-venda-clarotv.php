@@ -6,17 +6,13 @@ session_start();
 
 if(!isset($_SESSION['usuario'])){ ?>
 
-	
 
 <script type="text/javascript">
 
 window.location = 'index.php'
 
-</script>	
+</script>
 
-	
-
-	
 
 <? } 
 
@@ -45,15 +41,9 @@ $USUARIO = mysql_fetch_array($conUSUARIO);
 if($_GET['e'] == '1' && $USUARIO['editar_dados'] == '1'){ $editar = '1';}
 
 
-
 if($_GET['e'] == '1' && $USUARIO['editar_instalacao'] == '1'){ $editar_instalacao = '1';}
 
 ///////////////////////////////////
-
-
-
-
-
 
 
 if(isset($_POST['nome'])){
@@ -443,13 +433,13 @@ $data_instalacao = $data_instalacao0[2].$data_instalacao0[1].$data_instalacao0[0
 }
 
 else{
-	
+
 if($linha['data_instalacao'] == ''){ $data_instalacao = date("Ymd"); } else { $data_instalacao = $linha['data_instalacao']; } 
-	
-	
+
+
 }
 
-	
+
 }
 
 else { $data_instalacao = $linha['data_instalacao']; } 
@@ -717,83 +707,94 @@ body{margin: 0 0 0 0; font-family:Arial, Helvetica, sans-serif;}
 
         return v;
 
-    }	
+    }
 
+//////////////////////////////////
+
+
+function verificapagamento(v, str){
 	
-
-	
-
-//////////////////////////////////	
-
-	
-
-function verificapagamento(v){
-
-	
-
-	if(v == "DÉBITO"){ 
+	var elementos, i;
+	if(v == "DINHEIRO"){
+		
+		document.getElementById('idbancodep').value = '';
+		document.getElementById('idbancodep').style.display = 'none';
+		elementos = document.querySelectorAll('.idcartaocredito');
+		for ( i = 0, length = elementos.length; i < length; i++) {
+			elementos[i].style.display = 'none';
+		}
+		
+		}
+		
+	else if(v == "BOLETO"){
+		
+		document.getElementById('idbanco').value = '';
+		document.getElementById('idbanco').style.display = 'none';
+		document.getElementById('idbancodep').value = '';
+		document.getElementById('idbancodep').style.display = 'none';
+		document.getElementById('idpagamentoinstalacao').style.display = '';
+		elementos = document.querySelectorAll('.idcartaocredito');
+		for ( i = 0, length = elementos.length; i < length; i++) {
+			elementos[i].style.display = 'none';
+		}
+		}
+		
+	else if(v == "DÉBITO"){ 
 
 	document.getElementById('valor').value = '80,00';
-
 	document.getElementById('valor').disabled = true;
-
 	document.getElementById('idbanco').style.display = '';
 	document.getElementById('idbancodep').style.display = 'none';
-
+	document.getElementById('idpagamentoinstalacao').value = '';
 	document.getElementById('idpagamentoinstalacao').style.display = 'none';
-
-	
-	}else if (v == "DEPÓSITO"){
-
+	}
+	else if (v == "DEPÓSITO"){
 
 	document.getElementById('idbancodep').style.display = '';
-	
-
+	elementos = document.querySelectorAll('.idcartaocredito');
+		for ( i = 0, length = elementos.length; i < length; i++) {
+			elementos[i].style.display = 'none';
+		}
 		
-	 } else { 
-
-	 
-
-	 document.getElementById('valor').disabled = false; 	
-
-	 document.getElementById('idbanco').style.display = 'none';
-	 document.getElementById('idbancodep').style.display = '';
-
-     document.getElementById('idpagamentoinstalacao').style.display = '';
-
-
-
-	 }
-
+	} else if (str == 'fpagamento' && v == "CARTÃO DE CRÉDITO"){ 
 	
+	document.getElementById('valor').disabled = false;
 
-	}
-
-		
-
+	document.getElementById('idbanco').style.display = 'none';
+	document.getElementById('idbancodep').style.display = 'none';
+	document.getElementById('idpagamentoinstalacao').style.display = 'none';
 	
-
+	var elementos = document.querySelectorAll('.idcartaocredito');
+	for (var i = 0, length = elementos.length; i < length; i++) {
+		elementos[i].style.display = '';
+  }
+  }
+	else if (str == 'instalacao' && v == "CARTÃO DE CRÉDITO"){ 
 	
+	document.getElementById('valor').disabled = false;
 
+	document.getElementById('idbanco').style.display = 'none';
+	document.getElementById('idbancodep').style.display = 'none';
+	document.getElementById('idpagamentoinstalacao').style.display = '';
 	
+	var elementos = document.querySelectorAll('.idcartaocredito');
+	for (var i = 0, length = elementos.length; i < length; i++) {
+		elementos[i].style.display = '';
+  }
+  }
+}
 
 /////////////////////////////
-
-
-
 
 
 function mostrar(id){ document.getElementById(id).style.display = '' }
 
 
-
 function esconder(id){ document.getElementById(id).style.display = 'none' }
-
 
 
 function checkstatus(v){
 
-	
 
 if(v == 'CANCELADO'){ document.getElementById('mcancel').style.display = ''; 
 
@@ -835,13 +836,6 @@ else{ document.getElementById('mcancel').style.display = 'none';
 
 }
 
-	
-
-	
-
-	
-
-	
 
 ///////////////////////////////////
 ///////// CHECAR CONTRATOS////////
@@ -899,15 +893,44 @@ function checkoperador(m,op){
 
 ///////////////////////////////////////////
 
-/////////////// VALIDAÇÃO ////////////////	
+/////////////// VALIDAÇÃO ////////////////
 
 /////////////////////////////////////////
 
-
+function validacpf(cpf){
+	digitos_iguais = 1;
+	cpf = cpf.toString().replace(/\.|\-/g,"");
+	if (cpf.length < 11)
+		return false;
+	for (i = 0; i < cpf.length - 1; i++){
+		if (cpf.charAt(i) != cpf.charAt(i + 1))
+			{
+				digitos_iguais = 0;
+				break;
+				}}
+				if (!digitos_iguais)
+						{
+						numeros = cpf.substring(0,9);
+						digitos = cpf.substring(9);
+						soma = 0;
+						for(i = 10; i > 1; i--)
+							soma += numeros.charAt(10 - i) * i;
+						resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+						if (resultado != digitos.charAt(0))
+							  return false;
+						numeros = cpf.substring(0,10);
+						soma = 0;
+						for (i = 11; i > 1; i--)
+							  soma += numeros.charAt(11 - i) * i;
+						resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+						if (resultado != digitos.charAt(1))
+							  return false;
+						return true;
+						}
+}
 
 function validar(){
 
-	
 
 cpf = $('input[name="icpf"]').val();
 
@@ -918,24 +941,13 @@ tecnico = $('select[name="tecnico"]').val();
 dataagendamento = $('input[name="datamarcada"]').val();
 
 
-
-
-
-
-//////////	
+//////////
 
 status = $('select[name="status"]').val();
 
 erro = 0;
 
-
-
-///// Se APROVADO /////
-
-if(status == 'APROVADO'){
-
-if(cpf == '' || cpf == '000.000.000-00' || cpf == '111.111.111-11')
-
+if(!validacpf(cpf))
 {
 alert("CPF Inválido");
 
@@ -943,11 +955,16 @@ $('input[name="icpf"]').focus();
 
 erro = erro+1;
 
+window.location.reload();
+
 }
 
+///// Se APROVADO /////
+
+if(status == 'APROVADO'){
 
 // Verificar se existe gravação
-if(erro == 0){		
+if(erro == 0){
 
 if(gravacao == '')
 
@@ -957,15 +974,11 @@ alert("Status não permitido sem gravação!");
 
 erro = erro+1;
 
+window.location.reload();
 
 }}
 
 }
-
-
-
-
-
 
 
 //////// Se INSTALAR	/////////
@@ -974,23 +987,22 @@ if(status == 'INSTALAR'){
 
 
 // Verificar se o CPF é válido
-if(cpf == '' || cpf == '000.000.000-00' || cpf == '111.111.111-11')
 
+if(!validacpf(cpf))
 {
-
 alert("CPF Inválido");
 
 $('input[name="icpf"]').focus();
 
 erro = erro+1;
 
-stop();
+window.location.reload();
 
-}	
+}
 
 // Verificar a se exite data de agendamento
 
-if(erro == 0){		
+if(erro == 0){
 
 if(dataagendamento.length < 10)
 
@@ -1003,10 +1015,8 @@ erro = erro+1;
 }}
 
 
-
-
 // Verificar se existe gravação
-if(erro == 0){		
+if(erro == 0){
 
 if(gravacao == '')
 
@@ -1022,29 +1032,25 @@ erro = erro+1;
 
 }
 
-// Se CONECTADO	
+// Se CONECTADO
 
 if(status == 'CONECTADO'){
 
-	
 
-if(cpf == '' || cpf == '000.000.000-00' || cpf == '111.111.111-11')
-
+if(!validacpf(cpf))
 {
-
-
-
 alert("CPF Inválido");
 
 $('input[name="icpf"]').focus();
 
 erro = erro+1;
 
-}	
+window.location.reload();
+
+}
 
 
-
-if(erro == 0){		
+if(erro == 0){
 
 if(gravacao == '')
 
@@ -1072,14 +1078,9 @@ alert("Favor selecionar o técnico que fez a instalação!");
 
 $('input[select="tecnico"]').focus();
 
-erro = erro+1;	
-
-	
+erro = erro+1;
 
 }}
-
-
-
 
 
 }
@@ -1089,16 +1090,13 @@ erro = erro+1;
 if(erro == 0){ document.forms.editar.submit(); }
 
 
-
-				}
+}
 
 // Fim function
 
 
-
-
 function validadata(val,id){
-	
+
 tam = val.length;
 datastr = val.split("/");
 novadata = datastr[2]+datastr[1]+datastr[0];
@@ -1111,7 +1109,7 @@ if((dt.getDate() + 1) < 10){ dia = '0'+ dt.getDate(); } else { dia = dt.getDate(
 hoje = ano + "" + mes + "" + dia;
 
 if(tam < 10 || novadata < hoje){
-	
+
  $(id).stop().animate({backgroundColor: '#ffcece', border:"1px solid #ABABAB", padding:'1px', color:'#9a0000'},2000);	
 	
 	} else if(tam < 1 || tam >= 10) {
@@ -1119,9 +1117,9 @@ if(tam < 10 || novadata < hoje){
  $(id).stop().animate({backgroundColor: '#a2ff4f', color:'#428c00'},800, function(){
  $(id).animate({backgroundColor: '#ffffff', color:'#000000'},1200);
 	 
-	 });	
-		
-		
+	 });
+	
+	
 	}
 	
 	
@@ -1133,7 +1131,6 @@ function excluir(){if(confirm("Tem certeza que deseja excluir esta gravação?")
 	document.forms.excluirgravacao.submit();
 	
 	} }
-	
 
 </script>
 
@@ -1443,7 +1440,7 @@ if($editar == '1') {
 
 <? if($editar == '1') {?>
 
-<input type="text" name="rg" size="40" value="<?= $linha['rg']; ?>" />
+<input type="text" name="rg" size="40" maxlength="12" value="<?= $linha['rg']; ?>" />
 
 <? } else { ?>
 
@@ -2696,380 +2693,7 @@ $i++;
 <tr><td colspan="2"><hr size="1" color="#ccc" /></td></tr>
 
 
-<? } ?>
-
-
-
-<!-- ########## INICIO CARTAO ############# -->
-
-<? if($linha['pagamento_instalacao'] == 'CARTÃO DE CRÉDITO'){ ?>
-
-<tr>
-	<td colspan="2">
-		<h4 style="color:#7F7F7F;">Cartão de Crédito (Instalação)</h4>
-	</td>
-</tr>
-
-<tr>
-
-<td><b>Nome do Titular:</b></td>
-<td>
-
-<? if($editar == '1') {?>
-
-<input type="text" name="titularCartao_i" size="30" value="<?=$linha['titularCartao_i'];?>" /> <span style="font-size:12px; color:#999; font-style:italic">(Nome impresso no cartão)</span>
-
-<? } else {
-
-if($linha['numCar_i']){ echo $linha['titularCartao_i']; } ?>
-
-<input type="hidden" name="titularCartao_i" size="50" value="<?=$linha['titularCartao_i'];?>" /> 
-
-<? } ?>
-
-</td>
-</tr>
-
-
-
-<tr>
-<td><b>Cartão Crédito:</b></td>
-<td>
-<? 
-
-if( $linha['status'] == 'APROVADO'){
-
-$numDecoCartao = base64_decode($linha['numCar_i']);
-} else {
-
-if($linha['numCar_i'] != ''){		
-$numDecoCartao = 'XXXX-XXXX-XXXX-'.substr(base64_decode($linha['numCar_i']),15,4);
-} else{ $numDecoCartao = "";}
-
-}
-
-if($editar == '1') {?>
-
-<input type="text" name="numcartao_i" size="50" onKeyPress="mascara(this,cartaocredito)" onChange="mascara(this,cartaocredito)" maxlength="19" value="<?=$numDecoCartao;?>" /> 
-
-<? } else { 
-
-if($linha['numCar_i']){ echo 'XXXX-XXXX-XXXX-'.substr(base64_decode($linha['numCar_i']),15,4); } ?>
-<input type="hidden" name="numcartao_i" size="50" value="<?=$linha['numCar_i'];?>" /> 
-
-<? } ?>
-</td>
-</tr>
-
-
-<tr>
-<td><b>Cód. Segurança:</b></td>
-<td>
-<? 
-if( $linha['status'] == 'APROVADO'){
-$numDecoCodSeg = $linha['codSeg_i'];
-} else {
-
-if($linha['codSeg_i'] != ''){	
-
-$numDecoCodSeg = 'XX'.substr($linha['codSeg_i'],2,1);
-
-} else { $numDecoCodSeg = "";}
-
-}
-
-if($editar == '1') {?>
-
-<input type="text" name="numcodseguranca_i" size="50" onKeyPress="mascara(this,cartaocredito)" onChange="mascara(this,cartaocredito)" maxlength="3" value="<?=$numDecoCodSeg;?>" /> 
-
-<? } else { 
-
-if($linha['numCar_i']){ echo 'XX'.substr($linha['codSeg_i'],2,1); } ?>
-<input type="hidden" name="numcodseguranca_i" size="50" value="<?=$linha['codSeg_i'];?>" /> 
-<? } ?>
-</td>
-</tr>
-
-<tr>
-<td><b>Validade:</b></td>
-<td>
-
-<? 
-$ValidadeCartao = explode('/',$linha['carVal_i']);
-
-if($editar == '1') {?>
-<select name="mesval_i">
-<option value=""></option>
-<? for($i=1;$i<=12;$i++){ ?>
-<option value="<?= sprintf("%02d",$i);?>" <? if($i == $ValidadeCartao[0]){?> selected="selected" <? } ?>><?= sprintf("%02d",$i);?></option>
-<? } ?>
-</select>
-
-<select name="anoval_i">
-<option value=""></option>
-<? for($i=date('Y');$i<=(date('Y')+15);$i++){ ?>
-<option value="<?= sprintf("%02d",$i);?>" <? if($i == $ValidadeCartao[1]){?> selected="selected" <? } ?>><?= sprintf("%02d",$i);?></option>
-<? } ?>
-</select>
-
-<? } else { 
-
-if($linha['numCar_i']){ echo $linha['carVal_i']; } ?>
-
-<input type="hidden" name="numcartao_i" size="50" value="<?=$linha['carVal_i'];?>" /> 
-
-<? } ?>
-
-</td>
-</tr>
-
-
-<tr>
-
-<td><b>Bandeira:</b></td>
-<td>
-
-<? if($editar == '1') {?>
-
-<select name="carbandeira_i">
-<option value=""></option>
-<option value="Visa" <? if($linha['carBan_i'] == 'Visa'){?> selected="selected" <? } ?>>Visa</option>
-<option value="MasterCard" <? if($linha['carBan_i'] == 'MasterCard'){?> selected="selected" <? } ?>>MasterCard</option>
-</select>
-
-<? } else {
-
-if($linha['numCar_i']){ echo $linha['carBan_i']; } ?>
-
-<input type="hidden" name="carbandeira_i" size="50" value="<?=$linha['carBan_i'];?>" /> 
-
-<? } ?>
-
-</td>
-</tr>
-
-
-<tr>
-<td><b>Parcelas:</b></td>
-<td>
-
-<? 
-
-if($editar == '1') {?>
-
-<select name="numparcelas_i">
-<option value=""></option>
-<option value="8" <? if($linha['numParcelas_i'] == '8'){?> selected="selected" <? } ?>>8</option>
-<option value="11" <? if($linha['numParcelas_i'] == '11'){?> selected="selected" <? } ?>>11</option>
-<option value="20" <? if($linha['numParcelas_i'] == '20'){?> selected="selected" <? } ?>>20</option>
-<option value="25" <? if($linha['numParcelas_i'] == '25'){?> selected="selected" <? } ?>>25</option>
-</select>
-
-
-<? } else { 
-
-if($linha['numCar_i']){ echo $linha['numParcelas_i']; } ?>
-
-<input type="hidden" name="numparcelas_i" size="50" value="<?=$linha['numParcelas_i'];?>" /> 
-
-<? } ?>
-
-</td>
-</tr>
-
-<tr><td colspan="2"><hr size="1" color="#ccc" /></td></tr>
-
-<? } ?>
-
-<!-- ########## FIM CARTAO ############# -->
-
-<!-- ########## INICIO CARTAO ############# -->
-
-<? if($linha['pagamento'] == 'CARTÃO DE CRÉDITO'){ ?>
-
-<tr>
-	<td colspan="2">
-		<h4 style="color:#7F7F7F;">Cartão de Crédito (Mensalidade)</h4>
-	</td>
-</tr>
-
-<tr>
-
-<td><b>Nome do Titular:</b></td>
-<td>
-
-<? if($editar == '1') {?>
-
-<input type="text" name="titularCartao" size="30" value="<?=$linha['titularCartao'];?>" /> <span style="font-size:12px; color:#999; font-style:italic">(Nome impresso no cartão)</span>
-
-<? } else {
-
-if($linha['numCar']){ echo $linha['titularCartao']; } ?>
-
-<input type="hidden" name="titularCartao" size="50" value="<?=$linha['titularCartao'];?>" /> 
-
-<? } ?>
-
-</td>
-</tr>
-
-
-
-<tr>
-<td><b>Cartão Crédito:</b></td>
-<td>
-<? 
-
-if( $linha['status'] == 'APROVADO'){
-
-$numDecoCartao = base64_decode($linha['numCar']);
-} else {
-
-if($linha['numCar'] != ''){		
-$numDecoCartao = 'XXXX-XXXX-XXXX-'.substr(base64_decode($linha['numCar']),15,4);
-} else{ $numDecoCartao = "";}
-
-}
-
-if($editar == '1') {?>
-
-<input type="text" name="numcartao" size="50" onKeyPress="mascara(this,cartaocredito)" onChange="mascara(this,cartaocredito)" maxlength="19" value="<?=$numDecoCartao;?>" /> 
-
-<? } else { 
-
-if($linha['numCar']){ echo 'XXXX-XXXX-XXXX-'.substr(base64_decode($linha['numCar']),15,4); } ?>
-<input type="hidden" name="numcartao" size="50" value="<?=$linha['numCar'];?>" /> 
-
-<? } ?>
-</td>
-</tr>
-
-
-<tr>
-<td><b>Cód. Segurança:</b></td>
-<td>
-<? 
-if( $linha['status'] == 'APROVADO'){
-$numDecoCodSeg = $linha['codSeg'];
-} else {
-
-if($linha['codSeg'] != ''){	
-
-$numDecoCodSeg = 'XX'.substr($linha['codSeg'],2,1);
-
-} else { $numDecoCodSeg = "";}
-
-}
-
-if($editar == '1') {?>
-
-<input type="text" name="numcodseguranca" size="50" onKeyPress="mascara(this,cartaocredito)" onChange="mascara(this,cartaocredito)" maxlength="3" value="<?=$numDecoCodSeg;?>" /> 
-
-<? } else { 
-
-if($linha['numCar']){ echo 'XX'.substr($linha['codSeg'],2,1); } ?>
-<input type="hidden" name="numcodseguranca" size="50" value="<?=$linha['codSeg'];?>" /> 
-<? } ?>
-</td>
-</tr>
-
-<tr>
-<td><b>Validade:</b></td>
-<td>
-
-<? 
-$ValidadeCartao = explode('/',$linha['carVal']);
-
-if($editar == '1') {?>
-<select name="mesval">
-<option value=""></option>
-<? for($i=1;$i<=12;$i++){ ?>
-<option value="<?= sprintf("%02d",$i);?>" <? if($i == $ValidadeCartao[0]){?> selected="selected" <? } ?>><?= sprintf("%02d",$i);?></option>
-<? } ?>
-</select>
-
-<select name="anoval">
-<option value=""></option>
-<? for($i=date('Y');$i<=(date('Y')+15);$i++){ ?>
-<option value="<?= sprintf("%02d",$i);?>" <? if($i == $ValidadeCartao[1]){?> selected="selected" <? } ?>><?= sprintf("%02d",$i);?></option>
-<? } ?>
-</select>
-
-<? } else { 
-
-if($linha['numCar']){ echo $linha['carVal']; } ?>
-
-<input type="hidden" name="numcartao" size="50" value="<?=$linha['carVal'];?>" /> 
-
-<? } ?>
-
-</td>
-</tr>
-
-
-<tr>
-
-<td><b>Bandeira:</b></td>
-<td>
-
-<? if($editar == '1') {?>
-
-<select name="carbandeira">
-<option value=""></option>
-<option value="Visa" <? if($linha['carBan'] == 'Visa'){?> selected="selected" <? } ?>>Visa</option>
-<option value="MasterCard" <? if($linha['carBan'] == 'MasterCard'){?> selected="selected" <? } ?>>MasterCard</option>
-</select>
-
-<? } else {
-
-if($linha['numCar']){ echo $linha['carBan']; } ?>
-
-<input type="hidden" name="carbandeira" size="50" value="<?=$linha['carBan'];?>" /> 
-
-<? } ?>
-
-</td>
-</tr>
-
-
-<tr>
-<td><b>Parcelas:</b></td>
-<td>
-
-<? 
-
-if($editar == '1') {?>
-
-<select name="numparcelas">
-<option value=""></option>
-<option value="8" <? if($linha['numParcelas'] == '8'){?> selected="selected" <? } ?>>8</option>
-<option value="11" <? if($linha['numParcelas'] == '11'){?> selected="selected" <? } ?>>11</option>
-<option value="20" <? if($linha['numParcelas'] == '20'){?> selected="selected" <? } ?>>20</option>
-<option value="25" <? if($linha['numParcelas'] == '25'){?> selected="selected" <? } ?>>25</option>
-</select>
-
-
-<? } else { 
-
-if($linha['numCar']){ echo $linha['numParcelas']; } ?>
-
-<input type="hidden" name="numparcelas" size="50" value="<?=$linha['numParcelas'];?>" /> 
-
-<? } ?>
-
-</td>
-</tr>
-
-<tr><td colspan="2"><hr size="1" color="#ccc" /></td></tr>
-
-<? } ?>
-
-<!-- ########## FIM CARTAO ############# -->
-
-
-
-
-<?
+<? }
 
 $conGravacaoRetirada = $conexao->query("SELECT *, 
 												usuarios.nome AS nome,
@@ -3875,19 +3499,15 @@ R$ <?= str_replace('.',',',$linha['valor']); ?>
 <td>
 
 
-
 <? if($editar == '1') {?>
 
+<select name="pagamento"  onchange="verificapagamento(this.value, 'fpagamento');">
 
+<option value="BOLETO" <? if($linha['pagamento'] == 'BOLETO'){?>selected="selected"<? } ?>>BOLETO</option>
 
-<select name="pagamento"  onchange="verificapagamento(this.value);">
+<option value="DÉBITO" <? if($linha['pagamento'] == 'DÉBITO'){?>selected="selected"<? } ?>>DÉBITO</option>
 
-<option value="BOLETO" <? if($linha['pagamento'] == 'BOLETO'){?>selected="selected"<? } ?>>Boleto</option>
-
-<option value="DÉBITO" <? if($linha['pagamento'] == 'DÉBITO'){?>selected="selected"<? } ?>>Débito</option>
-
-<option value="CARTÃO DE CRÉDITO" <? if($linha['pagamento'] == 'CARTÃO DE CRÉDITO'){?>selected="selected"<? } ?>>Cartão de Crédito</option>
-
+<option value="CARTÃO DE CRÉDITO" <? if($linha['pagamento'] == 'CARTÃO DE CRÉDITO'){?>selected="selected"<? } ?>>CARTÃO DE CRÉDITO</option>
 
 </select>
 
@@ -3916,25 +3536,197 @@ R$ <?= str_replace('.',',',$linha['valor']); ?>
 
 
 
+<?/*
+<!-- ########## INICIO CARTAO ############# -->
+
+<tr class="idcartaocredito" <? if($linha['pagamento'] != 'CARTÃO DE CRÉDITO'){ ?> style="display: none" <? } ?>>
+
+<td><b>Nome do Titular:</b></td>
+<td>
+
+<? if($editar == '1') {?>
+
+<input type="text" name="titularCartao" size="30" value="<?=$linha['titularCartao'];?>" /> <span style="font-size:12px; color:#999; font-style:italic">(Nome impresso no cartão)</span>
+
+<? } else {
+
+if($linha['numCar']){ echo $linha['titularCartao']; } ?>
+
+<input type="hidden" name="titularCartao" size="50" value="<?=$linha['titularCartao'];?>" /> 
+
+<? } ?>
+
+</td>
+</tr>
+
+
+
+<tr class="idcartaocredito" <? if($linha['pagamento'] != 'CARTÃO DE CRÉDITO'){ ?> style="display: none" <? } ?>>
+<td><b>Cartão Crédito:</b></td>
+<td>
+<? 
+
+if( $linha['status'] == 'APROVADO'){
+
+$numDecoCartao = base64_decode($linha['numCar']);
+} else {
+
+if($linha['numCar'] != ''){		
+$numDecoCartao = 'XXXX-XXXX-XXXX-'.substr(base64_decode($linha['numCar']),15,4);
+} else{ $numDecoCartao = "";}
+
+}
+
+if($editar == '1') {?>
+
+<input type="text" name="numcartao" size="50" onKeyPress="mascara(this,cartaocredito)" onChange="mascara(this,cartaocredito)" maxlength="19" value="<?=$numDecoCartao;?>" /> 
+
+<? } else { 
+
+if($linha['numCar']){ echo 'XXXX-XXXX-XXXX-'.substr(base64_decode($linha['numCar']),15,4); } ?>
+<input type="hidden" name="numcartao" size="50" value="<?=$linha['numCar'];?>" /> 
+
+<? } ?>
+</td>
+</tr>
+
+
+<tr class="idcartaocredito" <? if($linha['pagamento'] != 'CARTÃO DE CRÉDITO'){ ?> style="display: none" <? } ?>>
+<td><b>Cód. Segurança:</b></td>
+<td>
+<? 
+if( $linha['status'] == 'APROVADO'){
+$numDecoCodSeg = $linha['codSeg'];
+} else {
+
+if($linha['codSeg'] != ''){	
+
+$numDecoCodSeg = 'XX'.substr($linha['codSeg'],2,1);
+
+} else { $numDecoCodSeg = "";}
+
+}
+
+if($editar == '1') {?>
+
+<input type="text" name="numcodseguranca" size="50" onKeyPress="mascara(this,cartaocredito)" onChange="mascara(this,cartaocredito)" maxlength="3" value="<?=$numDecoCodSeg;?>" /> 
+
+<? } else { 
+
+if($linha['numCar']){ echo 'XX'.substr($linha['codSeg'],2,1); } ?>
+<input type="hidden" name="numcodseguranca" size="50" value="<?=$linha['codSeg'];?>" /> 
+<? } ?>
+</td>
+</tr>
+
+<tr class="idcartaocredito" <? if($linha['pagamento'] != 'CARTÃO DE CRÉDITO'){ ?> style="display: none" <? } ?>>
+<td><b>Validade:</b></td>
+<td>
+
+<? 
+$ValidadeCartao = explode('/',$linha['carVal']);
+
+if($editar == '1') {?>
+<select name="mesval">
+<option value=""></option>
+<? for($i=1;$i<=12;$i++){ ?>
+<option value="<?= sprintf("%02d",$i);?>" <? if($i == $ValidadeCartao[0]){?> selected="selected" <? } ?>><?= sprintf("%02d",$i);?></option>
+<? } ?>
+</select>
+
+<select name="anoval">
+<option value=""></option>
+<? for($i=date('Y');$i<=(date('Y')+15);$i++){ ?>
+<option value="<?= sprintf("%02d",$i);?>" <? if($i == $ValidadeCartao[1]){?> selected="selected" <? } ?>><?= sprintf("%02d",$i);?></option>
+<? } ?>
+</select>
+
+<? } else { 
+
+if($linha['numCar']){ echo $linha['carVal']; } ?>
+
+<input type="hidden" name="numcartao" size="50" value="<?=$linha['carVal'];?>" /> 
+
+<? } ?>
+
+</td>
+</tr>
+
+
+<tr class="idcartaocredito" <? if($linha['pagamento'] != 'CARTÃO DE CRÉDITO'){ ?> style="display: none" <? } ?>>
+
+<td><b>Bandeira:</b></td>
+<td>
+
+<? if($editar == '1') {?>
+
+<select name="carbandeira">
+<option value=""></option>
+<option value="Visa" <? if($linha['carBan'] == 'Visa'){?> selected="selected" <? } ?>>Visa</option>
+<option value="MasterCard" <? if($linha['carBan'] == 'MasterCard'){?> selected="selected" <? } ?>>MasterCard</option>
+</select>
+
+<? } else {
+
+if($linha['numCar']){ echo $linha['carBan']; } ?>
+
+<input type="hidden" name="carbandeira" size="50" value="<?=$linha['carBan'];?>" /> 
+
+<? } ?>
+
+</td>
+</tr>
+
+
+<tr class="idcartaocredito" <? if($linha['pagamento'] != 'CARTÃO DE CRÉDITO'){ ?> style="display: none" <? } ?>>
+<td><b>Parcelas:</b></td>
+<td>
+
+<? 
+
+if($editar == '1') {?>
+
+<select name="numparcelas">
+<option value=""></option>
+<option value="8" <? if($linha['numParcelas'] == '8'){?> selected="selected" <? } ?>>8</option>
+<option value="11" <? if($linha['numParcelas'] == '11'){?> selected="selected" <? } ?>>11</option>
+<option value="20" <? if($linha['numParcelas'] == '20'){?> selected="selected" <? } ?>>20</option>
+<option value="25" <? if($linha['numParcelas'] == '25'){?> selected="selected" <? } ?>>25</option>
+</select>
+
+
+<? } else { 
+
+if($linha['numCar']){ echo $linha['numParcelas']; } ?>
+
+<input type="hidden" name="numparcelas" size="50" value="<?=$linha['numParcelas'];?>" /> 
+
+<? } ?>
+
+</td>
+</tr>
+
+<tr><td colspan="2"><hr size="1" color="#ccc" /></td></tr>
+
+<? } ?>
+
+<!-- ########## FIM CARTAO ############# -->
+
+*/?>
 
 <tr id="idbanco" <? if($linha['pagamento'] != 'DÉBITO'){?> style="display:none" <? } ?>>
 
 <td><b>Banco:</b></td>
-
-
 
 <td>
 
 <? if($editar == '1') {?>
 
 
-
 <input type="text" id="banco" name="banco" size="20" value="<?= $linha['banco'];?>" /> <b>AG:</b> <input type="text" name="agencia" id="agencia" size="5" value="<?= $linha['agencia'];?>" /> <b>CC:</b> <input type="text" name="contacorrente" id="contacorrente" size="7" value="<?= $linha['conta_corrente'];?>" />
 
 
-
 <? } else {?>
-
 
 
 <?= $linha['banco'].' <b>AG:</b> '.$linha['agencia'].' <b>CC:</b> '.$linha['conta_corrente'];?>
@@ -3944,9 +3736,6 @@ R$ <?= str_replace('.',',',$linha['valor']); ?>
 <input type="hidden" size="40" name="agencia" value="<?= $linha['agencia']; ?>" />
 
 <input type="hidden" size="40" name="contacorrente" value="<?= $linha['conta_corrente']; ?>" />
-
-
-
 
 
 <? } ?>
@@ -3959,27 +3748,23 @@ R$ <?= str_replace('.',',',$linha['valor']); ?>
 
 
 
-<tr id="idpagamentoinstalacao" <? if($linha['pagamento'] == 'DÉBITO'){?> style="display:none" <? } ?>>
+<tr id="idpagamentoinstalacao" <? if($linha['pagamento'] != 'BOLETO'){?> style="display:none" <? } ?>>
 
 <td><b>Pagamento Instalação:</b></td>
 
 <td>
 
-
-
 <? if($editar == '1'){?>
 
 
 
-<select name="pagamentoinstalacao"  onchange="verificapagamento(this.value);">
+<select name="pagamentoinstalacao"  onchange="verificapagamento(this.value, 'instalacao');">
 
-<option value=""></option>
+<option value="DINHEIRO" <? if($linha['pagamento_instalacao'] == 'DINHEIRO'){?> selected <? } ?>>DINHEIRO</option>
 
-<option value="DINHEIRO" <? if($linha['pagamento_instalacao'] == 'DINHEIRO'){?> selected="selected" <? } ?>>DINHEIRO</option>
+<option value="CARTÃO DE CRÉDITO" <? if($linha['pagamento_instalacao'] == 'CARTÃO DE CRÉDITO'){?> selected <? } ?>>CARTÃO DE CRÉDITO</option>
 
-<option value="CARTÃO DE CRÉDITO" <? if($linha['pagamento_instalacao'] == 'CARTÃO DE CRÉDITO'){?> selected="selected" <? } ?>>CARTÃO DE CRÉDITO</option>
-
-<option value="DEPÓSITO" <? if($linha['pagamento_instalacao'] == 'DEPÓSITO'){?> selected="selected" <? } ?>>DEPÓSITO</option>
+<option value="DEPÓSITO" <? if($linha['pagamento_instalacao'] == 'DEPÓSITO'){?> selected <? } ?>>DEPÓSITO</option>
 
 </select>
 
@@ -4040,6 +3825,178 @@ R$ <?= str_replace('.',',',$linha['valor']); ?>
 
 </tr>
 
+<!-- ########## INICIO CARTAO INSTALACAO ############# -->
+
+<tr class="idcartaocredito" <? if($linha['pagamento_instalacao'] != 'CARTÃO DE CRÉDITO'){ ?> style="display:none" <? } ?>>
+
+<td><b>Nome do Titular:</b></td>
+<td>
+
+<? if($editar == '1') {?>
+
+<input type="text" name="titularCartao_i" size="30" value="<?=$linha['titularCartao_i'];?>" /> <span style="font-size:12px; color:#999; font-style:italic">(Nome impresso no cartão)</span>
+
+<? } else {
+
+if($linha['numCar_i']){ echo $linha['titularCartao_i']; } ?>
+
+<input type="hidden" name="titularCartao_i" size="50" value="<?=$linha['titularCartao_i'];?>" /> 
+
+<? } ?>
+
+</td>
+</tr>
+
+<tr class="idcartaocredito" <? if($linha['pagamento_instalacao'] != 'CARTÃO DE CRÉDITO'){?> style="display:none" <? } ?>>
+<td><b>Cartão Crédito:</b></td>
+<td>
+<? 
+
+if( $linha['status'] == 'APROVADO'){
+
+$numDecoCartao = base64_decode($linha['numCar_i']);
+} else {
+
+if($linha['numCar_i'] != ''){
+$numDecoCartao = 'XXXX-XXXX-XXXX-'.substr(base64_decode($linha['numCar_i']),15,4);
+} else{ $numDecoCartao = "";}
+
+}
+
+if($editar == '1') {?>
+
+<input type="text" name="numcartao_i" size="50" onKeyPress="mascara(this,cartaocredito)" onChange="mascara(this,cartaocredito)" maxlength="19" value="<?=$numDecoCartao;?>" /> 
+
+<? } else { 
+
+if($linha['numCar_i']){ echo 'XXXX-XXXX-XXXX-'.substr(base64_decode($linha['numCar_i']),15,4); } ?>
+<input type="hidden" name="numcartao_i" size="50" value="<?=$linha['numCar_i'];?>" /> 
+
+<? } ?>
+</td>
+</tr>
+
+
+<tr class="idcartaocredito" <? if($linha['pagamento_instalacao'] != 'CARTÃO DE CRÉDITO'){?> style="display:none" <? } ?>>
+<td><b>Cód. Segurança:</b></td>
+<td>
+<? 
+if( $linha['status'] == 'APROVADO'){
+$numDecoCodSeg = $linha['codSeg_i'];
+} else {
+
+if($linha['codSeg_i'] != ''){	
+
+$numDecoCodSeg = 'XX'.substr($linha['codSeg_i'],2,1);
+
+} else { $numDecoCodSeg = "";}
+
+}
+
+if($editar == '1') {?>
+
+<input type="text" name="numcodseguranca_i" size="50" onKeyPress="mascara(this,cartaocredito)" onChange="mascara(this,cartaocredito)" maxlength="3" value="<?=$numDecoCodSeg;?>" /> 
+
+<? } else { 
+
+if($linha['numCar_i']){ echo 'XX'.substr($linha['codSeg_i'],2,1); } ?>
+<input type="hidden" name="numcodseguranca_i" size="50" value="<?=$linha['codSeg_i'];?>" /> 
+<? } ?>
+</td>
+</tr>
+
+<tr class="idcartaocredito" <? if($linha['pagamento_instalacao'] != 'CARTÃO DE CRÉDITO'){?> style="display:none" <? } ?>>
+<td><b>Validade:</b></td>
+<td>
+
+<? 
+$ValidadeCartao = explode('/',$linha['carVal_i']);
+
+if($editar == '1') {?>
+<select name="mesval_i">
+<option value=""></option>
+<? for($i=1;$i<=12;$i++){ ?>
+<option value="<?= sprintf("%02d",$i);?>" <? if($i == $ValidadeCartao[0]){?> selected="selected" <? } ?>><?= sprintf("%02d",$i);?></option>
+<? } ?>
+</select>
+
+<select name="anoval_i">
+<option value=""></option>
+<? for($i=date('Y');$i<=(date('Y')+15);$i++){ ?>
+<option value="<?= sprintf("%02d",$i);?>" <? if($i == $ValidadeCartao[1]){?> selected="selected" <? } ?>><?= sprintf("%02d",$i);?></option>
+<? } ?>
+</select>
+
+<? } else { 
+
+if($linha['numCar_i']){ echo $linha['carVal_i']; } ?>
+
+<input type="hidden" name="numcartao_i" size="50" value="<?=$linha['carVal_i'];?>" /> 
+
+<? } ?>
+
+</td>
+</tr>
+
+
+<tr class="idcartaocredito" <? if($linha['pagamento_instalacao'] != 'CARTÃO DE CRÉDITO'){?> style="display:none" <? } ?>>
+
+<td><b>Bandeira:</b></td>
+<td>
+
+<? if($editar == '1') {?>
+
+<select name="carbandeira_i">
+<option value=""></option>
+<option value="Visa" <? if($linha['carBan_i'] == 'Visa'){?> selected="selected" <? } ?>>Visa</option>
+<option value="MasterCard" <? if($linha['carBan_i'] == 'MasterCard'){?> selected="selected" <? } ?>>MasterCard</option>
+</select>
+
+<? } else {
+
+if($linha['numCar_i']){ echo $linha['carBan_i']; } ?>
+
+<input type="hidden" name="carbandeira_i" size="50" value="<?=$linha['carBan_i'];?>" /> 
+
+<? } ?>
+
+</td>
+</tr>
+
+
+<tr class="idcartaocredito" <? if($linha['pagamento_instalacao'] != 'CARTÃO DE CRÉDITO'){?> style="display:none" <? } ?>>
+<td><b>Parcelas:</b></td>
+<td>
+
+<? 
+
+if($editar == '1') {?>
+
+<select name="numparcelas_i">
+<option value=""></option>
+<option value="8" <? if($linha['numParcelas_i'] == '8'){?> selected="selected" <? } ?>>8</option>
+<option value="11" <? if($linha['numParcelas_i'] == '11'){?> selected="selected" <? } ?>>11</option>
+<option value="20" <? if($linha['numParcelas_i'] == '20'){?> selected="selected" <? } ?>>20</option>
+<option value="25" <? if($linha['numParcelas_i'] == '25'){?> selected="selected" <? } ?>>25</option>
+</select>
+
+
+<? } else { 
+
+if($linha['numCar_i']){ echo $linha['numParcelas_i']; } ?>
+
+<input type="hidden" name="numparcelas_i" size="50" value="<?=$linha['numParcelas_i'];?>" /> 
+
+<? } ?>
+
+</td>
+</tr>
+
+<tr><td colspan="2"><hr size="1" color="#ccc" /></td></tr>
+
+<? //} ?>
+
+<!-- ########## FIM CARTAO INSTALACAO ############# -->
 
 
 
@@ -4083,7 +4040,7 @@ R$ <?= str_replace('.',',',$linha['valor']); ?>
 
 </select>
 
-<!-- // EXCESSAO PARA SUPER USUARIO DE INTERNET -->
+<!-- // EXCEÇÃO PARA SUPER USUARIO DE INTERNET -->
 
 <? } else if($USUARIO['id']==3227 && ($editar == '1' || $editar_instalacao == '1') && ($linha['status'] == 'DEVOLVIDO' || $linha['status'] == 'SEM CONTATO' || $linha['status'] == 'RESTRIÇÃO') ) { ?>
 

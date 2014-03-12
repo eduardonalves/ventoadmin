@@ -612,7 +612,7 @@ box-shadow:  0px 0px 10px 2px #999;
 
 <td style="font-size:14px; color:#999;">ESTAT&Iacute;STICAS (CLARO FIXO)</td>
 
-<td align="right"><img src="img/voltar.png" style="cursor:pointer" onclick="window.location = '?p=clarotv'" /></td>
+<td align="right"><img src="img/voltar.png" style="cursor:pointer" onclick="window.location = '?p=clarofixo'" /></td>
 
 </tr>
 

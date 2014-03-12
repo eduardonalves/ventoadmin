@@ -1,4 +1,4 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <select type="text" id="operador" name="operador">
 <option value=""></option>
@@ -17,6 +17,6 @@ while($OPERADORES = mysql_fetch_array($conOPERADORES)){
 
 <? } ?>
 
-</select> <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
+</select> <span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
 
 <span class="erro" id="eoperador" style="display:none">Por favor, selecione o operador que fez a venda!</span>

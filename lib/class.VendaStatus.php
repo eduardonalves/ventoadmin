@@ -587,6 +587,8 @@ class VendaStatus extends VentoAdmin{
 		
 		if($status=='') { $status = $this->Venda->status; }
 		
+		$status = strtoupper($status);
+		
 		if( array_key_exists($status, $this->fluxoExcept[$this->produtoId]) )
 		{
 			
@@ -667,6 +669,8 @@ class VendaStatus extends VentoAdmin{
 	{
 
 		if($status=='') { $status = $this->Venda->status; }
+		
+		$status = strtoupper($status);
 		
 		if( array_key_exists($status, $this->statusLabels[$this->produtoId]) )
 		{

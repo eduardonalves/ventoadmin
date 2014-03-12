@@ -564,75 +564,35 @@ if(v == 'Pessoa Jurídica') {
 
 ///////////////////////
 
-
-
-
-
 function submitform(){
 
-	
-
-	
-
 e=0;
-
-
 
 /////// -- DADOS PESSOAIS -- ////////
 
 if(!document.getElementById('pessoa1').checked && !document.getElementById('pessoa2').checked){ document.getElementById('epessoa').style.display = ''; e=(e+1)} else { document.getElementById('epessoa').style.display = 'none';}
 
+if(document.getElementById('nome').value == ''){ document.getElementById('enome').style.display = ''; e=(e+1)} else { document.getElementById('enome').style.display = 'none';}
 
+if(document.getElementById('idcpf').value == '' && document.getElementById('idcnpj').value == ''){ document.getElementById('ecpf').style.display = ''; e=(e+1)} else { document.getElementById('ecpf').style.display = 'none';}
 
-if(document.getElementById('nome').value == ''){ document.getElementById('enome').style.display = ''; e=(e+1)} else { document.getElementById('enome').style.display = 'none';}	
-
-
-
-	
-
-//if(document.getElementById('idcpf').value == '' && document.getElementById('idcnpj').value == ''){ document.getElementById('ecpf').style.display = ''; e=(e+1)} else { document.getElementById('ecpf').style.display = 'none';}
-
-
-
-//if(document.getElementById('idcpf').value == '' && document.getElementById('idcnpj').value == '' && document.getElementById('pessoa2').checked){ document.getElementById('ecnpj').style.display = ''; e=(e+1)} else { document.getElementById('ecnpj').style.display = 'none';}
-
-
-
-
+if(document.getElementById('idcpf').value == '' && document.getElementById('idcnpj').value == '' && document.getElementById('pessoa2').checked){ document.getElementById('ecnpj').style.display = ''; e=(e+1)} else { document.getElementById('ecnpj').style.display = 'none';}
 
 if(!document.getElementById('pessoa2').checked){
 
-	
-
 if(document.getElementById('nomemae').value == ''){ document.getElementById('enomemae').style.display = ''; e=(e+1)} else { document.getElementById('enomemae').style.display = 'none';}
-
-	
 
 if(document.getElementById('nascd').value == '' || document.getElementById('nascm').value == '' || document.getElementById('nasca').value == ''){ document.getElementById('enasc').style.display = ''; e=(e+1)} else { document.getElementById('enasc').style.display = 'none';}	
 
-
-
-//if(document.getElementById('rg').value == '' || document.getElementById('orgexp').value == ''){ document.getElementById('erg').style.display = ''; e=(e+1)} else { document.getElementById('erg').style.display = 'none';}
-
-
+if(document.getElementById('rg').value == '' || document.getElementById('orgexp').value == ''){ document.getElementById('erg').style.display = ''; e=(e+1)} else { document.getElementById('erg').style.display = 'none';}
 
 if(document.getElementById('profissao').value == ''){ document.getElementById('eprofissao').style.display = ''; e=(e+1)} else { document.getElementById('eprofissao').style.display = 'none';}
 
-
-
 if(!document.getElementById('sexo1').checked && !document.getElementById('sexo2').checked){ document.getElementById('esexo').style.display = ''; e=(e+1)} else { document.getElementById('esexo').style.display = 'none';}
 
-
-
 if(document.getElementById('estadocivil').value == ''){ document.getElementById('eestadocivil').style.display = ''; e=(e+1)} else { document.getElementById('eestadocivil').style.display = 'none';}
 
-
-
 if(document.getElementById('estadocivil').value == ''){ document.getElementById('eestadocivil').style.display = ''; e=(e+1)} else { document.getElementById('eestadocivil').style.display = 'none';}
-
-
-
-
 
 }
 
@@ -646,10 +606,7 @@ if(document.getElementById('email').value == ''){ document.getElementById('eemai
 
 if(document.getElementById('tel1').value == ''){ document.getElementById('etelefone').style.display = ''; e=(e+1)} else { document.getElementById('etelefone').style.display = 'none';}
 
-
-
-
-
+if(document.getElementById('tel2').value == ''){ document.getElementById('etelefone2').style.display = ''; e=(e+1)} else { document.getElementById('etelefone2').style.display = 'none';}
 
 
 /////// -- ENDEREÇO CLIENTE -- ////////
@@ -672,7 +629,7 @@ if(document.getElementById('cidade').value == ''){ document.getElementById('ecid
 
 
 
-//if(document.getElementById('idcep').value == ''){ document.getElementById('ecep').style.display = ''; e=(e+1)} else { document.getElementById('ecep').style.display = 'none';}	
+if(document.getElementById('idcep').value == ''){ document.getElementById('ecep').style.display = ''; e=(e+1)} else { document.getElementById('ecep').style.display = 'none';}	
 
 
 
@@ -723,12 +680,6 @@ if(e!=0){ window.alert('ERRO: Preencha todos os campos indicados, corretamente')
 	
 
 }
-
-
-
-
-
-
 
 ///////////////////////////////////
 
@@ -842,7 +793,7 @@ $(document).ready(function(e) {
 
 <td style="font-size:14px; color:#999;">NOVA VENDA</td>
 
-<td align="right"><img src="img/voltar.png" style="cursor:pointer" onclick="window.location = '?p=clarotv'" /></td>
+<td align="right"><img src="img/voltar.png" style="cursor:pointer" onclick="window.location = '?p=claro3g'" /></td>
 
 </tr>
 
@@ -983,10 +934,61 @@ $(document).ready(function(e) {
 <td>Nascimento:</td>
 
 <td>
+	
+<script type="text/javascript">
 
+$(document).ready( function() {
 
+	$(".data-nasc").bind("change", function() {
+		
 
-<select name="nascd" id="nascd">
+		
+		vData = new Date();
+		
+		vDia = $("#nascd").val();
+		vMes = $("#nascm").val();
+		vAno = $("#nasca").val();
+		
+		vAnoAtual = vData.getFullYear();
+		vMesAtual = vData.getMonth()+1;
+		vDiaAtual = vData.getDate();
+		vAnoMaximo = vAnoAtual - 18;
+
+		
+		if (vDia!='' && vMes!='' && vAno!='')
+		{
+
+			if(vAno==vAnoMaximo)
+			{
+
+				if(parseInt(vMes)<parseInt(vMesAtual))
+				{
+					vDia = $("#nascd").val('');
+					vMes = $("#nascm").val('');
+					
+					alert('O cliente precisa ser maior de 18 anos. Verifique se a data de nascimento está correta.');
+
+				}else if (parseInt(vMes)==parseInt(vMesAtual)) {
+
+					if(parseInt(vDia)<parseInt(vDiaAtual))
+					{
+						vDia = $("#nascd").val('');
+						vMes = $("#nascm").val('');
+						
+						alert('O cliente precisa ser maior de 18 anos. Verifique se a data de nascimento está correta.');
+						
+					}
+				}
+			}
+		}
+	
+	});
+
+});
+
+</script>
+
+<select name="nascd" id="nascd" class="data-nasc">
 
 <option value=""></option>
 
@@ -1000,7 +1002,7 @@ $(document).ready(function(e) {
 
 
 
-<select name="nascm" id="nascm">
+<select name="nascm" id="nascm" class="data-nasc">
 
 <option value=""></option>
 
@@ -1014,7 +1016,7 @@ $(document).ready(function(e) {
 
 
 
-<select name="nasca" id="nasca">
+<select name="nasca" id="nasca" class="data-nasc">
 
 <option value=""></option>
 
@@ -1060,6 +1062,7 @@ $(document).ready(function(e) {
 
 <td id="cpfinp"><input type="text" id="idcnpj" name="icnpj" onKeyPress="mascara(this,cnpj)" maxlength="18" size="20" />
 
+<span class="campoobrigatorio" title="Campo Obrigatório">*</span>
 <span class="erro" id="ecnpj" style="display:none">Por favor, digite o CNPJ do cliente!</span>
 
 </td>
@@ -1074,7 +1077,7 @@ $(document).ready(function(e) {
 
 <td>RG:</td>
 
-<td id="rginp"><input type="text" id="rg" name="rg" size="20" /> <span class="campoobrigatorio" title="Campo Obrigatório">*</span> Org. Exp: <input type="text" title="Orgão Expedidor" id="orgexp" name="orgexp" size="20" /> <span class="campoobrigatorio" title="Campo Obrigatório">*</span> 
+<td id="rginp"><input type="text" id="rg" name="rg" size="20" maxlength="12"/> <span class="campoobrigatorio" title="Campo Obrigatório">*</span> Org. Exp: <input type="text" title="Orgão Expedidor" id="orgexp" name="orgexp" size="20" /> <span class="campoobrigatorio" title="Campo Obrigatório">*</span> 
 
  Data Exp: <input type="text" title="Data Expedição" id="dataexp" name="dataexp" onKeyPress="mascara(this,data)" maxlength="10" size="20" /> <span class="campoobrigatorio" title="Campo Obrigatório">*</span> 
 
@@ -1192,7 +1195,7 @@ $(document).ready(function(e) {
 
 <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
 
-<span class="erro" id="etelefone" style="display:none">Por favor, digite pelo menos um telefone do cliente!</span>
+<span class="erro" id="etelefone" style="display:none">Por favor, digite o telefone 1 do cliente!</span>
 
 </td>
 
@@ -1204,7 +1207,7 @@ $(document).ready(function(e) {
 
 <td>Telefone 2:</td>
 
-<td><input type="text" name="itelefone2" onKeyPress="mascara(this,telefone)" maxlength="15" size="20" /> 
+<td><input type="text" id="tel2" name="itelefone2" onKeyPress="mascara(this,telefone)" maxlength="15" size="20" /> 
 
 <select name="tipotel2">
 
@@ -1217,6 +1220,11 @@ $(document).ready(function(e) {
 <option value="Comercial">Comercial</option>
 
 </select>
+
+<span class="campoobrigatorio" title="Campo Obrigatório">*</span>
+
+<span class="erro" id="etelefone2" style="display:none">Por favor, digite o telefone 2 do cliente!</span>
+
 
 </td>
 
@@ -1260,7 +1268,11 @@ $(document).ready(function(e) {
 
 <td>CEP:</td>
 
-<td><input type="text" id="idcep" onkeyup="return getEndereco()" onchange="return getEndereco()" name="icep" size="30" onKeyPress="mascara(this,cep)" maxlength="9" > <span class="erro" id="ecep" style="display:none">Por favor, digite o CEP da instalação!</span></td>
+<td><input type="text" id="idcep" onkeyup="return getEndereco()" onchange="return getEndereco()" name="icep" size="30" onKeyPress="mascara(this,cep)" maxlength="9" >
+
+<span class="campoobrigatorio" title="Campo Obrigatório">*</span>
+
+<span class="erro" id="ecep" style="display:none">Por favor, digite o CEP da instalação!</span></td>
 
 </tr>
 
@@ -1557,8 +1569,6 @@ $(document).ready(function(e) {
 
 
 </form>
-
-
 
 </center>	
 

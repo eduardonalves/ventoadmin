@@ -12,11 +12,11 @@ define('DB_NAME','edukate');
 /*
 */
 
-define('DB_HOST','db498864657.db.1and1.com');
+define('DB_HOST','localhost');
 
-define('DB_USER','dbo498864657');
+define('DB_USER','root');
 
-define('DB_PASS','MysqlLogOn');
+define('DB_PASS','v3nt0adm');
 
 define('DB_NAME','db498864657');
 

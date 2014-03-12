@@ -1,0 +1,8 @@
+VERSION BUILD=9002379
+SET !EXTRACT_TEST_POPUP NO
+SET !ERRORIGNORE YES
+TAB T=1
+TAB CLOSEALLOTHERS
+URL GOTO=https://agente.embratel.com.br/CookieAuth.dll?GetLogon?curl=Z2FLivrefe&reason=0&formdir=3
+WAIT SECONDS=10
+TAB CLOSE

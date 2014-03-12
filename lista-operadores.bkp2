@@ -1,0 +1,423 @@
+<?
+
+if($_GET['p'] != 'configuracoes'){ ?>
+
+<script>
+window.location = "?p=configuracoes&es=3";	
+</script>
+<?
+	
+}
+?>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+<link rel="stylesheet" href="css/tables.css" />
+
+<script type="text/javascript">
+
+function editar(id){
+
+document.getElementById('tr'+id).style.display = 'none';
+document.getElementById('tredit'+id).style.display = '';
+	
+	
+}
+
+
+ /*Cria uma função de nome mascara, onde o primeiro argumento passado é um dos
+     objetos input O segundo é especificando o tipo de método no qual será tratado*/
+    function mascara(o,f){
+        v_obj=o;
+        v_fun=f;
+        setTimeout("execmascara()",1);
+    }
+    
+    function execmascara(){
+        /*Pegue o valor do objeto e atribua o resultado da função v_fun; cujo o conteúdo
+        da mesma é a função que foi referida e que será utilizada para tratar dos dados*/
+        v_obj.value=v_fun(v_obj.value);
+    }
+    
+    function soNumeros(v){
+        return v.replace(/\D/g,"");//Exclua tudo que não for numeral e retorne o valor
+    }
+    
+    function telefone(v){
+        //Remove tudo o que não é dígito
+        v=v.replace(/\D/g,"");
+        //Coloca parênteses em volta dos dois primeiros dígitos
+        v=v.replace(/^(\d\d)(\d)/g,"($1) $2");
+        //Coloca hífen entre o quarto e o quinto dígitos
+        v=v.replace(/(\d{4})(\d)/,"$1-$2");
+        //retorne o resultado
+        return v;
+    }
+	
+
+    function cpf(v){
+        //Remove tudo o que não é dígito
+        v=v.replace(/\D/g,"");
+        //Coloca parênteses em volta dos dois primeiros dígitos
+        v=v.replace(/^(\d{3})(\d)/g,"$1.$2");
+        //Coloca hífen entre o quarto e o quinto dígitos
+        v=v.replace(/(\d{3})(\d)/,"$1.$2");
+        //retorne o resultado
+		v=v.replace(/(\d{3})(\d)/,"$1-$2");
+        return v;
+    }
+	
+	
+	    function data(v){
+
+        //Remove tudo o que não é dígito
+
+        v=v.replace(/\D/g,"");
+
+        //Coloca parênteses em volta dos dois primeiros dígitos
+
+        v=v.replace(/^(\d{2})(\d)/g,"$1/$2");
+
+        //Coloca hífen entre o quarto e o quinto dígitos
+
+        v=v.replace(/(\d{2})(\d)/,"$1/$2");
+
+        return v;
+
+    }
+</script>
+
+
+<?
+
+if(isset($_POST['nomeoperador'])){
+	
+$IDoperador = $_POST['idoperador'];
+	
+	
+$NOMEoperador = $_POST['nomeoperador'];
+$IDmonitor = $_POST['nomemonitor'];
+$grupo = $_POST['grupo'];
+$data_admissao0 = explode('/',$_POST['dataadmissao']);
+$data_admissao = $data_admissao0[2].'-'.$data_admissao0[1].'-'.$data_admissao0[0];
+
+$data_efetivacao0 = explode('/',$_POST['dataefetivacao']);
+$data_efetivacao = $data_efetivacao0[2].'-'.$data_efetivacao0[1].'-'.$data_efetivacao0[0];
+$tipo_contrato = $_POST['tipocontrato'];
+$status = $_POST['status'];
+
+if($NOMEoperador != '' && $IDmonitor != '' && $grupo != '' && $status != ''){
+	
+	$update = $conexao->query("UPDATE operadores SET nome = '".$NOMEoperador."', monitor = '".$IDmonitor."', grupo = '".$grupo."', tipo_contrato = '".$tipo_contrato."', data_admissao = '".$data_admissao."', data_efetivacao = '".$data_efetivacao."', status = '".$status."' WHERE operador_id = '".$IDoperador."'");
+	
+	
+	}}
+
+
+
+if(isset($_POST['salvar'])){
+	
+$login = $_POST['login'];
+$nome = $_POST['nome'];
+$cpf = $_POST['icpf'];
+$grupo = $_POST['grupo'];
+$nmonitor = $_POST['nomemonitor'];
+$contrato = $_POST['contrato'];
+$data_admissao0 = explode('/',$_POST['dataadmissao']);
+$data_admissao = $data_admissao0[2].'-'.$data_admissao0[1].'-'.$data_admissao0[0];
+
+$data_efetivacao0 = explode('/',$_POST['dataefetivacao']);
+$data_efetivacao = $data_efetivacao0[2].'-'.$data_efetivacao0[1].'-'.$data_efetivacao0[0];
+
+$status = $_POST['status'];
+
+
+if($login != '' && $nome != '' && $grupo != '' && $cpf != '' && $nmonitor != '' && $status != ''){
+
+	$insert = $conexao->query("INSERT INTO operadores (login,nome,cpf,data_admissao,data_efetivacao,grupo,monitor,status) VALUES ('".$login."','".$nome."','".$cpf."','".$data_admissao."','".$data_efetivacao."','".$grupo."','".$nmonitor."','".$status."') ");
+	
+?>
+
+<script>
+window.alert('Operador inserido com sucesso!');
+</script>
+	
+<?	
+	
+} else { ?>
+
+<script>
+window.alert('ERRO: Algum campo não foi preenchido corretamente!');
+</script>	
+	
+<?	
+}}
+
+?>
+
+<br />
+<center>
+<form name="novooperador" action="" method="post">
+<input type="hidden" name="salvar" />
+<? $conLOGIN = $conexao->query("SELECT * FROM operadores ORDER BY ABS(login) DESC");
+$ultLOGIN = mysql_fetch_array($conLOGIN);
+?>
+<input type="hidden" value="<?= ($ultLOGIN['login']+1);?>" name="login" />
+<table border="0" width="900px"style="color:#999; font-size:14px;">
+<tr>
+<td colspan="2" style="color:#999; font-size:18px;">Inserir Operador</td>
+</tr>
+
+
+<tr bgcolor="#333" style="color:#FFF">
+<td>Nome:</td>
+<td>CPF :</td>
+<td>Produto:</td>
+<td>Monitor:</td>
+<td>Data Admiss&atilde;o:</td>
+<td>Tipo Contrato:</td>
+<td>Status:</td>
+<td>
+</tr>
+
+<tr bgcolor="#ededed">
+<td><input type="text" id="nome" name="nome" size="15" /></td>
+<td><input type="text" id="idcpf" name="icpf" onKeyPress="mascara(this,cpf)" maxlength="14" size="15" /></td>
+<td>
+<select name="grupo" id="grupo">
+<option value=""></option>
+<option value="0004" <? if($OPERADOR['grupooperador'] == '0004'){ ?>selected="selected" <? } ?>>Oi</option>
+<option value="0001|0004" <? if($OPERADOR['grupooperador'] == '0001|0004'){ ?>selected="selected" <? } ?>>Claro TV e Oi</option>
+<option value="0003|0004" <? if($OPERADOR['grupooperador'] == '0003|0004'){ ?>selected="selected" <? } ?>>Claro Fixo e Oi</option>
+<option value="0001" <? if($OPERADOR['grupooperador'] == '0001'){ ?>selected="selected" <? } ?>>Claro TV</option>
+<option value="0002" <? if($OPERADOR['grupooperador'] == '0002'){ ?>selected="selected" <? } ?>>Claro 3G</option>
+<option value="0003" <? if($OPERADOR['grupooperador'] == '0003'){ ?>selected="selected" <? } ?>>Claro FIXO</option>
+<option value="0001|0002" <? if($OPERADOR['grupooperador'] == '0001|0002'){ ?>selected="selected" <? } ?>>Claro TV e Claro 3G</option>
+<option value="0001|0003" <? if($OPERADOR['grupooperador'] == '0001|0003'){ ?>selected="selected" <? } ?>>Claro TV e Claro FIXO</option>
+<option value="0002|0003" <? if($OPERADOR['grupooperador'] == '0002|0003'){ ?>selected="selected" <? } ?>>Claro 3G e Claro Fixo</option>
+<option value="0001|0002|0003" <? if($OPERADOR['grupooperador'] == '0001|0002|0003'){ ?>selected="selected" <? } ?>>Claro TV, Claro 3G e Claro Fixo</option>
+<option value="0001|0002|0003|0004" <? if($OPERADOR['grupooperador'] == '0001|0002|0003|0004'){ ?>selected="selected" <? } ?>>Claro TV, Claro 3G, Claro Fixo e Oi</option>
+
+</select>
+</td>
+<td>
+<select name="nomemonitor">
+<option value=""></option>
+
+<?
+
+$conMONITORES = $conexao->query("SELECT * FROM usuarios WHERE tipo_usuario = 'MONITOR' && status != 'DESLIGADO' ORDER BY nome");
+while($MONITOR = mysql_fetch_array($conMONITORES)){
+
+?>
+<option value="<?= $MONITOR['id']; ?>" <? if($OPERADOR['idmonitor'] == $MONITOR['id']){ ?>selected="selected" <? } ?>><?= $MONITOR['nome']; ?></option>
+
+<? } ?>
+
+</select>
+</td>
+
+<td>
+<input type="text" name="dataadmissao"  onKeyPress="mascara(this,data)" maxlength="10" value="" placeholder="ex:(dd/mm/aaaa)">
+</td>
+<td>
+<select name="tipocontrato">
+<option value=""></option>
+<option value="TREINAMENTO">TREINAMENTO</option>
+<option value="EFETIVO">EFETIVO</option>
+</select>
+</td>
+<td>
+<select name="status">
+<option value=""></option>
+<option value="ATIVO" <? if($OPERADOR['statusoperador'] == 'ATIVO'){ ?>selected="selected" <? } ?>>ATIVO</option>
+<option value="DESLIGADO" <? if($OPERADOR['statusoperador'] == 'DESLIGADO'){ ?>selected="selected" <? } ?>>DESLIGADO</option>
+</select>
+</td>
+
+<td><img src="img/icone-salvar.png" width="20" style="cursor:pointer" title="Salvar" onclick="javascript:document.novooperador.submit();" /></td>
+</tr>
+
+
+
+<tr>
+<td colspan="100">
+<hr />
+</td>
+</tr>
+
+</table>
+</form>
+<br>
+
+<table border="0" width="900px">
+<tr style="color:#FFF; font-size:14px; font-weight:bold; cursor:pointer;" class="tr1" align="center">
+<td>Login</td>
+<td>Data Admiss&atilde;o</td>
+<td>Data Efetivação</td>
+<td>Nome do Operador</td>
+<td>CPF</td>
+<td>Monitor</td>
+<td>Produto</td>
+<td>Tipo Contrato</td>
+<td>Status</td>
+<td></td>
+</tr>
+
+<?
+
+$class = "tr2";
+
+$conOPERADORES = $conexao->query("SELECT *, operadores.login AS loginoperador,
+											DATE_FORMAT(operadores.data_admissao, '%d/%m/%Y') AS dataadmissao,
+											DATE_FORMAT(operadores.data_efetivacao, '%d/%m/%Y') AS dataefetivacao,
+											operadores.nome AS nomeoperador, 
+											operadores.cpf AS cpfoperador, 
+  											operadores.operador_id AS idoperador,
+											usuarios.nome AS nomemonitor, 
+											usuarios.id AS idmonitor,
+											operadores.grupo AS grupooperador,
+											operadores.tipo_contrato AS contratooperador,
+											operadores.status AS statusoperador
+											FROM operadores 
+											INNER JOIN usuarios ON operadores.monitor = usuarios.id 
+											WHERE operadores.status != 'DESLIGADO' 
+											ORDER BY operadores.nome"
+											
+											);
+while($OPERADOR = mysql_fetch_array($conOPERADORES)){
+
+
+if($class == "tr2"){ $class = "tr3";} else { $class = "tr2";}
+
+?>
+
+
+<tr class="<?= $class;?>" align="center" id="tr<?= $OPERADOR['idoperador'];?>">
+<td><?= $OPERADOR['loginoperador'];?></td>
+<td><?= $OPERADOR['dataadmissao'];?></td>
+<td><?= $OPERADOR['dataefetivacao'];?></td>
+<td><?= $OPERADOR['nomeoperador'];?></td>
+<td><?= $OPERADOR['cpfoperador'];?></td>
+
+<td><?= $OPERADOR['nomemonitor'];?></td>
+<td>
+<? if($OPERADOR['grupooperador'] == '0004'){$produto = 'Oi';}
+else if($OPERADOR['grupooperador'] == '0001|0004'){$produto = 'Claro TV e Oi';}
+else if($OPERADOR['grupooperador'] == '0003|0004'){$produto = 'Claro Fixo e Oi';}
+else if($OPERADOR['grupooperador'] == '0001'){$produto = 'Claro TV';}
+else if($OPERADOR['grupooperador'] == '0002'){$produto = 'Claro 3G';}
+else if($OPERADOR['grupooperador'] == '0003'){$produto = 'Claro FIXO';}
+else if($OPERADOR['grupooperador'] == '0001|0002'){$produto = 'Claro TV e Claro 3G';}
+else if($OPERADOR['grupooperador'] == '0001|0003'){$produto = 'Claro TV e Claro FIXO';}
+else if($OPERADOR['grupooperador'] == '0002|0003'){$produto = 'Claro 3G e Claro Fixo';}
+else if($OPERADOR['grupooperador'] == '0001|0002|0003'){$produto = 'Claro TV, Claro 3G e Claro Fixo';}
+else if($OPERADOR['grupooperador'] == '0001|0002|0003|0004'){$produto = 'Claro TV, Claro 3G, Claro Fixo e Oi';}
+
+echo $produto;
+?>
+
+
+</td>
+<td><?= $OPERADOR['contratooperador'];?></td>
+<td><?= $OPERADOR['statusoperador'];?></td>
+
+<td><img src="img/icone-editar.png" onclick="editar(<?= $OPERADOR['idoperador'];?>)" style="cursor:pointer" /></td>
+</tr>
+
+
+<form action="" method="post" name="form<?= $OPERADOR['idoperador'];?>">
+<tr class="<?= $class;?>" align="center" id="tredit<?= $OPERADOR['idoperador'];?>" style="display:none;">
+<td><?= $OPERADOR['loginoperador'];?></td>
+
+<td><input type="text" name="dataadmissao" size="10" value="<?= $OPERADOR['dataadmissao'];?>" /></td>
+
+<td><input type="text" name="dataefetivacao" size="10" value="<?= $OPERADOR['dataefetivacao'];?>" /></td>
+
+<td>
+<input type="hidden" name="idoperador" value="<?= $OPERADOR['idoperador'];?>" />
+<input type="text" name="nomeoperador" value="<?= $OPERADOR['nomeoperador'];?>" /></td>
+<td><?= $OPERADOR['cpfoperador'];?></td>
+
+<td>
+<select name="nomemonitor">
+<?
+
+$conMONITORES = $conexao->query("SELECT * FROM usuarios WHERE tipo_usuario = 'MONITOR' && status != 'DESLIGADO' ORDER BY nome");
+while($MONITOR = mysql_fetch_array($conMONITORES)){
+
+?>
+<option value="<?= $MONITOR['id']; ?>" <? if($OPERADOR['idmonitor'] == $MONITOR['id']){ ?>selected="selected" <? } ?>><?= $MONITOR['nome']; ?></option>
+
+<? } ?>
+
+</select>
+</td>
+<td>
+<?   if($OPERADOR['grupooperador'] == '0004'){$produto = 'Oi';}
+else if($OPERADOR['grupooperador'] == '0001|0004'){$produto = 'Claro TV e Oi';}
+else if($OPERADOR['grupooperador'] == '0003|0004'){$produto = 'Claro Fixo e Oi';}
+else if($OPERADOR['grupooperador'] == '0001'){$produto = 'Claro TV';}
+else if($OPERADOR['grupooperador'] == '0002'){$produto = 'Claro 3G';}
+else if($OPERADOR['grupooperador'] == '0003'){$produto = 'Claro FIXO';}
+else if($OPERADOR['grupooperador'] == '0001|0002'){$produto = 'Claro TV e Claro 3G';}
+else if($OPERADOR['grupooperador'] == '0001|0003'){$produto = 'Claro TV e Claro FIXO';}
+else if($OPERADOR['grupooperador'] == '0002|0003'){$produto = 'Claro 3G e Claro Fixo';}
+else if($OPERADOR['grupooperador'] == '0001|0002|0003'){$produto = 'Claro TV, Claro 3G e Claro Fixo';}
+else if($OPERADOR['grupooperador'] == '0001|0002|0003|0004'){$produto = 'Claro TV, Claro 3G, Claro Fixo e Oi';}
+
+?>
+
+<select name="grupo">
+<option value="0004" <? if($OPERADOR['grupooperador'] == '0004'){ ?>selected="selected" <? } ?>>Oi</option>
+<option value="0001|0004" <? if($OPERADOR['grupooperador'] == '0001|0004'){ ?>selected="selected" <? } ?>>Claro TV e Oi</option>
+<option value="0003|0004" <? if($OPERADOR['grupooperador'] == '0003|0004'){ ?>selected="selected" <? } ?>>Claro Fixo e Oi</option>
+<option value="0001" <? if($OPERADOR['grupooperador'] == '0001'){ ?>selected="selected" <? } ?>>Claro TV</option>
+<option value="0002" <? if($OPERADOR['grupooperador'] == '0002'){ ?>selected="selected" <? } ?>>Claro 3G</option>
+<option value="0003" <? if($OPERADOR['grupooperador'] == '0003'){ ?>selected="selected" <? } ?>>Claro FIXO</option>
+<option value="0001|0002" <? if($OPERADOR['grupooperador'] == '0001|0002'){ ?>selected="selected" <? } ?>>Claro TV e Claro 3G</option>
+<option value="0001|0003" <? if($OPERADOR['grupooperador'] == '0001|0003'){ ?>selected="selected" <? } ?>>Claro TV e Claro FIXO</option>
+<option value="0002|0003" <? if($OPERADOR['grupooperador'] == '0002|0003'){ ?>selected="selected" <? } ?>>Claro 3G e Claro Fixo</option>
+<option value="0001|0002|0003" <? if($OPERADOR['grupooperador'] == '0001|0002|0003'){ ?>selected="selected" <? } ?>>Claro TV, Claro 3G e Claro Fixo</option>
+<option value="0001|0002|0003|0004" <? if($OPERADOR['grupooperador'] == '0001|0002|0003|0004'){ ?>selected="selected" <? } ?>>Claro TV, Claro 3G, Claro Fixo e Oi</option>
+
+</select>
+
+
+
+</td>
+
+<td>
+<select name="tipocontrato">
+
+<option value="EFETIVO" <? if($OPERADOR['tipo_contrato'] == 'EFETIVO'){ ?>selected="selected" <? } ?>>EFETIVO</option>
+<option value="TREINAMENTO" <? if($OPERADOR['tipo_contrato'] == 'TREINAMENTO'){ ?>selected="selected" <? } ?>>TREINAMENTO</option>
+
+</select>
+</td>
+
+
+
+<td>
+
+<select name="status">
+
+<option value="ATIVO" <? if($OPERADOR['statusoperador'] == 'ATIVO'){ ?>selected="selected" <? } ?>>ATIVO</option>
+<option value="DESLIGADO" <? if($OPERADOR['statusoperador'] == 'DESLIGADO'){ ?>selected="selected" <? } ?>>DESLIGADO</option>
+
+</select>
+</td>
+
+<td><img src="img/icone-salvar.png" width="20" style="cursor:pointer" onclick="javascript:document.form<?= $OPERADOR['idoperador'];?>.submit();" /></td>
+</tr>
+</form>
+
+<?
+}
+?>
+</table>
+</center>
+
+<br />
+<br />

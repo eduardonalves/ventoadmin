@@ -94,8 +94,7 @@ $apto = $_POST['apto'];
 
 $casa = $_POST['casa'];
 
-if($_POST['complemento'] == 'fundos')
-	$fundos = $_POST['complemento'];
+$fundos = $_POST['fundos'];
 
 $bairro = $_POST['bairro'];
 
@@ -946,6 +945,8 @@ if(document.getElementById('loja').value == '' && document.getElementById('compl
 
 if(document.getElementById('sala').value == '' && document.getElementById('complemento').value == 'sala'){ document.getElementById('esala').style.display = ''; e=(e+1)} else { document.getElementById('esala').style.display = 'none';}
 
+if(document.getElementById('fundos').value == '' && document.getElementById('complemento').value == 'fundos'){ document.getElementById('efundos').style.display = ''; e=(e+1)} else { document.getElementById('efundos').style.display = 'none';}
+
 ///
 
 if(document.getElementById('bairro').value == ''){ document.getElementById('ebairro').style.display = ''; e=(e+1)} else { document.getElementById('ebairro').style.display = 'none';}
@@ -1172,11 +1173,13 @@ function verificacomplemento(v)
 		document.getElementById('tdcasa').style.display = 'none';
 		document.getElementById('tdloja').style.display = 'none';
 		document.getElementById('tdsala').style.display = 'none';
+		document.getElementById('tdfundos').style.display = 'none';
 		document.getElementById('apto').value = '';
 		document.getElementById('bloco').value = '';
 		document.getElementById('casa').value = '';
 		document.getElementById('loja').value = '';
 		document.getElementById('sala').value = '';
+		document.getElementById('fundos').value = '';
 	}
 	else if(v == 'apto'){
 		document.getElementById('tdapto').style.display = '';
@@ -1189,19 +1192,22 @@ function verificacomplemento(v)
 		document.getElementById('casa').value = '';
 		document.getElementById('loja').value = '';
 		document.getElementById('sala').value = '';
-	}
+		document.getElementById('fundos').value = '';
+		}
 	else if(v == 'loja'){
 		document.getElementById('tdloja').style.display = '';
 		document.getElementById('tdapto').style.display = 'none';
 		document.getElementById('tdlotequadra').style.display = 'none';
 		document.getElementById('tdcasa').style.display = 'none';
 		document.getElementById('tdsala').style.display = 'none';
+		document.getElementById('tdfundos').style.display = 'none';
 		document.getElementById('apto').value = '';
 		document.getElementById('bloco').value = '';
+		document.getElementById('casa').value = '';
 		document.getElementById('lote').value = '';
 		document.getElementById('quadra').value = '';
-		document.getElementById('casa').value = '';
 		document.getElementById('sala').value = '';
+		document.getElementById('fundos').value = '';
 	}
 	else if(v == 'casa'){
 		document.getElementById('tdcasa').style.display = '';
@@ -1209,12 +1215,14 @@ function verificacomplemento(v)
 		document.getElementById('tdapto').style.display = 'none';
 		document.getElementById('tdlotequadra').style.display = 'none';
 		document.getElementById('tdsala').style.display = 'none';
+		document.getElementById('tdfundos').style.display = 'none';
 		document.getElementById('loja').value = '';
 		document.getElementById('apto').value = '';
 		document.getElementById('bloco').value = '';
 		document.getElementById('lote').value = '';
 		document.getElementById('quadra').value = '';
 		document.getElementById('sala').value = '';
+		document.getElementById('fundos').value = '';
 	}
 	else if(v == 'sala'){
 		document.getElementById('tdsala').style.display = '';
@@ -1228,6 +1236,22 @@ function verificacomplemento(v)
 		document.getElementById('lote').value = '';
 		document.getElementById('quadra').value = '';
 		document.getElementById('sala').value = '';
+		document.getElementById('fundos').value = '';
+	}
+	else if(v == 'fundos'){
+		document.getElementById('tdfundos').style.display = '';
+		document.getElementById('tdloja').style.display = 'none';
+		document.getElementById('tdapto').style.display = 'none';
+		document.getElementById('tdlotequadra').style.display = 'none';
+		document.getElementById('tdcasa').style.display = 'none';
+		document.getElementById('tdsala').style.display = 'none';
+		document.getElementById('loja').value = '';
+		document.getElementById('apto').value = '';
+		document.getElementById('bloco').value = '';
+		document.getElementById('lote').value = '';
+		document.getElementById('quadra').value = '';
+		document.getElementById('sala').value = '';
+		document.getElementById('casa').value = '';
 	}
 	else{
 		document.getElementById('tdlotequadra').style.display = 'none';
@@ -1235,6 +1259,7 @@ function verificacomplemento(v)
 		document.getElementById('tdcasa').style.display = 'none';
 		document.getElementById('tdloja').style.display = 'none';
 		document.getElementById('tdsala').style.display = 'none';
+		document.getElementById('tdfundos').style.display = 'none';
 		document.getElementById('lote').value = '';
 		document.getElementById('quadra').value = '';
 		document.getElementById('apto').value = '';
@@ -1242,6 +1267,7 @@ function verificacomplemento(v)
 		document.getElementById('casa').value = '';
 		document.getElementById('loja').value = '';
 		document.getElementById('sala').value = '';
+		document.getElementById('fundos').value = '';
 	}
 	}
 
@@ -1845,7 +1871,7 @@ $(document).ready( function() {
 <select id="complemento" name="complemento" onchange="verificacomplemento(this.value)">
 <option></option>
 <option value="lotequadra">Lote - Quadra</option>
-<option value="apto">Apto.</option>
+<option value="apto">Apto. - Bloco</option>
 <option value="casa">Casa</option>
 <option value="loja">Loja</option>
 <option value="sala">Sala</option>
@@ -1894,6 +1920,15 @@ $(document).ready( function() {
 
  <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
  <span class="erro" id="esala" style="display:none">Por favor, preencha a sala.</span>
+
+</div>
+
+<div id='tdfundos' style="display: none; float: left; padding-left: 5px;">
+ 
+ Fundos: <input type="text" name="fundos" id="fundos" size="5" /> 
+
+ <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
+ <span class="erro" id="efundos" style="display:none">Por favor, preencha a campo fundos.</span>
 
 </div>
 

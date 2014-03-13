@@ -177,7 +177,7 @@ class VendaStatus extends VentoAdmin{
 																		'Usuarios.tipo_usuario' => array('MONITOR'),
 																		'Usuarios.acesso_usuario' => array('EXTERNO')
 																		),
-																'flux' => array()
+																'flux' => array('RECUPERADO')
 
 													)
 									),
@@ -229,6 +229,16 @@ class VendaStatus extends VentoAdmin{
 
 													),
 
+													'vendaExterna' => array(
+																
+																'==' => array (
+																	
+																		'Venda.tipoVenda' => array('EXTERNA'),
+																		),
+																'flux' => array('RESTRIÇÃO','ENVIAR GRAVAÇÃO', 'DEVOLVIDO')
+
+													),
+
 													'tipoEmbratelBoleto' => array(
 																
 																'==' => array (
@@ -236,9 +246,21 @@ class VendaStatus extends VentoAdmin{
 																		'Venda.tipoEntrega' => array('EMBRATEL'),
 																		'Venda.pagamento' => array('BOLETO')
 																		),
-																'flux' => array('BOLETO GERADO', 'DEVOLVIDO')
+																'flux' => array('BOLETO GERADO', 'DEVOLVIDO', 'RESTRIÇÃO')
+
+													),
+
+													'tipoEmbratelCartao' => array(
+																
+																'==' => array (
+																	
+																		'Venda.tipoEntrega' => array('EMBRATEL'),
+																		'Venda.pagamento' => array('CARTÃO DE CRÉDITO')
+																		),
+																'flux' => array('PENDENTE', 'DEVOLVIDO', 'RESTRIÇÃO','ENVIAR GRAVAÇÃO')
 
 													)
+
 
 									),
 									
@@ -309,7 +331,7 @@ class VendaStatus extends VentoAdmin{
 																		'Usuarios.tipo_usuario' => array('MONITOR'),
 																		'Usuarios.acesso_usuario' => array('EXTERNO')
 																		),
-																'flux' => array('CANCELADO')
+																'flux' => array()
 
 													)
 									),
@@ -369,6 +391,17 @@ class VendaStatus extends VentoAdmin{
 																		),
 																'flux' => array('CANCELADO','RECUPERADO')
 
+													),
+
+													'tipoEmbratelCartao' => array(
+																
+																'==' => array (
+																	
+																		'Venda.tipoEntrega' => array('EMBRATEL'),
+																		'Venda.pagamento' => array('CARTÃO DE CRÉDITO')
+																		),
+																'flux' => array('GRAVADO', 'RESTRIÇÃO')
+
 													)
 									),
 									
@@ -392,6 +425,16 @@ class VendaStatus extends VentoAdmin{
 																		'Usuarios.acesso_usuario' => array('EXTERNO')
 																		),
 																'flux' => array()
+
+													),
+
+													'vendaExterna' => array(
+																
+																'==' => array (
+																	
+																		'Venda.tipoVenda' => array('EXTERNA'),
+																		),
+																'flux' => array('FINALIZADA')
 
 													)
 									),

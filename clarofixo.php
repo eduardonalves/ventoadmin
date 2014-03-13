@@ -468,56 +468,63 @@ box-shadow:  0px 0px 10px 2px #999;
 
 <tr align="left">
 
-<td width="50%"><input type="checkbox" name="chk17" <? if(strstr($USUARIO['colunas_clarofixo'],'(motivo_cancelamento)')){?>checked="checked"<? } ?> value="motivo_cancelamento" /> Motivo Cancelamento</td>
+<td width="50%"><input type="checkbox" name="chk17" <? if(strstr($USUARIO['colunas_clarofixo'],'(valorAparelho)')){?>checked="checked"<? } ?> value="valorAparelho" /> Valor Aparelho</td>
 
-<td width="50%"><input type="checkbox" name="chk18" <? if(strstr($USUARIO['colunas_clarofixo'],'(motivo_restricao)')){?>checked="checked"<? } ?> value="motivo_restricao" /> Motivo Restrição</td>
-
-</tr>
-
-<tr align="left">
-
-<td width="50%"><input type="checkbox" name="chk19" <? if(strstr($USUARIO['colunas_clarofixo'],'(motivo_devolvido)')){?>checked="checked"<? } ?> value="motivo_devolvido" /> Motivo Devolvido</td>
-
-<td width="50%"><input type="checkbox" name="chk20" <? if(strstr($USUARIO['colunas_clarofixo'],'(data_liberacao)')){?>checked="checked"<? } ?> value="data_liberacao" /> Data Liberação</td></tr>
-
-<tr align="left">
-
-<td width="50%"><input type="checkbox" name="chk21" <? if(strstr($USUARIO['colunas_clarofixo'],'(data_entrega)')){?>checked="checked"<? } ?> value="data_entrega" /> Data Entrega</td>
-
-<td width="50%"><input type="checkbox" name="chk22" <? if(strstr($USUARIO['colunas_clarofixo'],'(cep)')){?>checked="checked"<? } ?> value="cep" /> CEP</td>
-
-</tr>
-
-<tr align="left">
-<td width="50%"><input type="checkbox" name="chk23" <? if(strstr($USUARIO['colunas_clarofixo'],'(pendencia)')){?>checked="checked"<? } ?> value="pendencia" /> Pendência</td>
-
-<td width="50%"><input type="checkbox" name="chk24" <? if(strstr($USUARIO['colunas_clarofixo'],'(tipo_venda)')){?>checked="checked"<? } ?> value="tipo_venda" /> Tipo Venda</td>
-</tr>
-
-<tr align="left">
-<td width="50%"><input type="checkbox" name="chk25" <? if(strstr($USUARIO['colunas_clarofixo'],'(agendamento_gravacao)')){?>checked="checked"<? } ?> value="agendamento_gravacao" /> Agend. Gravação</td>
-
-<td width="50%"><input type="checkbox" name="chk26" <? if(strstr($USUARIO['colunas_clarofixo'],'(novo_numero)')){?>checked="checked"<? } ?> value="novo_numero" /> Novo Número</td>
-</tr>
-
-<tr align="left">
-
-<td width="50%"><input type="checkbox" name="chk27" <? if(strstr($USUARIO['colunas_clarofixo'],'(agendamento_entrega)')){?>checked="checked"<? } ?> value="agendamento_entrega" /> Agend. Entrega</td>
-
-<td width="50%"><input type="checkbox" name="chk28" <? if(strstr($USUARIO['colunas_clarofixo'],'(status_portal)')){?>checked="checked"<? } ?> value="status_portal" /> Status Portal</td>
+<td width="50%"><input type="checkbox" name="chk18" <? if(strstr($USUARIO['colunas_clarofixo'],'(motivo_cancelamento)')){?>checked="checked"<? } ?> value="motivo_cancelamento" /> Motivo Cancelamento</td>
 
 </tr>
 
 <tr align="left">
 
-<td width="50%"><input type="checkbox" name="chk29" <? if(strstr($USUARIO['colunas_clarofixo'],'(documentacao)')){?>checked="checked"<? } ?> value="documentacao" /> Status Xerox</td>
-<td width="50%"><input type="checkbox" name="chk30" <? if(strstr($USUARIO['colunas_clarofixo'],'(numchip)')){?>checked="checked"<? } ?> value="numchip" /> Número do Chip</td>
+<td width="50%"><input type="checkbox" name="chk19" <? if(strstr($USUARIO['colunas_clarofixo'],'(motivo_restricao)')){?>checked="checked"<? } ?> value="motivo_restricao" /> Motivo Restrição</td>
+
+<td width="50%"><input type="checkbox" name="chk20" <? if(strstr($USUARIO['colunas_clarofixo'],'(motivo_devolvido)')){?>checked="checked"<? } ?> value="motivo_devolvido" /> Motivo Devolvido</td>
+
+<tr align="left">
+
+<td width="50%"><input type="checkbox" name="chk21" <? if(strstr($USUARIO['colunas_clarofixo'],'(data_liberacao)')){?>checked="checked"<? } ?> value="data_liberacao" /> Data Liberação</td>
+
+<td width="50%"><input type="checkbox" name="chk22" <? if(strstr($USUARIO['colunas_clarofixo'],'(data_entrega)')){?>checked="checked"<? } ?> value="data_entrega" /> Data Entrega</td>
 
 </tr>
 
 <tr align="left">
 
-<td width="50%"><input type="checkbox" name="chk31" <? if(strstr($USUARIO['colunas_clarofixo'],'(tipoentrega)')){?>checked="checked"<? } ?> value="tipoentrega" /> Tipo de Entrega</td>
+<td width="50%"><input type="checkbox" name="chk23" <? if(strstr($USUARIO['colunas_clarofixo'],'(cep)')){?>checked="checked"<? } ?> value="cep" /> CEP</td>
+
+<td width="50%"><input type="checkbox" name="chk24" <? if(strstr($USUARIO['colunas_clarofixo'],'(pendencia)')){?>checked="checked"<? } ?> value="pendencia" /> Pendência</td>
+
+</tr>
+
+<tr align="left">
+
+<td width="50%"><input type="checkbox" name="chk25" <? if(strstr($USUARIO['colunas_clarofixo'],'(tipo_venda)')){?>checked="checked"<? } ?> value="tipo_venda" /> Tipo Venda</td>
+
+<td width="50%"><input type="checkbox" name="chk26" <? if(strstr($USUARIO['colunas_clarofixo'],'(agendamento_gravacao)')){?>checked="checked"<? } ?> value="agendamento_gravacao" /> Agend. Gravação</td>
+
+</tr>
+
+<tr align="left">
+
+<td width="50%"><input type="checkbox" name="chk27" <? if(strstr($USUARIO['colunas_clarofixo'],'(novo_numero)')){?>checked="checked"<? } ?> value="novo_numero" /> Novo Número</td>
+
+<td width="50%"><input type="checkbox" name="chk28" <? if(strstr($USUARIO['colunas_clarofixo'],'(agendamento_entrega)')){?>checked="checked"<? } ?> value="agendamento_entrega" /> Agend. Entrega</td>
+
+</tr>
+
+<tr align="left">
+
+<td width="50%"><input type="checkbox" name="chk29" <? if(strstr($USUARIO['colunas_clarofixo'],'(status_portal)')){?>checked="checked"<? } ?> value="status_portal" /> Status Portal</td>
+
+<td width="50%"><input type="checkbox" name="chk30" <? if(strstr($USUARIO['colunas_clarofixo'],'(documentacao)')){?>checked="checked"<? } ?> value="documentacao" /> Status Xerox</td>
+
+</tr>
+
+<tr align="left">
+
+<td width="50%"><input type="checkbox" name="chk31" <? if(strstr($USUARIO['colunas_clarofixo'],'(numchip)')){?>checked="checked"<? } ?> value="numchip" /> Número do Chip</td>
+
+<td width="50%"><input type="checkbox" name="chk32" <? if(strstr($USUARIO['colunas_clarofixo'],'(tipoentrega)')){?>checked="checked"<? } ?> value="tipoentrega" /> Tipo de Entrega</td>
 
 </tr>
 
@@ -1172,7 +1179,11 @@ include "includes/filtro-clarofixo.php";
 
 <? } ?>
 
+<? if(strstr($USUARIO['colunas_clarofixo'],'(valorAparelho)')){?>
 
+<td title="PLANO" onclick="window.location = '?p=clarofixo&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&tpv=<?= $_GET['tpv']; ?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&di2=<?= $_GET['di2']; ?>&tpentrega=<?= $_GET['tpentrega']; ?>&de=<?= $_GET['de']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'valorAparelho DESC'){ echo 'valorAparelho DESC'; } else { echo 'valorAparelho ASC'; }?>'"> Valor Aparelho <? if($_GET['o'] == 'valorAparelho DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'valorAparelho ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
+
+<? } ?>
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(vencimento)')){?>
 
@@ -1488,7 +1499,11 @@ if ($class=="tr2"){ //alterna a cor
 
 <? } ?>
 
+<? if(strstr($USUARIO['colunas_clarofixo'],'(valorAparelho)')){?>
 
+<td title="Valor Aparelho" <? if(strstr($_GET['o'],'valorAparelho')){ ?>class="tdselected" <? } ?>><?= $VENDA['valorAparelho'];?></td>
+
+<? } ?>
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(vencimento)')){?>
 

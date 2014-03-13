@@ -236,21 +236,10 @@ class VendaStatus extends VentoAdmin{
 																		'Venda.tipoEntrega' => array('EMBRATEL'),
 																		'Venda.pagamento' => array('BOLETO')
 																		),
-																'flux' => array('BOLETO GERADO')
-
-													),													
-
-													'tipoEmbratelCartao' => array(
-																
-																'==' => array (
-																	
-																		'Venda.tipoEntrega' => array('EMBRATEL'),
-																		'Venda.pagamento' => array('CARTÃO DE CRÉDITO')
-																		),
-																'flux' => array('ENVIAR GRAVAÇÃO', 'PENDENTE')
+																'flux' => array('BOLETO GERADO', 'DEVOLVIDO')
 
 													)
-													
+
 									),
 									
 									'ENTREGAR' => array (

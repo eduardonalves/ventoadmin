@@ -16,7 +16,7 @@ define('DB_HOST','localhost');
 
 define('DB_USER','root');
 
-define('DB_PASS','v3nt0adm');
+define('DB_PASS','vento');
 
 define('DB_NAME','db498864657');
 

@@ -9873,7 +9873,7 @@ for($i=1; $i<=$linha["status_qualidade"]; $i++)
 <br />
 <br />
 
-<? if( ($USUARIO['id']== 3179 && $_GET['e']==1) || ($editar == '1' || $editar_instalacao == '1') || ($_GET['e'] == '1' && $USUARIO['tipo_usuario'] == 'LOGISTICA') || ($_GET['e'] == '1' && $USUARIO['tipo_usuario'] == 'MONITOR' && $linha['status'] == 'DEVOLVIDO') || ($_GET['e'] == '1' && $USUARIO['tipo_usuario'] == 'MONITOR' && $USUARIO['acesso_usuario'] == 'EXTERNO' && $linha['status'] == 'SEM CONTATO')) {?>
+<? if( ($USUARIO['id']== 3179 && $_GET['e']==1) || ($editar == '1' || $editar_instalacao == '1') || ($_GET['e'] == '1' && $USUARIO['tipo_usuario'] == 'LOGISTICA') || ($_GET['e'] == '1' && $USUARIO['tipo_usuario'] == 'MONITOR' && $linha['status'] == 'DEVOLVIDO') || ($_GET['e'] == '1' && $USUARIO['tipo_usuario'] == 'MONITOR' && $linha['status'] == 'SEM CONTATO')) {?>
 
 <center>
 

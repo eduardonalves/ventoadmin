@@ -1169,89 +1169,21 @@ function verificacomplemento(v)
 	
 	if(v == 'lotequadra'){
 		document.getElementById('tdlotequadra').style.display = '';
-		document.getElementById('tdapto').style.display = 'none';
-		document.getElementById('tdcasa').style.display = 'none';
-		document.getElementById('tdloja').style.display = 'none';
-		document.getElementById('tdsala').style.display = 'none';
-		document.getElementById('tdfundos').style.display = 'none';
-		document.getElementById('apto').value = '';
-		document.getElementById('bloco').value = '';
-		document.getElementById('casa').value = '';
-		document.getElementById('loja').value = '';
-		document.getElementById('sala').value = '';
-		document.getElementById('fundos').value = '';
 	}
 	else if(v == 'apto'){
 		document.getElementById('tdapto').style.display = '';
-		document.getElementById('tdlotequadra').style.display = 'none';
-		document.getElementById('tdcasa').style.display = 'none';
-		document.getElementById('tdloja').style.display = 'none';
-		document.getElementById('tdsala').style.display = 'none';
-		document.getElementById('lote').value = '';
-		document.getElementById('quadra').value = '';
-		document.getElementById('casa').value = '';
-		document.getElementById('loja').value = '';
-		document.getElementById('sala').value = '';
-		document.getElementById('fundos').value = '';
 		}
 	else if(v == 'loja'){
 		document.getElementById('tdloja').style.display = '';
-		document.getElementById('tdapto').style.display = 'none';
-		document.getElementById('tdlotequadra').style.display = 'none';
-		document.getElementById('tdcasa').style.display = 'none';
-		document.getElementById('tdsala').style.display = 'none';
-		document.getElementById('tdfundos').style.display = 'none';
-		document.getElementById('apto').value = '';
-		document.getElementById('bloco').value = '';
-		document.getElementById('casa').value = '';
-		document.getElementById('lote').value = '';
-		document.getElementById('quadra').value = '';
-		document.getElementById('sala').value = '';
-		document.getElementById('fundos').value = '';
 	}
 	else if(v == 'casa'){
 		document.getElementById('tdcasa').style.display = '';
-		document.getElementById('tdloja').style.display = 'none';
-		document.getElementById('tdapto').style.display = 'none';
-		document.getElementById('tdlotequadra').style.display = 'none';
-		document.getElementById('tdsala').style.display = 'none';
-		document.getElementById('tdfundos').style.display = 'none';
-		document.getElementById('loja').value = '';
-		document.getElementById('apto').value = '';
-		document.getElementById('bloco').value = '';
-		document.getElementById('lote').value = '';
-		document.getElementById('quadra').value = '';
-		document.getElementById('sala').value = '';
-		document.getElementById('fundos').value = '';
 	}
 	else if(v == 'sala'){
 		document.getElementById('tdsala').style.display = '';
-		document.getElementById('tdloja').style.display = 'none';
-		document.getElementById('tdapto').style.display = 'none';
-		document.getElementById('tdlotequadra').style.display = 'none';
-		document.getElementById('tdcasa').value = 'none';
-		document.getElementById('loja').value = '';
-		document.getElementById('apto').value = '';
-		document.getElementById('bloco').value = '';
-		document.getElementById('lote').value = '';
-		document.getElementById('quadra').value = '';
-		document.getElementById('sala').value = '';
-		document.getElementById('fundos').value = '';
 	}
 	else if(v == 'fundos'){
 		document.getElementById('tdfundos').style.display = '';
-		document.getElementById('tdloja').style.display = 'none';
-		document.getElementById('tdapto').style.display = 'none';
-		document.getElementById('tdlotequadra').style.display = 'none';
-		document.getElementById('tdcasa').style.display = 'none';
-		document.getElementById('tdsala').style.display = 'none';
-		document.getElementById('loja').value = '';
-		document.getElementById('apto').value = '';
-		document.getElementById('bloco').value = '';
-		document.getElementById('lote').value = '';
-		document.getElementById('quadra').value = '';
-		document.getElementById('sala').value = '';
-		document.getElementById('casa').value = '';
 	}
 	else{
 		document.getElementById('tdlotequadra').style.display = 'none';
@@ -1868,7 +1800,7 @@ $(document).ready( function() {
 
 <td>
 <div style="float: left;">
-<select id="complemento" name="complemento" onchange="verificacomplemento(this.value)">
+<select id="complemento" name="complemento">
 <option></option>
 <option value="lotequadra">Lote - Quadra</option>
 <option value="apto">Apto. - Bloco</option>
@@ -1877,26 +1809,29 @@ $(document).ready( function() {
 <option value="sala">Sala</option>
 <option value="fundos">Fundos</option>
 </select>
+
+<button type="button" name="addcomplemento" id="addcomplemento" onclick="verificacomplemento(document.getElementById('complemento').value)">Adicionar</button>
 </div>
-<div id='tdlotequadra' style="display: none; float: left; padding-left: 5px;">
+<div style="margin-top: 30px;">
+<div id='tdlotequadra' style="display: none;">
  
- Lote: <input type="text" name="lote" id="lote" size="2" /> Quadra: <input type="text" name="quadra" id="quadra" size="2" /> <br /> 
+ Lote: <input type="text" name="lote" id="lote" size="5" /> Quadra: <input type="text" name="quadra" id="quadra" size="5" />
 
  <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
  <span class="erro" id="elotequadra" style="display:none">Por favor, preencha lote e quadra.</span>
 
 </div>
 
-<div id='tdapto' style="display: none; float: left; padding-left: 5px;">
+<div id='tdapto' style="display: none;">
  
- Apto: <input type="text" name="apto" id="apto" size="5" /> Bloco: <input type="text" name="bloco" id="bloco" size="5" /> <br /> 
+ Apto: <input type="text" name="apto" id="apto" size="5" /> Bloco: <input type="text" name="bloco" id="bloco" size="5" />
 
  <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
  <span class="erro" id="eapto" style="display:none">Por favor, preencha ao menos o apartamento.</span>
 
 </div>
 
-<div id='tdcasa' style="display: none; float: left; padding-left: 5px;">
+<div id='tdcasa' style="display: none;">
  
  Casa: <input type="text" name="casa" id="casa" size="5" /> 
 
@@ -1905,7 +1840,7 @@ $(document).ready( function() {
 
 </div>
 
-<div id='tdloja' style="display: none; float: left; padding-left: 5px;">
+<div id='tdloja' style="display: none;">
  
  Loja: <input type="text" name="loja" id="loja" size="5" /> 
 
@@ -1914,7 +1849,7 @@ $(document).ready( function() {
 
 </div>
 
-<div id='tdsala' style="display: none; float: left; padding-left: 5px;">
+<div id='tdsala' style="display: none;">
  
  Sala: <input type="text" name="sala" id="sala" size="5" /> 
 
@@ -1923,15 +1858,15 @@ $(document).ready( function() {
 
 </div>
 
-<div id='tdfundos' style="display: none; float: left; padding-left: 5px;">
+<div id='tdfundos' style="display: none;">
  
  Fundos: <input type="text" name="fundos" id="fundos" size="5" /> 
 
  <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
- <span class="erro" id="efundos" style="display:none">Por favor, preencha a campo fundos.</span>
+ <span class="erro" id="efundos" style="display:none">Por favor, preencha o campo fundos.</span>
 
 </div>
-
+</div>
 </td>
 
 </tr>

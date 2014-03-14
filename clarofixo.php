@@ -682,23 +682,23 @@ Ano:
 
 <option value=""></option>
 
-<option value="FAV Local">FAV Local</option>
+<option value="FAV Local" <? if($_GET['t'] == 'FAV Local') { ?> selected <? } ?>>FAV Local</option>
 
-<option value="FAV Local com DDD">FAV Local com DDD</option>
+<option value="FAV Local com DDD" <? if($_GET['t'] == 'FAV Local com DDD') { ?> selected <? } ?>>FAV Local com DDD</option>
 
-<option value="FAV Local e DDD">FAV Local e DDD</option>
+<option value="FAV Local e DDD" <? if($_GET['t'] == 'FAV Local e DDD') { ?> selected <? } ?>>FAV Local e DDD</option>
 
-<option value="FAV Local e DDD com Móvel">FAV Local e DDD com Móvel</option>
+<option value="FAV Local e DDD com Móvel" <? if($_GET['t'] == 'FAV Local e DDD com Móvel') { ?> selected <? } ?>>FAV Local e DDD com Móvel</option>
 
 <option value=""></option>
 
-<option value="FAV Local + TV">FAV Local + TV</option>
+<option value="FAV Local + TV" <? if($_GET['t'] == 'FAV Local + TV') { ?> selected <? } ?>>FAV Local + TV</option>
 
-<option value="FAV Local com DDD + TV">FAV Local com DDD + TV</option>
+<option value="FAV Local com DDD + TV" <? if($_GET['t'] == 'FAV Local com DDD + TV') { ?> selected <? } ?>>FAV Local com DDD + TV</option>
 
-<option value="FAV Local e DDD + TV">FAV Local e DDD + TV</option>
+<option value="FAV Local e DDD + TV" <? if($_GET['t'] == 'FAV Local e DDD + TV') { ?> selected <? } ?>>FAV Local e DDD + TV</option>
 
-<option value="FAV Local e DDD com Móvel + TV">FAV Local e DDD com Móvel + TV</option>
+<option value="FAV Local e DDD com Móvel + TV" <? if($_GET['t'] == 'FAV Local e DDD com Móvel + TV') { ?> selected <? } ?>>FAV Local e DDD com Móvel + TV</option>
 
 </select>
 

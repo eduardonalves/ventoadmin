@@ -1,4 +1,4 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <link rel="stylesheet" type="text/css" href="css/dashboard_style.css" />
 <link rel="stylesheet" type="text/css" href="css/tables.css" />
@@ -15,7 +15,7 @@
 //////////////////////////////////////////
 
 
-$(document).ready(function(){ 	
+$(document).ready(function(){ 
 	  function hideResponse(){
 		  setTimeout(function(){
 		  $("#response").fadeOut("slow", function () {
@@ -31,8 +31,8 @@ $(document).ready(function(){
 				$("#response").html(response);
 				$("#response").fadeIn('slow');
 				hideResponse();
-			}); 															 
-		}								  
+			});
+		}  
 		});
 	});
 });
@@ -43,7 +43,7 @@ $(document).ready(function(){
 //////////////////////////
 
 function fechardash(id,del){
-	
+
 $(id).fadeOut(500);
 
  $.post('dashboard-delete.php',{id: del},function(del){
@@ -81,7 +81,7 @@ $('#dashconfig').animate({left:'50%',opacity:'1'},500);
 
 function esconderdashboardconfig(){  $('#dashconfig').fadeOut(500); $('#blackout').fadeOut(500); $('#dashconfig').animate({left:'-50%',opacity:'0'},500);
  }
-		
+
 </script>
 
 <style type="text/css">

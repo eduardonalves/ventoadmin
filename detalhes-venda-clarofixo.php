@@ -383,7 +383,8 @@ if($editar == '1' && $USUARIO['tipo_usuario'] == 'ADMINISTRADOR' && $_POST['data
 	if($_POST['status'] == 'FINALIZADA')
 	{
 
-		$data_finalizada = $_POST['datainstalacao'];
+		$data_finalizada = explode('/',$_POST['datainstalacao']);
+		$data_finalizada = $data_finalizada[2].$data_finalizada[1].$data_finalizada[0];  
 
 	}else{
 
@@ -587,46 +588,51 @@ if($_POST['status'] == strtoupper('FINALIZADA') && ($_POST['agendaentrega'] == "
 	
 	if( ($_POST['tipoEntrega'] == 'PRONTA ENTREGA' || $_POST['tipoEntrega'] == 'MOTOBOY INTERNO' || $_POST['tipoEntrega'] == 'MOTOBOY EXTERNO') && ( strtoupper($_POST['status'])=='FINALIZADA') )
 	{
-		if (! verificaEsn()  )
-		{
-				if( $varerros=='' )
-				{
-					$varerros = 'Campos obrigatórios não preenchidos ou Inválidos:\n\n';
-					$varerros .= "ESN Inválida";
-							 
-				}else{
-					$varerros .= ", ESN Inválida";
-				}
-		}
 		
-		if (! verificaNumChip()  )
+		if( ($linha['status']!='FINALIZADA') || ($linha['status']=='FINALIZADA' && $USUARIO['tipo_usuario'] != 'ADMINISTRADOR')  )
 		{
-				if( $varerros=='' )
-				{
-					$varerros = 'Campos obrigatórios não preenchidos ou Inválidos:\n\n';
-					$varerros .= "CHIP Inválido";
-							 
-				}else{
-					$varerros .= ", CHIP inválido";
-				}
-
-		}		
 		
-		if ( (! ctype_digit($_POST['aparelho'])) || ($_POST['aparelho']=="0") )
-		{
-			//$varerros = "Modelo de aparelho invalido";
+			if (! verificaEsn()  )
+			{
+					if( $varerros=='' )
+					{
+						$varerros = 'Campos obrigatórios não preenchidos ou Inválidos:\n\n';
+						$varerros .= "ESN Inválida";
+								 
+					}else{
+						$varerros .= ", ESN Inválida";
+					}
+			}
+			
+			if (! verificaNumChip()  )
+			{
+					if( $varerros=='' )
+					{
+						$varerros = 'Campos obrigatórios não preenchidos ou Inválidos:\n\n';
+						$varerros .= "CHIP Inválido";
+								 
+					}else{
+						$varerros .= ", CHIP inválido";
+					}
 
-				if( $varerros=='' )
-				{
-					$varerros = 'Campos obrigatórios não preenchidos ou Inválidos:\n\n';
-					$varerros .= "Modelo de Aparelho Inválido";
-							 
-				}else{
-					$varerros .= ", Modelo de Aparelho Inválido";
-				}
+			}		
+			
+			if ( (! ctype_digit($_POST['aparelho'])) || ($_POST['aparelho']=="0") )
+			{
+				//$varerros = "Modelo de aparelho invalido";
+
+					if( $varerros=='' )
+					{
+						$varerros = 'Campos obrigatórios não preenchidos ou Inválidos:\n\n';
+						$varerros .= "Modelo de Aparelho Inválido";
+								 
+					}else{
+						$varerros .= ", Modelo de Aparelho Inválido";
+					}
+
+			}
 
 		}
-
 
 	}
 
@@ -638,20 +644,22 @@ if($_POST['status'] == strtoupper('FINALIZADA') && ($_POST['agendaentrega'] == "
 		
 		// *********** Faz as validacoes ************
 		
-	
-		if($_POST['tipoEntrega']=='EMBRATEL')
+		if( ($linha['status']!='FINALIZADA') || ($linha['status']=='FINALIZADA' && $USUARIO['tipo_usuario'] != 'ADMINISTRADOR')  )
 		{
-			$excep = array("lote", "quadra", "complemento", "os", "esn", "novonumero","numchip","itelefone3","tipotel3","pontoref");
-			validarCampos($campos, $excep);
 
-		}elseif ($_POST['tipoEntrega']=='PRONTA ENTREGA') {
+			if($_POST['tipoEntrega']=='EMBRATEL')
+			{
+				$excep = array("lote", "quadra", "complemento", "os", "esn", "novonumero","numchip","itelefone3","tipotel3","pontoref");
+				validarCampos($campos, $excep);
 
-			$excep = array("lote", "quadra", "complemento","numchip","itelefone3","tipotel3","pontoref");
-			validarCampos($campos, $excep);
-			
-			
-		}
-		
+			}elseif ($_POST['tipoEntrega']=='PRONTA ENTREGA') {
+
+				$excep = array("lote", "quadra", "complemento","numchip","itelefone3","tipotel3","pontoref");
+				validarCampos($campos, $excep);
+				
+				
+			}
+		}	
 	}
 		
 		

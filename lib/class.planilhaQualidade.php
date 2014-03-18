@@ -17,7 +17,7 @@ class planilhaQualidade extends Qualidade
 	{
 
 		
-		$this->saidaTexto = new Accents( Accents::UTF_8, Accents::ISO_8859_1 );		
+		$this->saidaTexto = new Accents( Accents::UTF_8, Accents::UTF_8 );		
 
 		if( is_int($tipoPlanilha_asInteger) && array_key_exists($tipoPlanilha_asInteger, $this->tiposStatus_asArray) )
 		{

@@ -102,7 +102,7 @@ if(isset($_POST['chk'])){
 
 	
 
-$set_colunas = $conexao->query("UPDATE usuarios SET colunas_clarofixo = '(".$_POST['chk1'].") (".$_POST['chk2'].") (".$_POST['chk3'].") (".$_POST['chk4'].") (".$_POST['chk5'].") (".$_POST['chk6'].") (".$_POST['chk7'].") (".$_POST['chk8'].") (".$_POST['chk9'].") (".$_POST['chk10'].") (".$_POST['chk11'].") (".$_POST['chk12'].") (".$_POST['chk13'].") (".$_POST['chk14'].") (".$_POST['chk15'].") (".$_POST['chk16'].") (".$_POST['chk17'].") (".$_POST['chk18'].") (".$_POST['chk19'].") (".$_POST['chk20'].") (".$_POST['chk21'].") (".$_POST['chk22'].") (".$_POST['chk23'].") (".$_POST['chk24'].") (".$_POST['chk25'].") (".$_POST['chk26'].") (".$_POST['chk27'].") (".$_POST['chk28'].") (".$_POST['chk29'].") (".$_POST['chk30'].") (".$_POST['chk31'].")' WHERE id = '".$USUARIO['id']."'");
+$set_colunas = $conexao->query("UPDATE usuarios SET colunas_clarofixo = '(".$_POST['chk1'].") (".$_POST['chk2'].") (".$_POST['chk3'].") (".$_POST['chk4'].") (".$_POST['chk5'].") (".$_POST['chk6'].") (".$_POST['chk7'].") (".$_POST['chk8'].") (".$_POST['chk9'].") (".$_POST['chk10'].") (".$_POST['chk11'].") (".$_POST['chk12'].") (".$_POST['chk13'].") (".$_POST['chk14'].") (".$_POST['chk15'].") (".$_POST['chk16'].") (".$_POST['chk17'].") (".$_POST['chk18'].") (".$_POST['chk19'].") (".$_POST['chk20'].") (".$_POST['chk21'].") (".$_POST['chk22'].") (".$_POST['chk23'].") (".$_POST['chk24'].") (".$_POST['chk25'].") (".$_POST['chk26'].") (".$_POST['chk27'].") (".$_POST['chk28'].") (".$_POST['chk29'].") (".$_POST['chk30'].") (".$_POST['chk31'].") (".$_POST['chk32'].")' WHERE id = '".$USUARIO['id']."'");
 
 ?>	
 

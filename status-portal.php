@@ -1,7 +1,7 @@
 <meta name="http-equiv" content="Content-type: text/html; charset=UTF-8"/>
 
-<link rel="stylesheet" type=text/css href="css/tables.css" />
-<link rel="stylesheet" type=text/css href="css/paginacao.css" />
+<link rel="stylesheet" type="text/css" href="css/tables.css" />
+<link rel="stylesheet" type="text/css" href="css/paginacao.css" />
 
 <?php
 // Verificar se está logado
@@ -22,7 +22,7 @@ if(!isset($_SESSION['usuario'])){ ?>
 
 <?php } 
 
-$saidaTexto = new Accents( Accents::UTF_8, Accents::ISO_8859_1 );
+$saidaTexto = new Accents( Accents::UTF_8, Accents::UTF_8 );
 $objPlanilhas = new planilhaQualidade($conexao);
 ?>
 

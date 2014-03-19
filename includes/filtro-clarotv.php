@@ -186,14 +186,14 @@ $conVENDA = $conexao->query("SELECT *,
 							FROM reagendamentoinstalacao 
 								WHERE venda = vendas_clarotv.id
 						        ORDER BY id DESC LIMIT 0,1),
-								vendas_clarotv.data_marcada ) AS data_marcada,	
+								vendas_clarotv.data_marcada ) AS data_marcada,
 							vendas_clarotv.data_marcada AS agendamento
-							 FROM vendas_clarotv					 
-							 WHERE 		
-							 vendas_clarotv.produto='".$produto."'
-							 ".$gravacao." && 
-							 (vendas_clarotv.contrato LIKE '%".$_GET['b']."%' || 
-							 	vendas_clarotv.proposta LIKE '%".$_GET['b']."%' || 
+							FROM vendas_clarotv					 
+							WHERE 		
+							vendas_clarotv.produto='".$produto."'
+							".$gravacao." && 
+							(vendas_clarotv.contrato LIKE '%".$_GET['b']."%' || 
+								vendas_clarotv.proposta LIKE '%".$_GET['b']."%' || 
 								vendas_clarotv.nome LIKE '%".$_GET['b']."%' || 
 								vendas_clarotv.cpf LIKE '%".$_GET['b']."%' || 
 								vendas_clarotv.cep LIKE '%".$_GET['b']."%' || 

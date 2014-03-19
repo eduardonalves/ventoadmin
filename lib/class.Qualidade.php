@@ -3,11 +3,9 @@ include "conexao.php";
 
 class Qualidade{
 	
-	private $conexao;
+	protected $conexao;
 	
-	public function __construct(){
-		
-		global $conexao;
+	public function __construct(&$conexao){
 		
 		$this->conexao =& $conexao;
 		
@@ -20,22 +18,26 @@ class Qualidade{
 
 			$camposTabela = $this->conexao->query('SHOW COLUMNS FROM qualidades FROM ' . $this->conexao->dbName);
 			
-			$sqlString = "INSERT INTO 'Qualidades'(";
+			$sqlString = "INSERT INTO qualidades (";
 			
 			$virgula = "";
+
 			while( $campo = mysql_fetch_assoc($camposTabela) )
 			{
-				$sqlString .= "'" . $campo['Field'] . "'";
+				$sqlString .= $virgula . "" . $campo['Field'] . "";
+				$virgula = ",";
 			}
 			
 			$sqlString .= ") VALUES (";
-			$virgula = "";
-			
-			mysql_data_seek($camposTabela, 0);
 			
 			for ($i=0; $i<count($data['Qualidade']); $i++)
 			{
-
+				
+				$sqlString .= ( $i == 0 ) ? '' : ',(';
+				$virgula = "";
+				
+				mysql_data_seek($camposTabela, 0);
+				
 				while( $campo = mysql_fetch_assoc($camposTabela) )
 				{
 					
@@ -61,8 +63,11 @@ class Qualidade{
 					}
 				}
 
+				$sqlString .= ")";
 				
 			}
+			
+			
 			
 			return $sqlString;
 			

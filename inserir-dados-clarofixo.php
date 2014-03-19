@@ -1016,20 +1016,31 @@ function checkcpf(c){
 	}
 
 	
+	//GLOBAL
+	
+	var pagamentoOpts = false;
+	var tipoEntregaOpts = false;
 
 function checkoperador(m){
 
-	
-
-	
-
 	$('#loadoperadores').load('check-operadores.php?m='+m+'&g=0003');
-
 	
-
+	if ( pagamentoOpts == false ) { pagamentoOpts  = $("#pagamento").html(); }
+	if ( tipoEntregaOpts == false ) { tipoEntregaOpts  = $("#tipoEntrega").html(); }
 	
-
+	if ( $("#monitor option:selected").attr("data-acesso_usuario") == "EXTERNO" )
+	{
+		
+		$("#pagamento").html("<option value=\"DINHEIRO\" selected=\"selected\">DINHEIRO</option>");
+		$("#tipoEntrega").html("<option value=\"PRONTA ENTREGA\" selected=\"selected\">PRONTA ENTREGA</option>");
+		
+	}else{
+		
+		$("#pagamento").html(pagamentoOpts);
+		$("#tipoEntrega").html(tipoEntregaOpts);
 	}
+	
+}
 
 	
 
@@ -1339,7 +1350,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 
 ?>
 
-<option value="<?= $MONITORES['id']?>"><?= $MONITORES['nome']?></option>
+<option value="<?= $MONITORES['id']?>" data-acesso_usuario="<?= $MONITORES['acesso_usuario']?>"><?= $MONITORES['nome']?></option>
 
 <? } ?>
 

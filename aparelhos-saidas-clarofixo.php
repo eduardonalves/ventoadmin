@@ -2,7 +2,7 @@
 
 
 
-// Verificar se está logado
+// Verificar se estÃ¡ logado
 
 if(!isset($_SESSION['usuario'])){ ?>
 
@@ -147,7 +147,7 @@ window.location = '?p=<?= $_GET['p'];?>'
 
 
 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 
 <!-- 
@@ -236,9 +236,9 @@ window.location = '?p=<?= $_GET['p'];?>'
 
 
 
- /*Cria uma função de nome mascara, onde o primeiro argumento passado é um dos
+ /*Cria uma funÃ§Ã£o de nome mascara, onde o primeiro argumento passado Ã© um dos
 
-     objetos input O segundo é especificando o tipo de método no qual será tratado*/
+     objetos input O segundo Ã© especificando o tipo de mÃ©todo no qual serÃ¡ tratado*/
 
     function mascara(o,f){
 
@@ -254,9 +254,9 @@ window.location = '?p=<?= $_GET['p'];?>'
 
     function execmascara(){
 
-        /*Pegue o valor do objeto e atribua o resultado da função v_fun; cujo o conteúdo
+        /*Pegue o valor do objeto e atribua o resultado da funÃ§Ã£o v_fun; cujo o conteÃºdo
 
-        da mesma é a função que foi referida e que será utilizada para tratar dos dados*/
+        da mesma Ã© a funÃ§Ã£o que foi referida e que serÃ¡ utilizada para tratar dos dados*/
 
         v_obj.value=v_fun(v_obj.value);
 
@@ -266,7 +266,7 @@ window.location = '?p=<?= $_GET['p'];?>'
 
     function soNumeros(v){
 
-        return v.replace(/\D/g,"");//Exclua tudo que não for numeral e retorne o valor
+        return v.replace(/\D/g,"");//Exclua tudo que nÃ£o for numeral e retorne o valor
 
     }
 
@@ -274,15 +274,15 @@ window.location = '?p=<?= $_GET['p'];?>'
 
     function data(v){
 
-        //Remove tudo o que não é dígito
+        //Remove tudo o que nÃ£o Ã© dÃ­gito
 
         v=v.replace(/\D/g,"");
 
-        //Coloca parênteses em volta dos dois primeiros dígitos
+        //Coloca parÃªnteses em volta dos dois primeiros dÃ­gitos
 
         v=v.replace(/^(\d{2})(\d)/g,"$1/$2");
 
-        //Coloca hífen entre o quarto e o quinto dígitos
+        //Coloca hÃ­fen entre o quarto e o quinto dÃ­gitos
 
         v=v.replace(/(\d{2})(\d)/,"$1/$2");
 
@@ -416,7 +416,7 @@ box-shadow:  0px 0px 10px 2px #999;
 
 <tr align="center" height="40px" style="color:#999; font-weight:bold; font-size:14px;">
 
-<td>COLUNAS VISÍVEIS</td>
+<td>COLUNAS VISÃVEIS</td>
 
 </tr>
 
@@ -513,9 +513,9 @@ box-shadow:  0px 0px 10px 2px #999;
 
 /* VARIAVEIS GET
  * 
- * p = Página a ser exibida (Aparelhos)
- * o = Ordem de exibição dos registros (nome-do-campo + ASC or DESC)
- * m = Número de registros por página
+ * p = PÃ¡gina a ser exibida (Aparelhos)
+ * o = Ordem de exibiÃ§Ã£o dos registros (nome-do-campo + ASC or DESC)
+ * m = NÃºmero de registros por pÃ¡gina
  * 
  * mc = Filtro por Marca
  * mod = Filtro por modelo
@@ -582,11 +582,11 @@ while ($parceiro = mysql_fetch_array($getParceiros))
 </td>
 
 
-<td> | Saída de: <input type="text" name="v" id="calendario" onKeyPress="mascara(this,data)" value="<?= $_GET['v'];?>" maxlength="10" size="8" onchange="javascript:document.forms.filtro.submit();" /></td>
+<td> | SaÃ­da de: <input type="text" name="v" id="calendario" onKeyPress="mascara(this,data)" value="<?= $_GET['v'];?>" maxlength="10" size="8" onchange="javascript:document.forms.filtro.submit();" /></td>
 
 
 
-<td>Até: <input type="text" name="i" id="calendario2" onKeyPress="mascara(this,data)" value="<?= $_GET['i'];?>" maxlength="10" size="8" onchange="javascript:document.forms.filtro.submit();" /></td>
+<td>AtÃ©: <input type="text" name="i" id="calendario2" onKeyPress="mascara(this,data)" value="<?= $_GET['i'];?>" maxlength="10" size="8" onchange="javascript:document.forms.filtro.submit();" /></td>
 
 
 
@@ -662,7 +662,7 @@ include "includes/filtro-aparelhos-saidas.php";
 
 
 
-<img src="img/gear.png" width="20" style="cursor:pointer" onclick="mostrarcolunas();" title="Selecionar Colunas Visíveis"  />
+<img src="img/gear.png" width="20" style="cursor:pointer" onclick="mostrarcolunas();" title="Selecionar Colunas VisÃ­veis"  />
 
 </td>
 
@@ -777,7 +777,7 @@ include "includes/filtro-aparelhos-saidas.php";
 
 <? if(strstr($USUARIO['colunas_saidas'],'(data)')){?>
 
-<td title="Data da Saída" onclick="window.location = '?p=aparelhos-saidas-clarofixo&es=<?= $_GET['es'];?>&est=<?= $_GET['est'];?>&parc=<?= $_GET['parc'];?>&m=<?= $_GET['m'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&pg=<?php echo ($pg - 1); ?>&o=<? if($_GET['o'] != 'data DESC'){ echo 'data DESC'; } else { echo 'data ASC'; }?>'">Data <? if($_GET['o'] == 'data DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'data ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
+<td title="Data da SaÃ­da" onclick="window.location = '?p=aparelhos-saidas-clarofixo&es=<?= $_GET['es'];?>&est=<?= $_GET['est'];?>&parc=<?= $_GET['parc'];?>&m=<?= $_GET['m'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&pg=<?php echo ($pg - 1); ?>&o=<? if($_GET['o'] != 'data DESC'){ echo 'data DESC'; } else { echo 'data ASC'; }?>'">Data <? if($_GET['o'] == 'data DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'data ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
 
 <? } ?>
 
@@ -954,11 +954,11 @@ if($numpag == $pg){ ?>
 
 <td width="70px" align="center" bgcolor="#ededed" onMouseOver="this.style.background = '#f6f6f6'" onMouseOut="this.style.background = '#ededed'" style="cursor:pointer; font-size:13px" onClick="window.location = ('?p=<?= $_GET['p']; ?>&es=<?= $_GET['es']; ?>&m=<?= $_GET['m'];?>&o=<?= $_GET['o']; ?>&t=<?= $_GET['t']; ?>&f=<?= $_GET['f']; ?>&s=<?= $_GET['s']; ?>&v=<?= $_GET['v']; ?>&i=<?= $_GET['i']; ?>&b=<?= $_GET['b'];?>&tpv=<?= $_GET['tpv']; ?>&pg=<?php echo ($pg + 1); ?>&di=<?= $_GET['di']; ?>&de=<?= $_GET['de']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&g=<?= $_GET['g']; ?>')">
 
-Próximo &raquo;</td><? } else {?>
+PrÃ³ximo &raquo;</td><? } else {?>
 
 
 
-<td width="70px" align="center" bgcolor="#fbfbfb" style="cursor:default; font-size:13px; color:#cdcdcd">Próximo &raquo;</td> 
+<td width="70px" align="center" bgcolor="#fbfbfb" style="cursor:default; font-size:13px; color:#cdcdcd">PrÃ³ximo &raquo;</td> 
 
 
 

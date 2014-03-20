@@ -79,7 +79,7 @@
 
         });
     });
-		
+
 
     
 
@@ -199,7 +199,7 @@
                 n4 = n3+1;
                 if (n3 < n2) 
                 {
-                    $("#campoDinamico").append("<tr class='ap"+ n1 +"' align='left'><td style='width:158px;'><label id='serial' class='diagramacaoSerial' class='diagramacaoSerial2'>Serial "+n4+":</label> </td><td><input type='text' name='serial"+n1+n4+"' class='codigo' id='serial"+n1+n4+"'/><span class='campoobrigatorio' title='Campo Obrigat�rio'>*</span><span class='erro' id='epessoa' style='display:none'>Por favor, selecione o tipo do cliente!</span></td></tr>");
+                    $("#campoDinamico").append("<tr class='ap"+ n1 +"' align='left'><td style='width:158px;'><label id='serial' class='diagramacaoSerial' class='diagramacaoSerial2'>Serial "+n4+":</label> </td><td><input type='text' name='serial"+n1+n4+"' class='codigo' id='serial"+n1+n4+"'/><span class='campoobrigatorio' title='Campo Obrigatório'>*</span><span class='erro' id='epessoa' style='display:none'>Por favor, selecione o tipo do cliente!</span></td></tr>");
 					$("#serial"+n1+n4).focus();
                 }
                 else{
@@ -213,29 +213,36 @@
                 n2 = $("#textBoxQuantidade1").val();
                 n3++;   
                 n4 = n3+1;
-               if (n3 < n2) 
+                if (n3 < n2) 
                 {
-                    $("#campoDinamico").append("<tr class='ap"+ n1 +"' align='left'><td style='width:158px;'><label id='serial'>Serial "+n4+":</label> </td><td><input type='text' name='serial"+n1+n4+"' class='codigo' id='serial"+n1+n4+"'/><span class='campoobrigatorio' title='Campo Obrigat�rio'>*</span><span class='erro' id='epessoa' style='display:none'>Por favor, selecione o tipo do cliente!</span></td></tr>");
+                    $("#campoDinamico").append("<tr class='ap"+ n1 +"' align='left'><td style='width:158px;'><label id='serial'>Serial "+n4+":</label> </td><td><input type='text' name='serial"+n1+n4+"' class='codigo' id='serial"+n1+n4+"'/><span class='campoobrigatorio' title='Campo Obrigatório'>*</span><span class='erro' id='epessoa' style='display:none'>Por favor, selecione o tipo do cliente!</span></td></tr>");
 					$("#serial"+n1+n4).focus();
                 }
                 else{
                     n3=0;
                     //alert("Numero de serial precisa ser igual o numero de aparelhos ");
-                }       
+                }
             });
             
             
             
             });
             
-                        
+            
             $(".desabilitar").live("change", function(){
                 $(".desabilitar").attr("disabled", true);
                
               }); 
               
- 
-    
+function somenteNumero(e){
+	var tecla=(window.event)?event.keyCode:e.which;
+	if((tecla>47 && tecla<58)) return true;
+	else{
+	if (tecla==8 || tecla==0) return true;
+	else return false;
+}
+}
+
 </script>
 <!--Javascript/Jquery - FIM-->
 
@@ -259,7 +266,7 @@
     <table border="0" width="1000px">
 
         <tr valign="bottom" height="40px" align="left">
-        <td style="font-size:14px; color:#999;">Cadastro de Aparelhos - Saida</td>
+        <td style="font-size:14px; color:#999;">Cadastro de Aparelhos - Saída</td>
         
         </tr>
 
@@ -278,7 +285,7 @@
 		<table id="tableAppend" border="0" width="850px" >
 
 			<tr align="left">
-				<td style="color:#069; font-size:12px">Saida</td>
+				<td style="color:#069; font-size:12px">Saída</td>
 			</tr>
 
 
@@ -339,7 +346,7 @@
 			<input type="hidden" value="Em Estoque" name="selectStatus" id="selectStatus" />
 
 			<tr align="left">
-				<td style="color:#069; font-size:12px">Itens de Saida</td>
+				<td style="color:#069; font-size:12px">Itens de Saída</td>
 			</tr>
 
 			<tr>
@@ -368,7 +375,7 @@
 
 			<tr align='left'>
 				<td>Quantidade:</td>
-				<td><input type='text' style="width:40px;" id='textBoxQuantidade1' class='desabilitar' name='textBoxQuantidade1'/> <a class="edit_quantidade" id='teste1' href="#"><img src='img/icone-editar.png'/></a></td>
+				<td><input type='text' style="width:40px;" id='textBoxQuantidade1' class='desabilitar' name='textBoxQuantidade1' onkeypress="return somenteNumero(event)"/> <a class="edit_quantidade" id='teste1' href="#"><img src='img/icone-editar.png'/></a></td>
 			</tr>
     
 			<tr align='left'>

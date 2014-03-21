@@ -119,9 +119,9 @@
 				
         $sql4= "SELECT * FROM aparelhos WHERE id_aparelho = '$aparelho'";
         $query4 = mysql_query($sql4);
-        $apArray = mysql_fetch_array($query4);                  
+        $apArray = mysql_fetch_array($query4);
         $varConta = $apArray['estoque'];
-        $varConta = $apArray['estoque'];   
+        $varConta = $apArray['estoque'];
         $varResult = $varConta + $quantidade_itens;
 
            

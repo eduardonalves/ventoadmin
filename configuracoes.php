@@ -1,6 +1,4 @@
 
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.js"></script>
 <script src="js/jquery.Jcrop.min.js"></script>
 <script src="js/jquery.Jcrop.js"></script>
 <link rel="stylesheet" href="css/jquery.Jcrop.css" type="text/css" />

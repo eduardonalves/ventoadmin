@@ -13,7 +13,7 @@ if (! isset($_GET["es"]) )
 
 	}else{
 	
-	$_GET["es"] = "aparelhos-clarofixo";	
+	$_GET["es"] = "aparelhos-clarofixo";
 	
 	}
 

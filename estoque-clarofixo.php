@@ -18,17 +18,13 @@ function getVendasInternas()
 
 if(!isset($_SESSION['usuario'])){ ?>
 
-	
 
 <script type="text/javascript">
 
 <!-- window.location = 'index.php' -->
 
-</script>	
+</script>
 
-	
-
-	
 
 <? } 
 
@@ -80,7 +76,7 @@ $v = $v0[2].$v0[1].$v0[0];
 
 
 
-if($_GET['ve'] == '1' || $_GET['ve'] == ''){	
+if($_GET['ve'] == '1' || $_GET['ve'] == ''){
 
 $v = $ano.$mes;	
 
@@ -112,7 +108,7 @@ $datafinalizada = $di0[2].$di0[1].$di0[0];
 
 if($_GET['ve'] == '2'){	
 
-$datafinalizada = $ano.$mes;	
+$datafinalizada = $ano.$mes;
 
 }
 
@@ -159,7 +155,7 @@ window.location = '?p=<?= $_GET['p'];?>'
 
 
 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset = UTF-8" />
 
 
 

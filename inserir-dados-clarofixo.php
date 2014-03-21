@@ -909,7 +909,7 @@ if(document.getElementById('nomemae').value == ''){ document.getElementById('eno
 
 if(document.getElementById('nascd').value == '' || document.getElementById('nascm').value == '' || document.getElementById('nasca').value == ''){ document.getElementById('enasc').style.display = ''; e=(e+1)} else { document.getElementById('enasc').style.display = 'none';}	
 
-if(document.getElementById('rg').value == '' || document.getElementById('orgexp').value == ''){ document.getElementById('erg').style.display = ''; e=(e+1)} else { document.getElementById('erg').style.display = 'none';}
+if(document.getElementById('rg').value == '' || document.getElementById('orgexp').value == '' || document.getElementById('dataexp').value == ''){ document.getElementById('erg').style.display = ''; e=(e+1)} else { document.getElementById('erg').style.display = 'none';}
 
 //if(document.getElementById('profissao').value == ''){ document.getElementById('eprofissao').style.display = ''; e=(e+1)} else { document.getElementById('eprofissao').style.display = 'none';}
 
@@ -931,21 +931,21 @@ if(document.getElementById('tel2').value == ''){ document.getElementById('etelef
 
 /////// -- ENDEREÇO CLIENTE -- ////////
 
-if(document.getElementById('endereco').value == ''){ document.getElementById('eendereco').style.display = ''; e=(e+1)} else { document.getElementById('eendereco').style.display = 'none';}
+if(document.getElementById('endereco').value == '' || (document.getElementById('numero').value == '' && document.getElementById('complemento').value == '')){ document.getElementById('eendereco').style.display = ''; e=(e+1)} else { document.getElementById('eendereco').style.display = 'none';}
 
 //COMPLEMENTO
 
-if((document.getElementById('lote').value == '' || document.getElementById('quadra').value == '') && document.getElementById('complemento').value == 'lotequadra'){ document.getElementById('elotequadra').style.display = ''; e=(e+1)} else { document.getElementById('elotequadra').style.display = 'none';}
+if((document.getElementById('lote').value == '' || document.getElementById('quadra').value == '') && addcomplemento == 'lotequadra'){ document.getElementById('elotequadra').style.display = ''; e=(e+1)} else { document.getElementById('elotequadra').style.display = 'none';}
 
-if(document.getElementById('apto').value == '' && document.getElementById('complemento').value == 'apto'){ document.getElementById('eapto').style.display = ''; e=(e+1)} else { document.getElementById('eapto').style.display = 'none';}
+if(document.getElementById('apto').value == '' && addcomplemento == 'apto'){ document.getElementById('eapto').style.display = ''; e=(e+1)} else { document.getElementById('eapto').style.display = 'none';}
 
-if(document.getElementById('casa').value == '' && document.getElementById('complemento').value == 'casa'){ document.getElementById('ecasa').style.display = ''; e=(e+1)} else { document.getElementById('ecasa').style.display = 'none';}
+if(document.getElementById('casa').value == '' && addcomplemento == 'casa'){ document.getElementById('ecasa').style.display = ''; e=(e+1)} else { document.getElementById('ecasa').style.display = 'none';}
 
-if(document.getElementById('loja').value == '' && document.getElementById('complemento').value == 'loja'){ document.getElementById('eloja').style.display = ''; e=(e+1)} else { document.getElementById('eloja').style.display = 'none';}
+if(document.getElementById('loja').value == '' && addcomplemento == 'loja'){ document.getElementById('eloja').style.display = ''; e=(e+1)} else { document.getElementById('eloja').style.display = 'none';}
 
-if(document.getElementById('sala').value == '' && document.getElementById('complemento').value == 'sala'){ document.getElementById('esala').style.display = ''; e=(e+1)} else { document.getElementById('esala').style.display = 'none';}
+if(document.getElementById('sala').value == '' && addcomplemento == 'sala'){ document.getElementById('esala').style.display = ''; e=(e+1)} else { document.getElementById('esala').style.display = 'none';}
 
-if(document.getElementById('fundos').value == '' && document.getElementById('complemento').value == 'fundos'){ document.getElementById('efundos').style.display = ''; e=(e+1)} else { document.getElementById('efundos').style.display = 'none';}
+if(document.getElementById('fundos').value == '' && addcomplemento == 'fundos'){ document.getElementById('efundos').style.display = ''; e=(e+1)} else { document.getElementById('efundos').style.display = 'none';}
 
 ///
 
@@ -1020,6 +1020,7 @@ function checkcpf(c){
 	
 	var pagamentoOpts = false;
 	var tipoEntregaOpts = false;
+	var addcomplemento; //Variável de controle. Verifica qual complemento o usuário adicionou e cobra os respectivos campos preenchidos e validados.
 
 function checkoperador(m){
 
@@ -1180,21 +1181,27 @@ function verificacomplemento(v)
 	
 	if(v == 'lotequadra'){
 		document.getElementById('tdlotequadra').style.display = '';
+		addcomplemento = 'lotequadra';
 	}
 	else if(v == 'apto'){
 		document.getElementById('tdapto').style.display = '';
+		addcomplemento = 'apto';
 		}
 	else if(v == 'loja'){
 		document.getElementById('tdloja').style.display = '';
+		addcomplemento = 'loja';
 	}
 	else if(v == 'casa'){
 		document.getElementById('tdcasa').style.display = '';
+		addcomplemento = 'casa';
 	}
 	else if(v == 'sala'){
 		document.getElementById('tdsala').style.display = '';
+		addcomplemento = 'sala';
 	}
 	else if(v == 'fundos'){
 		document.getElementById('tdfundos').style.display = '';
+		addcomplemento = 'fundos';
 	}
 	else{
 		document.getElementById('tdlotequadra').style.display = 'none';
@@ -1211,6 +1218,7 @@ function verificacomplemento(v)
 		document.getElementById('loja').value = '';
 		document.getElementById('sala').value = '';
 		document.getElementById('fundos').value = '';
+		addcomplemento = '';
 	}
 	}
 
@@ -1583,9 +1591,9 @@ $(document).ready( function() {
 
 <td>RG:</td>
 
-<td id="rginp"><input type="text" id="rg" name="rg" size="20" maxlength="12" onKeyPress="mascara(this,rg)"/> <span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
+<td id="rginp"><input type="text" id="rg" name="rg" size="20" maxlength="12" onKeyPress="mascara(this,rg)"/> <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
 
- Org. Exp: <input type="text" title="Orgão Expedidor" id="orgexp" name="orgexp" size="20" /> <span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
+ Org. Exp: <input type="text" title="Orgão Expedidor" id="orgexp" name="orgexp" size="20" /> <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
 
  Data Exp: <input type="text" title="Data Expedição" id="dataexp" name="dataexp" onKeyPress="mascara(this,data)" maxlength="10" size="20" />
 

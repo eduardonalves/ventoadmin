@@ -1,4 +1,4 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <table border="0" width="1000px" bgcolor="#f6f6f6" onmouseover="loadsize(document.getElementById('pagesize').innerHTML);">
 <tr style="font-size:13px">
@@ -47,13 +47,13 @@
 
 <option value="GRAVAR" <? if($_GET['s'] == 'GRAVAR'){?>selected="selected"<? } ?>>Gravar</option>
 <option value="APROVADO" <? if($_GET['s'] == 'APROVADO'){?>selected="selected"<? } ?>>Aprovado</option>
-<option value="ANÁLISE" <? if($_GET['s'] == 'ANÁLISE'){?>selected="selected"<? } ?>>Análise</option>
-<option value="PRÉ-ANÁLISE" <? if($_GET['s'] == 'PRÉ-ANÁLISE'){?>selected="selected"<? } ?>>Pré-Análise</option>
+<option value="ANÃLISE" <? if($_GET['s'] == 'ANÃLISE'){?>selected="selected"<? } ?>>AnÃ¡lise</option>
+<option value="PRÃ‰-ANÃLISE" <? if($_GET['s'] == 'PRÃ‰-ANÃLISE'){?>selected="selected"<? } ?>>PrÃ©-AnÃ¡lise</option>
 <option value="PENDENTE" <? if($_GET['s'] == 'PENDENTE'){?>selected="selected"<? } ?>>Pendente</option>
 <option value="DEVOLVIDO" <? if($_GET['s'] == 'DEVOLVIDO'){?>selected="selected"<? } ?>>Devolvido</option>
 <option value="FINALIZADA" <? if($_GET['s'] == 'FINALIZADA'){?>selected="selected"<? }?>>Finalizada</option>
 <option value="SEM CONTATO" <? if($_GET['s'] == 'SEM CONTATO'){?>selected="selected"<? } ?>>Sem Contato</option>
-<option value="RESTRIÇÃO" <? if($_GET['s'] == 'RESTRIÇÃO'){?>selected="selected"<? } ?>>Restrição</option>
+<option value="RESTRIÃ‡ÃƒO" <? if($_GET['s'] == 'RESTRIÃ‡ÃƒO'){?>selected="selected"<? } ?>>RestriÃ§Ã£o</option>
 <option value="CANCELADO" <? if($_GET['s'] == 'CANCELADO'){?>selected="selected"<? } ?>>Cancelado</option>
 <option value="CONECTADO" <? if($_GET['s'] == 'CONECTADO'){?>selected="selected"<? } ?>>Conectado</option>
 

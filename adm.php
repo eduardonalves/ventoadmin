@@ -5,7 +5,7 @@ date_default_timezone_set("Brazil/East");
 header("Content-type: text/html; charset=UTF-8", true);
 
 
-error_reporting(0);
+error_reporting(E_ALL);
 
 session_start();
 
@@ -93,14 +93,14 @@ $USUARIO = mysql_fetch_assoc($conUSUARIO);
 <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
  -->
  
- <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
-<link rel="stylesheet" type=text/css href="css/geral.css" />
+ <!-- <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script> -->
+ <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/geral.css" />
 
 
 
 
 <script type="text/javascript">
-
 
 
 <? if($_GET['a'] == '1'){?>

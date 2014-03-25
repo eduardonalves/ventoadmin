@@ -2,7 +2,7 @@
 
 session_start();
 
-// Verificar se est· logado
+// Verificar se est√° logado
 
 if(!isset($_SESSION['usuario'])){ ?>
 
@@ -111,7 +111,7 @@ $tipo_tel3 = $_POST['tipotel3'];
 
 
 
-// EndereÁo InstalaÁ„o
+// Endere√ßo Instala√ß√£o
 
 $endereco = $_POST['endereco'];	
 
@@ -169,7 +169,7 @@ $os3 = $_POST['os3'];
 
 $vencimento = $_POST['vencimento'];
 
-// Agendamento gravaÁ„o
+// Agendamento grava√ß√£o
 
 
 if($_POST['agendagravacao']){
@@ -258,7 +258,7 @@ if($_POST['reagendamentoPendente'] != ''){
 
 
 //// fim reagendamento ////
-// Dados da InstalaÁ„o
+// Dados da Instala√ß√£o
 
 $data_marcada0 = explode('/',$_POST['datamarcada']);
 
@@ -329,7 +329,7 @@ if($_POST['obsPendente']){
 }
 
 
-// ObservaÁıes
+// Observa√ß√µes
 
 if(strlen($_POST['obsgravacao']) > 3){
 $obs1 = $_POST['obsgravacao'];	
@@ -362,7 +362,7 @@ $pagamento_instalacao = $_POST['pagamentoinstalacao'];
 
 
 
-if($pagamento == 'D…BITO'){ $valor = '80.00';
+if($pagamento == 'D√âBITO'){ $valor = '80.00';
 
 
 
@@ -415,7 +415,7 @@ else { $status = $_POST['status']; }
 
 ////////////////////////
 
-// Salvar InstalaÁ„o //
+// Salvar Instala√ß√£o //
 
 //////////////////////
 
@@ -465,7 +465,7 @@ $update_instalacao = $conexao->query("UPDATE instalacoes_clarotv SET data='".$da
 
 
 
-$dadoscontrato1 = $conexao->query("SELECT (id) FROM vendas_clarotv  WHERE contrato = '".$contrato."'");	if(($POST['contrato'] != "" ) || ($POST['contrato'] != "PENDENTE") || ($linha['contrato'] != "")){	$contcontrato = $conexao->query("SELECT COUNT(id) FROM vendas_clarotv  WHERE contrato = '".$contrato."'");	}else{	$contcontrato =0;}$dadoscontr = mysql_fetch_array($dadoscontrato1);$contcontr = mysql_fetch_array($contcontrato);$dadosos1 = $conexao->query("SELECT (id) FROM vendas_clarotv  WHERE os = '".$os."'");	if(($POST['os'] != "" ) || ($POST['os'] != "PENDENTE") || ($linha['os'] != "")){	$cont_os = $conexao->query("SELECT COUNT(id) FROM vendas_clarotv  WHERE os = '".$os."'");	}$dadosos_1 = mysql_fetch_array($dadosos1);$cont_os_1 = mysql_fetch_array($cont_os);$errosvenda =0; if(($cont_os_1[0] == 1) && ($linha['os'] == "" )){		$errosvenda= 1;	$varerros = "Erro: Os j· existente!";}if(($contcontr[0] == 1) && ($linha['contrato'] == "" )){		$errosvenda= 1;	$varerros = "Erro: Contrato j· existente!";}if($_POST['status'] == 'FINALIZADA'){			if($linha['gravacao'] == ""){				$errosvenda= 1;		$varerros = "Erro: FaÁa o upload da gravaÁ„o antes de finalizar a venda!";	}	if($linha['contrato'] == ""){				$errosvenda= 1;		$varerros = "Erro: Insira o n∫ do contrato antes de finalizar a venda!";	}	if($linha['os'] == ""){				$errosvenda= 1;		$varerros = "Erro: Insira o n∫ da OS antes de finalizar a venda!";	}}if(($errosvenda == 0) || ($USUARIO['tipo_usuario'] == "ADMINISTRADOR")){		$update = $conexao->query("UPDATE vendas_clarotv SET proposta = '".$proposta."', gravacao = '".$gravacao."', auditor = '".$auditorid."', os = '".$os."', contrato = '".$contrato."', nome = '".$nome."', nascimento = '".$nascimento."', cpf = '".$cpf."', rg = '".$rg."', org_exp = '".$org_exp."', nome_mae = '".$nome_mae."', profissao = '".$profissao."', sexo = '".$sexo."', estado_civil = '".$estado_civil."', email = '".$email."', telefone = '".$telefone."', tipo_tel1 = '".$tipo_tel1."', telefone2 = '".$telefone2."', tipo_tel2 = '".$tipo_tel2."', telefone3 = '".$telefone3."', tipo_tel3 = '".$tipo_tel3."', endereco = '".$endereco."', numero = '".$numero."', lote = '".$lote."', quadra = '".$quadra."', complemento = '".$complemento."', bairro = '".$bairro."', cidade = '".$cidade."', uf = '".$uf."', cep = '".$cep."', ponto_referencia = '".$ponto_referencia."', operador = '".$operador."', monitor = '".$monitor."', status = '".$status."', obs = '".$obs."', valor = '".$valor."', pagamento = '".$pagamento."', banco = '".$banco."', agencia = '".$agencia."', conta_corrente = '".$conta_corrente."', data = '".$data."', plano = '".$plano."', pacotes_e_canais_adicionais = '".$pacotes_e_canais_adicionais."', pacoteEscolha = '".$pacoteEscolha."', eventosTemporada = '".$eventosTemporada."', ofertasOitv = '".$ofertasOitv."', oifixo = '".$oifixo."', telOifixo = '".$telOifixo."', pontos = '".$pontos."', os2 = '".$os2."', os3 = '".$os3."', vencimento = '".$vencimento."', agendGravacao = '".$agendGravacao."', agendamentoPendente = '".$agendamentoPendente."', obsPendente = '".$obsPendente."', ultimAgendPendente ='".$ultimAgendPendente ."', numerosReagendPendentes = '".$numerosReagendPendentes."', data_marcada = '".$data_marcada."', obs1 = '".$obs1."', motivo_cancelamento = '".$motivo_cancelamento."', motivo_pendente = '".$motivo_pendente."', motivo_devolvido = '".$motivo_devolvido."' , obs_recuperacao = '".$obs_recuperacao."', usuario_recuperacao = '".$usuario_recuperacao."', data_recuperacao = '".$data_recuperacao."', data_instalacao = '".$data_finalizada."', data_conectada = '".$data_conectada."', velox_fixo = '".$velox_fixo."', velox_fixo_plano = '".$velox_fixo_plano."' WHERE id = '".$_GET['id']."' ") or die ('Ocorreu um Erro ao inserir os dados!');	if($update){		$varerros = "Sucesso: Dados atualizados!";	}else{				$varerros =	"Erro: N„o foi possÌvel atualizar a venda";	}}
+$dadoscontrato1 = $conexao->query("SELECT (id) FROM vendas_clarotv  WHERE contrato = '".$contrato."'");	if(($POST['contrato'] != "" ) || ($POST['contrato'] != "PENDENTE") || ($linha['contrato'] != "")){	$contcontrato = $conexao->query("SELECT COUNT(id) FROM vendas_clarotv  WHERE contrato = '".$contrato."'");	}else{	$contcontrato =0;}$dadoscontr = mysql_fetch_array($dadoscontrato1);$contcontr = mysql_fetch_array($contcontrato);$dadosos1 = $conexao->query("SELECT (id) FROM vendas_clarotv  WHERE os = '".$os."'");	if(($POST['os'] != "" ) || ($POST['os'] != "PENDENTE") || ($linha['os'] != "")){	$cont_os = $conexao->query("SELECT COUNT(id) FROM vendas_clarotv  WHERE os = '".$os."'");	}$dadosos_1 = mysql_fetch_array($dadosos1);$cont_os_1 = mysql_fetch_array($cont_os);$errosvenda =0; if(($cont_os_1[0] == 1) && ($linha['os'] == "" )){		$errosvenda= 1;	$varerros = "Erro: Os j√° existente!";}if(($contcontr[0] == 1) && ($linha['contrato'] == "" )){		$errosvenda= 1;	$varerros = "Erro: Contrato j√° existente!";}if($_POST['status'] == 'FINALIZADA'){			if($linha['gravacao'] == ""){				$errosvenda= 1;		$varerros = "Erro: Fa√ßa o upload da grava√ß√£o antes de finalizar a venda!";	}	if($linha['contrato'] == ""){				$errosvenda= 1;		$varerros = "Erro: Insira o n¬∫ do contrato antes de finalizar a venda!";	}	if($linha['os'] == ""){				$errosvenda= 1;		$varerros = "Erro: Insira o n¬∫ da OS antes de finalizar a venda!";	}}if(($errosvenda == 0) || ($USUARIO['tipo_usuario'] == "ADMINISTRADOR")){		$update = $conexao->query("UPDATE vendas_clarotv SET proposta = '".$proposta."', gravacao = '".$gravacao."', auditor = '".$auditorid."', os = '".$os."', contrato = '".$contrato."', nome = '".$nome."', nascimento = '".$nascimento."', cpf = '".$cpf."', rg = '".$rg."', org_exp = '".$org_exp."', nome_mae = '".$nome_mae."', profissao = '".$profissao."', sexo = '".$sexo."', estado_civil = '".$estado_civil."', email = '".$email."', telefone = '".$telefone."', tipo_tel1 = '".$tipo_tel1."', telefone2 = '".$telefone2."', tipo_tel2 = '".$tipo_tel2."', telefone3 = '".$telefone3."', tipo_tel3 = '".$tipo_tel3."', endereco = '".$endereco."', numero = '".$numero."', lote = '".$lote."', quadra = '".$quadra."', complemento = '".$complemento."', bairro = '".$bairro."', cidade = '".$cidade."', uf = '".$uf."', cep = '".$cep."', ponto_referencia = '".$ponto_referencia."', operador = '".$operador."', monitor = '".$monitor."', status = '".$status."', obs = '".$obs."', valor = '".$valor."', pagamento = '".$pagamento."', banco = '".$banco."', agencia = '".$agencia."', conta_corrente = '".$conta_corrente."', data = '".$data."', plano = '".$plano."', pacotes_e_canais_adicionais = '".$pacotes_e_canais_adicionais."', pacoteEscolha = '".$pacoteEscolha."', eventosTemporada = '".$eventosTemporada."', ofertasOitv = '".$ofertasOitv."', oifixo = '".$oifixo."', telOifixo = '".$telOifixo."', pontos = '".$pontos."', os2 = '".$os2."', os3 = '".$os3."', vencimento = '".$vencimento."', agendGravacao = '".$agendGravacao."', agendamentoPendente = '".$agendamentoPendente."', obsPendente = '".$obsPendente."', ultimAgendPendente ='".$ultimAgendPendente ."', numerosReagendPendentes = '".$numerosReagendPendentes."', data_marcada = '".$data_marcada."', obs1 = '".$obs1."', motivo_cancelamento = '".$motivo_cancelamento."', motivo_pendente = '".$motivo_pendente."', motivo_devolvido = '".$motivo_devolvido."' , obs_recuperacao = '".$obs_recuperacao."', usuario_recuperacao = '".$usuario_recuperacao."', data_recuperacao = '".$data_recuperacao."', data_instalacao = '".$data_finalizada."', data_conectada = '".$data_conectada."', velox_fixo = '".$velox_fixo."', velox_fixo_plano = '".$velox_fixo_plano."' WHERE id = '".$_GET['id']."' ") or die ('Ocorreu um Erro ao inserir os dados!');	if($update){		$varerros = "Sucesso: Dados atualizados!";	}else{				$varerros =	"Erro: N√£o foi poss√≠vel atualizar a venda";	}}
 
 
 
@@ -526,7 +526,7 @@ window.location = '?id=<?= $_GET['id'];?>'
 
 <head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <title>Detalhes Venda Oi</title>
 
@@ -560,9 +560,9 @@ body{margin: 0 0 0 0; font-family:Arial, Helvetica, sans-serif;}
 
 
 
- /*Cria uma funÁ„o de nome mascara, onde o primeiro argumento passado È um dos
+ /*Cria uma fun√ß√£o de nome mascara, onde o primeiro argumento passado √© um dos
 
-     objetos input O segundo È especificando o tipo de mÈtodo no qual ser· tratado*/
+     objetos input O segundo √© especificando o tipo de m√©todo no qual ser√° tratado*/
 
     function mascara(o,f){
 
@@ -578,9 +578,9 @@ body{margin: 0 0 0 0; font-family:Arial, Helvetica, sans-serif;}
 
     function execmascara(){
 
-        /*Pegue o valor do objeto e atribua o resultado da funÁ„o v_fun; cujo o conte˙do
+        /*Pegue o valor do objeto e atribua o resultado da fun√ß√£o v_fun; cujo o conte√∫do
 
-        da mesma È a funÁ„o que foi referida e que ser· utilizada para tratar dos dados*/
+        da mesma √© a fun√ß√£o que foi referida e que ser√° utilizada para tratar dos dados*/
 
         v_obj.value=v_fun(v_obj.value);
 
@@ -590,7 +590,7 @@ body{margin: 0 0 0 0; font-family:Arial, Helvetica, sans-serif;}
 
     function soNumeros(v){
 
-        return v.replace(/\D/g,"");//Exclua tudo que n„o for numeral e retorne o valor
+        return v.replace(/\D/g,"");//Exclua tudo que n√£o for numeral e retorne o valor
 
     }
 
@@ -598,15 +598,15 @@ body{margin: 0 0 0 0; font-family:Arial, Helvetica, sans-serif;}
 
     function telefone(v){
 
-        //Remove tudo o que n„o È dÌgito
+        //Remove tudo o que n√£o √© d√≠gito
 
         v=v.replace(/\D/g,"");
 
-        //Coloca parÍnteses em volta dos dois primeiros dÌgitos
+        //Coloca par√™nteses em volta dos dois primeiros d√≠gitos
 
         v=v.replace(/^(\d\d)(\d)/g,"($1) $2");
 
-        //Coloca hÌfen entre o quarto e o quinto dÌgitos
+        //Coloca h√≠fen entre o quarto e o quinto d√≠gitos
 
         v=v.replace(/(\d{4})(\d)/,"$1-$2");
 
@@ -622,15 +622,15 @@ body{margin: 0 0 0 0; font-family:Arial, Helvetica, sans-serif;}
 
     function cpf(v){
 
-        //Remove tudo o que n„o È dÌgito
+        //Remove tudo o que n√£o √© d√≠gito
 
         v=v.replace(/\D/g,"");
 
-        //Coloca parÍnteses em volta dos dois primeiros dÌgitos
+        //Coloca par√™nteses em volta dos dois primeiros d√≠gitos
 
         v=v.replace(/^(\d{3})(\d)/g,"$1.$2");
 
-        //Coloca hÌfen entre o quarto e o quinto dÌgitos
+        //Coloca h√≠fen entre o quarto e o quinto d√≠gitos
 
         v=v.replace(/(\d{3})(\d)/,"$1.$2");
 
@@ -648,11 +648,11 @@ body{margin: 0 0 0 0; font-family:Arial, Helvetica, sans-serif;}
 
     function cep(v){
 
-        //Remove tudo o que n„o È dÌgito
+        //Remove tudo o que n√£o √© d√≠gito
 
         v=v.replace(/\D/g,"");
 
-        //Coloca hÌfen entre o quarto e o quinto dÌgitos
+        //Coloca h√≠fen entre o quarto e o quinto d√≠gitos
 
         v=v.replace(/(\d{5})(\d)/,"$1-$2");
 
@@ -666,15 +666,15 @@ body{margin: 0 0 0 0; font-family:Arial, Helvetica, sans-serif;}
 
     function data(v){
 
-        //Remove tudo o que n„o È dÌgito
+        //Remove tudo o que n√£o √© d√≠gito
 
         v=v.replace(/\D/g,"");
 
-        //Coloca parÍnteses em volta dos dois primeiros dÌgitos
+        //Coloca par√™nteses em volta dos dois primeiros d√≠gitos
 
         v=v.replace(/^(\d{2})(\d)/g,"$1/$2");
 
-        //Coloca hÌfen entre o quarto e o quinto dÌgitos
+        //Coloca h√≠fen entre o quarto e o quinto d√≠gitos
 
         v=v.replace(/(\d{2})(\d)/,"$1/$2");
 
@@ -694,7 +694,7 @@ function verificapagamento(v){
 
 	
 
-	if(v == "D…BITO"){ 
+	if(v == "D√âBITO"){ 
 
 	document.getElementById('valor').value = '80,00';
 
@@ -836,7 +836,7 @@ function checkoperador(m,op){
 
 ///////////////////////////////////////////
 
-/////////////// VALIDA«√O ////////////////	
+/////////////// VALIDA√á√ÉO ////////////////	
 
 /////////////////////////////////////////
 
@@ -881,7 +881,7 @@ if(cpf == '' || cpf == '000.000.000-00' || cpf == '111.111.111-11')
 
 
 
-alert("CPF Inv·lido");
+alert("CPF Inv√°lido");
 
 $('input[name="icpf"]').focus();
 
@@ -896,7 +896,7 @@ erro = erro+1;
 
 
 
-// Se INSTALAR	if(status == 'INSTALAR'){	if(cpf == '' || cpf == '000.000.000-00' || cpf == '111.111.111-11'){alert("CPF Inv·lido");$('input[name="icpf"]').focus();erro = erro+1;stop();}	if(erro == 0)		if(gravacao == ''){alert("Status n„o permitido sem gravaÁ„o!");erro = erro+1;}}// Se Finalizada	if(status == 'FINALIZADA'){contrato = '<?= $linha['contrato'];?>';	if(cpf == '' || cpf == '000.000.000-00' || cpf == '111.111.111-11'){alert("CPF Inv·lido");$('input[name="icpf"]').focus();erro = erro+1;stop();}	if(erro == 0)		if(gravacao == ''){alert("Status n„o permitido sem gravaÁ„o!");erro = erro+1;}else if(contrato == ''){alert("Status n„o permitido sem n∫ de contrato!");erro = erro+1;}}
+// Se INSTALAR	if(status == 'INSTALAR'){	if(cpf == '' || cpf == '000.000.000-00' || cpf == '111.111.111-11'){alert("CPF Inv√°lido");$('input[name="icpf"]').focus();erro = erro+1;stop();}	if(erro == 0)		if(gravacao == ''){alert("Status n√£o permitido sem grava√ß√£o!");erro = erro+1;}}// Se Finalizada	if(status == 'FINALIZADA'){contrato = '<?= $linha['contrato'];?>';	if(cpf == '' || cpf == '000.000.000-00' || cpf == '111.111.111-11'){alert("CPF Inv√°lido");$('input[name="icpf"]').focus();erro = erro+1;stop();}	if(erro == 0)		if(gravacao == ''){alert("Status n√£o permitido sem grava√ß√£o!");erro = erro+1;}else if(contrato == ''){alert("Status n√£o permitido sem n¬∫ de contrato!");erro = erro+1;}}
 
 
 
@@ -913,7 +913,7 @@ if(cpf == '' || cpf == '000.000.000-00' || cpf == '111.111.111-11')
 
 
 
-alert("CPF Inv·lido");
+alert("CPF Inv√°lido");
 
 $('input[name="icpf"]').focus();
 
@@ -931,7 +931,7 @@ if(gravacao == '')
 
 
 
-alert("Status n„o permitido sem gravaÁ„o!");
+alert("Status n√£o permitido sem grava√ß√£o!");
 
 erro = erro+1;
 
@@ -947,7 +947,7 @@ if(tecnico == ''){
 
 
 
-alert("Favor selecionar o tÈcnico que fez a instalaÁ„o!");
+alert("Favor selecionar o t√©cnico que fez a instala√ß√£o!");
 
 $('input[select="tecnico"]').focus();
 
@@ -965,7 +965,7 @@ if(datainstalacao == ''){
 
 
 
-alert("Favor informar a data da instalaÁ„o!");
+alert("Favor informar a data da instala√ß√£o!");
 
 $('input[name="datainstalacao"]').focus();
 
@@ -1069,7 +1069,7 @@ $('select#selectStatus').live('change', function(){
 
 <tr>
 
-<td><b>N∫ Contrato:</b></td>
+<td><b>N¬∫ Contrato:</b></td>
 
 <td>
 
@@ -1346,7 +1346,7 @@ if($editar == '1') {
 
 <tr>
 
-<td><b>Nome da M„e:</b></td>
+<td><b>Nome da M√£e:</b></td>
 
 <td>
 
@@ -1377,7 +1377,7 @@ if($editar == '1') {
 
 <tr>
 
-<td><b>Profiss„o:</b></td>
+<td><b>Profiss√£o:</b></td>
 
 <td>
 
@@ -1463,7 +1463,7 @@ if($editar == '1') {
 
 <option value="Divorciado" <? if($linha['estado_civil'] == 'Divorciado'){?> selected="selected" <? } ?>>Divorciado</option> 
 
-<option value="Vi˙vo" <? if($linha['estado_civil'] == 'Vi˙vo'){?> selected="selected" <? } ?>>Vi˙vo</option> 
+<option value="Vi√∫vo" <? if($linha['estado_civil'] == 'Vi√∫vo'){?> selected="selected" <? } ?>>Vi√∫vo</option> 
 
 </select>
 
@@ -1681,7 +1681,7 @@ if($editar == '1') {
 
 <tr>
 
-<td><b>EndereÁo:</b></td>
+<td><b>Endere√ßo:</b></td>
 
 <td>
 
@@ -1689,7 +1689,7 @@ if($editar == '1') {
 
 <? if($editar == '1') {?>
 
-<input type="text" size="27" name="endereco" value="<?= $linha['endereco']; ?>" /> N∫: <input type="text" size="5" name="numero" value="<?= $linha['numero']; ?>" /> <br /> Lote: <input type="text" size="5" name="lote" value="<?= $linha['lote']; ?>" /> Quadra: <input type="text" size="5" name="quadra" value="<?= $linha['quadra']; ?>" />
+<input type="text" size="27" name="endereco" value="<?= $linha['endereco']; ?>" /> N¬∫: <input type="text" size="5" name="numero" value="<?= $linha['numero']; ?>" /> <br /> Lote: <input type="text" size="5" name="lote" value="<?= $linha['lote']; ?>" /> Quadra: <input type="text" size="5" name="quadra" value="<?= $linha['quadra']; ?>" />
 
 <? } else { ?>
 
@@ -2149,7 +2149,7 @@ while($OPERADORES = mysql_fetch_array($conOPERADORES)){
 
 <tr>
 
-<td><b>GravaÁ„o:</b></td>
+<td><b>Grava√ß√£o:</b></td>
 
 <td>
 
@@ -2157,7 +2157,7 @@ while($OPERADORES = mysql_fetch_array($conOPERADORES)){
 
 
 
-<img src="img/record.png" width="20" align="absmiddle" style="cursor:pointer" title="Inserir GravaÁ„o" onClick="window.location = 'http://172.16.0.30/vento-adm/upload-gravacao-simples-oi.php?id=<?= $linha['id'];?>&u=<?= $USUARIO['id'];?>'" /> <span style="font-size:13px;">Inserir GravaÁ„o </span>
+<img src="img/record.png" width="20" align="absmiddle" style="cursor:pointer" title="Inserir Grava√ß√£o" onClick="window.location = 'http://vem.vento-consulting.com/upload-gravacao-simples-oi.php?id=<?= $linha['id'];?>&u=<?= $USUARIO['id'];?>'" /> <span style="font-size:13px;">Inserir Grava√ß√£o </span>
 
 
 
@@ -2165,7 +2165,7 @@ while($OPERADORES = mysql_fetch_array($conOPERADORES)){
 
 
 
-<img src="img/play-icon.png" width="20" align="absmiddle" style="cursor:pointer" title="Ouvir GravaÁ„o" onClick="javascript:window.location = 'http://172.16.0.30/audio/clarotv/orig/<?= $linha['gravacao'];?>'" /> <span style="font-size:13px;">Ouvir GravaÁ„o </span>
+<img src="img/play-icon.png" width="20" align="absmiddle" style="cursor:pointer" title="Ouvir Grava√ß√£o" onClick="javascript:window.location = 'http://172.16.0.30/audio/clarotv/orig/<?= $linha['gravacao'];?>'" /> <span style="font-size:13px;">Ouvir Grava√ß√£o </span>
 
 
 
@@ -2236,8 +2236,8 @@ include "includes/observacoes.php";
 <?
 
 $conReagendamentos = $conexao->query("SELECT *,
-												DATE_FORMAT( reagendamentoPendente.data, '%d/%m/%Y ‡s %H:%i:%s') AS dataevento,
-												DATE_FORMAT( reagendamentoPendente.agendamento, '%d/%m/%Y ‡s %H:%i:%s') AS dataagendamento,
+												DATE_FORMAT( reagendamentoPendente.data, '%d/%m/%Y √†s %H:%i:%s') AS dataevento,
+												DATE_FORMAT( reagendamentoPendente.agendamento, '%d/%m/%Y √†s %H:%i:%s') AS dataagendamento,
 												usuarios.nome AS nomeusuario
 												FROM  reagendamentoPendente 
 												INNER JOIN usuarios 
@@ -2283,7 +2283,7 @@ $i++;
 <td>
 
 
-<input type="text" name="reagendamentoPendente" id="reagendamentoPendente" size="20" onKeyUp="validadata(this.value,reagendamentoPendente)" onKeyPress="mascara(this,data)" maxlength="10"  /> ‡s
+<input type="text" name="reagendamentoPendente" id="reagendamentoPendente" size="20" onKeyUp="validadata(this.value,reagendamentoPendente)" onKeyPress="mascara(this,data)" maxlength="10"  /> √†s
 
 <select name="reagendamentoPendentehora">
 <? for($h=8;$h<22;$h++){?>
@@ -2377,7 +2377,7 @@ $i++;
 <? if($editar == '1' && ($USUARIO['tipo_usuario'] == 'ADMINISTRADOR' || $USUARIO['tipo_usuario'] == 'AUDITOR')){ ?>
 
 <input type="radio" name="velox_fixo" value="SIM" class="velox_fixo" <?if(isset($linha['velox_fixo']) && $linha['velox_fixo'] =="SIM"){echo "checked";}?>> Sim<br>
-<input type="radio" name="velox_fixo" value="N√O" class="velox_fixo" <?if(isset($linha['velox_fixo']) && $linha['velox_fixo'] =="N√O"){echo "checked";}?>>N„o<br>
+<input type="radio" name="velox_fixo" value="N√ÉO" class="velox_fixo" <?if(isset($linha['velox_fixo']) && $linha['velox_fixo'] =="N√ÉO"){echo "checked";}?>>N√£o<br>
 
 <? } else {?>
 
@@ -2391,8 +2391,8 @@ $i++;
 <?}?>
 
 <? if($linha['produto']=="6"){?>
-<tr  class="velox_fixo_plano"<?if($linha['velox_fixo'] == 'N√O' || $linha['velox_fixo_plano'] == ''){?>style="display:none"<?}?>><td colspan="2"><hr size="1" color="#ccc" /></td></tr>
-<tr class="velox_fixo_plano" <?if($linha['velox_fixO'] == 'N√O' || $linha['velox_fixo_plano'] == ''){?>style="display:none"<?}?>>
+<tr  class="velox_fixo_plano"<?if($linha['velox_fixo'] == 'N√ÉO' || $linha['velox_fixo_plano'] == ''){?>style="display:none"<?}?>><td colspan="2"><hr size="1" color="#ccc" /></td></tr>
+<tr class="velox_fixo_plano" <?if($linha['velox_fixO'] == 'N√ÉO' || $linha['velox_fixo_plano'] == ''){?>style="display:none"<?}?>>
 
 <td><b>Plano Fixo:</b></td>
 
@@ -2400,9 +2400,9 @@ $i++;
 
 <? if($editar == '1' && ($USUARIO['tipo_usuario'] == 'ADMINISTRADOR' || $USUARIO['tipo_usuario'] == 'AUDITOR')){ ?>
 
-<input type="radio" name="velox_fixo_plano" value="Fale a vontade 39,90" <?if(isset($linha['velox_fixo_plano']) && $linha['velox_fixo_plano'] =="Fale a vontade 39,90"){echo "checked";}?>> Fale a vontade 39,90 <br><span style="font-style: italic; font-size: 11px; margin-left: 19px; margin-top: 10px;">(identificador de chamadas, faz chamadas a cobrar, e sÛ fazer recarga para fazer ddd)</span><br><br>
-<input type="radio" name="velox_fixo_plano" value="Fixo local ilimitado 28,90"<?if(isset($linha['velox_fixo_plano']) && $linha['velox_fixo_plano'] =="Fixo local ilimitado 28,90"){echo "checked";}?>>Fixo local ilimitado 28,90<br> <span style="font-style: italic; font-size: 11px; margin-left: 19px;  margin-top: 10px;">(LigaÁıes ilimitadas para fixo local)</span><br><br>
-<input type="radio" name="velox_fixo_plano" value="Ilimitado fim de semana 29,90"<?if(isset($linha['velox_fixo_plano']) && $linha['velox_fixo_plano'] =="Ilimitado fim de semana 29,90"){echo "checked";}?>>Ilimitado fim de semana 29,90<br> <span style="font-style: italic; font-size: 11px; margin-left: 19px; margin-top: 10px;">(PreÁos reduzidos de chamada para celular e ddd no fim de semana)</span><br><br>
+<input type="radio" name="velox_fixo_plano" value="Fale a vontade 39,90" <?if(isset($linha['velox_fixo_plano']) && $linha['velox_fixo_plano'] =="Fale a vontade 39,90"){echo "checked";}?>> Fale a vontade 39,90 <br><span style="font-style: italic; font-size: 11px; margin-left: 19px; margin-top: 10px;">(identificador de chamadas, faz chamadas a cobrar, e s√≥ fazer recarga para fazer ddd)</span><br><br>
+<input type="radio" name="velox_fixo_plano" value="Fixo local ilimitado 28,90"<?if(isset($linha['velox_fixo_plano']) && $linha['velox_fixo_plano'] =="Fixo local ilimitado 28,90"){echo "checked";}?>>Fixo local ilimitado 28,90<br> <span style="font-style: italic; font-size: 11px; margin-left: 19px;  margin-top: 10px;">(Liga√ß√µes ilimitadas para fixo local)</span><br><br>
+<input type="radio" name="velox_fixo_plano" value="Ilimitado fim de semana 29,90"<?if(isset($linha['velox_fixo_plano']) && $linha['velox_fixo_plano'] =="Ilimitado fim de semana 29,90"){echo "checked";}?>>Ilimitado fim de semana 29,90<br> <span style="font-style: italic; font-size: 11px; margin-left: 19px; margin-top: 10px;">(Pre√ßos reduzidos de chamada para celular e ddd no fim de semana)</span><br><br>
 <? } else {?>
 
 <? if($linha['velox_fixo_plano'] != ''){ echo $linha['velox_fixo_plano']; } ?>
@@ -2434,7 +2434,7 @@ include "includes/oi/".$includeDetalhes;?>
 
 <tr id="mcdevolvido" <? if($linha['status'] != 'DEVOLVIDO'){ ?> style="display:none" <? } ?>>
 
-	<td><b>Motivo DevoluÁ„o:</b></td>
+	<td><b>Motivo Devolu√ß√£o:</b></td>
 
 	<td>
 		
@@ -2445,9 +2445,9 @@ include "includes/oi/".$includeDetalhes;?>
 				<option value="Sem Porta/Link" <? if($linha['motivo_devolvido'] == 'BOV: Sem Porta/Link'){?>selected="selected"<? } ?>>BOV: Sem Porta/Link</option>
 				<option value="Sem Velocidade" <? if($linha['motivo_devolvido'] == 'BOV: Sem Velocidade'){?>selected="selected"<? } ?>>BOV: Sem Velocidade</option>
 				<option value="Sem Infra Cliente" <? if($linha['motivo_devolvido'] == 'BOV: Sem Infra Cliente'){?>selected="selected"<? } ?>>BOV: Sem Infra Cliente</option>
-				<option value="DesistÍncia na Auditoria" <? if($linha['motivo_devolvido'] == 'DesistÍncia na Auditoria'){?>selected="selected"<? } ?>>DesistÍncia na Auditoria</option>
-				<option value="DivergÍncia de informaÁ„o" <? if($linha['motivo_devolvido'] == 'DivergÍncia de informaÁ„o'){?>selected="selected"<? } ?>>DivergÍncia de informaÁ„o</option>
-				<option value="Venda perdida para concorrÍncia" <? if($linha['motivo_devolvido'] == 'Venda perdida para concorrÍncia'){?>selected="selected"<? } ?>>Venda perdida para concorrÍncia</option>
+				<option value="Desist√™ncia na Auditoria" <? if($linha['motivo_devolvido'] == 'Desist√™ncia na Auditoria'){?>selected="selected"<? } ?>>Desist√™ncia na Auditoria</option>
+				<option value="Diverg√™ncia de informa√ß√£o" <? if($linha['motivo_devolvido'] == 'Diverg√™ncia de informa√ß√£o'){?>selected="selected"<? } ?>>Diverg√™ncia de informa√ß√£o</option>
+				<option value="Venda perdida para concorr√™ncia" <? if($linha['motivo_devolvido'] == 'Venda perdida para concorr√™ncia'){?>selected="selected"<? } ?>>Venda perdida para concorr√™ncia</option>
 		</select>
 	
 	
@@ -2458,9 +2458,9 @@ include "includes/oi/".$includeDetalhes;?>
 			<option value="Sem Porta/Link" <? if($linha['motivo_devolvido'] == 'BOV: Sem Porta/Link'){?>selected="selected"<? } ?>>BOV: Sem Porta/Link</option>
 			<option value="Sem Velocidade" <? if($linha['motivo_devolvido'] == 'BOV: Sem Velocidade'){?>selected="selected"<? } ?>>BOV: Sem Velocidade</option>
 			<option value="Sem Infra Cliente" <? if($linha['motivo_devolvido'] == 'BOV: Sem Infra Cliente'){?>selected="selected"<? } ?>>BOV: Sem Infra Cliente</option>
-			<option value="DesistÍncia na Auditoria" <? if($linha['motivo_devolvido'] == 'DesistÍncia na Auditoria'){?>selected="selected"<? } ?>>DesistÍncia na Auditoria</option>
-			<option value="DivergÍncia de informaÁ„o" <? if($linha['motivo_devolvido'] == 'DivergÍncia de informaÁ„o'){?>selected="selected"<? } ?>>DivergÍncia de informaÁ„o</option>
-			<option value="Venda perdida para concorrÍncia" <? if($linha['motivo_devolvido'] == 'Venda perdida para concorrÍncia'){?>selected="selected"<? } ?>>Venda perdida para concorrÍncia</option>
+			<option value="Desist√™ncia na Auditoria" <? if($linha['motivo_devolvido'] == 'Desist√™ncia na Auditoria'){?>selected="selected"<? } ?>>Desist√™ncia na Auditoria</option>
+			<option value="Diverg√™ncia de informa√ß√£o" <? if($linha['motivo_devolvido'] == 'Diverg√™ncia de informa√ß√£o'){?>selected="selected"<? } ?>>Diverg√™ncia de informa√ß√£o</option>
+			<option value="Venda perdida para concorr√™ncia" <? if($linha['motivo_devolvido'] == 'Venda perdida para concorr√™ncia'){?>selected="selected"<? } ?>>Venda perdida para concorr√™ncia</option>
 			
 		</select>
 		
@@ -2488,12 +2488,12 @@ include "includes/oi/".$includeDetalhes;?>
 		<select name="motivocancelamento" id="motivocancelamento">
 
 			<option value=""></option>
-			<option value="Inviabilidade TÈcnica" <? if($linha['motivo_cancelamento'] == 'Inviabilidade TÈcnica'){?>selected="selected"<? } ?>>Inviabilidade TÈcnica</option>
-			<option value="BOV: Cliente n„o solicitou" <? if($linha['motivo_cancelamento'] == 'BOV: Cliente n„o solicitou'){?>selected="selected"<? } ?>>BOV: Cliente n„o solicitou</option>
+			<option value="Inviabilidade T√©cnica" <? if($linha['motivo_cancelamento'] == 'Inviabilidade T√©cnica'){?>selected="selected"<? } ?>>Inviabilidade T√©cnica</option>
+			<option value="BOV: Cliente n√£o solicitou" <? if($linha['motivo_cancelamento'] == 'BOV: Cliente n√£o solicitou'){?>selected="selected"<? } ?>>BOV: Cliente n√£o solicitou</option>
 			<option value="BOV: Dificuldade Financeira" <? if($linha['motivo_cancelamento'] == 'BOV: Dificuldade Financeira'){?>selected="selected"<? } ?>>BOV: Dificuldade Financeira</option>
-			<option value="DesistÍncia na Auditoria" <? if($linha['motivo_cancelamento'] == 'DesistÍncia na Auditoria'){?>selected="selected"<? } ?>>DesistÍncia na Auditoria</option>
-			<option value="DivergÍncia de informaÁ„o" <? if($linha['motivo_cancelamento'] == 'DivergÍncia de informaÁ„o'){?>selected="selected"<? } ?>>DivergÍncia de informaÁ„o</option>
-			<option value="Venda perdida para concorrÍncia" <? if($linha['motivo_cancelamento'] == 'Venda perdida para concorrÍncia'){?>selected="selected"<? } ?>>Venda perdida para concorrÍncia</option>
+			<option value="Desist√™ncia na Auditoria" <? if($linha['motivo_cancelamento'] == 'Desist√™ncia na Auditoria'){?>selected="selected"<? } ?>>Desist√™ncia na Auditoria</option>
+			<option value="Diverg√™ncia de informa√ß√£o" <? if($linha['motivo_cancelamento'] == 'Diverg√™ncia de informa√ß√£o'){?>selected="selected"<? } ?>>Diverg√™ncia de informa√ß√£o</option>
+			<option value="Venda perdida para concorr√™ncia" <? if($linha['motivo_cancelamento'] == 'Venda perdida para concorr√™ncia'){?>selected="selected"<? } ?>>Venda perdida para concorr√™ncia</option>
 		</select>
 		<?} else if($_GET['e'] == '1' && $USUARIO['tipo_usuario'] == 'ADMINISTRADOR' && $linha['produto']== 6) { ?>
 			<select name="motivocancelamento" id="motivocancelamento">
@@ -2501,33 +2501,33 @@ include "includes/oi/".$includeDetalhes;?>
 				<option value="BOV: Sem Porta/Link" <? if($linha['motivo_cancelamento'] == 'BOV: Sem Porta/Link'){?>selected="selected"<? } ?>>BOV: Sem Porta/Link</option>
 				<option value="BOV: Sem Velocidade" <? if($linha['motivo_cancelamento'] == 'BOV: Sem Velocidade'){?>selected="selected"<? } ?>>BOV: Sem Velocidade</option>
 				<option value="BOV: Sem Infra Cliente" <? if($linha['motivo_cancelamento'] == 'BOV: Sem Infra Cliente'){?>selected="selected"<? } ?>>BOV: Sem Infra Cliente</option>
-				<option value="DesistÍncia na Auditoria" <? if($linha['motivo_cancelamento'] == 'DesistÍncia na Auditoria'){?>selected="selected"<? } ?>>DesistÍncia na Auditoria</option>
-				<option value="DivergÍncia de informaÁ„o" <? if($linha['motivo_cancelamento'] == 'DivergÍncia de informaÁ„o'){?>selected="selected"<? } ?>>DivergÍncia de informaÁ„o</option>
-				<option value="Venda perdida para concorrÍncia" <? if($linha['motivo_cancelamento'] == 'Venda perdida para concorrÍncia'){?>selected="selected"<? } ?>>Venda perdida para concorrÍncia</option>
+				<option value="Desist√™ncia na Auditoria" <? if($linha['motivo_cancelamento'] == 'Desist√™ncia na Auditoria'){?>selected="selected"<? } ?>>Desist√™ncia na Auditoria</option>
+				<option value="Diverg√™ncia de informa√ß√£o" <? if($linha['motivo_cancelamento'] == 'Diverg√™ncia de informa√ß√£o'){?>selected="selected"<? } ?>>Diverg√™ncia de informa√ß√£o</option>
+				<option value="Venda perdida para concorr√™ncia" <? if($linha['motivo_cancelamento'] == 'Venda perdida para concorr√™ncia'){?>selected="selected"<? } ?>>Venda perdida para concorr√™ncia</option>
 			</select>
 		<?} else if($_GET['e'] == '1' && $USUARIO['tipo_usuario'] == 'MONITOR') { ?>
 
 		<select name="motivocancelamento" id="motivocancelamento">
 
 			<option value=""></option>
-			<option value="Inviabilidade TÈcnica" <? if($linha['motivo_cancelamento'] == 'Inviabilidade TÈcnica'){?>selected="selected"<? } ?>>Inviabilidade TÈcnica</option>
+			<option value="Inviabilidade T√©cnica" <? if($linha['motivo_cancelamento'] == 'Inviabilidade T√©cnica'){?>selected="selected"<? } ?>>Inviabilidade T√©cnica</option>
 			<option value="Falta de Dinheiro" <? if($linha['motivo_cancelamento'] == 'Falta de Dinheiro'){?>selected="selected"<? } ?>>Falta de Dinheiro</option>
-			<option value="Venda Perdida para a ConcorrÍncia" <? if($linha['motivo_cancelamento'] == 'Venda Perdida para a ConcorrÍncia'){?>selected="selected"<? } ?>>Venda Perdida para a ConcorrÍncia</option>
-			<option value="DesistÍncia do Cliente" <? if($linha['motivo_cancelamento'] == 'DesistÍncia do Cliente'){?>selected="selected"<? } ?>>DesistÍncia do Cliente</option>
-			<option value="EndereÁo N„o Encontrado" <? if($linha['motivo_cancelamento'] == 'EndereÁo N„o Encontrado'){?>selected="selected"<? } ?>>EndereÁo N„o Encontrado</option>
-			<option value="¡rea de Risco" <? if($linha['motivo_cancelamento'] == '¡rea de Risco'){?>selected="selected"<? } ?>>¡rea de Risco</option>
+			<option value="Venda Perdida para a Concorr√™ncia" <? if($linha['motivo_cancelamento'] == 'Venda Perdida para a Concorr√™ncia'){?>selected="selected"<? } ?>>Venda Perdida para a Concorr√™ncia</option>
+			<option value="Desist√™ncia do Cliente" <? if($linha['motivo_cancelamento'] == 'Desist√™ncia do Cliente'){?>selected="selected"<? } ?>>Desist√™ncia do Cliente</option>
+			<option value="Endere√ßo N√£o Encontrado" <? if($linha['motivo_cancelamento'] == 'Endere√ßo N√£o Encontrado'){?>selected="selected"<? } ?>>Endere√ßo N√£o Encontrado</option>
+			<option value="√Årea de Risco" <? if($linha['motivo_cancelamento'] == '√Årea de Risco'){?>selected="selected"<? } ?>>√Årea de Risco</option>
 			<option value="Cancelado no VSALES" <? if($linha['motivo_cancelamento'] == 'Cancelado no VSALES'){?>selected="selected"<? } ?>>Cancelado no VSALES</option>
-			<option value="N˙mero Inv·lido" <? if($linha['motivo_cancelamento'] == 'N˙mero Inv·lido'){?>selected="selected"<? } ?>>N˙mero Inv·lido</option>
+			<option value="N√∫mero Inv√°lido" <? if($linha['motivo_cancelamento'] == 'N√∫mero Inv√°lido'){?>selected="selected"<? } ?>>N√∫mero Inv√°lido</option>
 
 		</select>
 		<?} else if($_GET['e'] == '1' && $USUARIO['tipo_usuario'] == 'AUDITORIA' && $linha['produto']== 4 ){ ?>
 			<select name="motivocancelamento" id="motivocancelamento">
 				<option value=""></option>
-				<option value="BOV: Cliente n„o solicitou" <? if($linha['motivo_cancelamento'] == 'BOV: Cliente n„o solicitou'){?>selected="selected"<? } ?>>BOV: Cliente n„o solicitou</option>
+				<option value="BOV: Cliente n√£o solicitou" <? if($linha['motivo_cancelamento'] == 'BOV: Cliente n√£o solicitou'){?>selected="selected"<? } ?>>BOV: Cliente n√£o solicitou</option>
 				<option value="BOV: Dificuldade Financeira" <? if($linha['motivo_cancelamento'] == 'BOV: Dificuldade Financeira'){?>selected="selected"<? } ?>>BOV: Dificuldade Financeira</option>
-				<option value="DesistÍncia na Auditoria" <? if($linha['motivo_cancelamento'] == 'DesistÍncia na Auditoria'){?>selected="selected"<? } ?>>DesistÍncia na Auditoria</option>
-				<option value="DivergÍncia de informaÁ„o" <? if($linha['motivo_cancelamento'] == 'DivergÍncia de informaÁ„o'){?>selected="selected"<? } ?>>DivergÍncia de informaÁ„o</option>
-				<option value="Venda perdida para concorrÍncia" <? if($linha['motivo_cancelamento'] == 'Venda perdida para concorrÍncia'){?>selected="selected"<? } ?>>Venda perdida para concorrÍncia</option>
+				<option value="Desist√™ncia na Auditoria" <? if($linha['motivo_cancelamento'] == 'Desist√™ncia na Auditoria'){?>selected="selected"<? } ?>>Desist√™ncia na Auditoria</option>
+				<option value="Diverg√™ncia de informa√ß√£o" <? if($linha['motivo_cancelamento'] == 'Diverg√™ncia de informa√ß√£o'){?>selected="selected"<? } ?>>Diverg√™ncia de informa√ß√£o</option>
+				<option value="Venda perdida para concorr√™ncia" <? if($linha['motivo_cancelamento'] == 'Venda perdida para concorr√™ncia'){?>selected="selected"<? } ?>>Venda perdida para concorr√™ncia</option>
 
 			</select>
 		<? } else if($_GET['e'] == '1' && $USUARIO['tipo_usuario'] == 'AUDITORIA' && $linha['produto']== 6 ){?>
@@ -2536,9 +2536,9 @@ include "includes/oi/".$includeDetalhes;?>
 				<option value="BOV: Sem Porta/Link" <? if($linha['motivo_cancelamento'] == 'BOV: Sem Porta/Link'){?>selected="selected"<? } ?>>BOV: Sem Porta/Link</option>
 				<option value="BOV: Sem Velocidade" <? if($linha['motivo_cancelamento'] == 'BOV: Sem Velocidade'){?>selected="selected"<? } ?>>BOV: Sem Velocidade</option>
 				<option value="BOV: Sem Infra Cliente" <? if($linha['motivo_cancelamento'] == 'BOV: Sem Infra Cliente'){?>selected="selected"<? } ?>>BOV: Sem Infra Cliente</option>
-				<option value="DesistÍncia na Auditoria" <? if($linha['motivo_cancelamento'] == 'DesistÍncia na Auditoria'){?>selected="selected"<? } ?>>DesistÍncia na Auditoria</option>
-				<option value="DivergÍncia de informaÁ„o" <? if($linha['motivo_cancelamento'] == 'DivergÍncia de informaÁ„o'){?>selected="selected"<? } ?>>DivergÍncia de informaÁ„o</option>
-				<option value="Venda perdida para concorrÍncia" <? if($linha['motivo_cancelamento'] == 'Venda perdida para concorrÍncia'){?>selected="selected"<? } ?>>Venda perdida para concorrÍncia</option>
+				<option value="Desist√™ncia na Auditoria" <? if($linha['motivo_cancelamento'] == 'Desist√™ncia na Auditoria'){?>selected="selected"<? } ?>>Desist√™ncia na Auditoria</option>
+				<option value="Diverg√™ncia de informa√ß√£o" <? if($linha['motivo_cancelamento'] == 'Diverg√™ncia de informa√ß√£o'){?>selected="selected"<? } ?>>Diverg√™ncia de informa√ß√£o</option>
+				<option value="Venda perdida para concorr√™ncia" <? if($linha['motivo_cancelamento'] == 'Venda perdida para concorr√™ncia'){?>selected="selected"<? } ?>>Venda perdida para concorr√™ncia</option>
 			</select>
 		<? } else {?>
 		
@@ -2562,31 +2562,31 @@ include "includes/oi/".$includeDetalhes;?>
 		<select name="motivopendente" id="motivopendente">
 
 				<option value=""></option>
-				<option value="Cliente com dÈbito" <? if($linha['motivo_pendente'] == 'Cliente com dÈbito'){?>selected="selected"<? } ?>>Cliente com dÈbito</option>
+				<option value="Cliente com d√©bito" <? if($linha['motivo_pendente'] == 'Cliente com d√©bito'){?>selected="selected"<? } ?>>Cliente com d√©bito</option>
 				<option value="ID gerado" <? if($linha['motivo_pendente'] == 'ID gerado'){?>selected="selected"<? } ?>>ID gerado</option>
-				<option value="J· tem pedido em aberto" <? if($linha['motivo_pendente'] == 'J· tem pedido em aberto'){?>selected="selected"<? } ?>>J· tem pedido em aberto</option>
+				<option value="J√° tem pedido em aberto" <? if($linha['motivo_pendente'] == 'J√° tem pedido em aberto'){?>selected="selected"<? } ?>>J√° tem pedido em aberto</option>
 				<option value="Parcelamento ativo" <? if($linha['motivo_pendente'] == 'Parcelamento ativo'){?>selected="selected"<? } ?>>Parcelamento ativo</option>
-				<option value="J· esta vinculado ao serviÁo ADSL" <? if($linha['motivo_pendente'] == 'J· esta vinculado ao serviÁo ADSL'){?>selected="selected"<? } ?>>J· esta vinculado ao serviÁo ADSL</option>
+				<option value="J√° esta vinculado ao servi√ßo ADSL" <? if($linha['motivo_pendente'] == 'J√° esta vinculado ao servi√ßo ADSL'){?>selected="selected"<? } ?>>J√° esta vinculado ao servi√ßo ADSL</option>
 		</select>
 		<?} else if($_GET['e'] == '1' && $USUARIO['tipo_usuario'] == 'ADMINISTRADOR'  && $linha['produto']== 6 ) { ?>
 			<select name="motivopendente" id="motivopendente">
 
 				<option value=""></option>
-				<option value="Cliente com dÈbito" <? if($linha['motivo_pendente'] == 'Cliente com dÈbito'){?>selected="selected"<? } ?>>Cliente com dÈbito</option>
+				<option value="Cliente com d√©bito" <? if($linha['motivo_pendente'] == 'Cliente com d√©bito'){?>selected="selected"<? } ?>>Cliente com d√©bito</option>
 				<option value="ID gerado" <? if($linha['motivo_pendente'] == 'ID gerado'){?>selected="selected"<? } ?>>ID gerado</option>
-				<option value="J· tem pedido em aberto" <? if($linha['motivo_pendente'] == 'J· tem pedido em aberto'){?>selected="selected"<? } ?>>J· tem pedido em aberto</option>
+				<option value="J√° tem pedido em aberto" <? if($linha['motivo_pendente'] == 'J√° tem pedido em aberto'){?>selected="selected"<? } ?>>J√° tem pedido em aberto</option>
 				<option value="Parcelamento ativo" <? if($linha['motivo_pendente'] == 'Parcelamento ativo'){?>selected="selected"<? } ?>>Parcelamento ativo</option>
-				<option value="J· esta vinculado ao serviÁo ADSL" <? if($linha['motivo_pendente'] == 'J· esta vinculado ao serviÁo ADSL'){?>selected="selected"<? } ?>>J· esta vinculado ao serviÁo ADSL</option>
+				<option value="J√° esta vinculado ao servi√ßo ADSL" <? if($linha['motivo_pendente'] == 'J√° esta vinculado ao servi√ßo ADSL'){?>selected="selected"<? } ?>>J√° esta vinculado ao servi√ßo ADSL</option>
 			</select>
 		
 		<?} else if($_GET['e'] == '1' && $USUARIO['tipo_usuario'] == 'AUDITORIA' && $linha['produto']== 4 ){ ?>
 			<select name="motivopendente" id="motivopendente">
 				<option value=""></option>
-				<option value="BOV: Cliente n„o solicitou" <? if($linha['motivo_pendente'] == 'BOV: Cliente n„o solicitou'){?>selected="selected"<? } ?>>BOV: Cliente n„o solicitou</option>
+				<option value="BOV: Cliente n√£o solicitou" <? if($linha['motivo_pendente'] == 'BOV: Cliente n√£o solicitou'){?>selected="selected"<? } ?>>BOV: Cliente n√£o solicitou</option>
 				<option value="BOV: Dificuldade Financeira" <? if($linha['motivo_pendente'] == 'BOV: Dificuldade Financeira'){?>selected="selected"<? } ?>>BOV: Dificuldade Financeira</option>
-				<option value="DesistÍncia na Auditoria" <? if($linha['motivo_pendente'] == 'DesistÍncia na Auditoria'){?>selected="selected"<? } ?>>DesistÍncia na Auditoria</option>
-				<option value="DivergÍncia de informaÁ„o" <? if($linha['motivo_pendente'] == 'DivergÍncia de informaÁ„o'){?>selected="selected"<? } ?>>DivergÍncia de informaÁ„o</option>
-				<option value="Venda perdida para concorrÍncia" <? if($linha['motivo_pendente'] == 'Venda perdida para concorrÍncia'){?>selected="selected"<? } ?>>Venda perdida para concorrÍncia</option>
+				<option value="Desist√™ncia na Auditoria" <? if($linha['motivo_pendente'] == 'Desist√™ncia na Auditoria'){?>selected="selected"<? } ?>>Desist√™ncia na Auditoria</option>
+				<option value="Diverg√™ncia de informa√ß√£o" <? if($linha['motivo_pendente'] == 'Diverg√™ncia de informa√ß√£o'){?>selected="selected"<? } ?>>Diverg√™ncia de informa√ß√£o</option>
+				<option value="Venda perdida para concorr√™ncia" <? if($linha['motivo_pendente'] == 'Venda perdida para concorr√™ncia'){?>selected="selected"<? } ?>>Venda perdida para concorr√™ncia</option>
 
 			</select>
 		<? } else if($_GET['e'] == '1' && $USUARIO['tipo_usuario'] == 'AUDITORIA' && $linha['produto']== 6 ){?>
@@ -2595,9 +2595,9 @@ include "includes/oi/".$includeDetalhes;?>
 				<option value="BOV: Sem Porta/Link" <? if($linha['motivo_pendente'] == 'BOV: Sem Porta/Link'){?>selected="selected"<? } ?>>BOV: Sem Porta/Link</option>
 				<option value="BOV: Sem Velocidade" <? if($linha['motivo_pendente'] == 'BOV: Sem Velocidade'){?>selected="selected"<? } ?>>BOV: Sem Velocidade</option>
 				<option value="BOV: Sem Infra Cliente" <? if($linha['motivo_pendente'] == 'BOV: Sem Infra Cliente'){?>selected="selected"<? } ?>>BOV: Sem Infra Cliente</option>
-				<option value="DesistÍncia na Auditoria" <? if($linha['motivo_pendente'] == 'DesistÍncia na Auditoria'){?>selected="selected"<? } ?>>DesistÍncia na Auditoria</option>
-				<option value="DivergÍncia de informaÁ„o" <? if($linha['motivo_pendente'] == 'DivergÍncia de informaÁ„o'){?>selected="selected"<? } ?>>DivergÍncia de informaÁ„o</option>
-				<option value="Venda perdida para concorrÍncia" <? if($linha['motivo_pendente'] == 'Venda perdida para concorrÍncia'){?>selected="selected"<? } ?>>Venda perdida para concorrÍncia</option>
+				<option value="Desist√™ncia na Auditoria" <? if($linha['motivo_pendente'] == 'Desist√™ncia na Auditoria'){?>selected="selected"<? } ?>>Desist√™ncia na Auditoria</option>
+				<option value="Diverg√™ncia de informa√ß√£o" <? if($linha['motivo_pendente'] == 'Diverg√™ncia de informa√ß√£o'){?>selected="selected"<? } ?>>Diverg√™ncia de informa√ß√£o</option>
+				<option value="Venda perdida para concorr√™ncia" <? if($linha['motivo_pendente'] == 'Venda perdida para concorr√™ncia'){?>selected="selected"<? } ?>>Venda perdida para concorr√™ncia</option>
 			</select>
 		<? } else {?>
 		
@@ -2627,7 +2627,7 @@ include "includes/oi/".$includeDetalhes;?>
 
 <tr id="obsrecupe" <? if($linha['obs_recuperacao'] == ''){ ?> style="display:none" <? } ?>>
 
-<td><b>Obs. RecuperaÁ„o:</b></td>
+<td><b>Obs. Recupera√ß√£o:</b></td>
 
 <td>
 
@@ -2645,7 +2645,7 @@ include "includes/oi/".$includeDetalhes;?>
 $conVendaRecuperada = $conexao->query("SELECT nome FROM usuarios WHERE id = '".$linha['usuario_recuperacao']."'");
 $usuarioRecuperada = mysql_fetch_array($conVendaRecuperada);
 
-$dataRecuperada = substr($linha['data_recuperacao'],8,2).'/'.substr($linha['data_recuperacao'],5,2).'/'.substr($linha['data_recuperacao'],0,4).' ‡s '.substr($linha['data_recuperacao'],11);
+$dataRecuperada = substr($linha['data_recuperacao'],8,2).'/'.substr($linha['data_recuperacao'],5,2).'/'.substr($linha['data_recuperacao'],0,4).' √†s '.substr($linha['data_recuperacao'],11);
 
 ?>
 

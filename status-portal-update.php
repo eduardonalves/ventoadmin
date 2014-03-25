@@ -1,3 +1,9 @@
+<?php
+ini_set('max_input_vars', 3000);
+ini_set('max_input_nesting_level', 3000);
+ini_set('post_max_size', '20M');
+ 
+?>
 <meta name="http-equiv" content="Content-type: text/html; charset=UTF-8"/>
 
 <link rel="stylesheet" type="text/css" href="css/tables.css" />
@@ -22,119 +28,44 @@
 
 	$(document).ready( function() {
 		
-		var id;
-		var total = $( ".tb-line" ).length;
-		
-		$("[name='filtro-status']").live("change", function() {
-			
-			var status = $(this).val();
-			
-			if(status=="up-ok")
-			{
-				
-				$( ".up-ok" ).each(function( index ) {
-				
-				id = $(this).attr("id");
-				$("#line-"+id).css("display", "table-row");
-				});
+		$('.btSalvar').bind('click', function() {
 
-				$( ".up-falho" ).each(function( index ) {
-				
-				id = $(this).attr("id");
-				$("#line-"+id).css("display", "none");
-				});
+			totForm = $('.saveform').length;
+			
+			$( ".saveform" ).each(function( index ) {
 
-			
-			}else if(status=="up-falho"){
-
-				$( ".up-ok" ).each(function( index ) {
-				
-				id = $(this).attr("id");
-				$("#line-"+id).css("display", "none");
-				});
-
-				$( ".up-falho" ).each(function( index ) {
-				
-				id = $(this).attr("id");
-				$("#line-"+id).css("display", "table-row");
-				});
-			
-			}else{
-				
-				$( ".up-ok" ).each(function( index ) {
-				
-				id = $(this).attr("id");
-				$("#line-"+id).css("display", "table-row");
-				});
-
-				$( ".up-falho" ).each(function( index ) {
-				
-				id = $(this).attr("id");
-				$("#line-"+id).css("display", "table-row");
-				});
-			}
-			
-		});
-		
-		$( ".tb-line" ).each(function( index ) {
-			
-			id = $(this).attr("id");
-			id = id.replace("line-", "");
-			//return false;
-			var serializedData = $("#form-line-"+id).serialize();
-			
-			//alert(serializeData);
-			request = $.ajax({
-				
-				url: "ajax/status-portal-update.php",
-				async: false,
-				type: "post",
-				data: serializedData,
-				success: function(data) {
+				var objForm = $(this);
+				var serializedData = $(this).serialize();
+				//alert(serializedData);
+				request = $.ajax({
 					
-					//alert(data);
-					
-					if(data>0)
-					{
+					url: "ajax/status-portal-update.php",
+					async: false,
+					type: "post",
+					data: serializedData,
+					success: function(data) {
+						
 						//alert(data);
-						upStatus = "up-ok";
-					
-						$("#"+id).attr("class", upStatus);
-						$("#"+id).html("ATUALIZADO");
-					
-					}else{
+						//$('input', this).remove();
+						
+						curForm = objForm.attr('data-formid');
 
-						upStatus = "up-falho";
+						percent = (curForm*100) / totForm;
 					
-						$(id).attr("class", upStatus);
-						$(id).html("FALHOU");
+						$('#progress-bar').css('display', 'block');
+						$('#load-bar').css('width', percent+'%');
+						$('#load-label').html('Dados ' + percent + '% salvos.');
+						
+						if ( percent == 100 )
+						{
+							$('.btSalvar').css('display', 'none');
+						}
 						
 					}
-					
-					
-					
-					$("#line-"+id).css("display", "table-row");
-					
-					if((id-1)==total)
-					{
-						$("#load-label").html("Conclu&iacute;do " + total + " registros verificados.");
-					
-					}else{
-					
-						$("#load-label").html("Verificando " + (id-1) + " de " + total + " registros");	
-					}
-					
-					
-					var percent = (id*100) / total;
-					
-					$("#load-bar").css("width", percent+"%");
-					//alert(data);
-					}
-				});
+					});
 
+			});
 		});
-		
-	//alert($(".tb-line").length);
 	});
 
 </script>
@@ -145,13 +76,9 @@ require_once 'lib/PHPExcel.php';
 
 $camposPlanilhas = array();
 
-
-$saidaTexto = new Accents( Accents::UTF_8, Accents::ISO_8859_1 );
-
-$objPlanilhas = new planilhaQualidade($conexao);
+$objPlanilhas = new Qualidade($conexao);
 
 $curTipoPlanilha = $_POST["tipoPlanilha"];
-$camposPlanilhaCur = $objPlanilhas->getCamposPlanilha($curTipoPlanilha);
 
 //print_r($camposPlanilhaCur);
 
@@ -173,35 +100,33 @@ $objPHPExcel->setActiveSheetIndex(0);
 $totalLinhas = $objPHPExcel->getActiveSheet()->getHighestRow();
 //echo "Numero de linhas:" . $objPHPExcel->getActiveSheet()->getHighestRow();
 
+$planilha = $objPlanilhas->getPlanilha($curTipoPlanilha);
+
+$camposPlanilhaCur = $planilha['colunas'];
+
 ?>
-<div id="label-importacao" style="width:100%; margin-left:10px; margin-top:10px; font-size:14px; color:#999;">
+<div id="label-importacao" style="width:98%; margin-left:10px; margin-top:10px; font-size:14px; color:#999;">
 <b>Importando arquivo:</b> <?php echo $_POST["original-filename"]; ?>
 <br />
-<b>Tipo de Planilha:</b> <?php echo $saidaTexto->clear( $objPlanilhas->getTiposPlanilhas($curTipoPlanilha) ); ?>
+
+<b>Tipo de Planilha:</b> <?php echo $planilha['label']; ?>
 </div>
 
-<div id="progress-bar" style="overflow:hidden; border:1px solid #E5E5E5; margin-left:10px;width:98%; position:relative; display:block; float:left; margin-bottom:15px;margin-top:15px;">
+<div id="progress-bar" style=" display: none; overflow:hidden; border:1px solid #E5E5E5; margin-left:10px;width:98%; position:relative;  float:left; margin-bottom:15px;margin-top:15px;">
 	
-	<span id="load-bar" style="display:block; width:50%; background-color:#E5E5E5; position:absolute;height:20px;padding:3px;"></span>
+	<span id="load-bar" style="display:block; width:0%; background-color:#E5E5E5; position:absolute;height:20px;padding:3px;"></span>
 	<span id="load-label" style="color:#7F7F7F; position:relative;height:20px;padding:3px;display:block;"></span>
 
 </div>
 
-<div id="filtro" style="display:block; position:relative; float:left; margin-left:15px;margin-bottom:15px;">
-	<label for="filtro-status">Filtrar por Status: </label>
-	<select name="filtro-status">
-		
-		<option value="" selected="selected">Todos</option>
-		<option value="up-ok">Atualizados</option>
-		<option value="up-falho">Falhos</option>		
-		
-	</select>
+<div id="import" style="display:block; position:relative; float:right; margin-right:27px;margin-bottom:15px;">
+	<input type="button" value="Salvar Dados" name='salvar' class='btSalvar' />
 </div>
 
 <br style="clear:both" />
 <center>
-<table id="tabela-status-importacao" width="98%">
-
+<table id="tabela-status-importacao" width="96%">
+	<form class="saveform" data-formid="1">
 	<tr style="padding-top:5px; padding-bottom:3px; background-color:#565656; text-align:center;color:#FFF; font-size:14px; font-weight:bold;" class="tr1">
 		
 		<td style="width:50px;">LINHA</td>
@@ -216,12 +141,12 @@ $totalLinhas = $objPHPExcel->getActiveSheet()->getHighestRow();
 			if(strstr($value, "data"))
 			{
 			
-			$col_name = "DATA " . $objPlanilhas->getTiposPlanilhas($curTipoPlanilha);
-			echo $saidaTexto->clear(mb_strtoupper($col_name, "UTF-8")); 
+			$col_name = "DATA " . $planilha['status'];
+			echo mb_strtoupper($col_name, "UTF-8");
 			
 			}else{
 			
-			echo $saidaTexto->clear(mb_strtoupper($objPHPExcel->getActiveSheet()->getCell($key . "1"), "UTF-8")); 
+			echo mb_strtoupper($objPHPExcel->getActiveSheet()->getCell($key . "1"), "UTF-8");
 			
 			}
 			?>
@@ -235,17 +160,24 @@ $totalLinhas = $objPHPExcel->getActiveSheet()->getHighestRow();
 	</tr>
 	
 	<?php
+	
+	$insertLine = array();
+	$insertLine['Qualidade'] = array();
+	$linecont = 0;
+	$formcont = 2;
+	
 	for($i=2; $i<=$totalLinhas; $i++)
 	{
 		$status = "up-ok";
 	?>
-	<tr id="line-<?php echo $i;?>" style="display:none" class="tb-line">
+	
+	<tr id="line-<?php echo $i;?>" style="display:table-row" class="tb-line">
 		
-		<td><?php echo "$i"; ?></td>
+		<td><?php echo $i-1; ?></td>
 				
 		<?php
-		
-		$updateArray["tipo_planilha"] = $curTipoPlanilha;
+		$updateArray = array();
+		$updateArray['status_portal'] = $curTipoPlanilha;
 		
 		foreach($camposPlanilhaCur as $key=>$value)
 		{
@@ -255,82 +187,105 @@ $totalLinhas = $objPHPExcel->getActiveSheet()->getHighestRow();
 		
 			<?php
 
-				$cellVal = $saidaTexto->clear(mb_strtoupper($objPHPExcel->getActiveSheet()->getCell($key . "$i"), "UTF-8"));
+				$cellVal = mb_strtoupper($objPHPExcel->getActiveSheet()->getCell($key . "$i"), "UTF-8");
 				
-				if(strstr($value, "novoNumero"))
+				if(strstr($value, "novo_numero") || strstr($value, "Numero"))
 				{
 					$cellVal = (int) $cellVal;
 					Qualidade::maskTel($cellVal);
 					
-					$updateArray["numero"] = $cellVal;
+					$updateArray['novo_numero'] = $cellVal;
 				}
 				
-				elseif(strstr($value, "data"))
+				elseif(strstr($value, "status_data"))
 				{
 					if($curTipoPlanilha!=4 && $curTipoPlanilha!=5)
 					{
 						$cellVal = date("Y-m-d H:i:s", strtotime($cellVal));
 												
-						$updateArray["data-status"] = $cellVal;
+						$updateArray["status_data"] = $cellVal;
 						
 					}else{
 						
 						$cellVal_toUp =  substr($cellVal, 0, 4) . "-" . substr($cellVal, 4, 2) . "-01 00:00:00";
-						$updateArray["data-status"] = $cellVal_toUp;
+						$updateArray["status_data"] = $cellVal_toUp;
 						
 						$cellVal = substr($cellVal, 4, 2) . "-" . substr($cellVal, 0, 4);
 						
 					}
-				}elseif(strstr($value, "status_processo"))
+				}elseif(strstr($value, "status_xerox"))
 				{
 
 						if(strstr($cellVal, "SEM"))
 						{
-							$updateArray["status-processo"] = 1;
+							$updateArray["status_xerox"] = 0;
 						
 						}else{
-							$updateArray["status-processo"] = 2;
+							$updateArray["status_xerox"] = 1;
 						}
+						
+				}elseif($value == "os")
+				{
+
+					$updateArray["os"] = $cellVal;
 						
 				}
 				
 				echo $cellVal;
+				
 			?>
 		
 		</td>
 		
 		<?php
 		}
+		
+		array_push($insertLine['Qualidade'], $updateArray);
+		
+		?>
+		<?php
+		
+		foreach($camposPlanilhaCur as $key=>$value)
+		{
+		echo "\n<input type=\"hidden\" name=\"Qualidade[" . ($linecont) . "][" . $value . "]\" value=\"" . $updateArray[$value] . "\">";
+		echo "\n<input type=\"hidden\" name=\"Qualidade[" . ($linecont) . "][status_portal]\" value=\"" . $curTipoPlanilha . "\">";
+
+
+		}
+
 		?>
 
-		<form id="form-line-<?php echo $i;?>" name="form-line-<?php echo $i;?>">
+		<?php $linecont++; ?>
 		
-		<?php foreach($updateArray as $key=>$value)
+		<?php
+		if ( $linecont >= 500 )
 		{
-			echo "<input type=\"hidden\" name=\"$key\" value=\"$value\" />";
+			
+			echo "</form>";
+			echo "<form name=\"save" . time() . "\" class=\"saveform\" data-formid=\"" . $formcont . "\">";
+			
+			$formcont++;
+			$linecont = 0;
 		}
 		?>
-		
-		</form>
-		<?php
-			//$upStatus = $objPlanilhas->atualizaNumero($updateArray);
-
-			
-			if($upStatus<=0)
-			{
-				$status="up-falho";
-			}
-			
-		?>
-		
-		<td id="<?php echo $i;?>" class="<?php echo $status; ?>">FALHOU</td>
+		<td id="<?php echo $i;?>" class="<?php echo $status; ?>">OK</td>
 		
 	</tr>
 	<?php
+
+		
 	}
 	?>
-
+	</form>
 </table>
+<div id="numero_linhas" style="display:block; position:relative; margin-top:20px; float:left; margin-left:27px;margin-bottom:15px;">
+	Total de linhas: <span class='totallinhas'><?php echo $totalLinhas-1; ?></span>
+</div>
+
+<div id="import" style="display:block; position:relative; margin-top:20px; float:right; margin-right:27px;margin-bottom:15px;">
+	<input type="button" value="Salvar Dados" name='salvar' class='btSalvar' />
+</div>
+
 </center>
 <?php
 //var_dump($objPHPExcel);

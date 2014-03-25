@@ -8,7 +8,6 @@ Copyright (c) 2013 Pedro Molina
 // Define a destination
 $targetFolder = 'upload/'; // Relative to the root
 
-
 if (!empty($_FILES)) {
 	$tempFile = $_FILES['file']['tmp_name'];
 	$targetPath = dirname(__FILE__) . '/' . $targetFolder;

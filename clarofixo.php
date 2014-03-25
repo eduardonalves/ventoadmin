@@ -867,7 +867,6 @@ Até: <input type="text" name="di2" id="calendario42" class="datepicker" onKeyPr
 
 <td>| Buscar: <input type="text" size="11" value="<?= $_GET['b']; ?>" name="b" onkeyup="keypressed()" /> &nbsp;</td>
 
-
 <td valign="middle">Status Portal:</td>
 
 <td>
@@ -875,11 +874,13 @@ Até: <input type="text" name="di2" id="calendario42" class="datepicker" onKeyPr
 <?php 
 
 include_once "lib/class.Accents.php";
-include_once "lib/class.planilhaQualidade.php";
+//include_once "lib/class.planilhaQualidade.php";
 include_once "lib/class.Qualidade.php";
 
-$planilhas = new planilhaQualidade($conexao);
+$qualidade = new Qualidade($conexao);
+//$planilhas = new planilhaQualidade($conexao);
 $saidaTexto = new Accents( Accents::UTF_8, Accents::UTF_8);
+
 
 ?>
 
@@ -889,11 +890,11 @@ $saidaTexto = new Accents( Accents::UTF_8, Accents::UTF_8);
 
 	<?php
 	
-	foreach($planilhas->getTiposPlanilhas() as $key=>$value)
+	foreach($qualidade->getTiposPlanilhas() as $key=>$value)
 	{
 	?>
 	
-	<option value="<?php echo $key; ?>" <?php if (isset($_GET["ebt"]) && $_GET["ebt"]=="$key"){ echo "selected=\"selected\""; }?>><?php echo $saidaTexto->clear($value); ?></option>
+	<option value="<?php echo $key; ?>" <?php if (isset($_GET["ebt"]) && $_GET["ebt"]=="$key"){ echo "selected=\"selected\""; }?>><?php echo $saidaTexto->clear($value['status']); ?></option>
 	
 	<?php
 	}

@@ -1,4 +1,4 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script type="text/javascript" src="js/jquery-ui-1.7.3.custom.min.js"></script>
 <script type="text/javascript">
 
@@ -50,7 +50,7 @@ else{ document.getElementById('valor').value = '';}
 
 
 </select>
-<span class="campoobrigatorio" title="Campo Obrigatório">*</span>
+<span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
 <span class="erro" id="eplano" style="display:none">Por favor, selecione um plano!</span>
 </td>
 </tr>
@@ -58,7 +58,7 @@ else{ document.getElementById('valor').value = '';}
 
 <tr align="left">
 <td>Data Venda:</td>
-<td><input type="text" id="calendario2" name="idata" onKeyPress="mascara(this,data)" maxlength="10" value="<?= date("d/m/Y");?>" size="20" /> <span style="font-size:12px; color:#999; font-style:italic">(dd/mm/aaaa)</span> <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
+<td><input type="text" id="calendario2" name="idata" onKeyPress="mascara(this,data)" maxlength="10" value="<?= date("d/m/Y");?>" size="20" /> <span style="font-size:12px; color:#999; font-style:italic">(dd/mm/aaaa)</span> <span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
  <br /> 
 <span class="erro" id="evenda" style="display:none">Por favor, selecione a data da venda!</span>
 </td>
@@ -67,8 +67,8 @@ else{ document.getElementById('valor').value = '';}
 
 <tr align="left">
 <td>Valor:</td>
-<td> <span style="font-size:12px; color:#999; font-style:italic">R$</span> <input type="text" id="valor" name="valor" value="" size="8" maxlength="10" /> <span style="font-size:12px; color:#999; font-style:italic">(0,00)</span> <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
- <br /> <span class="erro" id="evalor" style="display:none">Por favor, digite o valor da instalação!</span>
+<td> <span style="font-size:12px; color:#999; font-style:italic">R$</span> <input type="text" id="valor" name="valor" value="" size="8" maxlength="10" /> <span style="font-size:12px; color:#999; font-style:italic">(0,00)</span> <span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
+ <br /> <span class="erro" id="evalor" style="display:none">Por favor, digite o valor da instalaÃ§Ã£o!</span>
 </td> 
 </tr>
 
@@ -84,7 +84,7 @@ else{ document.getElementById('valor').value = '';}
 <td>
 <span class="button" align="absmiddle" onclick="submitform('6');">Inserir nova venda</span> 
 <span class="button" align="absmiddle" onclick="submitform();">Inserir venda outro produto</span>
-<span class="campoobrigatorio">(*) Campos Obrigatórios!</span>
+<span class="campoobrigatorio">(*) Campos ObrigatÃ³rios!</span>
 </td>
 </tr>
 

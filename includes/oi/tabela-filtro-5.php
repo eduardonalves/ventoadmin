@@ -1,4 +1,4 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <table border="0" width="1000px" bgcolor="#f6f6f6" onmouseover="loadsize(document.getElementById('pagesize').innerHTML);">
 <tr style="font-size:13px">
@@ -51,11 +51,11 @@
 
 <option value="APROVADO" <? if($_GET['s'] == 'APROVADO'){?>selected="selected"<? }?>>Aprovado</option>
 
-<option value="PRÉ-ANÁLISE" <? if($_GET['s'] == 'PRÉ-ANÁLISE'){?>selected="selected"<? }?>>Pré-Análise</option>
+<option value="PRÃ‰-ANÃLISE" <? if($_GET['s'] == 'PRÃ‰-ANÃLISE'){?>selected="selected"<? }?>>PrÃ©-AnÃ¡lise</option>
 
 <option value="PENDENTE" <? if($_GET['s'] == 'PENDENTE'){?>selected="selected"<? }?>>Pendente</option>
 
-<option value="RESTRIÇÃO" <? if($_GET['s'] == 'RESTRIÇÃO'){?>selected="selected"<? }?>>Restri&ccedil;&atilde;o</option>
+<option value="RESTRIÃ‡ÃƒO" <? if($_GET['s'] == 'RESTRIÃ‡ÃƒO'){?>selected="selected"<? }?>>Restri&ccedil;&atilde;o</option>
 
 <option value="SEM CONTATO" <? if($_GET['s'] == 'SEM CONTATO'){?>selected="selected"<? }?>>Sem Contato</option>
 

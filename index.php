@@ -1,5 +1,4 @@
-<? 
-
+<?
 
 session_start();
 
@@ -14,53 +13,33 @@ include_once "includes/ifmobile.php";
 
 }
 
-
-
 include_once "conexao.php";
-
-
-
-
-
-
-
 
 // Verificar se está logado
 
 if(isset($_SESSION['usuario'])){ ?>
 
-	
-
 <script type="text/javascript">
 
 window.location = 'adm'
 
-</script>	
-
-	
-
-	
+</script>
 
 <? } 
 
 
-
 if(isset($_POST['login'])){
 
-if(!$_POST['resetarsenha']){
+if($_POST['resetarsenha'] == 'false'){
 
 $login = $_POST['login'];
 
 $senha =  md5($_POST['senha']);
 
 
-
-
-
 $consulta = $conexao->query("SELECT * FROM usuarios where login = '".$login."' && senha = '".$senha."' && status != 'DESLIGADO'");
 
 $linha = mysql_fetch_array($consulta);
-
 
 
 if($linha == 0){ $erro = "1";} else{
@@ -69,21 +48,14 @@ if($linha == 0){ $erro = "1";} else{
 $_SESSION['usuario'] = $linha['id'];
 
 
-
 $data = date("Y-m-d H:i:s");
 
-
-
 //LOG ENTRADA
-
-
 
 $insert_entrada = $conexao->query("INSERT into log_sistema (data,usuario,evento) VALUES ('".$data."','".$linha['id']."','Entrou no sistema.')");
 
 
-
 ?>
-
 
 
 <script type="text/javascript">
@@ -93,13 +65,12 @@ window.location = 'adm?a=1';
 </script>
 
 
-
 <?
 
 }
 
 }
-else{
+else if($_POST['resetarsenha'] == 'true'){
 	
 	$email = $_POST['email'];
 	
@@ -118,7 +89,7 @@ else{
 	//Se não estiver cadastrado, informar na tela e recarregar página.
 	
 	if($linha == 0){
-		die("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /> <meta http-equiv='refresh' content='2'> ERRO: e-mail não cadastrado no sistema.");}
+		die("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /> <meta http-equiv='refresh' content='0'> <script> alert('ERRO: e-mail não cadastrado no sistema.'); </script>");}
 	else{
 		require_once("lib/PHPMailer-master/class.phpmailer.php"); // requere a PHPMailer
 		$mail = new PHPMailer(); // instancia a classe PHPMailer
@@ -151,14 +122,14 @@ else{
 		$mail->Body     = "Olá ".$linha['nome']."! \n\nAcesse o link a seguir para completar o processo de redefinição de sua senha no Vento Admin. \n\n".$link." \n\nSe você não solicitou redefinição de senha no Vento Admin, por favor desconsidere este e-mail."; //Mensagem
 
 		if($mail->Send()){ //envio da mensagem
-			echo "<script type='text/javascript'> alert('E-mail enviado com sucesso! Verifique sua caixa de entrada.');</script>";
+			echo "<script> alert('E-mail enviado com sucesso! Verifique sua caixa de entrada.');</script>";
+			setcookie('redefinir',$email,time()+300);
 		}
 		else
-			echo "<script type='text/javascript'> alert('Ocorreu um erro ao enviar e-mail. Tente novamente.');</script>";
+			echo "<script> alert('Ocorreu um erro ao enviar e-mail. Tente novamente.');</script>";
 		
 		$mail->SmtpClose(); //encerra a sessão SMTP
 		
-		setcookie('redefinir',$email,time()+300);
 		}
 	}
 }
@@ -200,13 +171,13 @@ function esquecisenha(str){
 		$("#login").val('');
 		$("#senha").val('');
 		$(".campossenha").css('display','');
-		$("#resetarsenha").val(true);
+		$("#resetarsenha").val('true');
 	}
 	else if(str=='voltar'){
 		$(".campossenha").css('display','none');
 		$("#email").val('');
 		$(".camposlogin").css('display','');
-		$("#resetarsenha").val(false);
+		$("#resetarsenha").val('false');
 		}
 	
 	}

@@ -2,7 +2,7 @@
 
 
 
-// Verificar se está logado
+// Verificar se estÃ¡ logado
 
 if(!isset($_SESSION['usuario'])){ ?>
 
@@ -148,7 +148,7 @@ window.location = '?p=<?= $_GET['p'];?>'
 
 
 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 
 
@@ -230,9 +230,9 @@ window.location = '?p=<?= $_GET['p'];?>'
 
 
 
- /*Cria uma função de nome mascara, onde o primeiro argumento passado é um dos
+ /*Cria uma funÃ§Ã£o de nome mascara, onde o primeiro argumento passado Ã© um dos
 
-     objetos input O segundo é especificando o tipo de método no qual será tratado*/
+     objetos input O segundo Ã© especificando o tipo de mÃ©todo no qual serÃ¡ tratado*/
 
     function mascara(o,f){
 
@@ -248,9 +248,9 @@ window.location = '?p=<?= $_GET['p'];?>'
 
     function execmascara(){
 
-        /*Pegue o valor do objeto e atribua o resultado da função v_fun; cujo o conteúdo
+        /*Pegue o valor do objeto e atribua o resultado da funÃ§Ã£o v_fun; cujo o conteÃºdo
 
-        da mesma é a função que foi referida e que será utilizada para tratar dos dados*/
+        da mesma Ã© a funÃ§Ã£o que foi referida e que serÃ¡ utilizada para tratar dos dados*/
 
         v_obj.value=v_fun(v_obj.value);
 
@@ -260,7 +260,7 @@ window.location = '?p=<?= $_GET['p'];?>'
 
     function soNumeros(v){
 
-        return v.replace(/\D/g,"");//Exclua tudo que não for numeral e retorne o valor
+        return v.replace(/\D/g,"");//Exclua tudo que nÃ£o for numeral e retorne o valor
 
     }
 
@@ -268,15 +268,15 @@ window.location = '?p=<?= $_GET['p'];?>'
 
     function data(v){
 
-        //Remove tudo o que não é dígito
+        //Remove tudo o que nÃ£o Ã© dÃ­gito
 
         v=v.replace(/\D/g,"");
 
-        //Coloca parênteses em volta dos dois primeiros dígitos
+        //Coloca parÃªnteses em volta dos dois primeiros dÃ­gitos
 
         v=v.replace(/^(\d{2})(\d)/g,"$1/$2");
 
-        //Coloca hífen entre o quarto e o quinto dígitos
+        //Coloca hÃ­fen entre o quarto e o quinto dÃ­gitos
 
         v=v.replace(/(\d{2})(\d)/,"$1/$2");
 
@@ -410,7 +410,7 @@ box-shadow:  0px 0px 10px 2px #999;
 
 <tr align="center" height="40px" style="color:#999; font-weight:bold; font-size:14px;">
 
-<td>COLUNAS VISÍVEIS</td>
+<td>COLUNAS VISÃVEIS</td>
 
 </tr>
 
@@ -470,7 +470,7 @@ box-shadow:  0px 0px 10px 2px #999;
 
 <td width="50%"><input type="checkbox" name="chk11" <? if(strstr($USUARIO['colunas_oi'],'(data)') || $USUARIO['colunas_oi'] == ''){?>checked="checked"<? } ?> value="data" /> Data da Venda</td>
 
-<td width="50%"><input type="checkbox" name="chk12" <? if(strstr($USUARIO['colunas_oi'],'(endereco)')){?>checked="checked"<? } ?> value="endereco" /> Endereço</td>
+<td width="50%"><input type="checkbox" name="chk12" <? if(strstr($USUARIO['colunas_oi'],'(endereco)')){?>checked="checked"<? } ?> value="endereco" /> EndereÃ§o</td>
 
 </tr>
 
@@ -486,7 +486,7 @@ box-shadow:  0px 0px 10px 2px #999;
 <td width="50%"><input type="checkbox" name="chk24" <? if(strstr($USUARIO['colunas_oi'],'(data_conectada)')){?>checked="checked"<? } ?> value="data_conectada" /> Data Conectada</td>
 
 
-<td width="50%"><input type="checkbox" name="chk18" <? if(strstr($USUARIO['colunas_oi'],'(motivo_restricao)')){?>checked="checked"<? } ?> value="motivo_restricao" /> Motivo Restrição</td>
+<td width="50%"><input type="checkbox" name="chk18" <? if(strstr($USUARIO['colunas_oi'],'(motivo_restricao)')){?>checked="checked"<? } ?> value="motivo_restricao" /> Motivo RestriÃ§Ã£o</td>
 
 
 </tr>
@@ -501,7 +501,7 @@ box-shadow:  0px 0px 10px 2px #999;
 </tr>
 <tr align="left">
 <td width="50%"><input type="checkbox" name="chk15" <? if(strstr($USUARIO['colunas_oi'],'(pagamento)')){?>checked="checked"<? } ?> value="pagamento" /> Pagamento</td>
-<td width="50%"><input type="checkbox" name="chk23" <? if(strstr($USUARIO['colunas_oi'],'(motivo_pendente)')){?>checked="checked"<? } ?> value="motivo_pendente" /> Motivo Pendência</td>
+<td width="50%"><input type="checkbox" name="chk23" <? if(strstr($USUARIO['colunas_oi'],'(motivo_pendente)')){?>checked="checked"<? } ?> value="motivo_pendente" /> Motivo PendÃªncia</td>
 
 </tr>
 <tr align="left">
@@ -515,7 +515,7 @@ box-shadow:  0px 0px 10px 2px #999;
 <tr align="left">
 
 <td width="50%"><input type="checkbox" name="chk19" <? if(strstr($USUARIO['colunas_oi'],'(data_marcada)')){?>checked="checked"<? } ?> value="data_marcada" /> Agendamento-Instalacao</td>
-<td width="50%"><input type="checkbox" name="chk22" <? if(strstr($USUARIO['colunas_oi'],'(agendGravacao)')){?>checked="checked"<? } ?> value="agendGravacao" /> Agendamento Gravação</td>
+<td width="50%"><input type="checkbox" name="chk22" <? if(strstr($USUARIO['colunas_oi'],'(agendGravacao)')){?>checked="checked"<? } ?> value="agendGravacao" /> Agendamento GravaÃ§Ã£o</td>
 
 </tr>
 
@@ -616,7 +616,7 @@ box-shadow:  0px 0px 10px 2px #999;
 
 &nbsp; &nbsp;
 
-Mês: 
+MÃªs: 
 
 <select name="me" onchange="javascript:document.forms.filtro.submit();">
 
@@ -626,7 +626,7 @@ Mês:
 
 <option value="02" <? if($mes == '02'){ ?> selected="selected" <? } ?>>FEVEREIRO</option>
 
-<option value="03" <? if($mes == '03'){ ?> selected="selected" <? } ?>>MARÇO</option>
+<option value="03" <? if($mes == '03'){ ?> selected="selected" <? } ?>>MARÃ‡O</option>
 
 <option value="04" <? if($mes == '04'){ ?> selected="selected" <? } ?>>ABRIL</option>
 
@@ -741,7 +741,7 @@ include "includes/filtro-oi.php";
 
 
 
-<img src="img/gear.png" width="20" style="cursor:pointer" onclick="mostrarcolunas();" title="Selecionar Colunas Visíveis"  />
+<img src="img/gear.png" width="20" style="cursor:pointer" onclick="mostrarcolunas();" title="Selecionar Colunas VisÃ­veis"  />
 
 </td>
 
@@ -917,7 +917,7 @@ include "includes/filtro-oi.php";
 
 <? if(strstr($USUARIO['colunas_oi'],'(endereco)')){?>
 
-<td title="CEP" onclick="window.location = '?p=oi&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&de=<?= $_GET['de']; ?>&de=<?= $_GET['de']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&pro=<?= $_GET['pro']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'endereco DESC'){ echo 'endereco DESC'; } else { echo 'endereco ASC'; }?>'">Endereço <? if($_GET['o'] == 'endereco DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'endereco ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
+<td title="CEP" onclick="window.location = '?p=oi&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&de=<?= $_GET['de']; ?>&de=<?= $_GET['de']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&pro=<?= $_GET['pro']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'endereco DESC'){ echo 'endereco DESC'; } else { echo 'endereco ASC'; }?>'">EndereÃ§o <? if($_GET['o'] == 'endereco DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'endereco ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
 
 <? } ?>
 
@@ -939,12 +939,12 @@ include "includes/filtro-oi.php";
 
 <? if(strstr($USUARIO['colunas_oi'],'(data_marcada)')){?>
 
-<td title="Data agendamento Instalação" onclick="window.location = '?p=oi&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&de=<?= $_GET['de']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&pro=<?= $_GET['pro']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'data_marcada DESC'){ echo 'data_marcada DESC'; } else { echo 'data_marcada ASC'; }?>'">Agendamento Instalação <? if($_GET['o'] == 'data_marcada DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'data_marcada ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
+<td title="Data agendamento InstalaÃ§Ã£o" onclick="window.location = '?p=oi&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&de=<?= $_GET['de']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&pro=<?= $_GET['pro']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'data_marcada DESC'){ echo 'data_marcada DESC'; } else { echo 'data_marcada ASC'; }?>'">Agendamento InstalaÃ§Ã£o <? if($_GET['o'] == 'data_marcada DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'data_marcada ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
 
 <? } ?>
 <? if(strstr($USUARIO['colunas_oi'],'(agendGravacao)')){?>
 
-<td title="agendGravacao" onclick="window.location = '?p=oi&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&de=<?= $_GET['de']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&pro=<?= $_GET['pro']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'agendGravacao DESC'){ echo 'agendGravacao DESC'; } else { echo 'agendGravacao ASC'; }?>'">Agendamento Gravação <? if($_GET['o'] == 'agendGravacao DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'agendGravacao ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
+<td title="agendGravacao" onclick="window.location = '?p=oi&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&de=<?= $_GET['de']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&pro=<?= $_GET['pro']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'agendGravacao DESC'){ echo 'agendGravacao DESC'; } else { echo 'agendGravacao ASC'; }?>'">Agendamento GravaÃ§Ã£o <? if($_GET['o'] == 'agendGravacao DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'agendGravacao ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
 
 <? } ?>
 <? if(strstr($USUARIO['colunas_oi'],'(ultimAgendPendente)')){?>
@@ -975,7 +975,7 @@ include "includes/filtro-oi.php";
 
 <? if(strstr($USUARIO['colunas_oi'],'(motivo_restricao)')){?>
 
-<td title="Motivo Restrição" onclick="window.location = '?p=oi&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&de=<?= $_GET['de']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&pro=<?= $_GET['pro']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'motivo_restricao DESC'){ echo 'motivo_restricao DESC'; } else { echo 'motivo_restricao ASC'; }?>'">Motivo Restrição <? if($_GET['o'] == 'motivo_restricao DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'motivo_restricao ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
+<td title="Motivo RestriÃ§Ã£o" onclick="window.location = '?p=oi&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&de=<?= $_GET['de']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&pro=<?= $_GET['pro']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'motivo_restricao DESC'){ echo 'motivo_restricao DESC'; } else { echo 'motivo_restricao ASC'; }?>'">Motivo RestriÃ§Ã£o <? if($_GET['o'] == 'motivo_restricao DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'motivo_restricao ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
 
 <? } ?>
 
@@ -989,7 +989,7 @@ include "includes/filtro-oi.php";
 
 <? if(strstr($USUARIO['colunas_oi'],'(motivo_pendente)')){?>
 
-<td title="Motivo da Pendência" onclick="window.location = '?p=oi&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&de=<?= $_GET['de']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&pro=<?= $_GET['pro']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'motivo_pendente DESC'){ echo 'motivo_pendente DESC'; } else { echo 'motivo_pendente ASC'; }?>'">Motivo Pendência <? if($_GET['o'] == 'motivo_pendente DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'motivo_pendente ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
+<td title="Motivo da PendÃªncia" onclick="window.location = '?p=oi&m=<?= $_GET['m'];?>&t=<?= $_GET['t'];?>&f=<?= $_GET['f'];?>&s=<?= $_GET['s'];?>&v=<?= $_GET['v'];?>&i=<?= $_GET['i'];?>&b=<?= $_GET['b'];?>&pg=<?php echo ($pg - 1); ?>&di=<?= $_GET['di']; ?>&de=<?= $_GET['de']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&pro=<?= $_GET['pro']; ?>&g=<?= $_GET['g']; ?>&o=<? if($_GET['o'] != 'motivo_pendente DESC'){ echo 'motivo_pendente DESC'; } else { echo 'motivo_pendente ASC'; }?>'">Motivo PendÃªncia <? if($_GET['o'] == 'motivo_pendente DESC'){ ?><img src="img/seta-d.png" /> <? } else if($_GET['o'] == 'motivo_pendente ASC'){ ?> <img src="img/seta-u.png" /> <? } ?></td>
 
 <? } ?>
 
@@ -1167,7 +1167,7 @@ case 6: $nomeProduto = 'Oi Velox'; break;
 
 <? if(strstr($USUARIO['colunas_oi'],'(endereco)')){?>
 
-<td title="Endereço do Cliente" <? if(strstr($_GET['o'],'endereco')){ ?>class="tdselected" <? } ?>><?= $VENDA['endereco'];?></td>
+<td title="EndereÃ§o do Cliente" <? if(strstr($_GET['o'],'endereco')){ ?>class="tdselected" <? } ?>><?= $VENDA['endereco'];?></td>
 
 <? } ?>
 
@@ -1219,10 +1219,10 @@ $auxdataGrav=explode(" ", $VENDA['agendGravacao']);
 $trocaDataGrav= explode("-", $auxdataGrav[0]);
 $dataGravacao = $trocaDataGrav[2]."/".$trocaDataGrav[1]."/".$trocaDataGrav[0]; 
 ?>
-<td title="Data de Agendamento da Gravação" <? if(strstr($_GET['o'],'agendGravacao') || $_GET['o'] == ''){ ?>class="tdselected"  <? } ?>><?= $dataGravacao;?></td>
+<td title="Data de Agendamento da GravaÃ§Ã£o" <? if(strstr($_GET['o'],'agendGravacao') || $_GET['o'] == ''){ ?>class="tdselected"  <? } ?>><?= $dataGravacao;?></td>
 
 <? } ?>
-<td title="<?= $titleAgendamento; ?>" <? if($VENDA['status'] != 'CONECTADO' && $VENDA['status'] != 'RESTRIÇÃO' && $VENDA['status'] != 'CANCELADO' && $VENDA['ultimAgendPendente'] < date("Y-m-d H:i:s")){ ?> style="color:#E00; font-weight:bold" <? } ?> <? if(strstr($_GET['o'],'ultimAgendPendente')){ ?>class="tdselected"<? } ?>>
+<td title="<?= $titleAgendamento; ?>" <? if($VENDA['status'] != 'CONECTADO' && $VENDA['status'] != 'RESTRIÃ‡ÃƒO' && $VENDA['status'] != 'CANCELADO' && $VENDA['ultimAgendPendente'] < date("Y-m-d H:i:s")){ ?> style="color:#E00; font-weight:bold" <? } ?> <? if(strstr($_GET['o'],'ultimAgendPendente')){ ?>class="tdselected"<? } ?>>
 <? 
 	$datareagend = explode("-", $VENDA['ultimAgendPendente']);
 	$diaReagend = explode(" ", $datareagend[2]);
@@ -1268,7 +1268,7 @@ $dataGravacao = $trocaDataGrav[2]."/".$trocaDataGrav[1]."/".$trocaDataGrav[0];
 
 <? if(strstr($USUARIO['colunas_oi'],'(motivo_restricao)')){?>
 
-<td title="Motivo Restrição" <? if(strstr($_GET['o'],'motivo_restricao')){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['motivo_restricao']);?></td>
+<td title="Motivo RestriÃ§Ã£o" <? if(strstr($_GET['o'],'motivo_restricao')){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['motivo_restricao']);?></td>
 
 <? } ?>
 
@@ -1282,7 +1282,7 @@ $dataGravacao = $trocaDataGrav[2]."/".$trocaDataGrav[1]."/".$trocaDataGrav[0];
 
 <? if(strstr($USUARIO['colunas_oi'],'(motivo_pendente)')){?>
 
-<td title="Motivo da Pendência" <? if(strstr($_GET['o'],'motivo_pendente')){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['motivo_pendente']);?></td>
+<td title="Motivo da PendÃªncia" <? if(strstr($_GET['o'],'motivo_pendente')){ ?>class="tdselected" <? } ?>><?= strtoupper($VENDA['motivo_pendente']);?></td>
 
 <? } ?>
 
@@ -1293,7 +1293,7 @@ $dataGravacao = $trocaDataGrav[2]."/".$trocaDataGrav[1]."/".$trocaDataGrav[0];
 <? } ?>
 
 
-<? $conOBS = $conexao->query("SELECT DATE_FORMAT(observacoes.data, '%d/%m/%Y às %H:%i:%s') AS data,
+<? $conOBS = $conexao->query("SELECT DATE_FORMAT(observacoes.data, '%d/%m/%Y Ã s %H:%i:%s') AS data,
 										  observacoes.observacao AS obs, 
 										  usuarios.nome AS usuario
 				   				   FROM observacoes 
@@ -1316,7 +1316,7 @@ $dataGravacao = $trocaDataGrav[2]."/".$trocaDataGrav[1]."/".$trocaDataGrav[0];
 
 <? if($USUARIO['inserir_gravacao'] == 1 && $VENDA['status'] == 'GRAVAR' && $VENDA['gravacao'] == ''){?>
 
-<img src="img/icone-gravar.png" title="Inserir Gravação" width="13" height="13" onclick="Popup=window.open('upload-gravacao-simples-oi.php?id=<?= $VENDA['id']; ?>','Popup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=470,height=350,left=430,top=100');" />
+<img src="img/icone-gravar.png" title="Inserir GravaÃ§Ã£o" width="13" height="13" onclick="Popup=window.open('http://vem.vento-consulting.com/upload-gravacao-simples-oi.php?id=<?= $VENDA['id']; ?>','Popup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=470,height=350,left=430,top=100');" />
 
 <? } ?>
 
@@ -1326,7 +1326,7 @@ $dataGravacao = $trocaDataGrav[2]."/".$trocaDataGrav[1]."/".$trocaDataGrav[0];
 
 
 
-<img src="img/icone-ouvir.png" title="Ouvir Gravação" width="13" height="13" onclick="javascript:window.open('http://172.16.0.30/audio/oi/orig/<?= $VENDA['gravacao'];?>','_blank')" />
+<img src="img/icone-ouvir.png" title="Ouvir GravaÃ§Ã£o" width="13" height="13" onclick="javascript:window.open('http://172.16.0.30/audio/oi/orig/<?= $VENDA['gravacao'];?>','_blank')" />
 
 
 
@@ -1436,11 +1436,11 @@ if($numpag == $pg){ ?>
 
 <td width="70px" align="center" bgcolor="#ededed" onMouseOver="this.style.background = '#f6f6f6'" onMouseOut="this.style.background = '#ededed'" style="cursor:pointer; font-size:13px" onClick="window.location = ('?p=<?= $_GET['p']; ?>&m=<?= $_GET['m'];?>&o=<?= $_GET['o']; ?>&t=<?= $_GET['t']; ?>&f=<?= $_GET['f']; ?>&s=<?= $_GET['s']; ?>&v=<?= $_GET['v']; ?>&i=<?= $_GET['i']; ?>&b=<?= $_GET['b']; ?>&pg=<?php echo ($pg + 1); ?>&di=<?= $_GET['di']; ?>&de=<?= $_GET['de']; ?>&me=<?= $_GET['me']; ?>&an=<?= $_GET['an']; ?>&ve=<?= $_GET['ve']; ?>&pro=<?= $_GET['pro']; ?>&pro=<?= $_GET['pro']; ?>&g=<?= $_GET['g']; ?>')">
 
-Próximo &raquo;</td><? } else {?>
+PrÃ³ximo &raquo;</td><? } else {?>
 
 
 
-<td width="70px" align="center" bgcolor="#fbfbfb" style="cursor:default; font-size:13px; color:#cdcdcd">Próximo &raquo;</td> 
+<td width="70px" align="center" bgcolor="#fbfbfb" style="cursor:default; font-size:13px; color:#cdcdcd">PrÃ³ximo &raquo;</td> 
 
 
 

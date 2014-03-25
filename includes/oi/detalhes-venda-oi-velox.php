@@ -1,4 +1,4 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <script type="text/javascript">
 function verificavalor(){
@@ -192,30 +192,30 @@ include "includes/observacoes.php";
 <? if($editar == '1' && ($USUARIO['tipo_usuario'] == 'ADMINISTRADOR' || ($USUARIO['id'] == '23' || $USUARIO['id'] == '3145'))){ ?>
 	<select name="status"  id="selectStatus" onChange="checkstatus(this.value)">
 		<option value=""></option>
-		<option value="ANÁLISE" <? if($linha['status'] == 'ANÁLISE'){?>selected="selected"<? } ?>>Análise</option>
+		<option value="ANÃLISE" <? if($linha['status'] == 'ANÃLISE'){?>selected="selected"<? } ?>>AnÃ¡lise</option>
 		<option value="GRAVAR" <? if($linha['status'] == 'GRAVAR'){?>selected="selected"<? } ?>>Gravar</option>
-		<option value="PRÉ-ANÁLISE" <? if($linha['status'] == 'PRÉ-ANÁLISE'){?>selected="selected"<? } ?>>Pré-Análise</option>
+		<option value="PRÃ‰-ANÃLISE" <? if($linha['status'] == 'PRÃ‰-ANÃLISE'){?>selected="selected"<? } ?>>PrÃ©-AnÃ¡lise</option>
 		<option value="PENDENTE" <? if($linha['status'] == 'PENDENTE'){?>selected="selected"<? } ?>>Pendente</option>
 		<option value="FINALIZADA" <? if($linha['status'] == 'FINALIZADA'){?>selected="selected"<? } ?>>Finalizada</option>
 		<option value="DEVOLVIDO" <? if($linha['status'] == 'DEVOLVIDO'){?>selected="selected"<? } ?>>Devolvido</option>
 		<option value="RECUPERADO" <? if($linha['status'] == 'RECUPERADO'){?>selected="selected"<? } ?>>Venda Recuperada</option>
 		<option value="SEM CONTATO" <? if($linha['status'] == 'SEM CONTATO'){?>selected="selected"<? } ?>>Sem Contato</option>
-		<option value="RESTRIÇÃO" <? if($linha['status'] == 'RESTRIÇÃO'){?>selected="selected"<? } ?>>Restrição</option>
+		<option value="RESTRIÃ‡ÃƒO" <? if($linha['status'] == 'RESTRIÃ‡ÃƒO'){?>selected="selected"<? } ?>>RestriÃ§Ã£o</option>
 		<option value="CANCELADO" <? if($linha['status'] == 'CANCELADO'){?>selected="selected"<? } ?>>Cancelado</option>
 		
-		<option value="PÓS VENDAS" <? if($linha['status'] == 'PÓS VENDAS'){?>selected="selected"<? } ?>>Pós Vendas</option>
+		<option value="PÃ“S VENDAS" <? if($linha['status'] == 'PÃ“S VENDAS'){?>selected="selected"<? } ?>>PÃ³s Vendas</option>
 		<option value="CONECTADO" <? if($linha['status'] == 'CONECTADO'){?>selected="selected"<? } ?>>Conectado</option>
 	</select>
-<? } else if(($editar == '1') && ($USUARIO['tipo_usuario'] == 'AUDITOR') && ($linha['status'] == 'PRÉ-ANÁLISE') ){ ?>
+<? } else if(($editar == '1') && ($USUARIO['tipo_usuario'] == 'AUDITOR') && ($linha['status'] == 'PRÃ‰-ANÃLISE') ){ ?>
 		<select name="status"  id="selectStatus" onChange="checkstatus(this.value)">
 			<option value=""></option><option value="GRAVAR" <? if($linha['status'] == 'GRAVAR'){?>selected="selected"<? } ?>>Gravar</option>
 			<option value="PENDENTE" <? if($linha['status'] == 'PENDENTE'){?>selected="selected"<? } ?>>Pendente</option>
-			<option value="RESTRIÇÃO" <? if($linha['status'] == 'RESTRIÇÃO'){?>selected="selected"<? } ?>>Restrição</option>
+			<option value="RESTRIÃ‡ÃƒO" <? if($linha['status'] == 'RESTRIÃ‡ÃƒO'){?>selected="selected"<? } ?>>RestriÃ§Ã£o</option>
 		</select>
 <? }elseif(($editar == '1') && ($USUARIO['tipo_usuario'] == 'AUDITOR') && ($linha['status'] == 'GRAVAR') && ($linha['gravacao'] != '') ){?>
 		<select name="status"  id="selectStatus" onChange="checkstatus(this.value)">
 			<option value=""></option>
-			<option value="ANÁLISE" <? if($linha['status'] == 'ANÁLISE'){?>selected="selected"<? } ?>>Análise</option>
+			<option value="ANÃLISE" <? if($linha['status'] == 'ANÃLISE'){?>selected="selected"<? } ?>>AnÃ¡lise</option>
 			<option value="FINALIZADA" <? if($linha['status'] == 'FINALIZADA'){?>selected="selected"<? } ?>>Finalizada</option>
 		</select>
 <?}elseif(($editar == '1') && ($USUARIO['tipo_usuario'] == 'AUDITOR') && ($linha['status'] == 'FINALIZADA')){ ?>
@@ -240,7 +240,7 @@ include "includes/observacoes.php";
 			<option value="GRAVAR" <? if($linha['status'] == 'GRAVAR'){?>selected="selected"<? } ?>>Gravar</option>
 			
 		</select>
-<? }elseif(($editar == '1') && ($USUARIO['tipo_usuario'] == 'AUDITOR') && ($linha['status'] == 'ANÁLISE')){?>
+<? }elseif(($editar == '1') && ($USUARIO['tipo_usuario'] == 'AUDITOR') && ($linha['status'] == 'ANÃLISE')){?>
 		<select name="status"  id="selectStatus" onChange="checkstatus(this.value)">
 			<option value=""></option>
 			<option value="FINALIZADA" <? if($linha['status'] == 'FINALIZADA'){?>selected="selected"<? } ?>>Finalizada</option>

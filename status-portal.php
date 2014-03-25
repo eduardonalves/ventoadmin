@@ -1,9 +1,26 @@
-<meta name="http-equiv" content="Content-type: text/html; charset=UTF-8"/>
+<?php /*
+session_start();
+include_once 'conexao.php';
 
+spl_autoload_register("autoload");
+
+function autoload($class) {
+    
+    
+    include_once "lib/class." . $class . ".php";
+
+}
+
+
+?>
+
+<meta name="http-equiv" content="Content-type: text/html; charset=UTF-8"/>
+ <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/geral.css" />
 <link rel="stylesheet" type="text/css" href="css/tables.css" />
 <link rel="stylesheet" type="text/css" href="css/paginacao.css" />
 
-<?php
+<?php 
 // Verificar se está logado
 
 if(!isset($_SESSION['usuario'])){ ?>
@@ -20,14 +37,17 @@ if(!isset($_SESSION['usuario'])){ ?>
 
 	
 
-<?php } 
+<?php } */
 
 $saidaTexto = new Accents( Accents::UTF_8, Accents::UTF_8 );
-$objPlanilhas = new planilhaQualidade($conexao);
+//$objPlanilhas = new planilhaQualidade($conexao);
+$objQualidade = new Qualidade($conexao);
 ?>
+
 
 <link rel="stylesheet" type="text/css" href="css/custom.css" />
 <script type="text/javascript" src="js/pekeUpload.js"></script>
+
 
 <style type="text/css">
 
@@ -109,35 +129,36 @@ box-shadow:  0px 0px 10px 2px #999;
 
 	$(document).ready( function() {
 		
-
-		$("#statusForm").live("submit", function(event, x){
+		$("#statusForm").bind("submit", function(event, x){
 		
-		if(x!==true) {return false; }
+			if(x!==true) {return false; }
 		
-		$("[name='original-filename']").val( $("#file").val() );
+			$("[name='original-filename']").val( $("#file").val() );
 		});
 			
-			
-			$("#bt-submit").live("click", function(){
+			$("#bt-submit").bind("click", function(){
 
 				if($("#tipoPlanilha").val()==0)
 				{
-					alert(decodeURIComponent(escape("Tipo de planilha não selecionado.")));
+					alert("Tipo de planilha não selecionado.");
 					return false;
+					
 				}else
 				
 				{
-
 					if($("#file").val()=="")
 					{
-						alert(decodeURIComponent(escape("Arquivo de planilha não selecionado.")));
+						alert("Arquivo de planilha não selecionado.");
 						return false;
 
 					}
 				}
+				return true;
 			 });
 
 		$("#file").pekeUpload({invalidExtError:'Tipo de arquivo inv&aacute;lido', file:'arquivo', onSubmit:true, multi:false, data:'<?php $curTime = time(); echo $curTime;?>', btnText:'Selecionar arquivo', allowedExtensions:"xls", onFileSuccess: function(file,data){ $("#statusForm").trigger("submit", [true]);}});
+		//$("#file").pekeUpload();
+		
 		
 
 	});
@@ -173,14 +194,14 @@ box-shadow:  0px 0px 10px 2px #999;
 					<option value="0">N&atilde;o Selecionado</option>
 				<?php
 				
-				$tiposPlanilhas = $objPlanilhas->getTiposPlanilhas("nao", 2);
+				$tiposPlanilhas = $objQualidade->getTiposPlanilhas();
 				
 				foreach($tiposPlanilhas as $key=>$value)
 				{
 					if($key!=0)
 					{
 				?>
-					<option value="<?php echo $key; ?>"><?php echo $saidaTexto->Clear($value); ?></option>
+					<option value="<?php echo $key; ?>"><?php echo $saidaTexto->Clear($value['label']); ?></option>
 				<?php
 					}
 				}
@@ -192,6 +213,7 @@ box-shadow:  0px 0px 10px 2px #999;
 				
 				<input id="bt-submit" type="submit" value="Importar Planilha" style="margin-top:40px; clear:both; min-width:140px; display:block; float:left;" />
 				
+
 			</form><!-- statusForm -->
 		
 		</div><!-- importar-box -->
@@ -199,4 +221,5 @@ box-shadow:  0px 0px 10px 2px #999;
 	</div><!-- conteudo -->
 
 </div><!-- main -->
+
 

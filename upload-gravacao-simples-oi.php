@@ -8,7 +8,7 @@ include "conexao.php";
 
 
 
-// Verificar se est· logado
+// Verificar se est√° logado
 
 if(!isset($_SESSION['usuario'])){ ?>
 
@@ -42,7 +42,7 @@ $linha = mysql_fetch_array($consulta);
 
 
 
-window.alert('Venda n„o encontrada!');
+window.alert('Venda n√£o encontrada!');
 
 window.close();
 
@@ -92,7 +92,7 @@ $update = $conexao->query("UPDATE vendas_clarotv SET gravacao = '".$arquivo."', 
 
 $datadehoje = date("Y-m-d H:i:s");
 
-$insert_log = $conexao->query("INSERT into log_sistema (data,usuario,evento) VALUES ('".$datadehoje."','".$_SESSION['usuario']."','Inseriu uma nova gravaÁ„o no sistema (ID: ".$_GET['id'].").')");
+$insert_log = $conexao->query("INSERT into log_sistema (data,usuario,evento) VALUES ('".$datadehoje."','".$_SESSION['usuario']."','Inseriu uma nova grava√ß√£o no sistema (ID: ".$_GET['id'].").')");
 
 
 
@@ -133,9 +133,9 @@ window.location = 'http://vem.vento-consulting.com/detalhes-venda-oi.php?id=<?= 
 
 <head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<title>UpLoad GravaÁ„o</title>
+<title>UpLoad Grava√ß√£o</title>
 
 </head>
 
@@ -153,7 +153,7 @@ window.location = 'http://vem.vento-consulting.com/detalhes-venda-oi.php?id=<?= 
 
 <tr valign="bottom" height="40px">
 
-<td style="font-size:18px; color:#999">INSERIR GRAVA«√O</td>
+<td style="font-size:18px; color:#999">INSERIR GRAVA√á√ÉO</td>
 
 </tr>
 
@@ -207,7 +207,7 @@ window.location = 'http://vem.vento-consulting.com/detalhes-venda-oi.php?id=<?= 
 
 <tr height="50px" valign="bottom">
 
-<td>GravaÁ„o:</td> <td><input type="file" name="gravacao[]" size="40" /></td>
+<td>Grava√ß√£o:</td> <td><input type="file" name="gravacao[]" size="40" /></td>
 
 </tr>
 

@@ -1,4 +1,7 @@
 <?php
+ini_set('max_input_vars', 3000);
+ini_set('max_input_nesting_level', 3000);
+ini_set('post_max_size', '2000');
 
 require_once '../conexao.php';
 
@@ -11,9 +14,22 @@ function autoload($class) {
 
 }
 
-$objPlanilhas = new planilhaQualidade($conexao);
+$objPlanilhas = new Qualidade($conexao);
 
-$upStatus = $objPlanilhas->atualizaNumero($_POST);
-echo $upStatus;
-//print_r($_POST);
+$data = array( 'Qualidade' => array() );
+
+$data['Qualidade'] = $_POST['Qualidade'];
+
+$objPlanilhas->save( $data );
+
+if ( mysql_affected_rows($conexao->connection) > 0 )
+{
+	//echo count($data['Qualidade']) . " / " . count($_POST['Qualidade']);
+	//print_r($data);
+	echo '1';
+}else{
+	
+	echo '0';
+}
+
 ?>

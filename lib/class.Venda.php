@@ -39,6 +39,7 @@ class Venda extends VentoAdmin {
 		}
 		
 		$this->Venda = (object) $novaVenda;
+		
 		return $this->Venda;
 	}
 	
@@ -53,7 +54,7 @@ class Venda extends VentoAdmin {
 			
 			$this->Venda = NULL;
 		}
-		
+
 		return $this->Venda;
 	
 	}

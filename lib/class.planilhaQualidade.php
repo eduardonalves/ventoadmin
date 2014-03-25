@@ -16,7 +16,7 @@ class planilhaQualidade extends Qualidade
 	function __construct(&$conexao, $tipoPlanilha_asInteger=0)
 	{
 
-		
+/*		
 		$this->saidaTexto = new Accents( Accents::UTF_8, Accents::UTF_8 );		
 
 		if( is_int($tipoPlanilha_asInteger) && array_key_exists($tipoPlanilha_asInteger, $this->tiposStatus_asArray) )
@@ -29,7 +29,7 @@ class planilhaQualidade extends Qualidade
 			
 			exit($this->saidaTexto->clear("Class:Qualidade__construct error: Tipo de planilha a ser importada não informado ou inválido."));
 		}
-		
+	*/	
 		
 	}// fnct Construct
 	

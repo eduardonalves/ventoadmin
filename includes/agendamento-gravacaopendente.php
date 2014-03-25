@@ -1,4 +1,4 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <tr>
 <td><b>Agend. Pendente:</b></td>
@@ -23,7 +23,7 @@ if($_GET['e'] == '1' && $USUARIO['inserir_gravacao'] == '1'){
 	
 ?>
 
-<input type="text" name="agendamentoPendente"  onKeyUp="validadata(this.value,agendamentoPendente)" onKeyPress="mascara(this,data)" maxlength="10" value="<? if($dataAgendadapendente != '00/00/0000' && $dataAgendadapendente != ''){ echo $dataAgendadapendente;}?>" /> às 
+<input type="text" name="agendamentoPendente"  onKeyUp="validadata(this.value,agendamentoPendente)" onKeyPress="mascara(this,data)" maxlength="10" value="<? if($dataAgendadapendente != '00/00/0000' && $dataAgendadapendente != ''){ echo $dataAgendadapendente;}?>" /> Ã s 
 <select name="agendamentoPendenteHora">
 <option></option>
 <? for($h=8;$h<22;$h++){?>
@@ -42,7 +42,7 @@ if($_GET['e'] == '1' && $USUARIO['inserir_gravacao'] == '1'){
 
 <? } else{?>
 
-<?= $dataAgendadapendente; ?> <? if($horaAgendadapendente > 7){ echo ' às '.$horaAgendadapendente.':'.$minutoAgendadopendente; }?>
+<?= $dataAgendadapendente; ?> <? if($horaAgendadapendente > 7){ echo ' Ã s '.$horaAgendadapendente.':'.$minutoAgendadopendente; }?>
 
 <? } ?>
 

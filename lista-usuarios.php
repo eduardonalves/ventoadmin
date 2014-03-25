@@ -121,7 +121,7 @@ require_once "conexao.php";
 	<table align="center" height="90%" width="60%" valign="middle" style="background-color:#EFEBEB; border: 1px solid #BFBFBF;" >
 	
 		<tr style="font-family:arial;" valign="middle">
-			<td align="center"><h3>Usuário editado com sucesso.</h3></td>
+			<td align="center"><h3>Usuário <?php echo ($_POST['action']=='add') ? "adicionado" : "editado"; ?> com sucesso.</h3></td>
 		</tr>
 
 		<tr style="font-family:arial; font-size:12px; color:#4D4D4D;" valign="middle">
@@ -136,7 +136,7 @@ require_once "conexao.php";
 	
 		<tr style="font-family:arial;" valign="middle">
 			<td align="center">
-				<h3>Erro ao editar usuário.</h3>
+				<h3>Erro ao <?php echo ($_POST['action']=='add') ? "adicionar" : "editar"; ?> usuário.</h3>
 				
 				<br />
 				
@@ -172,7 +172,10 @@ require_once "conexao.php";
 <input type="hidden" name="action" value="add" />
 
 <br/ ><br />
-<table border="0" width="900px"style="color:#999; font-size:14px;" align="center">
+
+<?php if ( $_POST['action'] == 'add' || $_POST['action'] == 'edit' ) { goto fim; } ?>
+
+<table border="0" width="900px" style="color:#999; font-size:14px;" align="center">
 <tr>
 	<td colspan="2" style="color:#999; font-size:18px;">Inserir Usuários</td>
 </tr>
@@ -205,6 +208,15 @@ require_once "conexao.php";
 		</select>
 	</td>
 	<td colspan="2">
+	<?php
+	if ( $USUARIO['tipo_usuario'] == 'SUPERVISOR'  )
+	{
+		
+		echo "<input type=\"hidden\" name=\"supervisor\" value=\"" . $USUARIO['id'] . "\" />";
+		echo $USUARIO['nome'];
+		
+	}else{
+	?>
 	<select name="supervisor">
 	<option value=""></option>
 	
@@ -220,6 +232,10 @@ require_once "conexao.php";
 	<? } ?>
 	
 	</select>
+	<?php 
+	
+		} // tipo_usuario
+	?>
 	</td>
 </tr>
 <tr>
@@ -241,6 +257,15 @@ require_once "conexao.php";
 	</td>
 	
 	<td>
+	<?php
+	if ( $USUARIO['tipo_usuario'] == 'SUPERVISOR' || $USUARIO['tipo_usuario'] == 'FINANCEIRO' )
+	{
+		echo '<input type="hidden" value="MONITOR" name="tipo_usuario" />';
+		echo 'MONITOR';
+	
+	}else{
+	?>
+
 		<select name="tipo_usuario">
 			<option value=""></option>
 
@@ -256,16 +281,34 @@ require_once "conexao.php";
 			<option value="ESTOQUISTA">ESTOQUISTA</option>
 
 		</select>
+
+	<?php
+	}
+	?>
+
 	</td>
 
 	<td colspan="2">
+	<?php
+	if ( $USUARIO['tipo_usuario'] == 'SUPERVISOR' || $USUARIO['tipo_usuario'] == 'FINANCEIRO' )
+	{
+		echo '<input type="hidden" value="EXTERNO" name="acesso_usuario" />';
+		echo 'EXTERNO';
+	
+	}else{
+	?>
 		<select name="acesso_usuario">
 			<option value=""></option>
 			<option value="INTERNO">INTERNO</option>
 			<option value="EXTERNO">EXTERNO</option>
 		</select>
-	</td>
 
+	<?php
+	}
+	?>
+
+	</td>
+	
 	
 </tr>
 
@@ -280,11 +323,24 @@ require_once "conexao.php";
 	
 	<td><input type="password" id="senha" name="senha" value="" size="15" /></td>
 	<td>
+	<?php
+	
+	if ( $USUARIO['tipo_usuario'] == 'SUPERVISOR'  )
+	{
+		
+		echo "<input type=\"hidden\" name=\"status\" value=\"DESLIGADO\" />";
+		echo "DESLIGADO";
+		
+	}else{
+	?>
 		<select name="status">
 		<option value=""></option>
 		<option value="ATIVO" <? if($OPERADOR['statusoperador'] == 'ATIVO'){ ?>selected="selected" <? } ?>>ATIVO</option>
 		<option value="DESLIGADO" <? if($OPERADOR['statusoperador'] == 'DESLIGADO'){ ?>selected="selected" <? } ?>>DESLIGADO</option>
 		</select>
+	<?php
+	}
+	?>
 	</td>
 	<td colspan="1"></td>
 	<td><img src="img/icone-salvar.png" width="20" style="cursor:pointer" title="Salvar" onclick="javascript:document.novousuario.submit();" /></td>
@@ -317,9 +373,27 @@ require_once "conexao.php";
 	</tr>
 <?php
 
-	$conUsuarios = $conexao->query("Select usuarios.*, supervisor.nome as supervisor_nome from usuarios
-	LEFT JOIN usuarios supervisor ON (usuarios.supervisor = supervisor.id)
-	order by usuarios.nome ASC");
+	if ( $USUARIO['tipo_usuario'] == 'SUPERVISOR' )
+	{
+
+		$conUsuarios = $conexao->query("Select usuarios.*, supervisor.nome as supervisor_nome from usuarios
+		LEFT JOIN usuarios supervisor ON (usuarios.supervisor = supervisor.id)
+		where usuarios.supervisor='" . $USUARIO['id'] . "' order by usuarios.nome ASC");
+
+	}elseif ( $USUARIO['tipo_usuario'] == 'FINANCEIRO' )
+	{
+
+		$conUsuarios = $conexao->query("Select usuarios.*, supervisor.nome as supervisor_nome from usuarios
+		LEFT JOIN usuarios supervisor ON (usuarios.supervisor = supervisor.id)
+		where usuarios.tipo_usuario='MONITOR' && usuarios.acesso_usuario='EXTERNO' order by usuarios.nome ASC");
+	
+	
+	}else{
+
+		$conUsuarios = $conexao->query("Select usuarios.*, supervisor.nome as supervisor_nome from usuarios
+		LEFT JOIN usuarios supervisor ON (usuarios.supervisor = supervisor.id)
+		order by usuarios.nome ASC");
+	}
 	
 	while($user = mysql_fetch_array($conUsuarios))
 	{
@@ -471,6 +545,11 @@ require_once "conexao.php";
 
 ?>
 </table>
+<?php
+
+fim:
+
+?>
 <br />
 <br />
 <!-- FIM INSERIR -->

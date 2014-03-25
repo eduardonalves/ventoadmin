@@ -1,4 +1,4 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <tr>
 <td><b>Cliente Oi:<b></td>
@@ -12,7 +12,7 @@
 
 <option value="SIM" <? if($linha['oifixo'] == 'SIM'){?>selected="selected"<? } ?>>Sim</option>
 
-<option value="NÃO" <? if($linha['oifixo'] == 'NÃO'){?>selected="selected"<? } ?>>N&atilde;o</option>
+<option value="NÃƒO" <? if($linha['oifixo'] == 'NÃƒO'){?>selected="selected"<? } ?>>N&atilde;o</option>
 
 </select>
 
@@ -70,7 +70,7 @@
 
 <option value="BOLETO" <? if($linha['pagamento'] == 'BOLETO'){?>selected="selected"<? } ?>>Boleto</option>
 
-<option value="DÉBITO" <? if($linha['pagamento'] == 'DÉBITO'){?>selected="selected"<? } ?>>D&eacute;bito</option>
+<option value="DÃ‰BITO" <? if($linha['pagamento'] == 'DÃ‰BITO'){?>selected="selected"<? } ?>>D&eacute;bito</option>
 
 <option value="CONTA FIXO" <? if($linha['pagamento'] == 'CONTA FIXO'){?>selected="selected"<? } ?>>Conta Fixo</option>
 
@@ -107,7 +107,7 @@
 
 <? if($editar == '1') {?>
 
-R$ <input type="text" name="valor" id="valor" <? if($linha['pagamento'] == 'DÉBITO'){?>disabled="disabled"<? } ?> size="30" value="<?= str_replace('.',',',$linha['valor']); ?>" />
+R$ <input type="text" name="valor" id="valor" <? if($linha['pagamento'] == 'DÃ‰BITO'){?>disabled="disabled"<? } ?> size="30" value="<?= str_replace('.',',',$linha['valor']); ?>" />
 
 <? } else { ?>
 
@@ -237,9 +237,9 @@ R$ <?= str_replace('.',',',$linha['valor']); ?>
 
 <? if($editar == '1') {?>
 
-<input type="checkbox" name="pct1" value="SEXYPRIVÊ" <? if(strstr($linha['pacotes_e_canais_adicionais'],'SEXYPRIVÊ')){ ?> checked="checked" <? }?>>Sexy Priv&ecirc; &nbsp;&nbsp;
+<input type="checkbox" name="pct1" value="SEXYPRIVÃŠ" <? if(strstr($linha['pacotes_e_canais_adicionais'],'SEXYPRIVÃŠ')){ ?> checked="checked" <? }?>>Sexy Priv&ecirc; &nbsp;&nbsp;
 
-<input type="checkbox" name="pct2" value="ÉTNICOS" <? if(strstr($linha['pacotes_e_canais_adicionais'], 'ÉTNICOS')){ ?> checked="checked" <? }?>>Étnicos &nbsp;&nbsp;
+<input type="checkbox" name="pct2" value="Ã‰TNICOS" <? if(strstr($linha['pacotes_e_canais_adicionais'], 'Ã‰TNICOS')){ ?> checked="checked" <? }?>>Ã‰tnicos &nbsp;&nbsp;
 
 <input type="checkbox" name="pct3" value="TV CORINTHIANS" <? if(strstr($linha['pacotes_e_canais_adicionais'], 'TV CORINTHIANS')){ ?> checked="checked" <? }?>>Playboy TV &nbsp;&nbsp;
 
@@ -279,13 +279,13 @@ R$ <?= str_replace('.',',',$linha['valor']); ?>
 
 <option value=""></option>
 
-<option value="01 ESTADUAL + SÉRIE A - 67,90" <? if($linha['pacoteEscolha'] == '01 ESTADUAL + SÉRIE A - 67,90'){ ?> selected="selected" <? }?>>01 ESTADUAL + S&Eacute;RIE A - 67,90</option>
+<option value="01 ESTADUAL + SÃ‰RIE A - 67,90" <? if($linha['pacoteEscolha'] == '01 ESTADUAL + SÃ‰RIE A - 67,90'){ ?> selected="selected" <? }?>>01 ESTADUAL + S&Eacute;RIE A - 67,90</option>
 
-<option value="02 ESTADUAIS + SÉRIE A - 67,90" <? if($linha['pacoteEscolha'] == '02 ESTADUAIS + SÉRIE A - 67,90'){ ?> selected="selected" <? }?>>02 ESTADUAIS + S&Eacute;RIE A - 67,90</option>
+<option value="02 ESTADUAIS + SÃ‰RIE A - 67,90" <? if($linha['pacoteEscolha'] == '02 ESTADUAIS + SÃ‰RIE A - 67,90'){ ?> selected="selected" <? }?>>02 ESTADUAIS + S&Eacute;RIE A - 67,90</option>
 
-<option value="01 ESTADUAL + SÉRIE A + B - 82,90" <? if($linha['pacoteEscolha'] == '01 ESTADUAL + SÉRIE A + B - 82,90'){ ?> selected="selected" <? }?>>01 ESTADUAL + S&Eacute;RIE A + B - 82,90</option>
+<option value="01 ESTADUAL + SÃ‰RIE A + B - 82,90" <? if($linha['pacoteEscolha'] == '01 ESTADUAL + SÃ‰RIE A + B - 82,90'){ ?> selected="selected" <? }?>>01 ESTADUAL + S&Eacute;RIE A + B - 82,90</option>
 
-<option value="01 ESTADUAL + SÉRIE B - 82,90" <? if($linha['pacoteEscolha'] == '01 ESTADUAL + SÉRIE B - 82,90'){ ?> selected="selected" <? }?>>01 ESTADUAL + S&Eacute;RIE B - 82,90</option>
+<option value="01 ESTADUAL + SÃ‰RIE B - 82,90" <? if($linha['pacoteEscolha'] == '01 ESTADUAL + SÃ‰RIE B - 82,90'){ ?> selected="selected" <? }?>>01 ESTADUAL + S&Eacute;RIE B - 82,90</option>
 
 
 </select>
@@ -365,17 +365,17 @@ R$ <?= str_replace('.',',',$linha['valor']); ?>
 
 <option value=""></option>
 
-<option value="(PREÇO TABELA_AQUISIÇÃO_HD) TV ALONE (BOLETO)" <? if($linha['ofertasOitv'] == '(PREÇO TABELA_AQUISIÇÃO_HD) TV ALONE (BOLETO)'){ ?> selected="selected" <? }?>>(PRE&Ccedil;O TABELA_AQUISI&Ccedil;&Atilde;O_HD) TV ALONE (BOLETO)</option>
+<option value="(PREÃ‡O TABELA_AQUISIÃ‡ÃƒO_HD) TV ALONE (BOLETO)" <? if($linha['ofertasOitv'] == '(PREÃ‡O TABELA_AQUISIÃ‡ÃƒO_HD) TV ALONE (BOLETO)'){ ?> selected="selected" <? }?>>(PRE&Ccedil;O TABELA_AQUISI&Ccedil;&Atilde;O_HD) TV ALONE (BOLETO)</option>
 
-<option value="(Preço Tabela_Aquisição_HD) Fixo + TV (Boleto)" <? if($linha['ofertasOitv'] == '(Preço Tabela_Aquisição_HD) Fixo + TV (Boleto)'){ ?> selected="selected" <? }?>>(Pre&ccedil;o Tabela_Aquisi&ccedil;&atilde;o_HD) Fixo + TV (Boleto)</option>
+<option value="(PreÃ§o Tabela_AquisiÃ§Ã£o_HD) Fixo + TV (Boleto)" <? if($linha['ofertasOitv'] == '(PreÃ§o Tabela_AquisiÃ§Ã£o_HD) Fixo + TV (Boleto)'){ ?> selected="selected" <? }?>>(Pre&ccedil;o Tabela_Aquisi&ccedil;&atilde;o_HD) Fixo + TV (Boleto)</option>
 
-<option value="(Preço Tabela_Aquisição_HD) TV Alone (DACC)" <? if($linha['ofertasOitv'] == '(Preço Tabela_Aquisição_HD) TV Alone (DACC)'){ ?> selected="selected" <? }?>>(Pre&ccedil;o Tabela_Aquisi&ccedil;&atilde;o_HD) TV Alone (DACC)</option>
+<option value="(PreÃ§o Tabela_AquisiÃ§Ã£o_HD) TV Alone (DACC)" <? if($linha['ofertasOitv'] == '(PreÃ§o Tabela_AquisiÃ§Ã£o_HD) TV Alone (DACC)'){ ?> selected="selected" <? }?>>(Pre&ccedil;o Tabela_Aquisi&ccedil;&atilde;o_HD) TV Alone (DACC)</option>
 
-<option value="(Preço Tabela_Aquisição_HD) Fixo + TV (DACC/Oi Fixo)" <? if($linha['ofertasOitv'] == '(Preço Tabela_Aquisição_HD) Fixo + TV (DACC/Oi Fixo)'){ ?> selected="selected" <? }?>>(Pre&ccedil;o Tabela_Aquisi&ccedil;&atilde;o_HD) Fixo + TV (DACC/Oi Fixo)</option>
+<option value="(PreÃ§o Tabela_AquisiÃ§Ã£o_HD) Fixo + TV (DACC/Oi Fixo)" <? if($linha['ofertasOitv'] == '(PreÃ§o Tabela_AquisiÃ§Ã£o_HD) Fixo + TV (DACC/Oi Fixo)'){ ?> selected="selected" <? }?>>(Pre&ccedil;o Tabela_Aquisi&ccedil;&atilde;o_HD) Fixo + TV (DACC/Oi Fixo)</option>
 
-<option value="(PREÇO TABELA_AQUISIÇÃO_HD) TV ALONE (BOLETO)" <? if($linha['ofertasOitv'] == '(PREÇO TABELA_AQUISIÇÃO_HD) TV ALONE (BOLETO)'){ ?> selected="selected" <? }?>>(PRE&Ccedil;O TABELA_AQUISI&Ccedil;&Atilde;O_HD) TV ALONE (BOLETO)</option>
+<option value="(PREÃ‡O TABELA_AQUISIÃ‡ÃƒO_HD) TV ALONE (BOLETO)" <? if($linha['ofertasOitv'] == '(PREÃ‡O TABELA_AQUISIÃ‡ÃƒO_HD) TV ALONE (BOLETO)'){ ?> selected="selected" <? }?>>(PRE&Ccedil;O TABELA_AQUISI&Ccedil;&Atilde;O_HD) TV ALONE (BOLETO)</option>
 
-<option value="(Preço Tabela_Aquisição_HD) OCT + TV (DACC/Oi Fixo)" <? if($linha['ofertasOitv'] == '(Preço Tabela_Aquisição_HD) OCT + TV (DACC/Oi Fixo)'){ ?> selected="selected" <? }?>>(Pre&ccedil;o Tabela_Aquisi&ccedil;&atilde;o_HD) OCT + TV (DACC/Oi Fixo)</option>
+<option value="(PreÃ§o Tabela_AquisiÃ§Ã£o_HD) OCT + TV (DACC/Oi Fixo)" <? if($linha['ofertasOitv'] == '(PreÃ§o Tabela_AquisiÃ§Ã£o_HD) OCT + TV (DACC/Oi Fixo)'){ ?> selected="selected" <? }?>>(Pre&ccedil;o Tabela_Aquisi&ccedil;&atilde;o_HD) OCT + TV (DACC/Oi Fixo)</option>
 
 </select>
 
@@ -592,7 +592,7 @@ include "includes/observacoes.php";
 <option value="DEVOLVIDO" <? if($linha['status'] == 'DEVOLVIDO'){?>selected="selected"<? } ?>>Devolvido</option>
 <option value="RECUPERADO" <? if($linha['status'] == 'RECUPERADO'){?>selected="selected"<? } ?>>Venda Recuperada</option>
 <option value="SEM CONTATO" <? if($linha['status'] == 'SEM CONTATO'){?>selected="selected"<? } ?>>Sem Contato</option>
-<option value="RESTRIÇÃO" <? if($linha['status'] == 'RESTRIÇÃO'){?>selected="selected"<? } ?>>Restrição</option>
+<option value="RESTRIÃ‡ÃƒO" <? if($linha['status'] == 'RESTRIÃ‡ÃƒO'){?>selected="selected"<? } ?>>RestriÃ§Ã£o</option>
 <option value="CANCELADO" <? if($linha['status'] == 'CANCELADO'){?>selected="selected"<? } ?>>Cancelado</option>
 <option value="CONECTADO" <? if($linha['status'] == 'CONECTATO'){?>selected="selected"<? } ?>>Conectado</option>
 <option value="PENDENTE" <? if($linha['status'] == 'PENDENTE'){?>selected="selected"<? } ?>>Pendente</option>
@@ -622,7 +622,7 @@ include "includes/observacoes.php";
 <option value="APROVADO" <? if($linha['status'] == 'APROVADO'){?>selected="selected"<? } ?>>Aprovado</option>
 <option value="INSTALAR" <? if($linha['status'] == 'INSTALAR'){?>selected="selected"<? } ?>>Instalar</option>
 <option value="DEVOLVIDO" <? if($linha['status'] == 'DEVOLVIDO'){?>selected="selected"<? } ?>>Devolvido</option>
-<option value="RESTRIÇÃO" <? if($linha['status'] == 'RESTRIÇÃO'){?>selected="selected"<? } ?>>Restrição</option>
+<option value="RESTRIÃ‡ÃƒO" <? if($linha['status'] == 'RESTRIÃ‡ÃƒO'){?>selected="selected"<? } ?>>RestriÃ§Ã£o</option>
 <option value="PENDENTE" <? if($linha['status'] == 'PENDENTE'){?>selected="selected"<? } ?>>Pendente</option>
 </select>
 
@@ -657,16 +657,16 @@ include "includes/observacoes.php";
 
 </select>
 
-<? } else if(($editar == '1') && $linha['status'] == 'RESTRIÇÃO') { ?>
+<? } else if(($editar == '1') && $linha['status'] == 'RESTRIÃ‡ÃƒO') { ?>
 
 <select name="status"  id="selectStatus" onChange="checkstatus(this.value)">
 
-<option value="RESTRIÇÃO" <? if($linha['status'] == 'RESTRIÇÃO'){?>selected="selected"<? } ?>>Restrição</option>
+<option value="RESTRIÃ‡ÃƒO" <? if($linha['status'] == 'RESTRIÃ‡ÃƒO'){?>selected="selected"<? } ?>>RestriÃ§Ã£o</option>
 <option value="RECUPERADO" <? if($linha['status'] == 'RECUPERADO'){?>selected="selected"<? } ?>>Recuperado</option>
 
 </select>
 
-<? } else if(($editar == '1') && $linha['status'] == 'PRÉ-ANÁLISE') { ?>
+<? } else if(($editar == '1') && $linha['status'] == 'PRÃ‰-ANÃLISE') { ?>
 
 
 <select name="status"  id="selectStatus" onChange="checkstatus(this.value)">
@@ -676,7 +676,7 @@ include "includes/observacoes.php";
 <option value="DEVOLVIDO" <? if($linha['status'] == 'DEVOLVIDO'){?>selected="selected"<? } ?>>Devolvido</option>
 <option value="SEM CONTATO" <? if($linha['status'] == 'SEM CONTATO'){?>selected="selected"<? } ?>>Sem Contato</option>
 <option value="PENDENTE" <? if($linha['status'] == 'PENDENTE'){?>selected="selected"<? } ?>>Pendente</option>
-<option value="RESTRIÇÃO" <? if($linha['status'] == 'RESTRIÇÃO'){?>selected="selected"<? } ?>>Restrição</option>
+<option value="RESTRIÃ‡ÃƒO" <? if($linha['status'] == 'RESTRIÃ‡ÃƒO'){?>selected="selected"<? } ?>>RestriÃ§Ã£o</option>
 </select>
 <? } else { ?>
 

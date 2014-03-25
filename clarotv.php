@@ -77,9 +77,9 @@ window.location = '?p=<?= $_GET['p'];?>'
 <script type="text/javascript" src="js/jquery-ui-1.7.3.custom.min.js"></script>
 <script type="text/javascript" src="js/calendario.js"></script>
 <script type="text/javascript" charset="utf-8"></script>
-<link rel="stylesheet" type=text/css href="css/ui-lightness/jquery-ui-1.7.3.custom.css" />
-<link rel="stylesheet" type=text/css href="css/tables.css" />
-<link rel="stylesheet" type=text/css href="css/geral.css" />
+<link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.7.3.custom.css" />
+<link rel="stylesheet" type="text/css" href="css/tables.css" />
+<link rel="stylesheet" type="text/css" href="css/geral.css" />
 
 
 <script type="text/javascript">

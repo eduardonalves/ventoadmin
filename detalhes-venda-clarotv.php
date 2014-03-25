@@ -2367,6 +2367,7 @@ while($OPERADORES = mysql_fetch_array($conOPERADORES)){
 <option value="FAMÍLIA (SEM FIDELIDADE)" <? if($linha['plano'] == 'FAMÍLIA (SEM FIDELIDADE)'){ ?> selected="selected" <? }?>>FAMÍLIA (SEM FIDELIDADE)</option>
 <option value=""></option>
 
+<option value="ESSENCIAL HD ABERTOS DTV" <? if($linha['plano'] == 'ESSENCIAL HD ABERTOS DTV'){ ?> selected="selected" <? }?>>ESSENCIAL HD ABERTOS DTV</option>
 <option value="ESSENCIAL HBO BRASIL DTV" <? if($linha['plano'] == 'ESSENCIAL HBO BRASIL DTV'){ ?> selected="selected" <? }?>>ESSENCIAL HBO BRASIL DTV</option>
 <option value="ESSENCIAL TELECINE LIGHT DTV" <? if($linha['plano'] == 'ESSENCIAL TELECINE LIGHT DTV'){ ?> selected="selected" <? }?>>ESSENCIAL TELECINE LIGHT DTV</option>
 <option value="ESSENCIAL HBO DTV" <? if($linha['plano'] == 'ESSENCIAL HBO DTV'){ ?> selected="selected" <? }?>>ESSENCIAL HBO DTV</option>

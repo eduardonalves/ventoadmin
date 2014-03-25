@@ -789,6 +789,7 @@ Data Exp: <input type="text" title="Data Expedição" id="dataexp" name="dataexp
 <option value="FAMÍLIA (SEM FIDELIDADE)">FAMÍLIA (SEM FIDELIDADE)</option>
 <option value=""></option>
 
+<option value="ESSENCIAL HD ABERTOS DTV">ESSENCIAL HD ABERTOS DTV</option>
 <option value="ESSENCIAL HBO BRASIL DTV">ESSENCIAL HBO BRASIL DTV</option>
 <option value="ESSENCIAL TELECINE LIGHT DTV">ESSENCIAL TELECINE LIGHT DTV</option>
 <option value="ESSENCIAL HBO DTV">ESSENCIAL HBO DTV</option>

@@ -8,7 +8,8 @@ class Qualidade extends VentoAdmin{
 
 									0=> array(
 											
-											'label' => "N.A."
+											'label' => "N.A.",
+											'status' => "N.A."
 											),
 									
 									1=> array(
@@ -52,7 +53,6 @@ class Qualidade extends VentoAdmin{
 		
 		parent::__construct();
 		
-		echo "a";
 	}
 
 	public function getTiposPlanilhas()
@@ -132,38 +132,79 @@ class Qualidade extends VentoAdmin{
 		
 	}
 	
-	public function getVendaStatus($vendaId)
+	public function getVendaStatus(Venda $venda)
 	{
 
-		if(! is_int($vendaId) )
-		{
-			trigger_error("Qualidade::getStatusVenda() - Impossível carregar venda. Id não informado ou inválido.", E_USER_ERROR);
-		}
-
-		$venda = new Venda($vendaId);
-echo "a.";
 		$novoNumero = $venda->novoNumero;
 		$os = $venda->os;
-		$novoNumero = '(21) 4748-3647';
-		$os = '15693380';
-		$statusFind = $this->conexao->query("Select * from qualidades where (os='" . $os . "' || os = '') && novo_numero='" . $novoNumero . "' order by status_portal desc, qualidade_id desc");
-		
+		//$novoNumero = '(21) 4748-3647';
+		//return $novoNumero;
+		//$os = '15693380';
+
+		$statusFind = $this->conexao->query("SELECT DISTINCT(status_portal), (Select MAX( status_data ) as status_data from qualidades q where q.status_portal=qualidades.status_portal && qualidades.novo_numero=q.novo_numero) AS status_data,
+			(Select MAX(status_xerox)  from qualidades qx where qx.novo_numero='" . $novoNumero . "' && qx.os='" . $os . "') as status_xerox
+			FROM `qualidades`
+			WHERE novo_numero = '" . $novoNumero . "'");
 		
 		//$statusFind = $this->conexao->query("Select * from qualidades where (os='" . $os . "' || os = '') && novo_numero='" . $novoNumero . "' order by status_portal desc, qualidade_id desc");
+
+		//$statusFind = $this->conexao->query("Select * from qualidades where (os='" . $os . "' || os = '') && novo_numero='" . $novoNumero . "' order by status_portal desc, qualidade_id desc");
 		//$statusFind = $this->conexao->query("Select novoNumero, (Select status_portal from qualidades where novo_numero = novoNumero) as statusaa from vendas_clarotv order by statusaa LIMIT 0,100");
+
+		//$statusFind = $this->conexao->query("Select novoNumero, q.status_portal from vendas_clarotv left join qualidades q on (vendas_clarotv.novoNumero=(Select status_portal from qualidades where novo_numero=vendas_clarotv.novoNumero LIMIT 1) ) LIMIT 0,30");
 		
-		$statusFind = $this->conexao->query("Select novoNumero, q.status_portal from vendas_clarotv left join qualidades q on (vendas_clarotv.novoNumero=(Select status_portal from qualidades where novo_numero=vendas_clarotv.novoNumero LIMIT 1) ) LIMIT 0,30");
+		$statusReturn = array();
 		
 		while( $line = mysql_fetch_assoc($statusFind) )
 		{
-			echo "<pre>";
-			print_r($line);
+			$statusReturn[$line['status_portal']] = $line;
+		}
+		
+		if ( count($statusReturn) < 1 )
+		{
+			foreach ( $this->planilhas as $key=>$value )
+			{
+				
+				$statusReturn[$key]['status_portal'] = $this->planilhas[$key]['status'];
+				$statusReturn[$key]['status_data'] = '-';
+				$statusReturn[$key]['status_xerox'] = 'SEM DOCUMENTAÇÃO';
+			}
+		
+		}else{
+
+			list($k, $v) = each($statusReturn);
 			
-			echo "</pre>";
+			$xerox = ($statusReturn[$k]['status_xerox']==NULL || $statusReturn[$k]['status_xerox']==0) ? 'SEM DOCUMENTAÇÃO' : 'OK';
+			print_r($statusReturn);
+			foreach ( $this->planilhas as $key=>$value )
+			{
+				
+				if (! array_key_exists($key, $statusReturn) )
+				{
+
+					$statusReturn[$key]['status_portal'] = $this->planilhas[$key]['status'];
+					$statusReturn[$key]['status_data'] = '-';
+					$statusReturn[$key]['status_xerox'] = $xerox;
+					
+				}else{
+
+					$statusReturn[$key]['status_portal'] = $this->planilhas[$key]['status'];
+					$statusReturn[$key]['status_data'] = date('d-m-Y', strtotime($statusReturn[$key]['status_data']));
+					$statusReturn[$key]['status_xerox'] = $xerox;
+
+				}
+			}
+
+			$statusReturn[0]['status_portal'] = $this->planilhas[$k]['status'];
+			$statusReturn[0]['status_data'] = date('d-m-Y', strtotime($statusReturn[$k]['status_data']));
+			$statusReturn[0]['status_xerox'] = $xerox;
+
 			
 		}
 		
-		return $novoNumero;
+		ksort($statusReturn);
+		print_r ($statusReturn);
+		return $statusReturn;
 
 	}
 	

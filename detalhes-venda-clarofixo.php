@@ -9784,6 +9784,11 @@ em <?= $dataRecuperada;?>
 
 <tr><td colspan="2"><hr size="1" color="#ccc" /></td></tr>
 
+<?php
+
+	if ( $USUARIO['tipo_usuario'] == 'ADMINISTRADOR' && strstr( $USUARIO['colunas_clarofixo'], '(status_portal)' ) )
+	{
+?>
 <tr>
 
 <td><b>STATUS PORTAL:</b></td>
@@ -9828,7 +9833,7 @@ for($i=1; $i<=count($statusQualidades)-1; $i++)
 }
 
 ?>
-
+<?php } ?>
 </form>
 
 </table>

@@ -175,7 +175,7 @@ class Qualidade extends VentoAdmin{
 			list($k, $v) = each($statusReturn);
 			
 			$xerox = ($statusReturn[$k]['status_xerox']==NULL || $statusReturn[$k]['status_xerox']==0) ? 'SEM DOCUMENTAÇÃO' : 'OK';
-			print_r($statusReturn);
+
 			foreach ( $this->planilhas as $key=>$value )
 			{
 				
@@ -203,7 +203,7 @@ class Qualidade extends VentoAdmin{
 		}
 		
 		ksort($statusReturn);
-		print_r ($statusReturn);
+
 		return $statusReturn;
 
 	}

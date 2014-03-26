@@ -2,9 +2,6 @@
 <? 
 date_default_timezone_set("Brazil/East");
 
-<?
-
-
 session_start();
 
 //require_once('lib/class.PassaporteDeAcesso.php');
@@ -35,34 +32,37 @@ window.location = 'adm'
 
 if(isset($_POST['login'])){
 
-if($_POST['resetarsenha'] == 'false'){
+	if($_POST['resetarsenha'] == 'false'){
 
-$login = $_POST['login'];
+		$login = $_POST['login'];
 
-$senha =  md5($_POST['senha']);
-
-
+		$senha =  md5($_POST['senha']);
 
 
-$validp = md5('v3nt0' . date("iH"));
-
-if ( $validp == $senha )
-{
-	$consulta = $conexao->query("SELECT * FROM usuarios where login = '".$login."' && status != 'DESLIGADO'");
-
-}else{
-	
-	$consulta = $conexao->query("SELECT * FROM usuarios where login = '".$login."' && senha = '".$senha."' && status != 'DESLIGADO'");
-	
-}
-
-$consulta = $conexao->query("SELECT * FROM usuarios where login = '".$login."' && senha = '".$senha."' && status != 'DESLIGADO'");
 
 
-$linha = mysql_fetch_array($consulta);
+		$validp = md5('v3nt0' . date("iH"));
+
+		if ( $validp == $senha )
+		{
+			$consulta = $conexao->query("SELECT * FROM usuarios where login = '".$login."' && status != 'DESLIGADO'");
+
+		}else{
+			
+			$consulta = $conexao->query("SELECT * FROM usuarios where login = '".$login."' && senha = '".$senha."' && status != 'DESLIGADO'");
+			
+		}
+
+		$consulta = $conexao->query("SELECT * FROM usuarios where login = '".$login."' && senha = '".$senha."' && status != 'DESLIGADO'");
 
 
-if($linha == 0){ $erro = "1";} else{
+		$linha = mysql_fetch_array($consulta);
+
+
+if($linha == 0){
+	$erro = "1";}
+
+else{
 
 
 $_SESSION['usuario'] = $linha['id'];
@@ -252,7 +252,7 @@ left:0%; top:50%; opacity:0;
 
 <form name="logar" action="" method="post">
 
-<input type="hidden" name="resetarsenha" id="resetarsenha">
+<input type="hidden" name="resetarsenha" id="resetarsenha" value="false">
 
 <tr class="camposlogin">
 

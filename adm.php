@@ -93,8 +93,8 @@ $USUARIO = mysql_fetch_assoc($conUSUARIO);
 <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
  -->
  
- <!-- <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script> -->
- <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+ <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+ <!--<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script> -->
 <link rel="stylesheet" type="text/css" href="css/geral.css" />
 
 

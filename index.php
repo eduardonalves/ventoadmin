@@ -112,6 +112,8 @@ else if($_POST['resetarsenha'] == 'true'){
 		die("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /> <meta http-equiv='refresh' content='0'> <script> alert('ERRO: e-mail não cadastrado no sistema.'); </script>");}
 	else{
 		require_once("lib/PHPMailer-master/class.phpmailer.php"); // requere a PHPMailer
+		require_once("email-config.php");
+		
 		$mail = new PHPMailer(); // instancia a classe PHPMailer
 
 		$mail->IsSMTP();  // informa à classe para usar SMTP
@@ -119,8 +121,8 @@ else if($_POST['resetarsenha'] == 'true'){
 		$mail->SMTPAuth = TRUE; // habilita autenticação SMTP
 		$mail->SMTPSecure = "ssl"; // conexão segura
 		$mail->Port = 465; // porta SMTP
-		$mail->Username = "ti.dev@vento-consulting.com"; // conta SMTP do remetente.
-		$mail->Password = "ventovento"; // senha da conta SMTP do remetente. MUDAR!
+		$mail->Username = $mail_username; // conta SMTP do remetente.
+		$mail->Password = $mail_password; // senha da conta SMTP do remetente. MUDAR!
 		$mail->Host     = "smtp.gmail.com"; // servidor SMTP
 		$mail->CharSet  = "UTF-8"; //codificação da mensagem
 		

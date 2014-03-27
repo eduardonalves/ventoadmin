@@ -4017,12 +4017,12 @@ function excluir(){if(confirm("Tem certeza que deseja excluir esta gravação?")
 			($USUARIO['tipo_usuario'] =='ADMINISTRADOR' || $USUARIO['tipo_usuario'] =='AUDITOR' || $USUARIO['id']==3129) && 
 			($editar == '1' || $editar_instalacao == '1')
 		
-	) ||
+	) /*||
 	
 	( 
 		($USUARIO['tipo_usuario']=="MONITOR" && $USUARIO['acesso_usuario']=="EXTERNO")
 		&& ($linha['status']=='DEVOLVIDO' || $linha['status']=='SEM CONTATO') && ($editar == '1' || $editar_instalacao == '1')
-	)
+	)*/
 	)
 	{?>
 
@@ -4924,9 +4924,9 @@ if( ($editar == '1') && ( ($USUARIO['tipo_usuario']!="MONITOR" && $USUARIO['aces
 
 
 <? if(
-($editar == '1' && ( ($USUARIO['tipo_usuario']!="MONITOR" && $USUARIO['acesso_usuario']!="EXTERNO") )) ||
+($editar == '1' && ( ($USUARIO['tipo_usuario']!="MONITOR" && $USUARIO['acesso_usuario']!="EXTERNO") )) /*||
 ($editar =='1' && $USUARIO['tipo_usuario']=='MONITOR'  && $USUARIO['acesso_usuario']=='EXTERNO' && 
-($linha['status']=='DEVOLVIDO' || $linha['status']=='SEM CONTATO') ) ) {?>
+($linha['status']=='DEVOLVIDO' || $linha['status']=='SEM CONTATO') )*/ ) {?>
 
 
 
@@ -7547,9 +7547,9 @@ $uf = $linha['uf'];
 
 
 <? if( 
-( ($editar == '1' || $USUARIO['id']==3179) && ($USUARIO['tipo_usuario']!='MONITOR'  && $USUARIO['acesso_usuario']!='EXTERNO') ) || 
+( ($editar == '1' || $USUARIO['id']==3179) && ($USUARIO['tipo_usuario']!='MONITOR'  && $USUARIO['acesso_usuario']!='EXTERNO') ) /*|| 
 ($editar =='1' && $USUARIO['tipo_usuario']=='MONITOR'  && $USUARIO['acesso_usuario']=='EXTERNO' 
-&& ($linha['status']=='DEVOLVIDO' || $linha['status']=='SEM CONTATO') )  ) {?>
+&& ($linha['status']=='DEVOLVIDO' || $linha['status']=='SEM CONTATO') )*/  ) {?>
 
 
 

@@ -514,9 +514,9 @@ box-shadow:  0px 0px 10px 2px #999;
 
 <tr align="left">
 
-<td width="50%"><input type="checkbox" name="chk29" <? if(strstr($USUARIO['colunas_clarofixo'],'(status_portal)')){?>checked="checked"<? } ?> value="status_portal" /> Status Portal</td>
+<td width="50%"><input type="checkbox" name="chk29" <?php if($USUARIO['tipo_usuario']!='ADMINISTRADOR') { echo 'disabled=disabled'; }?> <? if(strstr($USUARIO['colunas_clarofixo'],'(status_portal)') && $USUARIO['tipo_usuario']=='ADMINISTRADOR'){?>checked="checked"<? } ?> value="status_portal" /> Status Portal</td>
 
-<td width="50%"><input type="checkbox" name="chk30" <? if(strstr($USUARIO['colunas_clarofixo'],'(documentacao)')){?>checked="checked"<? } ?> value="documentacao" /> Status Xerox</td>
+<td width="50%"><input type="checkbox" name="chk30" <?php if($USUARIO['tipo_usuario']!='ADMINISTRADOR') { echo 'disabled=disabled'; }?> <? if(strstr($USUARIO['colunas_clarofixo'],'(documentacao)') && $USUARIO['tipo_usuario']=='ADMINISTRADOR'){?>checked="checked"<? } ?> value="documentacao" /> Status Xerox</td>
 
 </tr>
 
@@ -867,6 +867,12 @@ Até: <input type="text" name="di2" id="calendario42" class="datepicker" onKeyPr
 
 <td>| Buscar: <input type="text" size="11" value="<?= $_GET['b']; ?>" name="b" onkeyup="keypressed()" /> &nbsp;</td>
 
+<?php
+
+	if ( $USUARIO['tipo_usuario'] == 'ADMINISTRADOR' && strstr( $USUARIO['colunas_clarofixo'], '(status_portal)' ) )
+	{
+?>
+
 <td valign="middle">Status Portal:</td>
 
 <td>
@@ -903,6 +909,11 @@ $saidaTexto = new Accents( Accents::UTF_8, Accents::UTF_8);
 </select>
 
 </td>
+
+<?php
+
+	} // status portal
+?>
 
 <td valign="middle" width="70%" colspan="3" align="left"><img src="img/bt_ok.png" style="margin-left:20px; margin-top:0px; cursor:pointer; position:relative; padding-top:2px;" onclick="javascript:document.forms.filtro.submit();" valign="bootom" /></td>
 
@@ -1635,21 +1646,21 @@ if ($class=="tr2"){ //alterna a cor
 
 <?php
 include_once "lib/class.Accents.php";
-include_once "lib/class.planilhaQualidade.php";
+//include_once "lib/class.planilhaQualidade.php";
 include_once "lib/class.Qualidade.php";
-$planilhas = new planilhaQualidade($conexao);
-$saidaTexto = new Accents( Accents::UTF_8, Accents::ISO_8859_1 );
+$planilhas = new Qualidade($conexao);
+$saidaTexto = new Accents( Accents::UTF_8, Accents::UTF_8 );
 ?>
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(status_portal)')){?>
 
-<td title="Status Portal" <? if(strstr($_GET['o'],'status_portal')){ ?>class="tdselected" <? } ?>><? echo $saidaTexto->clear( $planilhas->getTiposPlanilhas($VENDA["status_qualidade"]));?></td>
+<td title="Status Portal" <? if(strstr($_GET['o'],'status_portal')){ ?>class="tdselected" <? } ?>><? $statusLabel = $planilhas->getPlanilha($VENDA["status_qualidade"]); echo $saidaTexto->clear( $statusLabel['status']);?></td>
 
 <? } ?>
 
 <? if(strstr($USUARIO['colunas_clarofixo'],'(documentacao)')){?>
 
-<td title="Documenta&ccedil;&atilde;o" <? if(strstr($_GET['o'],'documentacao')){ ?>class="tdselected" <? } ?>><? echo $saidaTexto->clear( $planilhas->getTiposProcessos($VENDA["status_processo"]));?></td>
+<td title="Documenta&ccedil;&atilde;o" <? if(strstr($_GET['o'],'documentacao')){ ?>class="tdselected" <? } ?>><? echo $saidaTexto->clear( $VENDA["status_processo"]);?></td>
 
 <? } ?>
 

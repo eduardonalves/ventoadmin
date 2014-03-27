@@ -9784,6 +9784,11 @@ em <?= $dataRecuperada;?>
 
 <tr><td colspan="2"><hr size="1" color="#ccc" /></td></tr>
 
+<?php
+
+	if ( $USUARIO['tipo_usuario'] == 'ADMINISTRADOR' && strstr( $USUARIO['colunas_clarofixo'], '(status_portal)' ) )
+	{
+?>
 <tr>
 
 <td><b>STATUS PORTAL:</b></td>
@@ -9798,82 +9803,37 @@ include_once "lib/class.Qualidade.php";
 include_once "lib/class.planilhaQualidade.php";
 include_once "lib/class.Accents.php";
 
-$planilhas = new planilhaQualidade($conexao);
-$saidaTexto = new Accents( Accents::UTF_8, Accents::ISO_8859_1 );
+//$planilhas = new planilhaQualidade($conexao);
+$qualidade = new Qualidade;
+$saidaTexto = new Accents( Accents::UTF_8, Accents::UTF_8 );
+
+$statusQualidades = $qualidade->getVendaStatus($venda);
 
 ?>
 <tr>
 	<td><b>Status Portal:</b></td>
-	<td><?php echo $saidaTexto->clear($planilhas->getTiposPlanilhas($linha["status_qualidade"])); ?></td>
+	<td><?php echo $saidaTexto->clear($statusQualidades[0]["status_portal"]); ?></td>
 </tr>
 
 <tr>
 	<td><b>Status Xerox:</b></td>
-	<td><?php echo $saidaTexto->clear($planilhas->getTiposProcessos($linha["status_processo"])); ?></td>
+	<td><?php echo $saidaTexto->clear($statusQualidades[0]["status_xerox"]); ?></td>
 </tr>
 
 <tr><td>&nbsp;</td></tr>
 
 <?php
 
-for($i=1; $i<=$linha["status_qualidade"]; $i++)
+for($i=1; $i<=count($statusQualidades)-1; $i++)
 {
 	
-	if($i==1) {
-		
-		if( $linha["data_status_qualidade_1"]!="0000-00-00") 
-		{ 
-			echo "<tr><td><b>Data inten&ccedil;&atilde;o: </b></td><td>" . date("d/m/Y", strtotime($linha["data_status_qualidade_1"])) . "</td></tr>"; 
-		}else{
-			echo "<tr><td><b>Data inten&ccedil;&atilde;o: </b></td><td>-</td></tr>"; 
-		}
-	}
-
-	if($i==2) {
-		
-		if( $linha["data_status_qualidade_2"]!="0000-00-00") 
-		{ 
-			echo "<tr><td><b>Data confirma&ccedil;&atilde;o: </b></td><td>" . date("d/m/Y", strtotime($linha["data_status_qualidade_2"])) . "</td></tr>";
-		}else{
-			echo "<tr><td><b>Data inten&ccedil;&atilde;o: </b></td><td>-</td></tr>"; 
-		}
-	}
-
-	if($i==3) {
-		
-		if( $linha["data_status_qualidade_3"]!="0000-00-00") 
-		{ 
-			echo "<tr><td><b>Data ativa&ccedil;&atilde;o: </b></td><td>" . date("d/m/Y", strtotime($linha["data_status_qualidade_3"])) . "</td></tr>";
-		}else{
-			echo "<tr><td><b>Data inten&ccedil;&atilde;o: </b></td><td>-</td></tr>"; 
-		}
-	}
-	
-	if($i==4) {
-		
-		if( $linha["data_status_qualidade_4"]!="0000-00-00") 
-		{ 
-			echo "<tr><td><b>M&ecirc;s comissionamento: </b></td><td>" . date("m/Y", strtotime($linha["data_status_qualidade_4"])) . "</td></tr>";
-		}else{
-			echo "<tr><td><b>Data inten&ccedil;&atilde;o: </b></td><td>-</td></tr>"; 
-		}
-	}
-
-	if($i==5) {
-		
-		if( $linha["data_status_qualidade_5"]!="0000-00-00") 
-		{ 
-			echo "<tr><td><b>M&ecirc;s cancelamento: </b></td><td>" . date("m/Y", strtotime($linha["data_status_qualidade_5"])) . "</td></tr>";
-		}else{
-			echo "<tr><td><b>Data inten&ccedil;&atilde;o: </b></td><td>-</td></tr>"; 
-		}
-	}
+	echo "<tr><td style=\"font-size:12px\"><b>Data " . strtolower($statusQualidades[$i]['status_portal']) . ":</b></td><td>" . $statusQualidades[$i]['status_data'] . "</td></tr>"; 
 
 
 }
 
 ?>
-
+<?php } ?>
 </form>
 
 </table>

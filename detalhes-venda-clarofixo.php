@@ -891,6 +891,7 @@ window.location = '?e=1&id=<?= $_GET['id'];?>'
 		 } else { 
 			 
 			 document.getElementById('idbancodep').style.display = 'none';
+			 document.getElementById('pagseguroid').style.display = 'none';
 			 
 		 }
  
@@ -3703,6 +3704,25 @@ function excluir(){if(confirm("Tem certeza que deseja excluir esta gravação?")
 	
 	} }
 
+function verificatipoentrega(v){
+	
+	if(v == "EMBRATEL"){
+		$('#pagamento').html('<option value="BOLETO">BOLETO</option><option value="CARTÃO DE CRÉDITO">CARTÃO DE CRÉDITO</option><option value="GRÁTIS">GRÁTIS</option>'); 
+		$('#pagamento').append(''); 
+		}
+	
+	if(v == "MOTOBOY INTERNO" || v == "MOTOBOY EXTERNO"){
+		$('#pagamento').html('<option value="DINHEIRO">DINHEIRO</option><option value="BOLETO">BOLETO</option><option value="CARTÃO DE CRÉDITO">CARTÃO DE CRÉDITO</option><option value="DEPÓSITO">DEPÓSITO</option><option value="GRÁTIS">GRÁTIS</option><option value="PAGSEGURO">PAGSEGURO</option>'); 
+		$('#pagamento').append(''); 
+		}
+	
+	if(v == "PRONTA ENTREGA"){
+		$('#pagamento').html('<option value="DINHEIRO">DINHEIRO</option><option value="CARTÃO DE CRÉDITO">CARTÃO DE CRÉDITO</option><option value="GRÁTIS">GRÁTIS</option>'); 
+		$('#pagamento').append(''); 
+		}
+	
+	}
+
 </script>
 
 
@@ -4017,12 +4037,12 @@ function excluir(){if(confirm("Tem certeza que deseja excluir esta gravação?")
 			($USUARIO['tipo_usuario'] =='ADMINISTRADOR' || $USUARIO['tipo_usuario'] =='AUDITOR' || $USUARIO['id']==3129) && 
 			($editar == '1' || $editar_instalacao == '1')
 		
-	) ||
+	) /*||
 	
 	( 
 		($USUARIO['tipo_usuario']=="MONITOR" && $USUARIO['acesso_usuario']=="EXTERNO")
 		&& ($linha['status']=='DEVOLVIDO' || $linha['status']=='SEM CONTATO') && ($editar == '1' || $editar_instalacao == '1')
-	)
+	)*/
 	)
 	{?>
 
@@ -4924,9 +4944,9 @@ if( ($editar == '1') && ( ($USUARIO['tipo_usuario']!="MONITOR" && $USUARIO['aces
 
 
 <? if(
-($editar == '1' && ( ($USUARIO['tipo_usuario']!="MONITOR" && $USUARIO['acesso_usuario']!="EXTERNO") )) ||
+($editar == '1' && ( ($USUARIO['tipo_usuario']!="MONITOR" && $USUARIO['acesso_usuario']!="EXTERNO") )) /*||
 ($editar =='1' && $USUARIO['tipo_usuario']=='MONITOR'  && $USUARIO['acesso_usuario']=='EXTERNO' && 
-($linha['status']=='DEVOLVIDO' || $linha['status']=='SEM CONTATO') ) ) {?>
+($linha['status']=='DEVOLVIDO' || $linha['status']=='SEM CONTATO') )*/ ) {?>
 
 
 
@@ -7547,9 +7567,9 @@ $uf = $linha['uf'];
 
 
 <? if( 
-( ($editar == '1' || $USUARIO['id']==3179) && ($USUARIO['tipo_usuario']!='MONITOR'  && $USUARIO['acesso_usuario']!='EXTERNO') ) || 
+( ($editar == '1' || $USUARIO['id']==3179) && ($USUARIO['tipo_usuario']!='MONITOR'  && $USUARIO['acesso_usuario']!='EXTERNO') ) /*|| 
 ($editar =='1' && $USUARIO['tipo_usuario']=='MONITOR'  && $USUARIO['acesso_usuario']=='EXTERNO' 
-&& ($linha['status']=='DEVOLVIDO' || $linha['status']=='SEM CONTATO') )  ) {?>
+&& ($linha['status']=='DEVOLVIDO' || $linha['status']=='SEM CONTATO') )*/  ) {?>
 
 
 
@@ -8696,7 +8716,7 @@ if ($linha['status'] != "FINALIZADA")
 <td>
 <? if( ($editar == '1') && ( ($USUARIO['tipo_usuario']!="MONITOR" && $USUARIO['acesso_usuario']!="EXTERNO") ) ) {?>
 
-<select name="tipoEntrega" id="tipoEntrega">
+<select name="tipoEntrega" id="tipoEntrega" onchange="verificatipoentrega(this.value)">
 
 <?php
 if(! ($USUARIO["tipo_usuario"]=="MONITOR" && $USUARIO["acesso_usuario"]=="EXTERNO") )

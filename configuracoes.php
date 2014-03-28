@@ -103,10 +103,10 @@ window.alert("ERRO: Todos os campos devem ser preenchidos");
 
 </script>
 
-<?	
-	
+<?
+
 }else{
-	
+
 $nome = $_POST['nome'];
 $email = $_POST['email'];
 $senha = md5($_POST['senha']);
@@ -210,7 +210,7 @@ window.location = '?p=configuracoes';
 </script>
 
 <?
-	
+
 }}
 
 

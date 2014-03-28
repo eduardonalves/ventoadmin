@@ -1,12 +1,8 @@
 <?
 
-
-
 // Verificar se está logado
 
 if(!isset($_SESSION['usuario'])){ ?>
-
-	
 
 <script type="text/javascript">
 
@@ -14,21 +10,12 @@ window.location = 'index.php'
 
 </script>	
 
-	
-
-	
-
 <? } 
-
 
 
 if(isset($_POST['nome'])){
 
-		
-
 // Dados do cliente
-
-
 
 $pessoa = $_POST['pessoa'];
 
@@ -69,11 +56,7 @@ $telefone3 = $_POST['itelefone3'];
 $tipo_tel3 = $_POST['tipotel3'];
 
 
-
-
-
 // Ensereço Instalação
-
 
 
 $endereco = $_POST['endereco'];
@@ -105,7 +88,6 @@ $uf = $_POST['uf'];
 $cep = $_POST['icep'];
 
 $ponto_referencia = $_POST['pontoref'];
-
 
 
 // Dados da Venda
@@ -148,11 +130,9 @@ $tipoEntrega = $_POST['tipoEntrega'];
 // Verificar venda parceiro/interno
 
 
-
 $conTipovenda = $conexao->query("SELECT * FROM usuarios WHERE id = '".$monitor."'");
 
 $rowTipovenda = mysql_fetch_array($conTipovenda);
-
 
 
 if($rowTipovenda['acesso_usuario'] == 'INTERNO'){
@@ -176,9 +156,6 @@ if($rowTipovenda['acesso_usuario'] == 'INTERNO'){
 	}
 
 
-
-
-
 // PROTOCOLO
 
 $conNumvenda = $conexao->query("SELECT * FROM vendas_clarotv WHERE data LIKE '%".date('Ymd')."%'");
@@ -188,13 +165,6 @@ $rowNumvenda = mysql_num_rows($conNumvenda);
 
 
 $protocolo = date("ymdHi").$idTipoVenda.str_pad(($rowNumvenda+1),4, "0", STR_PAD_LEFT);
-
-
-
-
-
-
-
 
 
 if($cpf == '' || $cpf == '000.000.000-00' || $cpf == '111.111.111-11' || $cpf == '00.000.000/0000-00'){ $status = "GRAVAR"; } else { $status = "PRE-ANALISE";}
@@ -208,23 +178,9 @@ if  (strstr(strtolower($USUARIO['login']), 'internet'))
 }
 
 
-
-
-
-
-
-
-
-
 $inserir = $conexao->query("INSERT INTO vendas_clarotv (protocolo,produto,tipoVenda,pessoa,nome,nome_mae,nascimento,cpf,rg,org_exp,data_exp,profissao,sexo,estado_civil,email,telefone,tipo_tel1,telefone2,tipo_tel2,telefone3,tipo_tel3,endereco,numero,lote,quadra,loja,bloco,apto,sala,casa,fundos,bairro,cidade,uf,cep,ponto_referencia,operador,monitor,os,esn,tipoLinha,tipoAssinatura,tipoPlano,plano,valorPlano,aparelho,valorAparelho,pagamento,tipoEntrega,data,data_venda,vencimento,status, numchip) VALUES ('".$protocolo."','3','".$tipoVenda."','".$pessoa."','".$nome."','".$nome_mae."','".$nascimento."','".$cpf."','".$rg."','".$org_exp."','".$data_exp."','".$profissao."','".$sexo."','".$estado_civil."','".$email."','".$telefone."','".$tipo_tel1."','".$telefone2."','".$tipo_tel2."','".$telefone3."','".$tipo_tel3."','".$endereco."','".$numero."','".$lote."','".$quadra."','".$loja."','".$bloco."','".$apto."','".$sala."','".$casa."','".$fundos."','".$bairro."','".$cidade."','".$uf."','".$cep."','".$ponto_referencia."','".$operador."','".$monitor."','".$os."','".$esn."','".$tipoLinha."','".$tipoAssinatura."','".$tipoPlano."','".$plano."','".$valorPlano."','".$aparelho."','".$valorAparelho."','".$pagamento."','".$tipoEntrega."','".$data."','".$data."','".$vencimento."','".$status."', '".$numchip."')") or die('Ocorreu um Erro ao inserir os dados!');
 
-
-
-
-
 //LOG
-
-
 
 $datadehoje = date("Y-m-d H:i:s");
 
@@ -433,9 +389,7 @@ window.location = '?p=clarofixo';
 
         return v;
 
-    }	
-
-	
+    }
 
 ////////////////////////////////////
 
@@ -443,55 +397,56 @@ function verificapessoa(v){
 
 
 if(v == 'Pessoa Jurí­dica') {
-
-     document.getElementById('nomel').innerHTML = 'Razão Social:';
-
-     document.getElementById('nomemael').style.display = 'none';
-
-     document.getElementById('cpfl').style.display = 'none';
-
-	 document.getElementById('idcpf').value = '';
-
-     document.getElementById('cnpjl').style.display = '';
-
-	 
-
-	 document.getElementById('inpnasc').style.display = 'none';
-
-	 document.getElementById('inprg').style.display = 'none';
-
-	 document.getElementById('inpprofissao').style.display = 'none';
-
-	 document.getElementById('inpsexo').style.display = 'none';
-
-	 document.getElementById('inpestadocivil').style.display = 'none';
-
-
+	
+	document.getElementById('nomel').innerHTML = 'Razão Social:';
+	
+	document.getElementById('nomemael').style.display = 'none';
+	
+	document.getElementById('cpfl').style.display = 'none';
+	
+	document.getElementById('idcpf').value = '';
+	
+	document.getElementById('cnpjl').style.display = '';
+	
+	
+	
+	document.getElementById('inpnasc').style.display = 'none';
+	
+	document.getElementById('inprg').style.display = 'none';
+	
+	document.getElementById('inpprofissao').style.display = 'none';
+	
+	document.getElementById('inpsexo').style.display = 'none';
+	
+	document.getElementById('inpestadocivil').style.display = 'none';
+	
+	
 } else if(v == "Pessoa Física") {
-
-     document.getElementById('nomel').innerHTML = 'Nome:';
-
-     document.getElementById('nomemael').style.display = '';
-
-     document.getElementById('cpfl').style.display = '';
-
- 	 document.getElementById('idcnpj').value = '';
-
-     document.getElementById('cnpjl').style.display = 'none';
-
-
-
-	 document.getElementById('inpnasc').style.display = '';
-
-	 document.getElementById('inprg').style.display = '';
-
-	 document.getElementById('inpprofissao').style.display = '';
-
-	 document.getElementById('inpsexo').style.display = '';
-
-	 document.getElementById('inpestadocivil').style.display = '';
-
-
+	
+	
+	document.getElementById('nomel').innerHTML = 'Nome:';
+	
+	document.getElementById('nomemael').style.display = '';
+	
+	document.getElementById('cpfl').style.display = '';
+	
+	document.getElementById('idcnpj').value = '';
+	
+	document.getElementById('cnpjl').style.display = 'none';
+	
+	
+	
+	document.getElementById('inpnasc').style.display = '';
+	
+	document.getElementById('inprg').style.display = '';
+	
+	document.getElementById('inpprofissao').style.display = '';
+	
+	document.getElementById('inpsexo').style.display = '';
+	
+	document.getElementById('inpestadocivil').style.display = '';
+	
+	
 	}
 
 
@@ -499,80 +454,87 @@ if(v == 'Pessoa Jurí­dica') {
 
 
 function verificaassinatura(v){
-
-
-
-if(v == "Nova Linha"){ $('#tipoplano').html('<option value=""></option><!-- <option value="Pós Pago">Pós Pago</option> --><option value="Pós Pago">Pós Pago</option>'); }
-
-else if(v == "Portabilidade"){ $('#tipoplano').html('<option value=""></option><option value="Pós Pago">Pós Pago</option>'); }
-
-else { $('#tipoplano').html('<option value=""></option>');}
-
-
-
-verificatipoplano('');
-
-verificaplano('');
-
-verificaaparelho('');
-
+	
+	
+	
+	if(v == "Nova Linha"){
+	
+		$('#tipoplano').html('<option value=""></option> <option value="Pós Pago">Pós Pago</option>');
+	
+	}
+	
+	else if(v == "Portabilidade"){ 
+	
+		$('#tipoplano').html('<option value=""></option><option value="Pós Pago">Pós Pago</option>');
+	
+	}
+	
+	else {
+	
+		$('#tipoplano').html('<option value=""></option>');
+	
+	}
+	
+	
+	
+	verificatipoplano('');
+	
+	verificaplano('');
+	
+	verificaaparelho('');
+	
 }
 
 
 
 function verificatipoplano(v){
 
-
-
-if(v == "Pré Pago"){ $('#plano').html('<option value=""></option><option value="Pré 15">Pré 15</option><option value="Pré Fixo Ilimitado Local">Pré Fixo Ilimitado Local</option>'); }
-
-
-
-else if(v == "Pós Pago"){ 
+	if(v == "Pré Pago"){ $('#plano').html('<option value=""></option><option value="Pré 15">Pré 15</option><option value="Pré Fixo Ilimitado Local">Pré Fixo Ilimitado Local</option>'); }
+	
+	
+	
+	else if(v == "Pós Pago"){ 
 	
 	$('#plano').html('<option value=""></option><option value="FAV Local">FAV Local</option><option value="FAV Local com DDD">FAV Local com DDD</option><option value="FAV Local e DDD">FAV Local e DDD</option><option value="FAV Local e DDD com Móvel">FAV Local e DDD com Móvel</option>'); 
 	$('#plano').append('<option value=""></option><option value="FAV Local + TV">FAV Local + TV</option><option value="FAV Local com DDD + TV">FAV Local com DDD + TV</option><option value="FAV Local e DDD + TV">FAV Local e DDD + TV</option><option value="FAV Local e DDD com Móvel + TV">FAV Local e DDD com Móvel + TV</option>'); 
 	
 	}
-
-else { $('#plano').html('<option value=""></option>');}
-
-
-
-verificaplano('');
-
-verificaaparelho('');
-
-
-
-}		
+	
+	else { $('#plano').html('<option value=""></option>');}
+	
+	
+	
+	verificaplano('');
+	
+	verificaaparelho('');
+	
+}
 
 
 function verificaplano(v){
 
+	if(v == "Pré 15"){ document.getElementById('valorplano').value = '15,00'; }
 
+	else if(v == "Pré Fixo Ilimitado Local"){ document.getElementById('valorplano').value = '19,90';}
 
-if(v == "Pré 15"){ document.getElementById('valorplano').value = '15,00'; }
+	else if(v == "FAV Local"){ document.getElementById('valorplano').value = '19,90'; }
 
-else if(v == "Pré Fixo Ilimitado Local"){ document.getElementById('valorplano').value = '19,90';}
+	else if(v == "FAV Local com DDD"){ document.getElementById('valorplano').value = '29,90'; }
 
-else if(v == "FAV Local"){ document.getElementById('valorplano').value = '19,90'; }
+	else if(v == "FAV Local e DDD"){ document.getElementById('valorplano').value = '39,90'; }
 
-else if(v == "FAV Local com DDD"){ document.getElementById('valorplano').value = '29,90'; }
+	else if(v == "FAV Local e DDD com Móvel"){ document.getElementById('valorplano').value = '49,90'; }
 
-else if(v == "FAV Local e DDD"){ document.getElementById('valorplano').value = '39,90'; }
+	else if(v == "FAV Local + TV"){ document.getElementById('valorplano').value = '19,90'; }
 
-else if(v == "FAV Local e DDD com Móvel"){ document.getElementById('valorplano').value = '49,90'; }
+	else if(v == "FAV Local com DDD + TV"){ document.getElementById('valorplano').value = '19,90'; }
 
-else if(v == "FAV Local + TV"){ document.getElementById('valorplano').value = '19,90'; }
+	else if(v == "FAV Local e DDD + TV"){ document.getElementById('valorplano').value = '29,90'; }
 
-else if(v == "FAV Local com DDD + TV"){ document.getElementById('valorplano').value = '19,90'; }
+	else if(v == "FAV Local e DDD com Móvel + TV"){ document.getElementById('valorplano').value = '39,90'; }
 
-else if(v == "FAV Local e DDD + TV"){ document.getElementById('valorplano').value = '29,90'; }
-
-else if(v == "FAV Local e DDD com Móvel + TV"){ document.getElementById('valorplano').value = '39,90'; }
-
-else { document.getElementById('valorplano').value = '';}
+	else { document.getElementById('valorplano').value = '';}
+	
 
 <?php
 
@@ -601,6 +563,34 @@ verificaaparelho('');
 
 }
 
+//Verificar tipo de entrega para filtrar o select do tipo de pagamento
+
+function verificatipoentrega(v){
+
+	if(v == ""){
+		$('#pagamento').html(''); 
+		$('#pagamento').append(''); 
+		}
+	
+	if(v == "EMBRATEL"){
+		$('#pagamento').html('<option value=""></option><option value="BOLETO">BOLETO</option><option value="CARTÃO DE CRÉDITO">CARTÃO DE CRÉDITO</option><option value="GRÁTIS">GRÁTIS</option>'); 
+		$('#pagamento').append(''); 
+		}
+	
+	if(v == "MOTOBOY INTERNO" || v == "MOTOBOY EXTERNO"){
+		$('#pagamento').html('<option value=""></option><option value="DINHEIRO">DINHEIRO</option><option value="BOLETO">BOLETO</option><option value="CARTÃO DE CRÉDITO">CARTÃO DE CRÉDITO</option><option value="DEPÓSITO">DEPÓSITO</option><option value="GRÁTIS">GRÁTIS</option><option value="PAGSEGURO">PAGSEGURO</option>'); 
+		$('#pagamento').append(''); 
+		}
+	
+	if(v == "PRONTA ENTREGA"){
+		$('#pagamento').html('<option value=""></option><option value="DINHEIRO">DINHEIRO</option><option value="CARTÃO DE CRÉDITO">CARTÃO DE CRÉDITO</option><option value="GRÁTIS">GRÁTIS</option>'); 
+		$('#pagamento').append(''); 
+		}
+	
+	}
+
+
+
 $(document).ready(function() {
 	
 	$("#preco-promocional").bind('click', function() {
@@ -624,24 +614,23 @@ $(document).ready(function() {
 
 function verificaaparelho(v){
 
-var precoPromocional = $("#aparelho option:selected").attr('data-preco-promocional');
+	var precoPromocional = $("#aparelho option:selected").attr('data-preco-promocional');
 
-$("#preco-promocional").attr('checked', false);
-
-var acesso_usuario = '<?php echo $USUARIO['acesso_usuario']; ?>';
-
-if (precoPromocional != '' && precoPromocional != undefined && acesso_usuario == 'INTERNO' )
-{
-	$("#tr-preco-promocional").css('display', 'table-row');
-
-}else{
-
-	$("#tr-preco-promocional").css('display', 'none');
 	$("#preco-promocional").attr('checked', false);
-}
 
-var tipoassinatura = document.getElementById('tipoassinatura').value;
+	var acesso_usuario = '<?php echo $USUARIO['acesso_usuario']; ?>';
 
+	if (precoPromocional != '' && precoPromocional != undefined && acesso_usuario == 'INTERNO' )
+	{
+		$("#tr-preco-promocional").css('display', 'table-row');
+
+	}else{
+
+		$("#tr-preco-promocional").css('display', 'none');
+		$("#preco-promocional").attr('checked', false);
+	}
+
+	var tipoassinatura = document.getElementById('tipoassinatura').value;
 
 
 ////////////// PORTABILIDADE ////////////////
@@ -688,29 +677,15 @@ $("#fotoaparelho").fadeIn(600); });}
 
 
 
-else{ document.getElementById('valoraparelho').value = ''; $("#fotoaparelho").fadeOut(600); }	
+else{ document.getElementById('valoraparelho').value = ''; $("#fotoaparelho").fadeOut(600); }
 
-	
-
-	
-
-	}
-
-
-
-
-
-
-
+}
 
 
 else if(tipoassinatura == 'Nova Linha'){
 
 
-
 var plano = document.getElementById('plano').value;
-
-
 
 ////////////// PLANO PRÉ////////////////
 
@@ -973,6 +948,10 @@ if(document.getElementById('tipoplano').value == ''){ document.getElementById('e
 if(document.getElementById('plano').value == ''){ document.getElementById('eplano').style.display = ''; e=(e+1)} else { document.getElementById('eplano').style.display = 'none';}	
 
 if(document.getElementById('aparelho').value == ''){ document.getElementById('eaparelho').style.display = ''; e=(e+1)} else { document.getElementById('eaparelho').style.display = 'none';}
+
+if(document.getElementById('tipoEntrega').value == ''){ document.getElementById('etipoentrega').style.display = ''; e=(e+1)} else { document.getElementById('etipoentrega').style.display = 'none';}	
+
+if(document.getElementById('pagamento').value == ''){ document.getElementById('epagamento').style.display = ''; e=(e+1)} else { document.getElementById('epagamento').style.display = 'none';}	
 
 /*
 
@@ -2211,7 +2190,40 @@ $(document).ready( function() {
 
 </tr>
 
+<tr align="left">
 
+<td>Tipo de Entrega:</td>
+
+<td>
+
+<select name="tipoEntrega" id="tipoEntrega" onchange="verificatipoentrega(this.value)">
+
+<?php
+if(! ($USUARIO["tipo_usuario"]=="MONITOR" && $USUARIO["acesso_usuario"]=="EXTERNO") )
+{
+?>
+<option value=""></option>
+
+<option value="EMBRATEL">EMBRATEL</option>
+
+<option value="MOTOBOY INTERNO">MOTOBOY INTERNO</option>
+
+<option value="MOTOBOY EXTERNO">MOTOBOY EXTERNO</option>
+
+<?php } ?>
+
+<option value="PRONTA ENTREGA">PRONTA ENTREGA</option>
+
+
+</select>
+
+<span class="campoobrigatorio" title="Campo Obrigatório">*</span>
+
+<span class="erro" id="etipoentrega" style="display:none">Por favor, selecione um tipo de entrega!</span>
+
+</td>
+
+</tr>
 
 <tr align="left">
 
@@ -2227,66 +2239,17 @@ if(! ($USUARIO["tipo_usuario"]=="MONITOR" && $USUARIO["acesso_usuario"]=="EXTERN
 	
 ?>
 
-<option value="BOLETO">BOLETO</option>
-
-<option value="CARTÃO DE CRÉDITO">CARTÃO DE CRÉDITO</option>
-
-<option value="DEPÓSITO">DEPÓSITO</option>
-
-<option value="GRÁTIS">GRÁTIS</option>
-
-<option value="PAGSEGURO">PAGSEGURO</option>
-
 <?php
 
 }
 
 ?>
 
-<option value="DINHEIRO">DINHEIRO</option>
-
 </select>
 
-<!-- 
+<span class="campoobrigatorio" title="Campo Obrigatório">*</span>
 
-<span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
-
--->
-
-</td>
-
-</tr>
-
-<tr align="left">
-
-<td>Tipo de Entrega:</td>
-
-<td>
-
-<select name="tipoEntrega" id="tipoEntrega">
-
-<?php
-if(! ($USUARIO["tipo_usuario"]=="MONITOR" && $USUARIO["acesso_usuario"]=="EXTERNO") )
-{
-?>
-<option value="EMBRATEL">EMBRATEL</option>
-
-<option value="MOTOBOY INTERNO">MOTOBOY INTERNO</option>
-
-<option value="MOTOBOY EXTERNO">MOTOBOY EXTERNO</option>
-
-<?php } ?>
-
-<option value="PRONTA ENTREGA">PRONTA ENTREGA</option>
-
-
-</select>
-
-<!-- 
-
-<span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
-
--->
+<span class="erro" id="epagamento" style="display:none">Por favor, selecione um tipo de pagamento!</span>
 
 </td>
 

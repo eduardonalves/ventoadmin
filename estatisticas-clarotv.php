@@ -315,7 +315,7 @@ function mostrarinfo(id){
 
 	
 
-	$('#infooperador .load').load("includes/infooperador	-clarotv.php?id="+id+"&pro=<?= $produto_id;?>&m=<?= $mes;?>&an=<?= $ano;?>", function(){
+	$('#infooperador .load').load("includes/infooperador-clarotv.php?id="+id+"&pro=<?= $produto_id;?>&m=<?= $mes;?>&an=<?= $ano;?>", function(){
 
 		
 
@@ -492,7 +492,7 @@ box-shadow:  0px 0px 10px 2px #999;
 
 
 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <link rel="stylesheet" href="css/tables.css" />
 
@@ -2342,6 +2342,7 @@ $POAD = mysql_fetch_array($conPOAD);
 
 
 
+<?php /*<td style="cursor:pointer" onclick="mostrarinfo('#infotecnico<?= $TEC['tecnico_id']?>')"><?= $TEC['nome'];?></td> */ ?>
 <td style="cursor:pointer" onclick="mostrarinfo('#infotecnico<?= $TEC['tecnico_id']?>')"><?= $TEC['nome'];?></td>
 
 

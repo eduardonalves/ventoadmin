@@ -1,4 +1,6 @@
-<? include "conexao.php";
+<?
+date_default_timezone_set("Brazil/East");
+include "conexao.php";
 
 
 
@@ -8,7 +10,7 @@ session_start();
 
 
 
-// Verificar se est· logado
+// Verificar se est√° logado
 
 if(!isset($_SESSION['usuario'])){ ?>
 
@@ -126,7 +128,7 @@ $tipo_tel3 = $_POST['tipotel3'];
 
 
 
-// EndereÁo InstalaÁ„o
+// Endere√ßo Instala√ß√£o
 
 $endereco = $_POST['endereco'];	
 
@@ -185,7 +187,7 @@ $os3 = $_POST['os3'];
 $vencimento = $_POST['vencimento'];
 
 
-// Agendamento gravaÁ„o
+// Agendamento grava√ß√£o
 
 
 if($_POST['agendagravacao']){
@@ -201,7 +203,7 @@ $agendGravacao = $linha['agendagravacao'];
 }
 
 
-// Dados da InstalaÁ„o
+// Dados da Instala√ß√£o
 
 
 
@@ -262,7 +264,7 @@ $motivo_restricao = $_POST['motivorestricao'];
 $motivo_cancelamento = $_POST['motivocancelamento'];
 
 
-// ObservaÁıes
+// Observa√ß√µes
 
 if(strlen($_POST['obsgravacao']) > 3){
 $obs1 = $_POST['obsgravacao'];	
@@ -295,7 +297,7 @@ $pagamento_instalacao = $_POST['pagamentoinstalacao'];
 
 
 
-if($pagamento == 'D…BITO'){ $valor = '80.00';
+if($pagamento == 'D√âBITO'){ $valor = '80.00';
 
 
 
@@ -418,7 +420,7 @@ window.location = '?id=<?= $_GET['id'];?>'
 }
 
 ////////////////////////////////////
-////// EXCLUIR GRAVA«√O ///////////
+////// EXCLUIR GRAVA√á√ÉO ///////////
 //////////////////////////////////
 
 
@@ -433,14 +435,14 @@ $excluirgravacao = $conexao->query("UPDATE vendas_clarotv SET auditor = '', grav
 
 $data = date("Y-m-d H:i:s");
 
-$insert_log = $conexao->query("INSERT into log_sistema (data,usuario,evento) VALUES ('".$data."','".$_SESSION['usuario']."','Excluiu uma gravaÁ„o: [".$linha['gravacao']."] (ID: ".$_GET['id'].") .')");
+$insert_log = $conexao->query("INSERT into log_sistema (data,usuario,evento) VALUES ('".$data."','".$_SESSION['usuario']."','Excluiu uma grava√ß√£o: [".$linha['gravacao']."] (ID: ".$_GET['id'].") .')");
 
 
 	?>
 	
 <script type="text/javascript">
 
-window.alert('GravaÁ„o excluÌda com sucesso!');
+window.alert('Grava√ß√£o exclu√≠da com sucesso!');
 
 window.location = '?e=1&id=<?= $_GET['id'];?>'
 
@@ -462,7 +464,7 @@ window.location = '?e=1&id=<?= $_GET['id'];?>'
 
 <head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <title>Detalhes Venda Claro 3G</title>
 
@@ -496,9 +498,9 @@ body{margin: 0 0 0 0; font-family:Arial, Helvetica, sans-serif;}
 
 
 
- /*Cria uma funÁ„o de nome mascara, onde o primeiro argumento passado È um dos
+ /*Cria uma fun√ß√£o de nome mascara, onde o primeiro argumento passado √© um dos
 
-     objetos input O segundo È especificando o tipo de mÈtodo no qual ser· tratado*/
+     objetos input O segundo √© especificando o tipo de m√©todo no qual ser√° tratado*/
 
     function mascara(o,f){
 
@@ -514,9 +516,9 @@ body{margin: 0 0 0 0; font-family:Arial, Helvetica, sans-serif;}
 
     function execmascara(){
 
-        /*Pegue o valor do objeto e atribua o resultado da funÁ„o v_fun; cujo o conte˙do
+        /*Pegue o valor do objeto e atribua o resultado da fun√ß√£o v_fun; cujo o conte√∫do
 
-        da mesma È a funÁ„o que foi referida e que ser· utilizada para tratar dos dados*/
+        da mesma √© a fun√ß√£o que foi referida e que ser√° utilizada para tratar dos dados*/
 
         v_obj.value=v_fun(v_obj.value);
 
@@ -526,7 +528,7 @@ body{margin: 0 0 0 0; font-family:Arial, Helvetica, sans-serif;}
 
     function soNumeros(v){
 
-        return v.replace(/\D/g,"");//Exclua tudo que n„o for numeral e retorne o valor
+        return v.replace(/\D/g,"");//Exclua tudo que n√£o for numeral e retorne o valor
 
     }
 
@@ -534,15 +536,15 @@ body{margin: 0 0 0 0; font-family:Arial, Helvetica, sans-serif;}
 
     function telefone(v){
 
-        //Remove tudo o que n„o È dÌgito
+        //Remove tudo o que n√£o √© d√≠gito
 
         v=v.replace(/\D/g,"");
 
-        //Coloca parÍnteses em volta dos dois primeiros dÌgitos
+        //Coloca par√™nteses em volta dos dois primeiros d√≠gitos
 
         v=v.replace(/^(\d\d)(\d)/g,"($1) $2");
 
-        //Coloca hÌfen entre o quarto e o quinto dÌgitos
+        //Coloca h√≠fen entre o quarto e o quinto d√≠gitos
 
         v=v.replace(/(\d{4})(\d)/,"$1-$2");
 
@@ -558,15 +560,15 @@ body{margin: 0 0 0 0; font-family:Arial, Helvetica, sans-serif;}
 
     function cpf(v){
 
-        //Remove tudo o que n„o È dÌgito
+        //Remove tudo o que n√£o √© d√≠gito
 
         v=v.replace(/\D/g,"");
 
-        //Coloca parÍnteses em volta dos dois primeiros dÌgitos
+        //Coloca par√™nteses em volta dos dois primeiros d√≠gitos
 
         v=v.replace(/^(\d{3})(\d)/g,"$1.$2");
 
-        //Coloca hÌfen entre o quarto e o quinto dÌgitos
+        //Coloca h√≠fen entre o quarto e o quinto d√≠gitos
 
         v=v.replace(/(\d{3})(\d)/,"$1.$2");
 
@@ -584,11 +586,11 @@ body{margin: 0 0 0 0; font-family:Arial, Helvetica, sans-serif;}
 
     function cep(v){
 
-        //Remove tudo o que n„o È dÌgito
+        //Remove tudo o que n√£o √© d√≠gito
 
         v=v.replace(/\D/g,"");
 
-        //Coloca hÌfen entre o quarto e o quinto dÌgitos
+        //Coloca h√≠fen entre o quarto e o quinto d√≠gitos
 
         v=v.replace(/(\d{5})(\d)/,"$1-$2");
 
@@ -602,15 +604,15 @@ body{margin: 0 0 0 0; font-family:Arial, Helvetica, sans-serif;}
 
     function data(v){
 
-        //Remove tudo o que n„o È dÌgito
+        //Remove tudo o que n√£o √© d√≠gito
 
         v=v.replace(/\D/g,"");
 
-        //Coloca parÍnteses em volta dos dois primeiros dÌgitos
+        //Coloca par√™nteses em volta dos dois primeiros d√≠gitos
 
         v=v.replace(/^(\d{2})(\d)/g,"$1/$2");
 
-        //Coloca hÌfen entre o quarto e o quinto dÌgitos
+        //Coloca h√≠fen entre o quarto e o quinto d√≠gitos
 
         v=v.replace(/(\d{2})(\d)/,"$1/$2");
 
@@ -630,7 +632,7 @@ function verificapagamento(v){
 
 	
 
-	if(v == "D…BITO"){ 
+	if(v == "D√âBITO"){ 
 
 	document.getElementById('idbanco').style.display = '';
 
@@ -680,7 +682,7 @@ if(v == 'CANCELADO'){ document.getElementById('mcancel').style.display = ''; }
 
 
 
-else if(v == 'RESTRI«√O'){ document.getElementById('mrest').style.display = ''; } 
+else if(v == 'RESTRI√á√ÉO'){ document.getElementById('mrest').style.display = ''; } 
 
 else{ document.getElementById('mcancel').style.display = 'none';  
 
@@ -702,13 +704,15 @@ function verificaplano(v){
 
 
 
-if(v == "10GB"){ document.getElementById('valor').value = '159,92'; }
+if(v == "10GB"){ document.getElementById('valor').value = '129,90'; }
 
-else if(v == "5GB"){ document.getElementById('valor').value = '95,92'; }
+else if(v == "5GB"){ document.getElementById('valor').value = '95,90'; }
 
-else if(v == "3GB"){ document.getElementById('valor').value = '71,92'; }
+else if(v == "3GB"){ document.getElementById('valor').value = '71,90'; }
 
-else if(v == "2GB"){ document.getElementById('valor').value = '63,92'; }
+else if(v == "2GB"){ document.getElementById('valor').value = '63,90'; }
+
+else if(v == "1GB"){ document.getElementById('valor').value = '49,90'; }
 
 else { document.getElementById('valor').value = '';}
 
@@ -784,7 +788,7 @@ function checkoperador(m,op){
 
 ///////////////////////////////////////////
 
-/////////////// VALIDA«√O ////////////////	
+/////////////// VALIDA√á√ÉO ////////////////	
 
 /////////////////////////////////////////
 
@@ -821,7 +825,7 @@ if(cpf == '' || cpf == '000.000.000-00' || cpf == '111.111.111-11')
 
 
 
-alert("CPF Inv·lido");
+alert("CPF Inv√°lido");
 
 $('input[name="icpf"]').focus();
 
@@ -841,7 +845,7 @@ if(gravacao == '')
 
 
 
-alert("Status n„o permitido sem gravaÁ„o!");
+alert("Status n√£o permitido sem grava√ß√£o!");
 
 erro = erro+1;
 
@@ -865,7 +869,7 @@ if(cpf == '' || cpf == '000.000.000-00' || cpf == '111.111.111-11')
 
 
 
-alert("CPF Inv·lido");
+alert("CPF Inv√°lido");
 
 $('input[name="icpf"]').focus();
 
@@ -883,7 +887,7 @@ if(gravacao == '')
 
 
 
-alert("Status n„o permitido sem gravaÁ„o!");
+alert("Status n√£o permitido sem grava√ß√£o!");
 
 erro = erro+1;
 
@@ -919,7 +923,7 @@ document.forms.editar.submit();
 
 
 
-function excluir(){if(confirm("Tem certeza que deseja excluir esta gravaÁ„o?")){
+function excluir(){if(confirm("Tem certeza que deseja excluir esta grava√ß√£o?")){
 	
 	document.forms.excluirgravacao.submit();
 	
@@ -999,7 +1003,7 @@ function excluir(){if(confirm("Tem certeza que deseja excluir esta gravaÁ„o?")){
 
 <? if($editar == '1') {?>
 
-<input type="text" name="msisdn" size="40" maxlength="10" value="<?= $linha['msisdn']; ?>" />
+<input type="text" name="msisdn" size="40" maxlength="11" value="<?= $linha['msisdn']; ?>" />
 
 <? } else { ?>
 
@@ -1025,7 +1029,7 @@ function excluir(){if(confirm("Tem certeza que deseja excluir esta gravaÁ„o?")){
 
 <tr>
 
-<td><b>CÛd. AutorizaÁ„o:</b></td>
+<td><b>C√≥d. Autoriza√ß√£o:</b></td>
 
 <td>
 
@@ -1057,7 +1061,7 @@ function excluir(){if(confirm("Tem certeza que deseja excluir esta gravaÁ„o?")){
 
 <tr>
 
-<td><b>N˙mero Ordem:</b></td>
+<td><b>N√∫mero Ordem:</b></td>
 
 <td>
 
@@ -1125,7 +1129,7 @@ function excluir(){if(confirm("Tem certeza que deseja excluir esta gravaÁ„o?")){
 
 <tr>
 
-<td><b>Nome da M„e:</b></td>
+<td><b>Nome da M√£e:</b></td>
 
 <td>
 
@@ -1375,7 +1379,7 @@ if($editar == '1') {
 
 <tr>
 
-<td><b>Profiss„o:</b></td>
+<td><b>Profiss√£o:</b></td>
 
 <td>
 
@@ -1461,7 +1465,7 @@ if($editar == '1') {
 
 <option value="Divorciado" <? if($linha['estado_civil'] == 'Divorciado'){?> selected="selected" <? } ?>>Divorciado</option> 
 
-<option value="Vi˙vo" <? if($linha['estado_civil'] == 'Vi˙vo'){?> selected="selected" <? } ?>>Vi˙vo</option> 
+<option value="Vi√∫vo" <? if($linha['estado_civil'] == 'Vi√∫vo'){?> selected="selected" <? } ?>>Vi√∫vo</option> 
 
 </select>
 
@@ -1681,7 +1685,7 @@ if($editar == '1') {
 
 <tr>
 
-<td><b>EndereÁo:</b></td>
+<td><b>Endere√ßo:</b></td>
 
 <td>
 
@@ -1689,7 +1693,7 @@ if($editar == '1') {
 
 <? if($editar == '1') {?>
 
-<input type="text" size="27" name="endereco" value="<?= $linha['endereco']; ?>" /> N∫: <input type="text" size="5" name="numero" value="<?= $linha['numero']; ?>" /> <br /> Lote: <input type="text" size="5" name="lote" value="<?= $linha['lote']; ?>" /> Quadra: <input type="text" size="5" name="quadra" value="<?= $linha['quadra']; ?>" />
+<input type="text" size="27" name="endereco" value="<?= $linha['endereco']; ?>" /> N¬∫: <input type="text" size="5" name="numero" value="<?= $linha['numero']; ?>" /> <br /> Lote: <input type="text" size="5" name="lote" value="<?= $linha['lote']; ?>" /> Quadra: <input type="text" size="5" name="quadra" value="<?= $linha['quadra']; ?>" />
 
 <? } else { ?>
 
@@ -2165,6 +2169,7 @@ $OPERADORES = mysql_fetch_array($conOPERADORES);
 <option value="3GB" <? if($linha['plano'] == '3GB'){ ?> selected="selected" <? }?>>3GB</option>
 
 <option value="2GB" <? if($linha['plano'] == '2GB'){ ?> selected="selected" <? }?>>2GB</option>
+<option value="2GB" <? if($linha['plano'] == '1GB'){ ?> selected="selected" <? }?>>1GB</option>
 
 
 
@@ -2241,12 +2246,12 @@ $OPERADORES = mysql_fetch_array($conOPERADORES);
 
 $conGravacaoRetirada = $conexao->query("SELECT *, 
 												usuarios.nome AS nome,
-												DATE_FORMAT(log_sistema.data, '%d/%m/%Y ‡s %H:%i:%s') AS dataevento
+												DATE_FORMAT(log_sistema.data, '%d/%m/%Y √†s %H:%i:%s') AS dataevento
 												FROM log_sistema 
 												INNER JOIN usuarios
 												ON usuarios.id = log_sistema.usuario
 												WHERE  
-												log_sistema.evento LIKE '%Excluiu uma gravaÁ„o%' && 
+												log_sistema.evento LIKE '%Excluiu uma grava√ß√£o%' && 
 												log_sistema.evento LIKE '%(ID: ".$_GET['id'].")%' 
 												ORDER BY log_sistema.id ASC
 										");
@@ -2260,9 +2265,9 @@ $gravacaoRE = $gravacaoRE[0];
 ?>
 
 <tr>
-<td><b>GravaÁ„o retirada:</b></td>
+<td><b>Grava√ß√£o retirada:</b></td>
 <td>
-<img src="img/play-icon.png" width="20" align="absmiddle" style="cursor:pointer" title="Ouvir GravaÁ„o" onClick="javascript:window.location = 'http://172.16.0.30/audio/claro3g/orig/<?= $gravacaoRE;?>'" /> <span style="font-size:13px;">Ouvir GravaÁ„o </span>
+<img src="img/play-icon.png" width="20" align="absmiddle" style="cursor:pointer" title="Ouvir Grava√ß√£o" onClick="javascript:window.location = 'http://172.16.0.30/audio/claro3g/orig/<?= $gravacaoRE;?>'" /> <span style="font-size:13px;">Ouvir Grava√ß√£o </span>
 <br />
 <span style="color:#787878; font-size:11px;">
 <b>Retirada por:</b> <?= $GravacaoRetirada['nome'];?>&nbsp;
@@ -2294,7 +2299,7 @@ em <?= $GravacaoRetirada['dataevento'];?>
 
 
 
-<td><b>GravaÁ„o:</b></td>
+<td><b>Grava√ß√£o:</b></td>
 
 
 
@@ -2314,7 +2319,7 @@ em <?= $GravacaoRetirada['dataevento'];?>
 
 
 
-<img src="img/record.png" width="20" align="absmiddle" style="cursor:pointer" title="Inserir GravaÁ„o" onClick="window.location = 'upload-gravacao-simples-claro3g.php?id=<?= $linha['id'];?>&u=<?= $USUARIO['id'];?>'" /> <span style="font-size:13px;">Inserir GravaÁ„o </span>
+<img src="img/record.png" width="20" align="absmiddle" style="cursor:pointer" title="Inserir Grava√ß√£o" onClick="window.location = 'upload-gravacao-simples-claro3g.php?id=<?= $linha['id'];?>&u=<?= $USUARIO['id'];?>'" /> <span style="font-size:13px;">Inserir Grava√ß√£o </span>
 
 
 
@@ -2322,12 +2327,12 @@ em <?= $GravacaoRetirada['dataevento'];?>
 
 
 
-<img src="img/play-icon.png" width="20" align="absmiddle" style="cursor:pointer" title="Ouvir GravaÁ„o" onClick="javascript:window.location = 'http://172.16.0.30/audio/claro3g/orig/<?= $linha['gravacao'];?>'" /> <span style="font-size:13px;">Ouvir GravaÁ„o </span>
+<img src="img/play-icon.png" width="20" align="absmiddle" style="cursor:pointer" title="Ouvir Grava√ß√£o" onClick="javascript:window.location = 'http://172.16.0.30/audio/claro3g/orig/<?= $linha['gravacao'];?>'" /> <span style="font-size:13px;">Ouvir Grava√ß√£o </span>
 &nbsp; &nbsp; &nbsp;
 
 
 <? if($editar == 1){?>
-<img src="img/delete-icon.png" width="20" align="absmiddle" style="cursor:pointer" title="Excluir GravaÁ„o" onClick="javascript:excluir();" /> <span style="font-size:13px;">Excluir GravaÁ„o </span>
+<img src="img/delete-icon.png" width="20" align="absmiddle" style="cursor:pointer" title="Excluir Grava√ß√£o" onClick="javascript:excluir();" /> <span style="font-size:13px;">Excluir Grava√ß√£o </span>
 <? } ?>
 
 <? } ?>
@@ -2387,7 +2392,7 @@ include "includes/observacoes.php";
 
 <tr>
 
-<td><b>Data AutorizaÁ„o:</b></td>
+<td><b>Data Autoriza√ß√£o:</b></td>
 
 <td>
 
@@ -2409,7 +2414,7 @@ include "includes/observacoes.php";
 
 <tr>
 
-<td><b>Data AtivaÁ„o:</b></td>
+<td><b>Data Ativa√ß√£o:</b></td>
 
 <td>
 
@@ -2520,7 +2525,7 @@ R$ <?= str_replace('.',',',$linha['valor']); ?>
 
 <option value="BOLETO" <? if($linha['pagamento'] == 'BOLETO'){?>selected="selected"<? } ?>>Boleto</option>
 
-<option value="D…BITO" <? if($linha['pagamento'] == 'D…BITO'){?>selected="selected"<? } ?>>DÈbito</option>
+<option value="D√âBITO" <? if($linha['pagamento'] == 'D√âBITO'){?>selected="selected"<? } ?>>D√©bito</option>
 
 </select>
 
@@ -2610,13 +2615,13 @@ R$ <?= str_replace('.',',',$linha['valor']); ?>
 
 <select name="status" onChange="checkstatus(this.value)">
 
-<option value="PRE-ANALISE" <? if($linha['status'] == 'PRE-ANALISE'){?>selected="selected"<? } ?>>PrÈ-An·lise</option>
+<option value="PRE-ANALISE" <? if($linha['status'] == 'PRE-ANALISE'){?>selected="selected"<? } ?>>Pr√©-An√°lise</option>
 
 <option value="DEVOLVIDO" <? if($linha['status'] == 'DEVOLVIDO'){?>selected="selected"<? } ?>>Devolvido</option>
 
-<option value="PRE-APROVADO" <? if($linha['status'] == 'PRE-APROVADO'){?>selected="selected"<? } ?>>PrÈ-Aprovado</option>
+<option value="PRE-APROVADO" <? if($linha['status'] == 'PRE-APROVADO'){?>selected="selected"<? } ?>>Pr√©-Aprovado</option>
 
-<option value="RESTRI«√O" <? if($linha['status'] == 'RESTRI«√O'){?>selected="selected"<? } ?>>RestriÁ„o</option>
+<option value="RESTRI√á√ÉO" <? if($linha['status'] == 'RESTRI√á√ÉO'){?>selected="selected"<? } ?>>Restri√ß√£o</option>
 
 <option value="GRAVAR" <? if($linha['status'] == 'GRAVAR'){?>selected="selected"<? } ?>>Gravar</option>
 
@@ -2630,7 +2635,7 @@ R$ <?= str_replace('.',',',$linha['valor']); ?>
 
 <option value="AUTORIZADA" <? if($linha['status'] == 'AUTORIZADA'){?>selected="selected"<? } ?>>Autorizada</option>
 
-<option value="P”S VENDAS" <? if($linha['status'] == 'P”S VENDAS'){?>selected="selected"<? } ?>>PÛs Vendas</option>
+<option value="P√ìS VENDAS" <? if($linha['status'] == 'P√ìS VENDAS'){?>selected="selected"<? } ?>>P√≥s Vendas</option>
 
 <option value="ATIVADO" <? if($linha['status'] == 'ATIVADO'){?>selected="selected"<? } ?>>Ativado</option>
 
@@ -2641,7 +2646,7 @@ R$ <?= str_replace('.',',',$linha['valor']); ?>
 <!-- // EXCESSAO PARA SUPER USUARIO DE INTERNET -->
 <?php
 
-	if($editar == '1' && $USUARIO['id']==3227 && ($linha['status'] == 'DEVOLVIDO' || $linha['status'] == 'SEM CONTATO' || $linha['status'] == 'RESTRI«√O') )
+	if($editar == '1' && $USUARIO['id']==3227 && ($linha['status'] == 'DEVOLVIDO' || $linha['status'] == 'SEM CONTATO' || $linha['status'] == 'RESTRI√á√ÉO') )
 	{
 ?>
 
@@ -2665,13 +2670,13 @@ R$ <?= str_replace('.',',',$linha['valor']); ?>
 
 <select name="status" onChange="checkstatus(this.value)">
 
-<option value="PRE-ANALISE" <? if($linha['status'] == 'PRE-ANALISE'){?>selected="selected"<? } ?>>PrÈ-An·lise</option>
+<option value="PRE-ANALISE" <? if($linha['status'] == 'PRE-ANALISE'){?>selected="selected"<? } ?>>Pr√©-An√°lise</option>
 
 <option value="DEVOLVIDO" <? if($linha['status'] == 'DEVOLVIDO'){?>selected="selected"<? } ?>>Devolvido</option>
 
-<option value="PRE-APROVADO" <? if($linha['status'] == 'PRE-APROVADO'){?>selected="selected"<? } ?>>PrÈ-Aprovado</option>
+<option value="PRE-APROVADO" <? if($linha['status'] == 'PRE-APROVADO'){?>selected="selected"<? } ?>>Pr√©-Aprovado</option>
 
-<option value="RESTRI«√O" <? if($linha['status'] == 'RESTRI«√O'){?>selected="selected"<? } ?>>RestriÁ„o</option>
+<option value="RESTRI√á√ÉO" <? if($linha['status'] == 'RESTRI√á√ÉO'){?>selected="selected"<? } ?>>Restri√ß√£o</option>
 
 </select>
 
@@ -2727,19 +2732,19 @@ R$ <?= str_replace('.',',',$linha['valor']); ?>
 
 <option value="DEVOLVIDO" <? if($linha['status'] == 'DEVOLVIDO'){?>selected="selected"<? } ?>>Devolvido</option>
 
-<option value="RESTRI«√O" <? if($linha['status'] == 'RESTRI«√O'){?>selected="selected"<? } ?>>RestriÁ„o</option>
+<option value="RESTRI√á√ÉO" <? if($linha['status'] == 'RESTRI√á√ÉO'){?>selected="selected"<? } ?>>Restri√ß√£o</option>
 
 </select>
 
 
 
-<? } else if(($editar == '1') && $linha['status'] == 'RESTRI«√O') { ?>
+<? } else if(($editar == '1') && $linha['status'] == 'RESTRI√á√ÉO') { ?>
 
 
 
 <select name="status" onChange="checkstatus(this.value)">
 
-<option value="RESTRI«√O" <? if($linha['status'] == 'RESTRI«√O'){?>selected="selected"<? } ?>>RestriÁ„o</option>
+<option value="RESTRI√á√ÉO" <? if($linha['status'] == 'RESTRI√á√ÉO'){?>selected="selected"<? } ?>>Restri√ß√£o</option>
 
 <option value="AUTORIZADA" <? if($linha['status'] == 'AUTORIZADA'){?>selected="selected"<? } ?>>Autorizada</option>
 
@@ -2763,13 +2768,13 @@ R$ <?= str_replace('.',',',$linha['valor']); ?>
 
 
 
-<? } else if(($editar == '1') && $linha['status'] == 'P”S VENDAS') { ?>
+<? } else if(($editar == '1') && $linha['status'] == 'P√ìS VENDAS') { ?>
 
 
 
 <select name="status" onChange="checkstatus(this.value)">
 
-<option value="P”S VENDAS" <? if($linha['status'] == 'P”S VENDAS'){?>selected="selected"<? } ?>>PÛs Vendas</option>
+<option value="P√ìS VENDAS" <? if($linha['status'] == 'P√ìS VENDAS'){?>selected="selected"<? } ?>>P√≥s Vendas</option>
 
 <option value="ATIVADO" <? if($linha['status'] == 'ATIVADO'){?>selected="selected"<? } ?>>Ativado</option>
 
@@ -2823,23 +2828,23 @@ R$ <?= str_replace('.',',',$linha['valor']); ?>
 
 <option value=""></option>
 
-<option value="Inviabilidade TÈcnica" <? if($linha['motivo_cancelamento'] == 'Inviabilidade TÈcnica'){?>selected="selected"<? } ?>>Inviabilidade TÈcnica</option>
+<option value="Inviabilidade T√©cnica" <? if($linha['motivo_cancelamento'] == 'Inviabilidade T√©cnica'){?>selected="selected"<? } ?>>Inviabilidade T√©cnica</option>
 
 <option value="Falta de Dinheiro" <? if($linha['motivo_cancelamento'] == 'Falta de Dinheiro'){?>selected="selected"<? } ?>>Falta de Dinheiro</option>
 
-<option value="Venda Perdida para a ConcorrÍncia" <? if($linha['motivo_cancelamento'] == 'Venda Perdida para a ConcorrÍncia'){?>selected="selected"<? } ?>>Venda Perdida para a ConcorrÍncia</option>
+<option value="Venda Perdida para a Concorr√™ncia" <? if($linha['motivo_cancelamento'] == 'Venda Perdida para a Concorr√™ncia'){?>selected="selected"<? } ?>>Venda Perdida para a Concorr√™ncia</option>
 
-<option value="DesistÍncia do Cliente" <? if($linha['motivo_cancelamento'] == 'DesistÍncia do Cliente'){?>selected="selected"<? } ?>>DesistÍncia do Cliente</option>
+<option value="Desist√™ncia do Cliente" <? if($linha['motivo_cancelamento'] == 'Desist√™ncia do Cliente'){?>selected="selected"<? } ?>>Desist√™ncia do Cliente</option>
 
-<option value="EndereÁo N„o Encontrado" <? if($linha['motivo_cancelamento'] == 'EndereÁo N„o Encontrado'){?>selected="selected"<? } ?>>EndereÁo N„o Encontrado</option>
+<option value="Endere√ßo N√£o Encontrado" <? if($linha['motivo_cancelamento'] == 'Endere√ßo N√£o Encontrado'){?>selected="selected"<? } ?>>Endere√ßo N√£o Encontrado</option>
 
-<option value="¡rea de Risco" <? if($linha['motivo_cancelamento'] == '¡rea de Risco'){?>selected="selected"<? } ?>>¡rea de Risco</option>
+<option value="√Årea de Risco" <? if($linha['motivo_cancelamento'] == '√Årea de Risco'){?>selected="selected"<? } ?>>√Årea de Risco</option>
 
 <option value="Cancelado no VSALES" <? if($linha['motivo_cancelamento'] == 'Cancelado no VSALES'){?>selected="selected"<? } ?>>Cancelado no VSALES
 
 </option>
 
-<option value="N˙mero Inv·lido" <? if($linha['motivo_cancelamento'] == 'N˙mero Inv·lido'){?>selected="selected"<? } ?>>N˙mero Inv·lido</option>
+<option value="N√∫mero Inv√°lido" <? if($linha['motivo_cancelamento'] == 'N√∫mero Inv√°lido'){?>selected="selected"<? } ?>>N√∫mero Inv√°lido</option>
 
 
 
@@ -2865,9 +2870,9 @@ R$ <?= str_replace('.',',',$linha['valor']); ?>
 
 
 
-<? if($linha['status'] == 'RESTRI«√O' || $_GET['e'] == '1'){?>
+<? if($linha['status'] == 'RESTRI√á√ÉO' || $_GET['e'] == '1'){?>
 
-<tr id="mrest" <? if($linha['status'] != 'RESTRI«√O'){ ?> style="display:none" <? } ?>>
+<tr id="mrest" <? if($linha['status'] != 'RESTRI√á√ÉO'){ ?> style="display:none" <? } ?>>
 
 <td><b>Motivo:</b></td>
 
@@ -2887,7 +2892,7 @@ R$ <?= str_replace('.',',',$linha['valor']); ?>
 
 <option value="Politicas Internas" <? if($linha['motivo_restricao'] == 'Politicas Internas'){?>selected="selected"<? } ?>>Politicas Internas</option>
 
-<option value="Politicas de SeguranÁa" <? if($linha['motivo_restricao'] == 'Politicas de SeguranÁa'){?>selected="selected"<? } ?>>Politicas de SeguranÁa</option>
+<option value="Politicas de Seguran√ßa" <? if($linha['motivo_restricao'] == 'Politicas de Seguran√ßa'){?>selected="selected"<? } ?>>Politicas de Seguran√ßa</option>
 
 <option value="Consultas Excedidas" <? if($linha['motivo_restricao'] == 'Consultas Excedidas'){?>selected="selected"<? } ?>>Consultas Excedidas</option>
 

@@ -254,7 +254,7 @@ window.location = '?p=claro3g';
 
 
 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 
 
@@ -268,7 +268,7 @@ window.location = '?p=claro3g';
 
 <script type="text/javascript" charset="utf-8"></script>
 
-<link rel="stylesheet" type=text/css href="css/ui-lightness/jquery-ui-1.7.3.custom.css" />
+<link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.7.3.custom.css" />
 
 <link rel="stylesheet" type="text/css" href="css/geral.css" />
 
@@ -470,13 +470,15 @@ function verificaplano(v){
 
 
 
-if(v == "10GB"){ document.getElementById('valor').value = '159,92'; }
+if(v == "10GB"){ document.getElementById('valor').value = '129,90'; }
 
-else if(v == "5GB"){ document.getElementById('valor').value = '95,92'; }
+else if(v == "5GB"){ document.getElementById('valor').value = '95,90'; }
 
-else if(v == "3GB"){ document.getElementById('valor').value = '71,92'; }
+else if(v == "3GB"){ document.getElementById('valor').value = '71,90'; }
 
-else if(v == "2GB"){ document.getElementById('valor').value = '63,92'; }
+else if(v == "2GB"){ document.getElementById('valor').value = '63,90'; }
+
+else if(v == "1GB"){ document.getElementById('valor').value = '49,90'; }
 
 else { document.getElementById('valor').value = '';}
 
@@ -1424,8 +1426,7 @@ $(document).ready( function() {
 
 <option value="2GB">2GB</option>
 
-
-
+<option value="1GB">1GB</option>
 
 
 </select>

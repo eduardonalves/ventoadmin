@@ -764,52 +764,41 @@ Data Exp: <input type="text" title="Data Expedição" id="dataexp" name="dataexp
 <option value=""></option>
 <option value="INICIAL">INICIAL</option>
 <option value="FÁCIL">FÁCIL</option>
-<option value="FÁCIL + FUT (A La Carte PFC)">FÁCIL + FUT (A La Carte PFC)</option>
-<option value=""></option>
-
 <option value="ESSENCIAL">ESSENCIAL</option>
-<option value="ESSENCIAL HBO MAX DIGITAL">ESSENCIAL HBO MAX DIGITAL</option>
-<option value="ESSENCIAL TELECINE">ESSENCIAL TELECINE</option>
-<option value=""></option>
-
-<option value="FAMÍLIA TELECINE">FAMÍLIA TELECINE</option>
-<option value="FAMÍLIA HBO MAX DIGITAL">FAMÍLIA HBO MAX DIGITAL</option>
+<option value="ESSENCIAL HBO">ESSENCIAL HBO</option>
+<option value="ESSENCIAL TELECINE LIGHT">ESSENCIAL TELECINE LIGHT</option>
 <option value="FAMÍLIA">FAMÍLIA</option>
 <option value=""></option>
 <option value="FÁCIL HD ABERTOS">FÁCIL HD ABERTOS</option>
+<option value="FÁCIL HBO BRASIL HD ABERTOS">FÁCIL HBO BRASIL HD ABERTOS</option>
+<option value="FÁCIL TELECINE LIGHT HD ABERTOS">FÁCIL TELECINE LIGHT HD ABERTOS</option>
 <option value="ESSENCIAL HD ABERTOS">ESSENCIAL HD ABERTOS</option>
+<option value="ESSENCIAL TELECINE HD ABERTOS">ESSENCIAL TELECINE HD ABERTOS</option>
+<option value="ESSENCIAL HBO HD ABERTOS">ESSENCIAL HBO HD ABERTOS</option>
 <option value=""></option>
 <option value="ESSENCIAL HD LIGHT">ESSENCIAL HD LIGHT</option>
+<option value="ESSENCIAL TELECINE HD LIGHT">ESSENCIAL TELECINE HD LIGHT</option>
+<option value="ESSENCIAL HBO HD LIGHT">ESSENCIAL HBO HD LIGHT</option>
 <option value="FAMÍLIA HD LIGHT">FAMÍLIA HD LIGHT</option>
+<option value="FAMÍLIA TELECINE HD LIGHT">FAMÍLIA TELECINE HD LIGHT</option>
 <option value="FAMÍLIA HBO HD LIGHT">FAMÍLIA HBO HD LIGHT</option>
+<option value=""></option>
 <option value="FAMÍLIA HD MAIS">FAMÍLIA HD MAIS</option>
 <option value="FAMÍLIA HBO HD MAIS">FAMÍLIA HBO HD MAIS</option>
-<option value=""></option>
 <option value="ESSENCIAL (SEM FIDELIDADE)">ESSENCIAL (SEM FIDELIDADE)</option>
 <option value="FAMÍLIA (SEM FIDELIDADE)">FAMÍLIA (SEM FIDELIDADE)</option>
 <option value=""></option>
-
-<option value="ESSENCIAL HD ABERTOS DTV">ESSENCIAL HD ABERTOS DTV</option>
-<option value="ESSENCIAL HBO BRASIL DTV">ESSENCIAL HBO BRASIL DTV</option>
-<option value="ESSENCIAL TELECINE LIGHT DTV">ESSENCIAL TELECINE LIGHT DTV</option>
-<option value="ESSENCIAL HBO DTV">ESSENCIAL HBO DTV</option>
-<option value="ESSENCIAL TELECINE DTV">ESSENCIAL TELECINE DTV</option>
-<option value="ESSENCIAL HBO MAX DIGITAL DTV">ESSENCIAL HBO MAX DIGITAL DTV</option>
-<option value="ESSENCIAL CINEMA DTV">ESSENCIAL CINEMA DTV</option>
-<option value="FAMILIA TELECINE DTV">FAMILIA TELECINE DTV</option>
-<option value="FAMILIA HBO MAX DIGITAL DTV">FAMILIA HBO MAX DIGITAL DTV</option>
-<option value="FAMILIA CINEMA DTV">FAMILIA CINEMA DTV</option>
-
+<option value="FÁCIL HD ABERTOS DTV">FÁCIL HD ABERTOS DTV - PE SOMENTE SD</option>
+<option value="ESSENCIAL HD ABERTOS DTV">ESSENCIAL HD ABERTOS DTV - PE SOMENTE SD</option>
 <option value=""></option>
+
 <option value="ESSENCIAL HD LIGHT DTV">ESSENCIAL HD LIGHT DTV</option>
 <option value="FAMILIA HD LIGHT DTV">FAMILIA HD LIGHT DTV</option>
 <option value="ESSENCIAL TELECINE HD LIGHT DTV">ESSENCIAL TELECINE HD LIGHT DTV</option>
 <option value="ESSENCIAL HBO HD LIGHT DTV">ESSENCIAL HBO HD LIGHT DTV</option>
-<option value="FAMILIA TELECINE HD LIGHT DTV">FAMILIA TELECINE HD LIGHT DTV</option>
-<option value="FAMILIA HBO HD LIGHT DTV">FAMILIA HBO HD LIGHT DTV</option>
 <option value="ESSENCIAL CINEMA HD LIGHT DTV">ESSENCIAL CINEMA HD LIGHT DTV</option>
-<option value="FAMÍLIA CINEMA HD LIGHT DTV">FAMÍLIA CINEMA HD LIGHT DTV</option>
-<option value="FAMÍLIA HD LIGHT FUT DTV (A La carte PFC)">FAMÍLIA HD LIGHT FUT DTV (A La carte PFC)</option>
+<option value="FAMILIA CINEMA HD LIGHT DTV">FAMILIA CINEMA HD LIGHT DTV</option>
+<option value="FAMÍLIA HD MAIS DTV">FAMÍLIA HD MAIS DTV</option>
 
 <option value=""></option>
 <option value="FAMILIA CINEMA HD MAIS DTV">FAMILIA CINEMA HD MAIS DTV</option>
@@ -864,6 +853,7 @@ Data Exp: <input type="text" title="Data Expedição" id="dataexp" name="dataexp
 <input type="radio" id="ponto1" name="pontos" value="0" /> 0 &nbsp;
 <input type="radio" id="ponto2" name="pontos" value="1" /> 1 &nbsp;
 <input type="radio" id="ponto3" name="pontos" value="2" /> 2 &nbsp;
+<input type="radio" id="ponto3" name="pontos" value="3" /> 3 &nbsp;
 <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
 <span class="erro" id="epontos" style="display:none">Por favor, selecione o número de pontos adicionais!</span>
 
@@ -902,8 +892,8 @@ Data Exp: <input type="text" title="Data Expedição" id="dataexp" name="dataexp
 </tr>
 
 <tr align="left">
-<td>Valor:</td>
-<td> <span style="font-size:12px; color:#999; font-style:italic">R$</span> <input type="text" id="valor" name="valor" value="49,90" size="8" maxlength="10" /> <span style="font-size:12px; color:#999; font-style:italic">(0,00)</span> <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
+<td>Adesão/Instalação:</td>
+<td> <span style="font-size:12px; color:#999; font-style:italic">R$</span> <input type="text" id="valor" name="valor" value="69,00" size="8" maxlength="10" /> <span style="font-size:12px; color:#999; font-style:italic">(0,00)</span> <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
  <br /> <span class="erro" id="evalor" style="display:none">Por favor, digite o valor da instalação!</span>
 </td>
 </tr>

@@ -144,6 +144,34 @@ $vencimento = $_POST['vencimento'];
 
 $tipoEntrega = $_POST['tipoEntrega'];
 
+// Cartão
+
+$titularCartao = $_POST['titularCartao'];
+
+if(strstr($_POST['numcartao'],'XXXX-XXXX')){
+$numCar = $linha['numCar'];
+
+} else {
+
+$numCar = base64_encode($_POST['numcartao']);
+
+}
+
+
+if(strstr($_POST['numcodseguranca'],'XX')){
+
+$codSeg = $linha['codSeg'];
+
+} else {
+$codSeg = $_POST['numcodseguranca'];
+}
+
+$carVal = $_POST['mesval'].'/'.$_POST['anoval'];
+
+$carBan= $_POST['carbandeira'];
+
+
+$numParcelas = $_POST['numparcelas'];
 
 // Verificar venda parceiro/interno
 
@@ -216,7 +244,7 @@ if  (strstr(strtolower($USUARIO['login']), 'internet'))
 
 
 
-$inserir = $conexao->query("INSERT INTO vendas_clarotv (protocolo,produto,tipoVenda,pessoa,nome,nome_mae,nascimento,cpf,rg,org_exp,data_exp,profissao,sexo,estado_civil,email,telefone,tipo_tel1,telefone2,tipo_tel2,telefone3,tipo_tel3,endereco,numero,lote,quadra,loja,bloco,apto,sala,casa,fundos,bairro,cidade,uf,cep,ponto_referencia,operador,monitor,os,esn,tipoLinha,tipoAssinatura,tipoPlano,plano,valorPlano,aparelho,valorAparelho,pagamento,tipoEntrega,data,data_venda,vencimento,status, numchip) VALUES ('".$protocolo."','3','".$tipoVenda."','".$pessoa."','".$nome."','".$nome_mae."','".$nascimento."','".$cpf."','".$rg."','".$org_exp."','".$data_exp."','".$profissao."','".$sexo."','".$estado_civil."','".$email."','".$telefone."','".$tipo_tel1."','".$telefone2."','".$tipo_tel2."','".$telefone3."','".$tipo_tel3."','".$endereco."','".$numero."','".$lote."','".$quadra."','".$loja."','".$bloco."','".$apto."','".$sala."','".$casa."','".$fundos."','".$bairro."','".$cidade."','".$uf."','".$cep."','".$ponto_referencia."','".$operador."','".$monitor."','".$os."','".$esn."','".$tipoLinha."','".$tipoAssinatura."','".$tipoPlano."','".$plano."','".$valorPlano."','".$aparelho."','".$valorAparelho."','".$pagamento."','".$tipoEntrega."','".$data."','".$data."','".$vencimento."','".$status."', '".$numchip."')") or die('Ocorreu um Erro ao inserir os dados!');
+$inserir = $conexao->query("INSERT INTO vendas_clarotv (protocolo,produto,tipoVenda,pessoa,nome,nome_mae,nascimento,cpf,rg,org_exp,data_exp,profissao,sexo,estado_civil,email,telefone,tipo_tel1,telefone2,tipo_tel2,telefone3,tipo_tel3,endereco,numero,lote,quadra,loja,bloco,apto,sala,casa,fundos,bairro,cidade,uf,cep,ponto_referencia,operador,monitor,os,esn,tipoLinha,tipoAssinatura,tipoPlano,plano,valorPlano,aparelho,valorAparelho,pagamento,tipoEntrega,data,data_venda,vencimento,status, numchip, titularCartao, numCar, codSeg, carVal, carBan, numParcelas) VALUES ('".$protocolo."','3','".$tipoVenda."','".$pessoa."','".$nome."','".$nome_mae."','".$nascimento."','".$cpf."','".$rg."','".$org_exp."','".$data_exp."','".$profissao."','".$sexo."','".$estado_civil."','".$email."','".$telefone."','".$tipo_tel1."','".$telefone2."','".$tipo_tel2."','".$telefone3."','".$tipo_tel3."','".$endereco."','".$numero."','".$lote."','".$quadra."','".$loja."','".$bloco."','".$apto."','".$sala."','".$casa."','".$fundos."','".$bairro."','".$cidade."','".$uf."','".$cep."','".$ponto_referencia."','".$operador."','".$monitor."','".$os."','".$esn."','".$tipoLinha."','".$tipoAssinatura."','".$tipoPlano."','".$plano."','".$valorPlano."','".$aparelho."','".$valorAparelho."','".$pagamento."','".$tipoEntrega."','".$data."','".$data."','".$vencimento."','".$status."', '".$numchip."', '".$titularCartao."', '".$numCar."', '".$codSeg."', '".$carVal."', '".$carBan."', '".$numParcelas."')") or die('Ocorreu um Erro ao inserir os dados!');
 
 
 
@@ -286,7 +314,10 @@ window.location = '?p=clarofixo';
 <script type="text/javascript">
 
 
-
+	$(document).ready( function() {
+		$(".dados-cartao").css('display', 'none');
+	});
+	
  /*Cria uma função de nome mascara, onde o primeiro argumento passado é um dos
 
      objetos input O segundo é especificando o tipo de método no qual será tratado*/
@@ -313,7 +344,24 @@ window.location = '?p=clarofixo';
 
     }
 
-    
+    function cartaocredito(v){
+        //Remove tudo o que não é dígito
+        v=v.replace(/\D/g,"");
+
+        //Coloca parênteses em volta dos dois primeiros dígitos
+        v=v.replace(/^(\d{4})(\d)/g,"$1-$2");
+
+        //Coloca hífen entre o quarto e o quinto dígitos
+
+        v=v.replace(/(\d{4})(\d)/,"$1-$2");
+
+        v=v.replace(/(\d{4})(\d)/,"$1-$2");
+
+
+        return v;
+
+    }	
+
 
     function soNumeros(v){
 
@@ -437,6 +485,63 @@ window.location = '?p=clarofixo';
 
 	
 
+function verificapagamento(p)
+{
+
+				if( p=='PAGSEGURO' )
+				{
+
+					var campos = '<option value=""></option>\
+								<option value="1">1</option>\
+								<option value="2">2</option>\
+								<option value="3">3</option>\
+								<option value="4">4</option>\
+								<option value="5">5</option>\
+								<option value="6">6</option>\
+								';
+					
+					$("[name='numparcelas']").html(campos);
+
+					$("#carbandeira").append('<option value="Aura">Aura</option>');
+					$("#carbandeira").append('<option value="Elo">Elo</option>');
+					$("#carbandeira").append('<option value="Dinners">Dinners</option>');
+					
+					
+				}else if ( p=='CARTÃO DE CRÉDITO' ) {
+				
+					var campos = '<option value=""></option>\
+								<option value="1">1</option>\
+								<option value="2">2</option>\
+								<option value="3">3</option>\
+								<option value="4">4</option>\
+								<option value="5">5</option>\
+								<option value="6">6</option>\
+								<option value="7">7</option>\
+								<option value="8">8</option>\
+								<option value="9">9</option>\
+								<option value="10">10</option>\
+								';
+					
+					$("[name='numparcelas']").html(campos);
+
+					$("#carbandeira option[value='Aura']").remove();
+					$("#carbandeira option[value='Elo']").remove();
+					$("#carbandeira option[value='Dinners']").remove();
+						
+				}
+	
+	if ( p=='PAGSEGURO' || p=='CARTÃO DE CRÉDITO' )
+	{
+		
+		 $(".dados-cartao").css('display', 'table-row');
+		
+	}else{
+		
+		$(".dados-cartao").css('display', 'none');
+	}
+	
+}
+
 ////////////////////////////////////
 
 function verificapessoa(v){
@@ -530,8 +635,8 @@ if(v == "Pré Pago"){ $('#plano').html('<option value=""></option><option value=
 
 else if(v == "Pós Pago"){ 
 	
-	$('#plano').html('<option value=""></option><option value="FAV Local">FAV Local</option><option value="FAV Local com DDD">FAV Local com DDD</option><option value="FAV Local e DDD">FAV Local e DDD</option><option value="FAV Local e DDD com Móvel">FAV Local e DDD com Móvel</option>'); 
-	$('#plano').append('<option value=""></option><option value="FAV Local + TV">FAV Local + TV</option><option value="FAV Local com DDD + TV">FAV Local com DDD + TV</option><option value="FAV Local e DDD + TV">FAV Local e DDD + TV</option><option value="FAV Local e DDD com Móvel + TV">FAV Local e DDD com Móvel + TV</option>'); 
+	$('#plano').html('<option value=""></option><!-- <option value="FAV Local">FAV Local</option>--><option value="FAV Local com DDD">FAV Local com DDD</option><option value="FAV Local e DDD">FAV Local e DDD</option><option value="FAV Local e DDD com Móvel">FAV Local e DDD com Móvel</option>'); 
+	$('#plano').append('<option value=""></option><!-- <option value="FAV Local + TV">FAV Local + TV</option><option value="FAV Local com DDD + TV">FAV Local com DDD + TV</option>--><option value="FAV Local e DDD + TV">FAV Local e DDD + TV</option><option value="FAV Local e DDD com Móvel + TV">FAV Local e DDD com Móvel + TV</option>'); 
 	
 	}
 
@@ -628,7 +733,9 @@ var precoPromocional = $("#aparelho option:selected").attr('data-preco-promocion
 
 $("#preco-promocional").attr('checked', false);
 
-var acesso_usuario = '<?php echo $USUARIO['acesso_usuario']; ?>';
+var tipo_usuario = '<?php echo $USUARIO['tipo_usuario']; ?>';
+var acesso_usuario = $('#monitor option:selected').attr('data-acesso_usuario');
+
 
 if (precoPromocional != '' && precoPromocional != undefined && acesso_usuario == 'INTERNO' )
 {
@@ -805,6 +912,9 @@ $("#fotoaparelho").fadeIn(600); });}
 
 else{ document.getElementById('valoraparelho').value = ''; $("#fotoaparelho").fadeOut(600);}
 
+
+
+
                                                     }	
 
 
@@ -872,6 +982,11 @@ else{ document.getElementById('valoraparelho').value = ''; $("#fotoaparelho").fa
 else{ document.getElementById('valoraparelho').value = '';  $("#fotoaparelho").fadeOut(600);}
 
 
+
+if ( (tipo_usuario=='MONITOR' || acesso_usuario=='EXTERNO') && (<?php echo date("Y"); ?>==2014 && <?php echo date("m"); ?>==04 && <?php echo date("d"); ?><15) || (1==1) )
+{
+	document.getElementById('valoraparelho').value = '60,00';
+}
 
                             }
 
@@ -975,6 +1090,16 @@ if(document.getElementById('plano').value == ''){ document.getElementById('eplan
 if(document.getElementById('aparelho').value == ''){ document.getElementById('eaparelho').style.display = ''; e=(e+1)} else { document.getElementById('eaparelho').style.display = 'none';}
 
 /*
+ #################### VALIDACOES DOS CAMPOS DO CARTAO DE CREDITO ######################
+if(document.getElementById('titularCartao').value == ''){ document.getElementById('etitularCartao').style.display = ''; e=(e+1)} else { document.getElementById('etitularCartao').style.display = 'none';}
+if(document.getElementById('numcartao').value == ''){ document.getElementById('enumcartao').style.display = ''; e=(e+1)} else { document.getElementById('enumcartao').style.display = 'none';}
+if(document.getElementById('numcodseguranca').value == ''){ document.getElementById('enumcodseguranca').style.display = ''; e=(e+1)} else { document.getElementById('enumcodseguranca').style.display = 'none';}
+if(document.getElementById('mesval').value == '' || document.getElementById('anoval').value == ''){ document.getElementById('evalidade').style.display = ''; e=(e+1)} else { document.getElementById('evalidade').style.display = 'none';}
+if(document.getElementById('carbandeira').value == ''){ document.getElementById('ecarbandeira').style.display = ''; e=(e+1)} else { document.getElementById('ecarbandeira').style.display = 'none';}
+if(document.getElementById('numparcelas').value == ''){ document.getElementById('enumparcelas').style.display = ''; e=(e+1)} else { document.getElementById('enumparcelas').style.display = 'none';}
+
+#######################################################################################
+/*
 
 if(document.getElementById('calendario2').value == ''){ document.getElementById('evenda').style.display = ''; e=(e+1)} else { document.getElementById('evenda').style.display = 'none';}
 
@@ -1032,7 +1157,7 @@ function checkoperador(m){
 	if ( $("#monitor option:selected").attr("data-acesso_usuario") == "EXTERNO" )
 	{
 		
-		$("#pagamento").html("<option value=\"DINHEIRO\" selected=\"selected\">DINHEIRO</option>");
+		$("#pagamento").html("<option value=\"DINHEIRO\" selected=\"selected\">DINHEIRO</option><option value=\"PAGSEGURO\">PAGSEGURO</option>");
 		$("#tipoEntrega").html("<option value=\"PRONTA ENTREGA\" selected=\"selected\">PRONTA ENTREGA</option>");
 		
 	}else{
@@ -2235,7 +2360,6 @@ if(! ($USUARIO["tipo_usuario"]=="MONITOR" && $USUARIO["acesso_usuario"]=="EXTERN
 
 <option value="GRÁTIS">GRÁTIS</option>
 
-<option value="PAGSEGURO">PAGSEGURO</option>
 
 <?php
 
@@ -2245,6 +2369,8 @@ if(! ($USUARIO["tipo_usuario"]=="MONITOR" && $USUARIO["acesso_usuario"]=="EXTERN
 
 <option value="DINHEIRO">DINHEIRO</option>
 
+<option value="PAGSEGURO">PAGSEGURO</option>
+
 </select>
 
 <!-- 
@@ -2252,6 +2378,118 @@ if(! ($USUARIO["tipo_usuario"]=="MONITOR" && $USUARIO["acesso_usuario"]=="EXTERN
 <span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span>
 
 -->
+
+</td>
+
+</tr>
+
+<tr align="left" class="dados-cartao">
+
+<td>Titular:</td>
+
+<td>
+<input type="text" id="titularCartao" name="titularCartao" size="30" /> <span style="font-size:12px; color:#999; font-style:italic">(Nome impresso no cartão)</span>
+<span class="campoobrigatorio" title="Campo Obrigatório" style="display:none">*</span>
+
+<span class="erro" id="etitularCartao" style="display:none">Por favor, preencha este campo.</span>
+
+</td>
+</tr>
+
+<tr align="left" class="dados-cartao">
+
+<td>Cartão de Crédito:</td>
+
+<td>
+<input type="text" id="numcartao" name="numcartao" size="50" onKeyPress="mascara(this,cartaocredito)" onChange="mascara(this,cartaocredito)" maxlength="19" /> 
+<span class="campoobrigatorio" title="Campo Obrigatório" style="display:none">*</span>
+
+<span class="erro" id="enumcartao" style="display:none">Por favor, preencha com o número do cartão!</span>
+
+</td></tr>
+
+<tr align="left" class="dados-cartao">
+
+<td>Cód. Segurança::</td>
+
+<td>
+<input type="text" id="numcodseguranca" name="numcodseguranca" size="4" onKeyPress="mascara(this,cartaocredito)" onChange="mascara(this,cartaocredito)" maxlength="3" /> 
+<span class="campoobrigatorio" title="Campo Obrigatório" style="display:none">*</span>
+
+<span class="erro" id="enumcodseguranca" style="display:none">Por favor, preencha com o código de segurança do cartão!</span>
+
+</td>
+</tr>
+
+<tr align="left" class="dados-cartao">
+
+<td>Validade:</td>
+
+<td>
+
+<select id="mesval" name="mesval">
+<option value=""></option>
+<? for($i=1;$i<=12;$i++){ ?>
+<option value="<?= sprintf("%02d",$i);?>" <? if($i == $ValidadeCartao[0]){?> selected="selected" <? } ?>><?= sprintf("%02d",$i);?></option>
+<? } ?>
+</select>
+
+
+<select id="anoval" name="anoval">
+<option value=""></option>
+<? for($i=date('Y');$i<=(date('Y')+15);$i++){ ?>
+<option value="<?= sprintf("%02d",$i);?>" <? if($i == $ValidadeCartao[1]){?> selected="selected" <? } ?>><?= sprintf("%02d",$i);?></option>
+<? } ?>
+</select>
+<span class="campoobrigatorio" title="Campo Obrigatório" style="display:none">*</span>
+
+<span class="erro" id="evalidade" style="display:none">Por favor, preencha a validade do cartão!</span>
+
+</td>
+</tr>
+
+
+
+<tr class="dados-cartao">
+
+<td>Bandeira:</td>
+<td>
+	
+<select id="carbandeira" name="carbandeira">
+<option value=""></option>
+<option value="Visa">Visa</option>
+<option value="MasterCard">MasterCard</option>
+<option value="Hipercard">Hipercard</option>
+<option value="American Express">American Express</option>
+
+</select>
+
+<span class="campoobrigatorio" title="Campo Obrigatório" style="display:none">*</span>
+
+<span class="erro" id="ecarbandeira" style="display:none">Por favor, preencha a bandeira do cartão!</span>
+
+</td>
+</tr>
+
+
+<tr class="dados-cartao">
+<td>Parcelas:</td>
+<td>
+
+<select id="numparcelas" name="numparcelas">
+<option value=""></option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+
+</select>
+
+<span class="campoobrigatorio" title="Campo Obrigatório" style="display:none">*</span>
+
+<span class="erro" id="enumparcelas" style="display:none">Por favor, preencha com o número de parcelas!</span>
 
 </td>
 
@@ -2291,6 +2529,7 @@ if(! ($USUARIO["tipo_usuario"]=="MONITOR" && $USUARIO["acesso_usuario"]=="EXTERN
 </td>
 
 </tr>
+
 
 
 <tr align="left">

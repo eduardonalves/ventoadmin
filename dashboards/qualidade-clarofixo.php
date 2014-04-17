@@ -21,6 +21,15 @@ $idPRODUTO = '3';
 $conUSUARIO = $conexao->query("SELECT * FROM usuarios WHERE  id = '".$_SESSION['usuario']."'");
 $USUARIO = mysql_fetch_assoc($conUSUARIO);
 
+$conexao->query("create or replace view view_vendas as SELECT SQL_CACHE vendas.*, IFNULL(qualidades.status_portal, 0) as status_qualidade, qxerox.status_xerox as status_processo, qualidades.status_data
+		FROM vendas_clarotv vendas
+		LEFT OUTER JOIN qualidades ON ( qualidades.qualidade_id = (Select q.qualidade_id from qualidades q where (q.novo_numero=vendas.novoNumero && q.os=vendas.os) || (q.novo_numero=vendas.novoNumero && q.os='') order by q.status_data desc, q.created desc limit 1) )
+
+		LEFT OUTER JOIN qualidades qxerox ON ( qxerox.qualidade_id = (Select qx.qualidade_id from qualidades qx where (qx.novo_numero=vendas.novoNumero && qx.os=vendas.os) order by qx.status_xerox desc limit 1) )");
+
+
+/*
+
 if($USUARIO['tipo_usuario'] == 'MONITOR'){ $loginMONITOR =' monitor ='.$USUARIO['id'].'';}
 if($USUARIO['tipo_usuario'] == 'SUPERVISOR'){
 	
@@ -38,66 +47,29 @@ if($USUARIO['tipo_usuario'] == 'SUPERVISOR'){
 		$j= $j+1;
 	}
 }
-
+*/
 
 
 if($_GET['d'] == ''){ $dia = date("d"); } else if($_GET['d'] == 'Todos'){ $dia = '';} else { $dia = $_GET['d'];}
 if($_GET['m'] == ''){ $mes = date("m"); } else { $mes = $_GET['m'];}
 if($_GET['a'] == ''){ $ano = date("Y"); } else { $ano = $_GET['a'];}
 
-if(($USUARIO['tipo_usuario'] == 'MONITOR') || ($USUARIO['tipo_usuario'] == 'SUPERVISOR')){
+$totalNA = mysql_result( $conexao->query("Select count(id) from view_vendas where status_qualidade = '0' && data_venda like '" . $ano . $mes . "%' && status='FINALIZADA'"), 0 );
+$totalIntencionadas = mysql_result( $conexao->query("Select count(id) from view_vendas where status_qualidade = '1' && data_venda like '" . $ano . $mes . "%' && status='FINALIZADA'"), 0 );
+$totalConfirmadas = mysql_result( $conexao->query("Select count(id) from view_vendas where status_qualidade = '2' && data_venda like '" . $ano . $mes . "%' && status='FINALIZADA'"), 0 );
+$totalAtivadas = mysql_result( $conexao->query("Select count(id) from view_vendas where status_qualidade = '3' && data_venda like '" . $ano . $mes . "%' && status='FINALIZADA'"), 0 );
+$totalComissionadas = mysql_result( $conexao->query("Select count(id) from view_vendas where status_qualidade = '4' && data_venda like '" . $ano . $mes . "%' && status='FINALIZADA'"), 0 );
+$totalEstornadas = mysql_result( $conexao->query("Select count(id) from view_vendas where status_qualidade = '5' && data_venda like '" . $ano . $mes . "%' && status='FINALIZADA'"), 0 );
 
-	// Vendas Total
-	if( $loginMONITOR=="") { $loginMONITOR = "1=2"; }
-	$conVENDAS = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && data LIKE '%".$ano.$mes.$dia."%' && ($loginMONITOR)");
-	$totalVENDAS = mysql_num_rows($conVENDAS);
+// Valores
+$v1 = $totalNA;
+$v2 = $totalIntencionadas;
+$v3 = $totalConfirmadas;
+$v4 = $totalAtivadas;
+$v5 = $totalComissionadas;
+$v6 = $totalEstornadas;
+//$v6 = 100;
 
-	// Vendas Finalizadas
-	$conINST = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && data_instalacao LIKE '%".$ano.$mes.$dia."%' && status = 'FINALIZADA' && ($loginMONITOR)");
-	$totalINST = mysql_num_rows($conINST);
-
-	// Para finalizar ( Enviar Gravação + Boleto Gerado) 
-	$conPEND = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && (status = 'ENVIAR GRAVAÇÃO' || status = 'BOLETO GERADO') && data LIKE '%".$ano.$mes.$dia."%' && ($loginMONITOR)");
-	$totalPEND = mysql_num_rows($conPEND);
-
-	// Com restrição (=Restrição + Redirecionado + Sem Cobertura)
-	$conRES = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && (status = 'RESTRIÇÃO' || status = 'REDIRECIONADO' || status = 'SEM COBERTURA') && data LIKE '%".$ano.$mes.$dia."%' && ($loginMONITOR)");
-	$totalRES = mysql_num_rows($conRES);
-
-	// Rejeitados (=Devolvido + Cancelado + Sem Contato)
-	$conCANC = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && (status = 'DEVOLVIDO' || status = 'CANCELADO' || status = 'SEM CONTATO') && data LIKE '%".$ano.$mes.$dia."%' && ($loginMONITOR)");
-	$totalCANC = mysql_num_rows($conCANC);
-
-	// Tratar Auditoria (Pré-Análise + Gravar + Gravado + Pendente)
-	$conOUT = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && (status = 'PRE-ANALISE' || status = 'GRAVAR' || status = 'GRAVADO' || status = 'PENDENTE') && data LIKE '%".$ano.$mes.$dia."%' && ($loginMONITOR)");
-
-	$totalOUT = mysql_num_rows($conOUT);
-}else{
-	// Vendas Total
-	$conVENDAS = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && data LIKE '%".$ano.$mes.$dia."%'");
-	$totalVENDAS = mysql_num_rows($conVENDAS);
-
-	// Vendas Finalizadas
-	$conINST = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && data_instalacao LIKE '%".$ano.$mes.$dia."%' && status = 'FINALIZADA' ");
-	$totalINST = mysql_num_rows($conINST);
-
-	// Para finalizar ( Enviar Gravação + Boleto Gerado) 
-	$conPEND = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && (status = 'ENVIAR GRAVAÇÃO' || status = 'BOLETO GERADO') && data LIKE '%".$ano.$mes.$dia."%'");
-	$totalPEND = mysql_num_rows($conPEND);
-
-	// Com restrição (=Restrição + Redirecionado + Sem Cobertura)
-	$conRES = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && (status = 'RESTRIÇÃO' || status = 'REDIRECIONADO' || status = 'SEM COBERTURA') && data LIKE '%".$ano.$mes.$dia."%'");
-	$totalRES = mysql_num_rows($conRES);
-
-	// Rejeitados (=Devolvido + Cancelado + Sem Contato)
-	$conCANC = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && (status = 'DEVOLVIDO' || status = 'CANCELADO' || status = 'SEM CONTATO') && data LIKE '%".$ano.$mes.$dia."%'");
-	$totalCANC = mysql_num_rows($conCANC);
-
-	// Tratar Auditoria (Pré-Análise + Gravar + Gravado + Pendente)
-	$conOUT = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$idPRODUTO."' && (status = 'PRE-ANALISE' || status = 'GRAVAR' || status = 'GRAVADO' || status = 'PENDENTE') && data LIKE '%".$ano.$mes.$dia."%'");
-
-	$totalOUT = mysql_num_rows($conOUT);
-}
 switch ($mes) {
         case "01":    $m = Janeiro;     break;
         case "02":    $m = Fevereiro;   break;
@@ -115,21 +87,15 @@ switch ($mes) {
 ?>
 <?
 
-// Valores
-$v1 = $totalVENDAS;
-$v2 = $totalINST;
-$v3 = $totalPEND;
-$v4 = $totalRES;
-$v5 = $totalCANC;
-$v6 = $totalOUT;
 
 // Nomes dos valores
-$x1 = 'Vendas';
-$x2 = 'Finalizadas';
-$x3 = 'P/Finalizar';
-$x4 = 'C/Restrição';
-$x5 = 'Rejeitados';
-$x6 = 'Auditoria';
+$x1 = 'N.A.';
+$x2 = 'Intenções';
+$x3 = 'Confirmações';
+$x4 = 'Ativações';
+$x5 = 'Comissões';
+$x6 = 'Estornos';
+
 
 // Tamanho
 $w = 350;
@@ -175,7 +141,7 @@ $('#chart1').animate({height:'<?= $p1;?>%'},1700);
 $('#chart2').animate({height:'<?= $p2;?>%'},1500);
 $('#chart4').animate({height:'<?= $p4;?>%'},1500);	
 $('#chart5').animate({height:'<?= $p5;?>%'},1300);	
-$('#chart6').animate({height:'<?= $p6;?>%'},1600);	
+$('#chart6').animate({height:'<?= $p6;?>%'},1600);
 
 $('#chart3').animate({height:'<?= $p3;?>%'},1700, function(){	
 	
@@ -293,7 +259,7 @@ background: -o-linear-gradient(top,  #fcf400 0%,#ffcc00 100%); /* Opera 11.10+ *
 background: -ms-linear-gradient(top,  #fcf400 0%,#ffcc00 100%); /* IE10+ */
 background: linear-gradient(to bottom,  #fcf400 0%,#ffcc00 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcf400', endColorstr='#ffcc00',GradientType=0 ); /* IE6-9 */
- left:30px; bottom:0%;}
+ left:23px; bottom:0%;}
 
 #chart2{position:absolute; width:30px; height:0%; background: #0080bc; /* Old browsers */
 background: -moz-linear-gradient(top,  #0080bc 0%, #003399 100%); /* FF3.6+ */
@@ -303,7 +269,7 @@ background: -o-linear-gradient(top,  #0080bc 0%,#003399 100%); /* Opera 11.10+ *
 background: -ms-linear-gradient(top,  #0080bc 0%,#003399 100%); /* IE10+ */
 background: linear-gradient(to bottom,  #0080bc 0%,#003399 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0080bc', endColorstr='#003399',GradientType=0 ); /* IE6-9 */
- left:85px; bottom:0%;}
+ left:73px; bottom:0%;}
 
 #chart3{position:absolute; width:30px; height:0%; background: #7de51b; /* Old browsers */
 /* IE9 SVG, needs conditional override of 'filter' to 'none' */
@@ -315,7 +281,7 @@ background: -o-linear-gradient(top,  #7de51b 0%,#29b20a 100%); /* Opera 11.10+ *
 background: -ms-linear-gradient(top,  #7de51b 0%,#29b20a 100%); /* IE10+ */
 background: linear-gradient(to bottom,  #7de51b 0%,#29b20a 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7de51b', endColorstr='#29b20a',GradientType=0 ); /* IE6-8 */
- left:137px; bottom:0px;}
+ left:140px; bottom:0px;}
  
  #chart4{position:absolute; width:30px; height:0%; background: rgb(249,187,17); /* Old browsers */
 background: -moz-linear-gradient(top,  rgba(249,187,17,1) 1%, rgba(249,125,17,1) 100%); /* FF3.6+ */
@@ -326,7 +292,7 @@ background: -ms-linear-gradient(top,  rgba(249,187,17,1) 1%,rgba(249,125,17,1) 1
 background: linear-gradient(to bottom,  rgba(249,187,17,1) 1%,rgba(249,125,17,1) 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9bb11', endColorstr='#f97d11',GradientType=0 ); /* IE6-9 */
 
- left:189px; bottom:0px;}
+ left:205px; bottom:0px;}
  
  #chart5{position:absolute; width:30px; height:0%; background: #ff3019; /* Old browsers */
 background: -moz-linear-gradient(top,  #ff3019 0%, #cf0404 100%); /* FF3.6+ */
@@ -336,7 +302,7 @@ background: -o-linear-gradient(top,  #ff3019 0%,#cf0404 100%); /* Opera 11.10+ *
 background: -ms-linear-gradient(top,  #ff3019 0%,#cf0404 100%); /* IE10+ */
 background: linear-gradient(to bottom,  #ff3019 0%,#cf0404 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3019', endColorstr='#cf0404',GradientType=0 ); /* IE6-9 */
- left:241px; bottom:0px;}
+ left:258px; bottom:0px;}
 
 
  #chart6{position:absolute; width:30px; height:0%; background: rgb(250,198,149); /* Old browsers */
@@ -348,7 +314,7 @@ background: -ms-linear-gradient(top,  rgba(250,198,149,1) 0%,rgba(245,171,102,1)
 background: linear-gradient(to bottom,  rgba(250,198,149,1) 0%,rgba(245,171,102,1) 47%,rgba(239,141,49,1) 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fac695', endColorstr='#ef8d31',GradientType=0 ); /* IE6-9 */
 
- left:293px; bottom:0px;}
+ left:312px; bottom:0px;}
  
  
  
@@ -433,12 +399,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 
 }
 
-#x1{position:absolute; left:29px; top:2px;}
-#x2{position:absolute; left:75px; top:2px;}
-#x3{position:absolute; left:130px; top:2px;}
-#x4{position:absolute; left:178px; top:2px;}
-#x5{position:absolute; left:233px; top:2px;}
-#x6{position:absolute; left:291px; top:2px;}
+#x1{position:absolute; left:30px; top:2px;}
+#x2{position:absolute; left:70px; top:2px;}
+#x3{position:absolute; left:127px; top:2px;}
+#x4{position:absolute; left:200px; top:2px;}
+#x5{position:absolute; left:251px; top:2px;}
+#x6{position:absolute; left:310px; top:2px;}
 
 .v{position:absolute; top:5px; text-align:center; font-size:12px; width:100%}
 
@@ -644,7 +610,7 @@ $(function() {
 
 
 <div id="top">
-<span onClick="mostrardias();" style="cursor:pointer;" title="Escolher Dia"><? if($dia == ''){ echo 'Todos';} else { echo $dia;};?></span>
+<? /* <span onClick="mostrardias();" style="cursor:pointer;" title="Escolher Dia"><? if($dia == ''){ echo 'Todos';} else { echo $dia;};?></span> */ ?>
 <span onClick="mostrarmeses();" style="cursor:pointer;" title="Escolher Mês"><?= $m;?></span>
 <span onClick="mostraranos();" style="cursor:pointer;" title="Escolher Ano"><?= $ano;?></span>
 </div>
@@ -727,7 +693,7 @@ Dezembro
 <div id="l5"></div>
 <div id="n5"><?= $l5;?></div>
 
-<div id="chart1" class="chart" onMouseOver="showinfo('i1')" onMouseOut="hideinfo('i1')" onClick="javascript:window.open('../adm?ve=1&me=<?= $mes;?>&an=<?= $ano;?>&p=clarofixo&o=&m=&t=&f=&s=&v=&i=&di=&b=','_top');">
+<div id="chart1" class="chart" onMouseOver="showinfo('i1')" onMouseOut="hideinfo('i1')" onClick="javascript:window.open('../adm?ve=1&me=<?php echo $mes; ?>&an=<?php echo $ano; ?>&p=clarofixo&o=&m=&t=&f=&s=FINALIZADA&v=&i=&de=&di=&di2=&tpv=&tpentrega=&b=&ebt=1','_top');">
 <div id="v1" class="v"><?= $v1;?></div>
 <div id="i1" class="info" onMouseOver="showinfo('i1')" onMouseOut="hideinfo('i1')">
 <b><?= $m.' '.$ano;?></b><br />
@@ -735,7 +701,7 @@ Dezembro
 </div>
 </div>
 
-<div id="chart2" class="chart" onMouseOver="showinfo('i2')" onMouseOut="hideinfo('i2')" onClick="mostrargrafico('finalizadas');">
+<div id="chart2" class="chart" onMouseOver="showinfo('i2')" onMouseOut="hideinfo('i2')" onClick="javascript:window.open('../adm?ve=1&me=<?php echo $mes; ?>&an=<?php echo $ano; ?>&p=clarofixo&o=&m=&t=&f=&s=FINALIZADA&v=&i=&de=&di=&di2=&tpv=&tpentrega=&b=&ebt=2','_top');">
 <div id="v2" class="v"><?= $v2;?></div>
 <div id="i2" class="info" onMouseOver="showinfo('i2')" onMouseOut="hideinfo('i2')">
 <b><?= $m.' '.$ano;?></b><br />
@@ -743,7 +709,7 @@ Dezembro
 </div>
 </div>
 
-<div id="chart3" class="chart" onMouseOver="showinfo('i3')" onMouseOut="hideinfo('i3')" onClick="mostrargrafico('pfinalizar');">
+<div id="chart3" class="chart" onMouseOver="showinfo('i3')" onMouseOut="hideinfo('i3')" onClick="javascript:window.open('../adm?ve=1&me=<?php echo $mes; ?>&an=<?php echo $ano; ?>&p=clarofixo&o=&m=&t=&f=&s=FINALIZADA&v=&i=&de=&di=&di2=&tpv=&tpentrega=&b=&ebt=3','_top');">
 <div id="v3" class="v"><?= $v3;?></div>
 <div id="i3" class="info" onMouseOver="showinfo('i3')" onMouseOut="hideinfo('i3')">
 <b><?= $m.' '.$ano;?></b><br />
@@ -751,7 +717,7 @@ Dezembro
 </div>
 </div>
 
-<div id="chart4" class="chart" onMouseOver="showinfo('i4')" onMouseOut="hideinfo('i4')"   onClick="mostrargrafico('crestricao');">
+<div id="chart4" class="chart" onMouseOver="showinfo('i4')" onMouseOut="hideinfo('i4')"   onClick="javascript:window.open('../adm?ve=1&me=<?php echo $mes; ?>&an=<?php echo $ano; ?>&p=clarofixo&o=&m=&t=&f=&s=FINALIZADA&v=&i=&de=&di=&di2=&tpv=&tpentrega=&b=&ebt=4','_top');">
 <div id="v4" class="v"><?= $v4;?></div>
 <div id="i4" class="info" onMouseOver="showinfo('i4')" onMouseOut="hideinfo('i4')">
 <b><?= $m.' '.$ano;?></b><br />
@@ -759,7 +725,7 @@ Dezembro
 </div>
 </div>
 
-<div id="chart5" class="chart" onMouseOver="showinfo('i5')" onMouseOut="hideinfo('i5')" onClick="mostrargrafico('rejeitados');">
+<div id="chart5" class="chart" onMouseOver="showinfo('i5')" onMouseOut="hideinfo('i5')" onClick="javascript:window.open('../adm?ve=1&me=<?php echo $mes; ?>&an=<?php echo $ano; ?>&p=clarofixo&o=&m=&t=&f=&s=FINALIZADA&v=&i=&de=&di=&di2=&tpv=&tpentrega=&b=&ebt=5','_top');">
 <div id="v5" class="v"><?= $v5;?></div>
 <div id="i5" class="info2" onMouseOver="showinfo('i5')" onMouseOut="hideinfo('i5')">
 <b><?= $m.' '.$ano;?></b><br />

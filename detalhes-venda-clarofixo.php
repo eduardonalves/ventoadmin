@@ -863,14 +863,73 @@ window.location = '?e=1&id=<?= $_GET['id'];?>'
 <script type="text/javascript">
 	
 	$(window).load(function(){
-
+		
 		checkAgendEntrega();
 		
-		$("#pagamento").change(
+		$("#pagamento").change( 
+	
 		
 			function ()
 			{
 				checkAgendEntrega();
+				
+				nParcelas = $("[name='numparcelas']").val();
+				
+
+				if( $(this).val()=='PAGSEGURO' )
+				{
+
+					var campos = '<option value=""></option>\
+								<option value="1">1</option>\
+								<option value="2">2</option>\
+								<option value="3">3</option>\
+								<option value="4">4</option>\
+								<option value="5">5</option>\
+								<option value="6">6</option>\
+								';
+					
+					$("[name='numparcelas']").html(campos);
+					
+					if (nParcelas > 6)
+					{
+						$("[name='numparcelas']").val('6');
+					}else{
+					
+						$("[name='numparcelas']").val(nParcelas);
+						
+					}
+
+					$('<option value="Aura">Aura</option>').appendTo("#carbandeira");
+					$('<option value="Elo">Elo</option>').appendTo("#carbandeira");
+					$('<option value="Dinners">Dinners</option>').appendTo("#carbandeira");					
+					
+				}else if ( $(this).val()=='CARTÃO DE CRÉDITO' ) {
+				
+					var campos = '<option value=""></option>\
+								<option value="1">1</option>\
+								<option value="2">2</option>\
+								<option value="3">3</option>\
+								<option value="4">4</option>\
+								<option value="5">5</option>\
+								<option value="6">6</option>\
+								<option value="7">7</option>\
+								<option value="8">8</option>\
+								<option value="9">9</option>\
+								<option value="10">10</option>\
+								';
+					
+					$("[name='numparcelas']").html(campos);
+					$("[name='numparcelas']").val(nParcelas);
+					
+					$("#carbandeira option[value='Aura']").remove();
+					$("#carbandeira option[value='Elo']").remove();
+					$("#carbandeira option[value='Dinners']").remove();
+
+						
+				}
+			
+				
+
 			}
 		);
 	});
@@ -2226,8 +2285,8 @@ if(v == "Pré Pago"){ $('#plano').html('<option value=""></option><option value=
 
 else if(v == "Pós Pago"){
 	
-	$('#plano').html('<option value=""></option><option value="FAV Local">FAV Local</option><option value="FAV Local com DDD">FAV Local com DDD</option><option value="FAV Local e DDD">FAV Local e DDD</option><option value="FAV Local e DDD com Móvel">FAV Local e DDD com Móvel</option>'); 
-	$('#plano').append('<option value=""></option><option value="FAV Local + TV">FAV Local + TV</option><option value="FAV Local com DDD + TV">FAV Local com DDD + TV</option><option value="FAV Local e DDD + TV">FAV Local e DDD + TV</option><option value="FAV Local e DDD com Móvel + TV">FAV Local e DDD com Móvel + TV</option>'); 
+	$('#plano').html('<option value=""></option><!-- <option value="FAV Local">FAV Local</option>--><option value="FAV Local com DDD">FAV Local com DDD</option><option value="FAV Local e DDD">FAV Local e DDD</option><option value="FAV Local e DDD com Móvel">FAV Local e DDD com Móvel</option>'); 
+	$('#plano').append('<option value=""></option><!-- <option value="FAV Local + TV">FAV Local + TV</option><option value="FAV Local com DDD + TV">FAV Local com DDD + TV</option>--><option value="FAV Local e DDD + TV">FAV Local e DDD + TV</option><option value="FAV Local e DDD com Móvel + TV">FAV Local e DDD com Móvel + TV</option>'); 
 	}
 
 
@@ -2394,7 +2453,9 @@ var precoPromocional = $("#aparelho option:selected").attr('data-preco-promocion
 
 $("#preco-promocional").attr('checked', false);
 
+var tipo_usuario = '<?php echo $USUARIO['tipo_usuario']; ?>';
 var acesso_usuario = '<?php echo $USUARIO['acesso_usuario']; ?>';
+var tipo_venda = '<?php echo $linha['tipoVenda']; ?>';
 
 if (precoPromocional != '' && precoPromocional != undefined && precoPromocional=='<?php echo $linha['valorAparelho'];?>' && acesso_usuario == 'INTERNO')
 {
@@ -2579,6 +2640,22 @@ else{ document.getElementById('valoraparelho').value = ''; }
 
 else{ document.getElementById('valoraparelho').value = ''; }
 
+
+if ( (tipo_usuario=='MONITOR' || tipo_venda=='EXTERNA') && (<?php echo date("Y"); ?>==2014 && <?php echo date("m"); ?>==04 && <?php echo date("d"); ?><15) || (1==1) )
+{
+	document.getElementById('valoraparelho').value = '60,00';
+}
+
+/* faz verificacao de vendas antigas promocionais a 60,00 e nao altera o preco do aparelho
+var data_venda = '<? echo $linha['data_venda']; ?>';
+
+if( (tipo_venda=='EXTERNA') && ( data_venda=='20140410' || data_venda=='20140411' || data_venda=='20140412' || data_venda=='20140413' || data_venda=='20140414' ) ){
+	
+	document.getElementById('valoraparelho').value = '60,00';
+	
+}
+
+*/
 
 
                             }
@@ -8739,8 +8816,6 @@ if(! ($USUARIO["tipo_usuario"]=="MONITOR" && $USUARIO["acesso_usuario"]=="EXTERN
 ?>
 <option value="BOLETO" <? if($linha['pagamento'] == 'BOLETO'){?>selected="selected"<? } ?>>BOLETO</option>
 
-<option value="CARTÃO DE CRÉDITO" <? if($linha['pagamento'] == 'CARTÃO DE CRÉDITO'){?>selected="selected"<? } ?>>CARTÃO DE CRÉDITO</option>
-
 <option value="DEPÓSITO" <? if($linha['pagamento'] == 'DEPÓSITO'){?>selected="selected"<? } ?>>DEPÓSITO</option>
 
 <option value="GRÁTIS" <? if($linha['pagamento'] == 'GRÁTIS'){?>selected="selected"<? } ?>>GRÁTIS</option>
@@ -8754,6 +8829,7 @@ if(! ($USUARIO["tipo_usuario"]=="MONITOR" && $USUARIO["acesso_usuario"]=="EXTERN
 ?>
 <?php if($linha['tipoEntrega']=='PRONTA ENTREGA' || $linha['tipoEntrega']=='MOTOBOY INTERNO' || $linha['tipoEntrega']=='MOTOBOY EXTERNO') { ?>
 <option value="DINHEIRO" <? if($linha['pagamento'] == 'DINHEIRO'){?>selected="selected"<? } ?>>DINHEIRO</option>
+<option value="CARTÃO DE CRÉDITO" <? if($linha['pagamento'] == 'CARTÃO DE CRÉDITO'){?>selected="selected"<? } ?>>CARTÃO DE CRÉDITO</option>
 <? } ?>
 
 <? if($linha['pagamento'] == 'PRONTA ENTREGA'){?><option value="PRONTA ENTREGA" selected="selected">PRONTA ENTREGA</option><? } ?>
@@ -9133,10 +9209,26 @@ if($linha['numCar']){ echo $linha['carVal']; } ?>
 <? if(($editar == '1') && ( ($USUARIO['tipo_usuario']!="MONITOR" && $USUARIO['acesso_usuario']!="EXTERNO") ) ) {?>
 
 
-<select name="carbandeira">
+<select id="carbandeira" name="carbandeira">
 <option value=""></option>
+
 <option value="Visa" <? if($linha['carBan'] == 'Visa'){?> selected="selected" <? } ?>>Visa</option>
 <option value="MasterCard" <? if($linha['carBan'] == 'MasterCard'){?> selected="selected" <? } ?>>MasterCard</option>
+<option value="Hipercard" <? if($linha['carBan'] == 'Hipercard'){?> selected="selected" <? } ?>>Hipercard</option>
+<option value="American Express" <? if($linha['carBan'] == 'American Express'){?> selected="selected" <? } ?>>American Express</option>
+
+<?php
+if( $linha['pagamento'] == 'PAGSEGURO' )
+{
+?>
+
+<option value="Aura" <? if($linha['carBan'] == 'Aura'){?> selected="selected" <? } ?>>Aura</option>
+<option value="Elo" <? if($linha['carBan'] == 'Elo'){?> selected="selected" <? } ?>>Elo</option>
+<option value="Dinners" <? if($linha['carBan'] == 'Dinners'){?> selected="selected" <? } ?>>Dinners</option>
+
+
+<?php } ?>
+
 </select>
 
 <? } else {
@@ -9155,18 +9247,41 @@ if($linha['numCar']){ echo $linha['carBan']; } ?>
 <td><b>Parcelas:</b></td>
 <td>
 
+
 <? 
 
 if(($editar == '1') && ( ($USUARIO['tipo_usuario']!="MONITOR" && $USUARIO['acesso_usuario']!="EXTERNO") ) ) {?>
 
-<select name="numparcelas">
-<option value=""></option>
-<option value="8" <? if($linha['numParcelas'] == '8'){?> selected="selected" <? } ?>>8</option>
-<option value="11" <? if($linha['numParcelas'] == '11'){?> selected="selected" <? } ?>>11</option>
-<option value="20" <? if($linha['numParcelas'] == '20'){?> selected="selected" <? } ?>>20</option>
-<option value="25" <? if($linha['numParcelas'] == '25'){?> selected="selected" <? } ?>>25</option>
-</select>
+	<? if($linha['pagamento'] == 'CARTÃO DE CRÉDITO'){ ?>
 
+		<select name="numparcelas">
+		<option value=""></option>
+		<option value="1" <? if($linha['numParcelas'] == '1'){?> selected="selected" <? } ?>>1</option>
+		<option value="2" <? if($linha['numParcelas'] == '2'){?> selected="selected" <? } ?>>2</option>
+		<option value="3" <? if($linha['numParcelas'] == '3'){?> selected="selected" <? } ?>>3</option>
+		<option value="4" <? if($linha['numParcelas'] == '4'){?> selected="selected" <? } ?>>4</option>
+		<option value="5" <? if($linha['numParcelas'] == '5'){?> selected="selected" <? } ?>>5</option>
+		<option value="6" <? if($linha['numParcelas'] == '6'){?> selected="selected" <? } ?>>6</option>
+		<option value="7" <? if($linha['numParcelas'] == '7'){?> selected="selected" <? } ?>>7</option>
+		<option value="8" <? if($linha['numParcelas'] == '8'){?> selected="selected" <? } ?>>8</option>
+		<option value="9" <? if($linha['numParcelas'] == '9'){?> selected="selected" <? } ?>>9</option>
+		<option value="10" <? if($linha['numParcelas'] == '10'){?> selected="selected" <? } ?>>10</option>
+		</select>
+
+	<? }elseif($linha['pagamento'] == 'PAGSEGURO'){ ?>
+
+		<select name="numparcelas">
+		<option value=""></option>
+		<option value="1" <? if($linha['numParcelas'] == '1'){?> selected="selected" <? } ?>>1</option>
+		<option value="2" <? if($linha['numParcelas'] == '2'){?> selected="selected" <? } ?>>2</option>
+		<option value="3" <? if($linha['numParcelas'] == '3'){?> selected="selected" <? } ?>>3</option>
+		<option value="4" <? if($linha['numParcelas'] == '4'){?> selected="selected" <? } ?>>4</option>
+		<option value="5" <? if($linha['numParcelas'] == '5'){?> selected="selected" <? } ?>>5</option>
+		<option value="6" <? if($linha['numParcelas'] == '6'){?> selected="selected" <? } ?>>6</option>
+		</select>
+
+
+	<?php } ?>
 
 <? } else { 
 
@@ -9786,7 +9901,7 @@ em <?= $dataRecuperada;?>
 
 <?php
 
-	if ( $USUARIO['tipo_usuario'] == 'ADMINISTRADOR' && strstr( $USUARIO['colunas_clarofixo'], '(status_portal)' ) )
+	if ( $USUARIO['tipo_usuario'] == 'ADMINISTRADOR' && strstr( $USUARIO['colunas_clarofixo'], '(status_portal)' && 1==2) )
 	{
 ?>
 <tr>

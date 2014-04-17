@@ -62,7 +62,7 @@ class VendaStatus extends VentoAdmin{
 						
 							3 => array (
 
-								'PRE-ANALISE' => array('REDIRECIONADO','RESTRIÇÃO','SEM COBERTURA','GRAVAR','DEVOLVIDO'),
+								'PRE-ANALISE' => array('REDIRECIONADO','RESTRIÇÃO','SEM COBERTURA','GRAVAR','DEVOLVIDO','SEM CONTATO'),
 								'RESTRIÇÃO' => array(),
 								'REDIRECIONADO' => array(),
 								'SEM COBERTURA' => array(),
@@ -333,7 +333,18 @@ class VendaStatus extends VentoAdmin{
 																		),
 																'flux' => array()
 
+													),
+
+													'userMonitorInterno' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('MONITOR')
+																		),
+																'flux' => array('CANCELADO')
+
 													)
+
 									),
 									
 									'DEVOLVIDO' => array (

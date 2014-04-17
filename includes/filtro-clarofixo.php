@@ -10,7 +10,7 @@ if($_GET["ebt"]=="n" || (! isset($_GET['ebt']) ) ){ $_GET["ebt"]=""; }
          ELSE 'SEM DOCUMENTAÇÂO'
       END AS status_processo
 		FROM vendas_clarotv vendas
-		LEFT OUTER JOIN qualidades ON ( qualidades.qualidade_id = (Select q.qualidade_id from qualidades q where (q.novo_numero=vendas.novoNumero && q.os=vendas.os) || (q.novo_numero=vendas.novoNumero && q.os='') order by  q.status_portal desc, q.created desc limit 1) )
+		LEFT OUTER JOIN qualidades ON ( qualidades.qualidade_id = (Select q.qualidade_id from qualidades q where (q.novo_numero=vendas.novoNumero && q.os=vendas.os) || (q.novo_numero=vendas.novoNumero && q.os='') order by q.status_data desc, q.created desc limit 1) )
 
 		LEFT OUTER JOIN qualidades qxerox ON ( qxerox.qualidade_id = (Select qx.qualidade_id from qualidades qx where (qx.novo_numero=vendas.novoNumero && qx.os=vendas.os) order by qx.status_xerox desc limit 1) )");
 	}

@@ -5,7 +5,7 @@ date_default_timezone_set("Brazil/East");
 header("Content-type: text/html; charset=UTF-8", true);
 
 
-error_reporting(E_ALL);
+error_reporting(0);
 
 session_start();
 

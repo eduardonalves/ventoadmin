@@ -1,32 +1,9 @@
 <?php
-include_once('conexao.php');
-
 ini_set('memory_limit', '1000M');
 ini_set('max_execution_time','600');
 ?>
 <meta charset="UTF-8">
-
 <?php
-$row = 1;
-/*
-if (($handle = fopen("test.csv", "r")) !== FALSE) {
-
-    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-        $num = count($data);
-      //  echo "<p> $num fields in line $row: <br /></p>\n";
-        $row++;
-        for ($c=0; $c < $num; $c++) {
-        //    echo $c . ":" . $data[$c] . "<br />\n";
-        }
-    }
-    fclose($handle);
-
-}*/
-
-$inputFileName = 'upload/'. $_POST['unique-filename']. '.xls';
-$inputFileName = 'upload/com2.xls';
-
-$query = "INSERT INTO `planilha`(`id`, `A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `M`, `N`, `O`, `P`, `Q`, `R`, `S`, `T`, `U`, `V`, `W`, `X`, `Y`, `Z`) VALUES ";
 
 require_once 'lib/PHPExcel/IOFactory.php';
 require_once 'lib/PHPExcel.php';
@@ -38,8 +15,9 @@ PHPExcel_Settings::setCacheStorageMethod($cacheMethod, $cacheSettings);
 $inputFileName = 'upload/com2.xls';
 
 $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
+//$objReader = new PHPExcel_Reader_Excel5();
 $objReader = PHPExcel_IOFactory::createReader($inputFileType);
-
+//$objReader = new PHPExcel();
 $objReader->setReadDataOnly(true);
 $objPHPExcel = $objReader->load($inputFileName);
 $objPHPExcel->setActiveSheetIndex(0);
@@ -47,8 +25,7 @@ $objPHPExcel->setActiveSheetIndex(0);
 //echo $objPHPExcel->getActiveSheet()->getCellByColumnAndRow('C', 1)->getValue();
 echo $objPHPExcel->getActiveSheet()->getCell('C1')->getValue();
 $linhas = $objPHPExcel->getActiveSheet()->getHighestRow();
-
-$colunas =  array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+$colunas =  $objPHPExcel->getActiveSheet()->getHighestColumn();
 echo "<br>Colunas: " . $colunas;
 
 
@@ -90,38 +67,68 @@ $objPHPExcel = $objReader->load($inputFileName);
 $a  = array();
 
 $contadora = 1;
-$insert = "";
 
 for ($i=1; $i <= 65000; $i++)
 {
 	
 	if ( $i==1 || $contadora== 1500 ) {	
 		
-		loadRange($i);
+loadRange($i);
 		$contadora = 1;
-		
 	}else{
 	
 		$contadora++;
 	}
 
-	$insert .= ($insert=="") ? "('$i'" : ",('$i'";
 
 //echo 'B'.$i . " - " . $objPHPExcel->getActiveSheet()->getCell('J' . $i)->getValue() . "<br>";
-
-	foreach ( $colunas as $coluna )
-	{
-
-		$insert .= ",'" . $objPHPExcel->getActiveSheet()->getCell($coluna . $i)->getValue() . "'";
-		
-	}
-	
-	$insert .= ")";
+$t = $objPHPExcel->getActiveSheet()->getCell('J' . $i)->getValue();
+if ($t==NULL) { break; }
+$a[$i]  = $t;
 //$objPHPExcel->getActiveSheet()->getCellCacheController()->deleteCacheData('J' . $i);
 }
+echo "<pre>";
+print_r($a);
+echo "</pre>";
+
+/*
+$inputFileType = PHPExcel_IOFactory::identify($inputFileName);
+
+$objReader = PHPExcel_IOFactory::createReader($inputFileType); 
+
+$objPHPExcel = $objReader->load($inputFileName);
+$objWorksheet = $objPHPExcel->getActiveSheet();
+
+$a = array();
+
+foreach ($objWorksheet->getRowIterator() as $row) {
+  $cellIterator = $row->getCellIterator();
+  $cellIterator->setIterateOnlyExistingCells(false); 
+
+  foreach ($cellIterator as $cell) {
+    $a[] = $cell->getValue();
+  }
+echo "<pre>";
+print_r($a);
+
+echo "</pre>";
+	/*
+	Your cells contents here :
+	$value_cell_A = $a[0];
+	$value_cell_B = $a[1];
+	...
+	$value_cell_Z = $a[25];
+	$value_cell_AA = $a[26];
+        $value_cell_AB = $a[27];
+        etc...
+
+	then you can use them in this loop	
+	*/
+
+	// clear the array for the next line
+	//unset($a);
+//}
 
 
-echo $query.$insert;
-die();
 
 ?>

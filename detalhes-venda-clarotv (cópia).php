@@ -721,7 +721,6 @@ function verificapagamento(v, str){
 		
 		document.getElementById('idbancodep').value = '';
 		document.getElementById('idbancodep').style.display = 'none';
-		$(".idcartaocredito_i").css('display', 'none');
 		elementos = document.querySelectorAll('.idcartaocredito');
 		for ( i = 0, length = elementos.length; i < length; i++) {
 			elementos[i].style.display = 'none';
@@ -736,9 +735,6 @@ function verificapagamento(v, str){
 		document.getElementById('idbancodep').value = '';
 		document.getElementById('idbancodep').style.display = 'none';
 		document.getElementById('idpagamentoinstalacao').style.display = '';
-		$("[name='pagamentoinstalacao']").val('');
-		//$(".idcartaocredito_i").css('display', 'table-row');
-		
 		elementos = document.querySelectorAll('.idcartaocredito');
 		for ( i = 0, length = elementos.length; i < length; i++) {
 			elementos[i].style.display = 'none';
@@ -751,18 +747,12 @@ function verificapagamento(v, str){
 	document.getElementById('valor').disabled = true;
 	document.getElementById('idbanco').style.display = '';
 	document.getElementById('idbancodep').style.display = 'none';
-	//document.getElementById('idpagamentoinstalacao').value = '';
-	$("[name='pagamentoinstalacao']").val('');
+	document.getElementById('idpagamentoinstalacao').value = '';
 	document.getElementById('idpagamentoinstalacao').style.display = 'none';
-	$(".idcartaocredito").css("display", "none");
-	$(".idcartaocredito_i").css("display", "none");
-	//$(".idcartaocredito_i").css('display', '.idcartaocredito');
-	//$(".idcartaocredito_i").css('display', 'none');
 	}
 	else if (v == "DEPÓSITO"){
 
 	document.getElementById('idbancodep').style.display = '';
-	$(".idcartaocredito_i").css('display', 'none');
 	elementos = document.querySelectorAll('.idcartaocredito');
 		for ( i = 0, length = elementos.length; i < length; i++) {
 			elementos[i].style.display = 'none';
@@ -775,9 +765,6 @@ function verificapagamento(v, str){
 	document.getElementById('idbanco').style.display = 'none';
 	document.getElementById('idbancodep').style.display = 'none';
 	document.getElementById('idpagamentoinstalacao').style.display = 'none';
-
-	$("[name='pagamentoinstalacao']").val('');
-	$(".idcartaocredito_i").css('display', 'none');
 	
 	var elementos = document.querySelectorAll('.idcartaocredito');
 	for (var i = 0, length = elementos.length; i < length; i++) {
@@ -791,10 +778,8 @@ function verificapagamento(v, str){
 	document.getElementById('idbanco').style.display = 'none';
 	document.getElementById('idbancodep').style.display = 'none';
 	document.getElementById('idpagamentoinstalacao').style.display = '';
-
-	$(".idcartaocredito").css('display', 'none');
-		
-	var elementos = document.querySelectorAll('.idcartaocredito_i');
+	
+	var elementos = document.querySelectorAll('.idcartaocredito');
 	for (var i = 0, length = elementos.length; i < length; i++) {
 		elementos[i].style.display = '';
   }
@@ -2306,11 +2291,13 @@ while($OPERADORES = mysql_fetch_array($conOPERADORES)){
 
 <? if($linha['plano'] == 'CLARO COMBO'){ ?><option value="CLARO COMBO OU CLARO 3G" selected="selected">CLARO COMBO</option><? }?>
 
+<? if($linha['plano'] == 'FÁCIL'){ ?> <option value="FÁCIL" selected="selected">FÁCIL</option><? }?>
 
 <? if($linha['plano'] == 'FÁCIL HBO BRASIL'){ ?> <option value="FÁCIL HBO BRASIL" selected="selected">FÁCIL HBO BRASIL</option><? }?>
 
 <? if($linha['plano'] == 'FÁCIL TELECINE LIGHT'){ ?> <option value="FÁCIL TELECINE LIGHT" selected="selected">FÁCIL TELECINE LIGHT</option><? }?>
 
+<? if($linha['plano'] == 'ESSENCIAL'){ ?> <option value="ESSENCIAL" selected="selected">ESSENCIAL</option><? }?>
 
 <? if($linha['plano'] == 'ESSENCIAL TELECINE LIGHT'){ ?> <option value="ESSENCIAL TELECINE LIGHT" selected="selected">ESSENCIAL TELECINE LIGHT</option><? }?>
 
@@ -2326,6 +2313,7 @@ while($OPERADORES = mysql_fetch_array($conOPERADORES)){
 
 <? if($linha['plano'] == 'ESSENCIAL CINEMA TOTAL'){ ?> <option value="ESSENCIAL CINEMA TOTAL" selected="selected">ESSENCIAL CINEMA TOTAL</option><? }?>
 
+<? if($linha['plano'] == 'FAMÍLIA'){ ?> <option value="FAMÍLIA" selected="selected">FAMÍLIA</option><? }?>
 
 <? if($linha['plano'] == 'FAMÍLIA TELECINE'){ ?> <option value="FAMÍLIA TELECINE" selected="selected">FAMÍLIA TELECINE</option><? }?>
 
@@ -2357,87 +2345,60 @@ while($OPERADORES = mysql_fetch_array($conOPERADORES)){
 
 <? if($linha['plano'] == 'FAMÍLIA CINEMA HD MAIS'){ ?> <option value="FAMÍLIA CINEMA HD MAIS" selected="selected">FAMÍLIA CINEMA HD MAIS</option><? }?>
 
-<? if($linha['plano'] == 'FÁCIL + FUT (A La Carte PFC)'){ ?><option value="FÁCIL + FUT (A La Carte PFC)" selected="selected">FÁCIL + FUT (A La Carte PFC)</option><? }?>
-<? if($linha['plano'] == 'ESSENCIAL HBO MAX DIGITAL'){ ?> <option value="ESSENCIAL HBO MAX DIGITAL" selected="selected">ESSENCIAL HBO MAX DIGITAL</option><? }?>
-
-<? if($linha['plano'] == 'ESSENCIAL TELECINE'){ ?><option value="ESSENCIAL TELECINE" selected="selected">ESSENCIAL TELECINE</option><? }?>
-<? if($linha['plano'] == 'FAMÍLIA TELECINE'){ ?><option value="FAMÍLIA TELECINE" selected="selected">FAMÍLIA TELECINE</option><? }?>
-<? if($linha['plano'] == 'FAMÍLIA HBO MAX DIGITAL'){ ?><option value="FAMÍLIA HBO MAX DIGITAL" selected="selected">FAMÍLIA HBO MAX DIGITAL</option><? }?>
-<? if($linha['plano'] == 'ESSENCIAL HD ABERTOS'){ ?><option value="ESSENCIAL HD ABERTOS" selected="selected">ESSENCIAL HD ABERTOS</option><? }?>
-<? if($linha['plano'] == 'ESSENCIAL HD LIGHT'){ ?><option value="ESSENCIAL HD LIGHT" selected="selected">ESSENCIAL HD LIGHT</option><? }?>
-<? if($linha['plano'] == 'FAMÍLIA HD LIGHT'){ ?><option value="FAMÍLIA HD LIGHT" selected="selected">FAMÍLIA HD LIGHT</option><? }?>
-<? if($linha['plano'] == 'FAMÍLIA HBO HD LIGHT'){ ?><option value="FAMÍLIA HBO HD LIGHT" selected="selected">FAMÍLIA HBO HD LIGHT</option><? }?>
-<? if($linha['plano'] == 'FAMÍLIA HD MAIS'){ ?><option value="FAMÍLIA HD MAIS" selected="selected">FAMÍLIA HD MAIS</option><? }?>
-<? if($linha['plano'] == 'FAMÍLIA HBO HD MAIS'){ ?><option value="FAMÍLIA HBO HD MAIS" selected="selected">FAMÍLIA HBO HD MAIS</option><? }?>
-<? if($linha['plano'] == 'ESSENCIAL (SEM FIDELIDADE)'){ ?><option value="ESSENCIAL (SEM FIDELIDADE)" selected="selected">ESSENCIAL (SEM FIDELIDADE)</option><? }?>
-<? if($linha['plano'] == 'FAMÍLIA (SEM FIDELIDADE)'){ ?><option value="FAMÍLIA (SEM FIDELIDADE)" selected="selected">FAMÍLIA (SEM FIDELIDADE)</option><? }?>
-<? if($linha['plano'] == 'ESSENCIAL HBO BRASIL DTV'){ ?><option value="ESSENCIAL HBO BRASIL DTV" selected="selected">ESSENCIAL HBO BRASIL DTV</option><? }?>
-<? if($linha['plano'] == 'ESSENCIAL TELECINE LIGHT DTV'){ ?><option value="ESSENCIAL TELECINE LIGHT DTV" selected="selected">ESSENCIAL TELECINE LIGHT DTV</option><? }?>
-<? if($linha['plano'] == 'ESSENCIAL HBO DTV'){ ?><option value="ESSENCIAL HBO DTV" selected="selected">ESSENCIAL HBO DTV</option><? }?>
-<? if($linha['plano'] == 'ESSENCIAL TELECINE DTV'){ ?><option value="ESSENCIAL TELECINE DTV" selected="selected">ESSENCIAL TELECINE DTV</option><? }?>
-<? if($linha['plano'] == 'ESSENCIAL HBO MAX DIGITAL DTV'){ ?><option value="ESSENCIAL HBO MAX DIGITAL DTV" selected="selected">ESSENCIAL HBO MAX DIGITAL DTV</option><? }?>
-<? if($linha['plano'] == 'ESSENCIAL CINEMA DTV'){ ?><option value="ESSENCIAL CINEMA DTV" selected="selected">ESSENCIAL CINEMA DTV</option><? }?>
-<? if($linha['plano'] == 'FAMILIA TELECINE DTV'){ ?><option value="FAMILIA TELECINE DTV" selected="selected">FAMILIA TELECINE DTV</option><? }?>
-<? if($linha['plano'] == 'FAMILIA HBO MAX DIGITAL DTV'){ ?><option value="FAMILIA HBO MAX DIGITAL DTV" selected="selected">FAMILIA HBO MAX DIGITAL DTV</option><? }?>
-<? if($linha['plano'] == 'FAMILIA CINEMA DTV'){ ?><option value="FAMILIA CINEMA DTV" selected="selected">FAMILIA CINEMA DTV</option><? }?>
-<? if($linha['plano'] == 'ESSENCIAL HD LIGHT DTV'){ ?><option value="ESSENCIAL HD LIGHT DTV" selected="selected">ESSENCIAL HD LIGHT DTV</option><? }?>
-<? if($linha['plano'] == 'FAMILIA HD LIGHT DTV'){ ?><option value="FAMILIA HD LIGHT DTV" selected="selected">FAMILIA HD LIGHT DTV</option><? }?>
-<? if($linha['plano'] == 'ESSENCIAL TELECINE HD LIGHT DTV'){ ?><option value="ESSENCIAL TELECINE HD LIGHT DTV" selected="selected">ESSENCIAL TELECINE HD LIGHT DTV</option><? }?>
-<? if($linha['plano'] == 'FAMILIA TELECINE HD LIGHT DTV'){ ?><option value="FAMILIA TELECINE HD LIGHT DTV" selected="selected">FAMILIA TELECINE HD LIGHT DTV</option><? }?>
-<? if($linha['plano'] == 'FAMILIA HBO HD LIGHT DTV'){ ?><option value="FAMILIA HBO HD LIGHT DTV" selected="selected">FAMILIA HBO HD LIGHT DTV</option><? }?>
-<? if($linha['plano'] == 'ESSENCIAL CINEMA HD LIGHT DTV'){ ?><option value="ESSENCIAL CINEMA HD LIGHT DTV" selected="selected">ESSENCIAL CINEMA HD LIGHT DTV</option><? }?>
-<? if($linha['plano'] == 'FAMÍLIA CINEMA HD LIGHT DTV'){ ?><option value="FAMÍLIA CINEMA HD LIGHT DTV" selected="selected">FAMÍLIA CINEMA HD LIGHT DTV</option><? }?>
-<? if($linha['plano'] == 'FAMÍLIA HD LIGHT FUT DTV (A La carte PFC)'){ ?><option value="FAMÍLIA HD LIGHT FUT DTV (A La carte PFC)" selected="selected">FAMÍLIA HD LIGHT FUT DTV (A La carte PFC)</option><? }?>
-<? if($linha['plano'] == 'FAMILIA CINEMA HD MAIS DTV'){ ?><option value="FAMILIA CINEMA HD MAIS DTV" selected="selected">FAMILIA CINEMA HD MAIS DTV</option><? }?>
-<? if($linha['plano'] == 'FAMILIA HD MAIS FUT DTV (A La carte PFC)'){ ?><option value="FAMILIA HD MAIS FUT DTV (A La carte PFC)" selected="selected">FAMILIA HD MAIS FUT DTV (A La carte PFC)</option><? }?>
-<? if($linha['plano'] == 'FAMILIA CINE HD MAIS FUT DTV (A La carte PFC)'){ ?><option value="FAMILIA CINE HD MAIS FUT DTV (A La carte PFC)" selected="selected">FAMILIA CINE HD MAIS FUT DTV (A La carte PFC)</option><? }?>
-
-
 
 <option value="INICIAL" <? if($linha['plano'] == 'INICIAL'){ ?> selected="selected" <? }?>>INICIAL</option>
 <option value="FÁCIL" <? if($linha['plano'] == 'FÁCIL'){ ?> selected="selected" <? }?>>FÁCIL</option>
+<option value="FÁCIL + FUT (A La Carte PFC)" <? if($linha['plano'] == 'FÁCIL + FUT (A La Carte PFC)'){ ?> selected="selected" <? }?>>FÁCIL + FUT (A La Carte PFC)</option>
+<option value=""></option>
+
 <option value="ESSENCIAL" <? if($linha['plano'] == 'ESSENCIAL'){ ?> selected="selected" <? }?>>ESSENCIAL</option>
-<option value="ESSENCIAL HBO" <? if($linha['plano'] == 'ESSENCIAL HBO'){ ?> selected="selected" <? }?>>ESSENCIAL HBO</option>
-<option value="ESSENCIAL TELECINE LIGHT" <? if($linha['plano'] == 'ESSENCIAL TELECINE LIGHT'){ ?> selected="selected" <? }?>>ESSENCIAL TELECINE LIGHT</option>
+<option value="ESSENCIAL HBO MAX DIGITAL" <? if($linha['plano'] == 'ESSENCIAL HBO MAX DIGITAL'){ ?> selected="selected" <? }?>>ESSENCIAL HBO MAX DIGITAL</option>
+<option value="ESSENCIAL TELECINE" <? if($linha['plano'] == 'ESSENCIAL TELECINE'){ ?> selected="selected" <? }?>>ESSENCIAL TELECINE</option>
+<option value=""></option>
+
+<option value="FAMÍLIA TELECINE" <? if($linha['plano'] == 'FAMÍLIA TELECINE'){ ?> selected="selected" <? }?>>FAMÍLIA TELECINE</option>
+<option value="FAMÍLIA HBO MAX DIGITAL" <? if($linha['plano'] == 'FAMÍLIA HBO MAX DIGITAL'){ ?> selected="selected" <? }?>>FAMÍLIA HBO MAX DIGITAL</option>
 <option value="FAMÍLIA" <? if($linha['plano'] == 'FAMÍLIA'){ ?> selected="selected" <? }?>>FAMÍLIA</option>
-
-
 <option value=""></option>
 <option value="FÁCIL HD ABERTOS" <? if($linha['plano'] == 'FÁCIL HD ABERTOS'){ ?> selected="selected" <? }?>>FÁCIL HD ABERTOS</option>
-<option value="FÁCIL TELECINE LIGHT HD ABERTOS" <? if($linha['plano'] == 'FÁCIL TELECINE LIGHT HD ABERTOS'){ ?> selected="selected" <? }?>>FÁCIL TELECINE LIGHT HD ABERTOS</option>
 <option value="ESSENCIAL HD ABERTOS" <? if($linha['plano'] == 'ESSENCIAL HD ABERTOS'){ ?> selected="selected" <? }?>>ESSENCIAL HD ABERTOS</option>
-<option value="ESSENCIAL TELECINE HD ABERTOS" <? if($linha['plano'] == 'ESSENCIAL TELECINE HD ABERTOS'){ ?> selected="selected" <? }?>>ESSENCIAL TELECINE HD ABERTOS</option>
-<option value="ESSENCIAL HBO HD ABERTOS" <? if($linha['plano'] == 'ESSENCIAL HBO HD ABERTOS'){ ?> selected="selected" <? }?>>ESSENCIAL HBO HD ABERTOS</option>
 <option value=""></option>
 <option value="ESSENCIAL HD LIGHT" <? if($linha['plano'] == 'ESSENCIAL HD LIGHT'){ ?> selected="selected" <? }?>>ESSENCIAL HD LIGHT</option>
-<option value="ESSENCIAL TELECINE HD LIGHT" <? if($linha['plano'] == 'ESSENCIAL TELECINE HD LIGHT'){ ?> selected="selected" <? }?>>ESSENCIAL TELECINE HD LIGHT</option>
-<option value="ESSENCIAL HBO HD LIGHT" <? if($linha['plano'] == 'ESSENCIAL HBO HD LIGHT'){ ?> selected="selected" <? }?>>ESSENCIAL HBO HD LIGHT</option>
 <option value="FAMÍLIA HD LIGHT" <? if($linha['plano'] == 'FAMÍLIA HD LIGHT'){ ?> selected="selected" <? }?>>FAMÍLIA HD LIGHT</option>
-<option value="FAMÍLIA TELECINE HD LIGHT" <? if($linha['plano'] == 'FAMÍLIA TELECINE HD LIGHT'){ ?> selected="selected" <? }?>>FAMÍLIA TELECINE HD LIGHT</option>
 <option value="FAMÍLIA HBO HD LIGHT" <? if($linha['plano'] == 'FAMÍLIA HBO HD LIGHT'){ ?> selected="selected" <? }?>>FAMÍLIA HBO HD LIGHT</option>
-<option value=""></option>
 <option value="FAMÍLIA HD MAIS" <? if($linha['plano'] == 'FAMÍLIA HD MAIS'){ ?> selected="selected" <? }?>>FAMÍLIA HD MAIS</option>
 <option value="FAMÍLIA HBO HD MAIS" <? if($linha['plano'] == 'FAMÍLIA HBO HD MAIS'){ ?> selected="selected" <? }?>>FAMÍLIA HBO HD MAIS</option>
-<option value="ESSENCIAL (SEM FIDELIDADE)">ESSENCIAL (SEM FIDELIDADE)</option>
+<option value=""></option>
+<option value="ESSENCIAL (SEM FIDELIDADE)" <? if($linha['plano'] == 'ESSENCIAL (SEM FIDELIDADE)'){ ?> selected="selected" <? }?>>ESSENCIAL (SEM FIDELIDADE)</option>
 <option value="FAMÍLIA (SEM FIDELIDADE)" <? if($linha['plano'] == 'FAMÍLIA (SEM FIDELIDADE)'){ ?> selected="selected" <? }?>>FAMÍLIA (SEM FIDELIDADE)</option>
 <option value=""></option>
-<option value="FÁCIL HD ABERTOS DTV" <? if($linha['plano'] == 'FÁCIL HD ABERTOS DTV'){ ?> selected="selected" <? }?>>FÁCIL HD ABERTOS DTV - PE SOMENTE SD</option>
-<option value="ESSENCIAL HD ABERTOS DTV" <? if($linha['plano'] == 'ESSENCIAL HD ABERTOS DTV'){ ?> selected="selected" <? }?>>ESSENCIAL HD ABERTOS DTV - PE SOMENTE SD</option>
-<option value=""></option>
 
+<option value="ESSENCIAL HD ABERTOS DTV" <? if($linha['plano'] == 'ESSENCIAL HD ABERTOS DTV'){ ?> selected="selected" <? }?>>ESSENCIAL HD ABERTOS DTV</option>
+<option value="ESSENCIAL HBO BRASIL DTV" <? if($linha['plano'] == 'ESSENCIAL HBO BRASIL DTV'){ ?> selected="selected" <? }?>>ESSENCIAL HBO BRASIL DTV</option>
+<option value="ESSENCIAL TELECINE LIGHT DTV" <? if($linha['plano'] == 'ESSENCIAL TELECINE LIGHT DTV'){ ?> selected="selected" <? }?>>ESSENCIAL TELECINE LIGHT DTV</option>
+<option value="ESSENCIAL HBO DTV" <? if($linha['plano'] == 'ESSENCIAL HBO DTV'){ ?> selected="selected" <? }?>>ESSENCIAL HBO DTV</option>
+<option value="ESSENCIAL TELECINE DTV" <? if($linha['plano'] == 'ESSENCIAL TELECINE DTV'){ ?> selected="selected" <? }?>>ESSENCIAL TELECINE DTV</option>
+<option value="ESSENCIAL HBO MAX DIGITAL DTV" <? if($linha['plano'] == 'ESSENCIAL HBO MAX DIGITAL DTV'){ ?> selected="selected" <? }?>>ESSENCIAL HBO MAX DIGITAL DTV</option>
+<option value="ESSENCIAL CINEMA DTV" <? if($linha['plano'] == 'ESSENCIAL CINEMA DTV'){ ?> selected="selected" <? }?>>ESSENCIAL CINEMA DTV</option>
+<option value="FAMILIA TELECINE DTV" <? if($linha['plano'] == 'FAMILIA TELECINE DTV'){ ?> selected="selected" <? }?>>FAMILIA TELECINE DTV</option>
+<option value="FAMILIA HBO MAX DIGITAL DTV" <? if($linha['plano'] == 'FAMILIA HBO MAX DIGITAL DTV'){ ?> selected="selected" <? }?>>FAMILIA HBO MAX DIGITAL DTV</option>
+<option value="FAMILIA CINEMA DTV" <? if($linha['plano'] == 'FAMILIA CINEMA DTV'){ ?> selected="selected" <? }?>>FAMILIA CINEMA DTV</option>
+
+<option value=""></option>
 <option value="ESSENCIAL HD LIGHT DTV" <? if($linha['plano'] == 'ESSENCIAL HD LIGHT DTV'){ ?> selected="selected" <? }?>>ESSENCIAL HD LIGHT DTV</option>
 <option value="FAMILIA HD LIGHT DTV" <? if($linha['plano'] == 'FAMILIA HD LIGHT DTV'){ ?> selected="selected" <? }?>>FAMILIA HD LIGHT DTV</option>
 <option value="ESSENCIAL TELECINE HD LIGHT DTV" <? if($linha['plano'] == 'ESSENCIAL TELECINE HD LIGHT DTV'){ ?> selected="selected" <? }?>>ESSENCIAL TELECINE HD LIGHT DTV</option>
 <option value="ESSENCIAL HBO HD LIGHT DTV" <? if($linha['plano'] == 'ESSENCIAL HBO HD LIGHT DTV'){ ?> selected="selected" <? }?>>ESSENCIAL HBO HD LIGHT DTV</option>
+<option value="FAMILIA TELECINE HD LIGHT DTV" <? if($linha['plano'] == 'FAMILIA TELECINE HD LIGHT DTV'){ ?> selected="selected" <? }?>>FAMILIA TELECINE HD LIGHT DTV</option>
+<option value="FAMILIA HBO HD LIGHT DTV" <? if($linha['plano'] == 'FAMILIA HBO HD LIGHT DTV'){ ?> selected="selected" <? }?>>FAMILIA HBO HD LIGHT DTV</option>
 <option value="ESSENCIAL CINEMA HD LIGHT DTV" <? if($linha['plano'] == 'ESSENCIAL CINEMA HD LIGHT DTV'){ ?> selected="selected" <? }?>>ESSENCIAL CINEMA HD LIGHT DTV</option>
-<option value="FAMILIA CINEMA HD LIGHT DTV" <? if($linha['plano'] == 'FAMILIA CINEMA HD LIGHT DTV'){ ?> selected="selected" <? }?>>FAMILIA CINEMA HD LIGHT DTV</option>
-<option value="FAMÍLIA HD MAIS DTV" <? if($linha['plano'] == 'FAMÍLIA HD MAIS DTV'){ ?> selected="selected" <? }?>>FAMÍLIA HD MAIS DTV</option>
+<option value="FAMÍLIA CINEMA HD LIGHT DTV" <? if($linha['plano'] == 'FAMÍLIA CINEMA HD LIGHT DTV'){ ?> selected="selected" <? }?>>FAMÍLIA CINEMA HD LIGHT DTV</option>
+<option value="FAMÍLIA HD LIGHT FUT DTV (A La carte PFC)" <? if($linha['plano'] == 'FAMÍLIA HD LIGHT FUT DTV (A La carte PFC)'){ ?> selected="selected" <? }?>>FAMÍLIA HD LIGHT FUT DTV (A La carte PFC)</option>
 
 <option value=""></option>
 <option value="FAMILIA CINEMA HD MAIS DTV" <? if($linha['plano'] == 'FAMILIA CINEMA HD MAIS DTV'){ ?> selected="selected" <? }?>>FAMILIA CINEMA HD MAIS DTV</option>
 <option value="FAMILIA HD MAIS FUT DTV (A La carte PFC)" <? if($linha['plano'] == 'FAMILIA HD MAIS FUT DTV (A La carte PFC)'){ ?> selected="selected" <? }?>>FAMILIA HD MAIS FUT DTV (A La carte PFC)</option>
 <option value="FAMILIA CINE HD MAIS FUT DTV (A La carte PFC)" <? if($linha['plano'] == 'FAMILIA CINE HD MAIS FUT DTV (A La carte PFC)'){ ?> selected="selected" <? }?>>FAMILIA CINE HD MAIS FUT DTV (A La carte PFC)</option>
-
 
 
 </select>
@@ -3584,7 +3545,7 @@ R$ <?= str_replace('.',',',$linha['valor']); ?>
 
 
 
-
+<?/*
 <!-- ########## INICIO CARTAO ############# -->
 
 <tr class="idcartaocredito" <? if($linha['pagamento'] != 'CARTÃO DE CRÉDITO'){ ?> style="display: none" <? } ?>>
@@ -3756,9 +3717,11 @@ if($linha['numCar']){ echo $linha['numParcelas']; } ?>
 
 <tr><td colspan="2"><hr size="1" color="#ccc" /></td></tr>
 
+<? } ?>
 
 <!-- ########## FIM CARTAO ############# -->
 
+*/?>
 
 <tr id="idbanco" <? if($linha['pagamento'] != 'DÉBITO'){?> style="display:none" <? } ?>>
 
@@ -3873,7 +3836,7 @@ if($linha['numCar']){ echo $linha['numParcelas']; } ?>
 
 <!-- ########## INICIO CARTAO INSTALACAO ############# -->
 
-<tr class="idcartaocredito_i" <? if($linha['pagamento_instalacao'] != 'CARTÃO DE CRÉDITO' || $linha['pagamento'] != 'BOLETO'){ ?> style="display:none" <? } ?>>
+<tr class="idcartaocredito" <? if($linha['pagamento_instalacao'] != 'CARTÃO DE CRÉDITO'){ ?> style="display:none" <? } ?>>
 
 <td><b>Nome do Titular:</b></td>
 <td>
@@ -3893,7 +3856,7 @@ if($linha['numCar_i']){ echo $linha['titularCartao_i']; } ?>
 </td>
 </tr>
 
-<tr class="idcartaocredito_i" <? if($linha['pagamento_instalacao'] != 'CARTÃO DE CRÉDITO' || $linha['pagamento'] != 'BOLETO'){?> style="display:none" <? } ?>>
+<tr class="idcartaocredito" <? if($linha['pagamento_instalacao'] != 'CARTÃO DE CRÉDITO'){?> style="display:none" <? } ?>>
 <td><b>Cartão Crédito:</b></td>
 <td>
 <? 
@@ -3923,7 +3886,7 @@ if($linha['numCar_i']){ echo 'XXXX-XXXX-XXXX-'.substr(base64_decode($linha['numC
 </tr>
 
 
-<tr class="idcartaocredito_i" <? if($linha['pagamento_instalacao'] != 'CARTÃO DE CRÉDITO' || $linha['pagamento'] != 'BOLETO'){?> style="display:none" <? } ?>>
+<tr class="idcartaocredito" <? if($linha['pagamento_instalacao'] != 'CARTÃO DE CRÉDITO'){?> style="display:none" <? } ?>>
 <td><b>Cód. Segurança:</b></td>
 <td>
 <? 
@@ -3951,7 +3914,7 @@ if($linha['numCar_i']){ echo 'XX'.substr($linha['codSeg_i'],2,1); } ?>
 </td>
 </tr>
 
-<tr class="idcartaocredito_i" <? if($linha['pagamento_instalacao'] != 'CARTÃO DE CRÉDITO' || $linha['pagamento'] != 'BOLETO'){?> style="display:none" <? } ?>>
+<tr class="idcartaocredito" <? if($linha['pagamento_instalacao'] != 'CARTÃO DE CRÉDITO'){?> style="display:none" <? } ?>>
 <td><b>Validade:</b></td>
 <td>
 
@@ -3985,7 +3948,7 @@ if($linha['numCar_i']){ echo $linha['carVal_i']; } ?>
 </tr>
 
 
-<tr class="idcartaocredito_i" <? if($linha['pagamento_instalacao'] != 'CARTÃO DE CRÉDITO' || $linha['pagamento'] != 'BOLETO'){?> style="display:none" <? } ?>>
+<tr class="idcartaocredito" <? if($linha['pagamento_instalacao'] != 'CARTÃO DE CRÉDITO'){?> style="display:none" <? } ?>>
 
 <td><b>Bandeira:</b></td>
 <td>
@@ -4010,7 +3973,7 @@ if($linha['numCar_i']){ echo $linha['carBan_i']; } ?>
 </tr>
 
 
-<tr class="idcartaocredito_i" <? if($linha['pagamento_instalacao'] != 'CARTÃO DE CRÉDITO' || $linha['pagamento'] != 'BOLETO'){?> style="display:none" <? } ?>>
+<tr class="idcartaocredito" <? if($linha['pagamento_instalacao'] != 'CARTÃO DE CRÉDITO'){?> style="display:none" <? } ?>>
 <td><b>Parcelas:</b></td>
 <td>
 

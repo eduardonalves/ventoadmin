@@ -15,7 +15,7 @@ if (!empty($_FILES)) {
 	$time = time();
 
 	// Validate the file type
-	$fileTypes = array('xls'); // File extensions
+	$fileTypes = array('csv'); // File extensions
 	$fileParts = pathinfo($_FILES['file']['name']);
 		
 	//$targetFile = rtrim($targetPath,'/') . '/' . $_FILES['file']['name'];

@@ -156,7 +156,7 @@ box-shadow:  0px 0px 10px 2px #999;
 				return true;
 			 });
 
-		$("#file").pekeUpload({invalidExtError:'Tipo de arquivo inv&aacute;lido', file:'arquivo', onSubmit:true, multi:false, data:'<?php $curTime = time(); echo $curTime;?>', btnText:'Selecionar arquivo', allowedExtensions:"xls", onFileSuccess: function(file,data){ $("#statusForm").trigger("submit", [true]);}});
+		$("#file").pekeUpload({invalidExtError:'Tipo de arquivo inv&aacute;lido', file:'arquivo', onSubmit:true, multi:false, data:'<?php $curTime = time(); echo $curTime;?>', btnText:'Selecionar arquivo', allowedExtensions:"csv", onFileSuccess: function(file,data){ $("#statusForm").trigger("submit", [true]);}});
 		//$("#file").pekeUpload();
 		
 		

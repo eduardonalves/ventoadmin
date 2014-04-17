@@ -7,7 +7,7 @@ if($_GET['an'] != ""){ $ano = $_GET['an']; } else {$ano = date("Y");}
 switch ($mes) {
         case "01":    $m = Janeiro;     break;
         case "02":    $m = Fevereiro;   break;
-        case "03":    $m = Março;       break;
+        case "03":    $m = MarÃ§o;       break;
         case "04":    $m = Abril;       break;
         case "05":    $m = Maio;        break;
         case "06":    $m = Junho;       break;
@@ -36,7 +36,7 @@ body{ font-family:Arial, Helvetica, sans-serif;}
 <link rel="stylesheet" href="../css/geral.css" type="text/css" />
 <link rel="stylesheet" href="../css/tables.css" type="text/css" />
 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 
 <!-- INFO OPERADORES -->
@@ -56,7 +56,7 @@ $conINFOOPERADOR2 = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto 
 
 $conINFOOPERADORCONEC = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$produto_id."' && operador = '".$operador."' && data_instalacao LIKE '%".$ano.$mes."%' && status = 'CONECTADO'");
 
-$conINFOOPERADORREST = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$produto_id."' && operador = '".$operador."' && data LIKE '%".$ano.$mes."%' && status = 'RESTRIÇÃO'");
+$conINFOOPERADORREST = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$produto_id."' && operador = '".$operador."' && data LIKE '%".$ano.$mes."%' && status = 'RESTRIÃ‡ÃƒO'");
 
 $conINFOOPERADORCANC = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$produto_id."' && operador = '".$operador."' && data LIKE '%".$ano.$mes."%' && status = 'CANCELADO'");
 $conINFOOPERADORCONECTADO = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto = '".$produto_id."' && operador = '".$operador."' && data LIKE '%".$ano.$mes."%' && status = 'DEVOLVIDO'");
@@ -72,7 +72,7 @@ $numINFOOPERADORREST = mysql_num_rows($conINFOOPERADORREST);$numINFOOPERADORCONE
 <span style="color:#CCC; font-size:26px; font-weight:bold"><?= $OPERADORES['nome'];?></span>
 <br />
 <span style="font-size:12px"><? if($numINFOOPERADOR == 0){ echo '(Nenhuma Venda)';} else { 
-echo '<b style="font-size:14px;">VENDAS: '.$numINFOOPERADOR.'</b> &nbsp; &nbsp; <b>Conectadas:</b> '.$numINFOOPERADORCONEC.' &nbsp; <b>Devolvidas:</b> '.$numINFOOPERADORCONECTADO.'. &nbsp; <b>Restrições:</b> '.$numINFOOPERADORREST.' &nbsp; <b>Canceladas:</b> '.$numINFOOPERADORCANC; } ?></span></span>
+echo '<b style="font-size:14px;">VENDAS: '.$numINFOOPERADOR.'</b> &nbsp; &nbsp; <b>Conectadas:</b> '.$numINFOOPERADORCONEC.' &nbsp; <b>Devolvidas:</b> '.$numINFOOPERADORCONECTADO.'. &nbsp; <b>RestriÃ§Ãµes:</b> '.$numINFOOPERADORREST.' &nbsp; <b>Canceladas:</b> '.$numINFOOPERADORCANC; } ?></span></span>
 
 <table border="0" width="750px" cellpadding="0" cellspacing="0" id="tablelistaop<?= $OPERADORES['operador_id'];?>">
 

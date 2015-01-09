@@ -1129,7 +1129,7 @@ if(e!=0){
 	
 		if ( $("#cpfduplicado").length > 0 && $("#cpfduplicado").val() == 'duplicado' ){
 	
-			var confirma = confirm('Já existe uma venda com este cpf no sistema. A venda será inserida, porém somente será continuada com autorização de um Administrador. Deseja prosseguir?');
+			var confirma = confirm('Já existe uma venda com este cpf no sistema. A venda será inserida, porém somente continuada com autorização de um Administrador. Deseja prosseguir?');
 			
 			if (confirma) { document.forms.inserir.submit();  }
 		}

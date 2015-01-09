@@ -1,4 +1,0 @@
-ventoadmin
-==========
-
-Vento Admin

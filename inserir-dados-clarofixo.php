@@ -14,6 +14,7 @@ window.location = 'index.php'
 
 
 if(isset($_POST['nome'])){
+	
 //print_r($_POST);
 //die();
 // Dados do cliente
@@ -206,9 +207,14 @@ if  (strstr(strtolower($USUARIO['login']), 'internet'))
 	
 }
 
+// EXCESSAO PARA STATUS BLOQUEADA
 
 
-
+if( isset($_POST['cpfduplicado']) && $_POST['cpfduplicado'] == 'duplicado' ){
+	
+	$status='BLOQUEADA';
+	
+}
 
 
 
@@ -1115,7 +1121,20 @@ if(!document.getElementById('venci1').checked && !document.getElementById('venci
 
 /////// -- VERIFICAR SE EXISTEM ERROS -- ////////
 
-if(e!=0){ window.alert('ERRO: Preencha todos os campos indicados, corretamente'); $('body,html').animate({scrollTop: 150}, 800);} else { document.forms.inserir.submit(); }
+if(e!=0){ 
+	
+	window.alert('ERRO: Preencha todos os campos indicados, corretamente'); $('body,html').animate({scrollTop: 150}, 800);
+	
+	} else { 
+	
+		if ( $("#cpfduplicado").length > 0 && $("#cpfduplicado").val() == 'duplicado' ){
+	
+			var confirma = confirm('Já existe uma venda com este cpf no sistema. A venda será inserida, porém somente será continuada com autorização de um Administrador. Deseja prosseguir?');
+			
+			if (confirma) { document.forms.inserir.submit();  }
+		}
+
+	}
 
 
 }

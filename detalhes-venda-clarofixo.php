@@ -3,6 +3,7 @@ date_default_timezone_set("Brazil/East");
 if(!isset($_SESSION)){ session_start(); }
 
 include_once "conexao.php";
+include_once "global-functions.php";
 
 include_once "lib/class.Usuarios.php";
 include_once "lib/class.VentoAdmin.php";
@@ -241,6 +242,9 @@ function verificaEsn()
 	$apid = $_POST['aparelho'];
 	$monitor = $_POST['monitor'];
 
+	/// Excessao para venda somente de chip
+	if ($apid == 7 && $esn == '') { return true; }
+
 	if($esn=="" || $apid==0 || $monitor=="") { return false; }
 	
 
@@ -362,7 +366,10 @@ $numchip = $_POST['numchip'];
 $nome = $_POST['nome'];
 $nome_mae = $_POST['nomemae'];
 $nascimento = $_POST['nascd'].'/'.$_POST['nascm'].'/'.$_POST['nasca'];
-$cpf = $_POST['icpf'];
+
+$cpf = soNumero($_POST['icpf']);
+$cpf = mask($cpf,'###.###.###-##');
+
 $rg = $_POST['rg'];
 $org_exp = $_POST['orgexp'];
 $profissao = $_POST['profissao'];
@@ -683,10 +690,10 @@ if($numchip != '')
 			if( $varerros=='' )
 			{
 				$varerros = 'Campos obrigatórios não preenchidos ou Inválidos:\n\n';
-				$varerros .= "CHIP Inválido. EstE chip não pertence ao monitor associado a esta venda.";
+				$varerros .= "CHIP Inválido. Este chip não pertence ao monitor associado a esta venda.";
 						 
 			}else{
-				$varerros .= ", CHIP inválido. EstE chip não pertence ao monitor associado a esta venda.";
+				$varerros .= ", CHIP inválido. Este chip não pertence ao monitor associado a esta venda.";
 			
 			}
 	}		
@@ -794,6 +801,12 @@ if($_POST['status'] == strtoupper('FINALIZADA') && ($_POST['agendaentrega'] == "
 			}elseif ($_POST['tipoEntrega']=='PRONTA ENTREGA') {
 
 				$excep = array("lote", "quadra", "complemento","rg", "orgexp", "dataexp","numchip","itelefone3","tipotel3","pontoref");
+				
+				if ($_POST['aparelho'] == 7 && $_POST['esn'] == ''){
+					
+					$excep = array("lote", "quadra", "complemento","rg", "orgexp", "dataexp","numchip","itelefone3","tipotel3","pontoref", "esn");
+					
+				}
 				validarCampos($campos, $excep);
 				
 				
@@ -3292,10 +3305,25 @@ if( ($editar == '1') && ( (($USUARIO['tipo_usuario']!="MONITOR" && $USUARIO['ace
 </tr>
 
 
+<?php
 
+if($linha['status'] == 'BLOQUEADA'){
 
+?>
+	<tr>
+		<td></td>
+		
+		<td>
 
+			<span style="font-size:12px; color:#FF0000">Existe mais de uma venda cadastrada com este cpf.</span>
 
+		</td>
+
+	</tr>
+
+<?php 
+}
+?>
 
 
 

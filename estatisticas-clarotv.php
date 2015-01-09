@@ -46,6 +46,13 @@ if($_GET['m'] != ""){ $mes = $_GET['m']; } else {$mes = date("m");}
 
 if($_GET['an'] != ""){ $ano = $_GET['an']; } else {$ano = date("Y");}
 
+// *** Impedindo parceiros de visualizar meses anteriores
+if ($USUARIO['tipo_usuario'] == 'MONITOR' && $USUARIO['acesso_usuario'] == 'EXTERNO'){
+	
+	$mes = date("m");
+	$ano = date("Y");
+	
+}
 
 
 switch ($mes) {
@@ -650,29 +657,47 @@ box-shadow:  0px 0px 10px 2px #999;
 
 <select name="m">
 
-<option value="01" <? if($mes == '01'){ ?> selected="selected" <? } ?>>JANEIRO</option>
+<?php 
 
-<option value="02" <? if($mes == '02'){ ?> selected="selected" <? } ?>>FEVEREIRO</option>
+if ($USUARIO['tipo_usuario'] == 'MONITOR' && $USUARIO['acesso_usuario'] == 'EXTERNO'){
 
-<option value="03" <? if($mes == '03'){ ?> selected="selected" <? } ?>>MARÇO</option>
+?>
 
-<option value="04" <? if($mes == '04'){ ?> selected="selected" <? } ?>>ABRIL</option>
+	<option value="<?php echo $mes; ?>" selected="selected"><?php echo $m;?></option>
 
-<option value="05" <? if($mes == '05'){ ?> selected="selected" <? } ?>>MAIO</option>
+<?php
 
-<option value="06" <? if($mes == '06'){ ?> selected="selected" <? } ?>>JUNHO</option>
+}else{
+	
+?>
 
-<option value="07" <? if($mes == '07'){ ?> selected="selected" <? } ?>>JULHO</option>
+	<option value="01" <? if($mes == '01'){ ?> selected="selected" <? } ?>>JANEIRO</option>
 
-<option value="08" <? if($mes == '08'){ ?> selected="selected" <? } ?>>AGOSTO</option>
+	<option value="02" <? if($mes == '02'){ ?> selected="selected" <? } ?>>FEVEREIRO</option>
 
-<option value="09" <? if($mes == '09'){ ?> selected="selected" <? } ?>>SETEMBRO</option>
+	<option value="03" <? if($mes == '03'){ ?> selected="selected" <? } ?>>MARÇO</option>
 
-<option value="10" <? if($mes == '10'){ ?> selected="selected" <? } ?>>OUTUBRO</option>
+	<option value="04" <? if($mes == '04'){ ?> selected="selected" <? } ?>>ABRIL</option>
 
-<option value="11" <? if($mes == '11'){ ?> selected="selected" <? } ?>>NOVEMBRO</option>
+	<option value="05" <? if($mes == '05'){ ?> selected="selected" <? } ?>>MAIO</option>
 
-<option value="12" <? if($mes == '12'){ ?> selected="selected" <? } ?>>DEZEMBRO</option>
+	<option value="06" <? if($mes == '06'){ ?> selected="selected" <? } ?>>JUNHO</option>
+
+	<option value="07" <? if($mes == '07'){ ?> selected="selected" <? } ?>>JULHO</option>
+
+	<option value="08" <? if($mes == '08'){ ?> selected="selected" <? } ?>>AGOSTO</option>
+
+	<option value="09" <? if($mes == '09'){ ?> selected="selected" <? } ?>>SETEMBRO</option>
+
+	<option value="10" <? if($mes == '10'){ ?> selected="selected" <? } ?>>OUTUBRO</option>
+
+	<option value="11" <? if($mes == '11'){ ?> selected="selected" <? } ?>>NOVEMBRO</option>
+
+	<option value="12" <? if($mes == '12'){ ?> selected="selected" <? } ?>>DEZEMBRO</option>
+
+<?php 
+}
+?>
 
 </select>
 
@@ -682,16 +707,26 @@ box-shadow:  0px 0px 10px 2px #999;
 
 <select name="an">
 
-<? $a = date('Y'); while($a > '2011'){ $an = $a--; ?>
+<?php if ($USUARIO['tipo_usuario'] == 'MONITOR' && $USUARIO['acesso_usuario'] == 'EXTERNO'){
+?>
+	<option value="<?php echo $ano; ?>" selected="selected"><?php echo $ano; ?></option>
+<?php
+}else{
+?>
+
+	<? $a = date('Y'); while($a > '2011'){ $an = $a--; ?>
 
 
 
-<option value="<?= $an; ?>" <? if($ano == $an){ ?> selected="selected" <? } ?>><?= $an; ?></option>
+	<option value="<?= $an; ?>" <? if($ano == $an){ ?> selected="selected" <? } ?>><?= $an; ?></option>
 
 
 
-<? } ?>
+	<? } ?>
 
+<?php
+}
+?>
 </select>
 <? if($USUARIO['tipo_usuario']=="ADMINISTRADOR"){ ?>
 | Tipo de Venda: 
@@ -2343,7 +2378,7 @@ $POAD = mysql_fetch_array($conPOAD);
 
 
 <?php /*<td style="cursor:pointer" onclick="mostrarinfo('#infotecnico<?= $TEC['tecnico_id']?>')"><?= $TEC['nome'];?></td> */ ?>
-<td style="cursor:pointer" onclick="mostrarinfo('#infotecnico<?= $TEC['tecnico_id']?>')"><?= $TEC['nome'];?></td>
+<td style="cursor:pointer" onclick="mostrarinfo('<?= $TEC['tecnico_id']?>')"><?= $TEC['nome'];?></td>
 
 
 

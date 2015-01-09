@@ -1126,13 +1126,16 @@ if(e!=0){
 	window.alert('ERRO: Preencha todos os campos indicados, corretamente'); $('body,html').animate({scrollTop: 150}, 800);
 	
 	} else { 
+
 	
-		if ( $("#cpfduplicado").length > 0 && $("#cpfduplicado").val() == 'duplicado' ){
+		if ( $("#cpfduplicado").length > 0 ){
 	
-			var confirma = confirm('Já existe uma venda com este cpf no sistema. A venda será inserida, porém somente continuada com autorização de um Administrador. Deseja prosseguir?');
-			
-			if (confirma) { document.forms.inserir.submit();  }
+	
+			alert('Já existe uma venda com este cpf no sistema. A venda será inserida, porém somente continuada com autorização de um Administrador.');
+			document.forms.inserir.submit();  
+
 		}
+
 
 	}
 

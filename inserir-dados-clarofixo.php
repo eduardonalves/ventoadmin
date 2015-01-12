@@ -1776,7 +1776,7 @@ $(document).ready( function() {
 
  Org. Exp: <input type="text" title="Orgão Expedidor" id="orgexp" name="orgexp" size="20" /><span class="campoobrigatorio" title="Campo Obrigatório">*</span>
 
- Data Exp: <input type="text" title="Data Expedição" id="dataexp" name="dataexp" onKeyPress="mascara(this,data)" maxlength="10" size="20" />
+ Data Exp: <input type="text" title="Data Expedição" id="dataexp" name="dataexp" onKeyPress="mascara(this,data)" maxlength="10" size="15" />
 
 <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
 <span class="erro" id="erg" style="display:none">Por favor, digite o RG do cliente!</span>

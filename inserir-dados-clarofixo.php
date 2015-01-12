@@ -1130,10 +1130,16 @@ if(e!=0){
 	
 		if ( $("#cpfduplicado").length > 0 ){
 	
-	
-			alert('Já existe uma venda com este cpf no sistema. A venda será inserida, porém somente continuada com autorização de um Administrador.');
-			document.forms.inserir.submit();  
+			var $nn = confirm("Já existe uma venda com este cpf no sistema. A venda será inserida como BLOQUEADA, e somente continuada com autorização de um Administrador.\n\nDeseja continuar?");
 
+			if ( $nn == true)
+			{
+				document.forms.inserir.submit();
+			}
+
+		} else {
+			
+			document.forms.inserir.submit();
 		}
 
 

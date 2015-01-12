@@ -1793,7 +1793,7 @@ $(document).ready( function() {
 
 <!-- 
 
-<span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span> 
+<span class="campoobrigatorio" title="Campo Obrigatório">*</span> 
 
 <span class="erro" id="eprofissao" style="display:none">Por favor, preencha a profissÃ£o do cliente!</span>
 

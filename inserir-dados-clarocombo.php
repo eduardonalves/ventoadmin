@@ -137,6 +137,15 @@ if  (strstr(strtolower($USUARIO['login']), 'internet'))
 	
 }
 
+// EXCESSAO PARA STATUS BLOQUEADA
+
+
+if( isset($_POST['cpfduplicado']) && $_POST['cpfduplicado'] == 'duplicado' ){
+	
+	$status='BLOQUEADA';
+	
+}
+
 $inserir = $conexao->query("INSERT INTO vendas_clarotv (protocolo,produto,tipoVenda,pessoa,nome,nascimento,cpf,rg,org_exp,profissao,sexo,estado_civil,email,telefone,tipo_tel1,telefone2,tipo_tel2,telefone3,tipo_tel3,endereco,numero,lote,quadra,complemento,bairro,cidade,uf,cep,ponto_referencia,operador,monitor,plano,pontos,pagamento,data,data_venda,vencimento,valor,banco,agencia,conta_corrente,data_desejada,tipo_instalacao,tecnico_id,pagamento_instalacao,status,comboServicos, comboFonePlano, comboInternetPlano, comboFonePlanoPreco, comboInternetPlanoPreco, comboTotalPlanos, comboPortabilidade, comboNumeroPortado, comboRoteador, comboRoteadorPreco, comboClienteTv) VALUES ('".$protocolo."','9','".$tipoVenda."','".$pessoa."','".$nome."','".$nascimento."','".$cpf."','".$rg."','".$org_exp."','".$profissao."','".$sexo."','".$estado_civil."','".$email."','".$telefone."','".$tipo_tel1."','".$telefone2."','".$tipo_tel2."','".$telefone3."','".$tipo_tel3."','".$endereco."','".$numero."','".$lote."','".$quadra."','".$complemento."','".$bairro."','".$cidade."','".$uf."','".$cep."','".$ponto_referencia."','".$operador."','".$monitor."','".$plano."','".$pontos."','".$pagamento."','".$data."','".$data."','".$vencimento."','".$valor."','".$banco."','".$agencia."','".$conta_corrente."','".$data_desejada."','".$tipo_instalacao."','".$tecnico."','".$pagamento_instalacao."','".$status."','".$comboServicos."','".$comboFonePlano."','".$comboInternetPlano."','".$comboFonePlanoPreco."','".$comboInternetPlanoPreco."','".$comboTotalPlanos."','".$comboPortabilidade."','".$comboNumeroPortado."','".$comboRoteador."','".$comboRoteadorPreco."','".$comboClienteTv."')") or die('Ocorreu um Erro ao inserir os dados!');
 
 
@@ -386,7 +395,30 @@ if( document.getElementById('pagamento').value == 'DÉBITO' && (document.getElem
 //if(document.getElementById('calendario').value == ''){ document.getElementById('eagendamento').style.display = ''; e=(e+1)} else { document.getElementById('eagendamento').style.display = 'none';}
 /////// -- VERIFICAR SE EXISTEM ERROS -- ////////
 
-if(e!=0){ window.alert('ERRO: Preencha todos os campos indicados, corretamente'); $('body,html').animate({scrollTop: 150}, 800);} else { document.forms.inserir.submit(); }
+if(e!=0){ 
+	
+	window.alert('ERRO: Preencha todos os campos indicados, corretamente'); $('body,html').animate({scrollTop: 150}, 800);
+	
+	} else { 
+
+	
+		if ( $("#cpfduplicado").length > 0 && $("#cpfduplicado").val() == 'duplicado' ){
+	
+			var $nn = confirm("Já existe uma venda com este cpf no sistema. A venda será inserida como BLOQUEADA, e somente continuada com autorização de um Administrador.\n\nDeseja continuar?");
+
+			if ( $nn == true)
+			{
+				document.forms.inserir.submit();
+			}
+
+		} else {
+			
+			document.forms.inserir.submit();
+		}
+
+
+	}
+
 	
 }
 
@@ -395,6 +427,21 @@ if(e!=0){ window.alert('ERRO: Preencha todos os campos indicados, corretamente')
 ///////////////////////////////////
 ///////// CHECAR PROPOSTA////////
 /////////////////////////////////
+
+function checkcpf(c){
+
+	
+
+	
+
+	$('#loadcpf').load('check-cpf-clarocombo.php?c='+c);
+
+	
+
+	
+
+	}
+
 
 function checkpropostas(p){
 	
@@ -447,7 +494,7 @@ $(document).ready(function(e) {
 
 <tr valign="bottom" height="40px" align="left">
 <td style="font-size:14px; color:#999;">NOVA VENDA</td>
-<td align="right"><img src="img/voltar.png" style="cursor:pointer" onclick="window.location = '?p=clarotv'" /></td>
+<td align="right"><img src="img/voltar.png" style="cursor:pointer" onclick="window.location = '?p=clarocombo'" /></td>
 </tr>
 
 <tr>
@@ -888,7 +935,7 @@ $(document).ready( function() {
 
 <tr align="left" id="cpfl">
 <td>CPF:</td>
-<td id="cpfinp"><input type="text" id="idcpf" name="icpf" onKeyPress="mascara(this,cpf)" maxlength="14" size="20" />
+<td id="cpfinp"> <div id="loadcpf"></div> <input type="text" id="idcpf" name="icpf" onKeyPress="mascara(this,cpf)" onkeyup="checkcpf(this.value)" onfocusout="checkcpf(this.value)" maxlength="14" size="20" />
 <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
 <span class="erro" id="ecpf" style="display:none">Por favor, digite o CPF do cliente!</span>
 </td>
@@ -909,7 +956,7 @@ $(document).ready( function() {
 <td id="rginp"><input type="text" id="rg" name="rg" size="20" maxlength="12" /><span class="campoobrigatorio" title="Campo Obrigatório">*</span>
 Org. Exp: <input type="text" title="Orgão Expedidor" id="orgexp" name="orgexp" size="20" />
 <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
-Data Exp: <input type="text" title="Data Expedição" id="dataexp" name="dataexp" onKeyPress="mascara(this,data)" maxlength="10" size="20" />
+Data Exp: <input type="text" title="Data Expedição" id="dataexp" name="dataexp" onKeyPress="mascara(this,data)" maxlength="10" size="15" />
 <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
 <span class="erro" id="erg" style="display:none">Por favor, digite o RG do cliente!</span>
 </td>

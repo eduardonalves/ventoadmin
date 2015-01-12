@@ -34,6 +34,13 @@ if($_GET['me'] != "" && $_GET['me'] != "todos"){ $mes = $_GET['me']; } else if($
 
 if($_GET['an'] == "todos"){ $ano = "";} else if($_GET['an'] != ""){ $ano = $_GET['an']; } else {$ano = date("Y");}
 
+// *** Impedindo parceiros de visualizar meses anteriores
+if ($USUARIO['tipo_usuario'] == 'MONITOR' && $USUARIO['acesso_usuario'] == 'EXTERNO'){
+	
+	$mes = date("m");
+	$ano = date("Y");
+	
+}
 
 
 $ordem = $_GET['o'];
@@ -605,32 +612,113 @@ Mês:
 
 <select name="me" onchange="javascript:document.forms.filtro.submit();">
 
-<option value="todos">Todos</option>
+<?php 
 
-<option value="01" <? if($mes == '01'){ ?> selected="selected" <? } ?>>JANEIRO</option>
+if ($USUARIO['tipo_usuario'] == 'MONITOR' && $USUARIO['acesso_usuario'] == 'EXTERNO'){
+	
+	switch($mes) {
+		
+		case '01':
+		
+			$mesNome = "JANEIRO";
+			break;
 
-<option value="02" <? if($mes == '02'){ ?> selected="selected" <? } ?>>FEVEREIRO</option>
+		case '02':
+		
+			$mesNome = "FEVEREIRO";
+			break;
 
-<option value="03" <? if($mes == '03'){ ?> selected="selected" <? } ?>>MARÇO</option>
+		case '03':
+		
+			$mesNome = "MARÇO";
+			break;
 
-<option value="04" <? if($mes == '04'){ ?> selected="selected" <? } ?>>ABRIL</option>
+		case '04':
+		
+			$mesNome = "ABRIL";
+			break;
 
-<option value="05" <? if($mes == '05'){ ?> selected="selected" <? } ?>>MAIO</option>
+		case '05':
+		
+			$mesNome = "MAIO";
+			break;
 
-<option value="06" <? if($mes == '06'){ ?> selected="selected" <? } ?>>JUNHO</option>
+		case '06':
+		
+			$mesNome = "JUNHO";
+			break;
 
-<option value="07" <? if($mes == '07'){ ?> selected="selected" <? } ?>>JULHO</option>
+		case '07':
+		
+			$mesNome = "JULHO";
+			break;
 
-<option value="08" <? if($mes == '08'){ ?> selected="selected" <? } ?>>AGOSTO</option>
+		case '08':
+		
+			$mesNome = "AGOSTO";
+			break;
 
-<option value="09" <? if($mes == '09'){ ?> selected="selected" <? } ?>>SETEMBRO</option>
+		case '09':
+		
+			$mesNome = "SETEMBRO";
+			break;
 
-<option value="10" <? if($mes == '10'){ ?> selected="selected" <? } ?>>OUTUBRO</option>
+		case '10':
+		
+			$mesNome = "OUTUBRO";
+			break;
 
-<option value="11" <? if($mes == '11'){ ?> selected="selected" <? } ?>>NOVEMBRO</option>
+		case '11':
+		
+			$mesNome = "NOVEMBRO";
+			break;
 
-<option value="12" <? if($mes == '12'){ ?> selected="selected" <? } ?>>DEZEMBRO</option>
+		case '12':
+		
+			$mesNome = "DEZEMBRO";
+			break;
+		
+	}
+	
+?>
 
+	<option value="<?php echo date("m"); ?>" selected="selected"><?php echo $mesNome;?></option>
+
+<?php
+
+}else{
+	
+?>
+
+	<option value="todos">Todos</option>
+
+	<option value="01" <? if($mes == '01'){ ?> selected="selected" <? } ?>>JANEIRO</option>
+
+	<option value="02" <? if($mes == '02'){ ?> selected="selected" <? } ?>>FEVEREIRO</option>
+
+	<option value="03" <? if($mes == '03'){ ?> selected="selected" <? } ?>>MARÇO</option>
+
+	<option value="04" <? if($mes == '04'){ ?> selected="selected" <? } ?>>ABRIL</option>
+
+	<option value="05" <? if($mes == '05'){ ?> selected="selected" <? } ?>>MAIO</option>
+
+	<option value="06" <? if($mes == '06'){ ?> selected="selected" <? } ?>>JUNHO</option>
+
+	<option value="07" <? if($mes == '07'){ ?> selected="selected" <? } ?>>JULHO</option>
+
+	<option value="08" <? if($mes == '08'){ ?> selected="selected" <? } ?>>AGOSTO</option>
+
+	<option value="09" <? if($mes == '09'){ ?> selected="selected" <? } ?>>SETEMBRO</option>
+
+	<option value="10" <? if($mes == '10'){ ?> selected="selected" <? } ?>>OUTUBRO</option>
+
+	<option value="11" <? if($mes == '11'){ ?> selected="selected" <? } ?>>NOVEMBRO</option>
+
+	<option value="12" <? if($mes == '12'){ ?> selected="selected" <? } ?>>DEZEMBRO</option>
+
+<?php 
+}
+?>
 </select>
 
 &nbsp; &nbsp;
@@ -638,18 +726,28 @@ Mês:
 Ano: 
 
 <select name="an" onchange="javascript:document.forms.filtro.submit();">
-<option value="todos" <? if($ano == 'todos'){ ?> selected="selected" <? } ?>>Todos</option>
 
-<? $a = date('Y'); while($a > '2011'){ $an = $a--; ?>
+<?php if ($USUARIO['tipo_usuario'] == 'MONITOR' && $USUARIO['acesso_usuario'] == 'EXTERNO'){
+?>
+	<option value="<?php echo $ano; ?>" selected="selected"><?php echo $ano; ?></option>
+<?php
+}else{
+?>
+	<option value="todos" <? if($ano == 'todos'){ ?> selected="selected" <? } ?>>Todos</option>
+
+	<? $a = date('Y'); while($a > '2011'){ $an = $a--; ?>
 
 
 
-<option value="<?= $an; ?>" <? if($ano == $an){ ?> selected="selected" <? } ?>><?= $an; ?></option>
+	<option value="<?= $an; ?>" <? if($ano == $an){ ?> selected="selected" <? } ?>><?= $an; ?></option>
 
 
 
-<? } ?>
+	<? } ?>
 
+<?php
+}
+?>
 </select>
 
 </td>

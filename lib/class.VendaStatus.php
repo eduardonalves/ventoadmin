@@ -8,6 +8,8 @@ class VendaStatus extends VentoAdmin{
 	private $statusLabels = array (
 
 								1 => array (
+									
+									'BLOQUEADA' => 'Bloqueada',
 									'PRE-ANALISE' => 'Pré-Análise',
 									'ANÁLISE' => 'Análise',
 									'GRAVAR' => 'Gravar',
@@ -23,6 +25,7 @@ class VendaStatus extends VentoAdmin{
 								
 								2 => array(
 									
+									'BLOQUEADA' => 'Bloqueada',
 									'PRE-ANALISE' => 'Pŕe-Análise',
 									'DEVOLVIDO' => 'Devolvido',
 									'RESTRIÇÃO' => 'Restrição',
@@ -40,6 +43,7 @@ class VendaStatus extends VentoAdmin{
 								
 								3 => array(
 								
+									'BLOQUEADA' => 'Bloqueada',
 									'PRE-ANALISE' => 'Pré-Análise',
 									'CONSULTA' => 'Consulta',
 									'RESTRIÇÃO' => 'Restrição',
@@ -71,6 +75,8 @@ class VendaStatus extends VentoAdmin{
 								),
 
 								9 => array (
+								
+									'BLOQUEADA' => 'Bloqueada',
 									'PRE-ANALISE' => 'Pré-Análise',
 									'ANÁLISE' => 'Análise',
 									'GRAVAR' => 'Gravar',
@@ -116,7 +122,8 @@ class VendaStatus extends VentoAdmin{
 									'INSTALAR' => array('CANCELADO','CONECTADO'),
 									'CANCELADO' => array(),
 									'RECUPERADO' => array(),
-									'CONECTADO' => array()
+									'CONECTADO' => array(),
+									'BLOQUEADA' => array()
 							),
 							
 							2 => array(
@@ -132,7 +139,8 @@ class VendaStatus extends VentoAdmin{
 								'CANCELADO' => array(),
 								'AUTORIZADA' => array('ATIVADO'),
 								//'PÓS VENDAS' => array('ATIVADO'),
-								'ATIVADO' => array()
+								'ATIVADO' => array(),
+								'BLOQUEADA' => array()
 
 							),
 						
@@ -153,7 +161,8 @@ class VendaStatus extends VentoAdmin{
 								'ENVIAR GRAVAÇÃO' => array('FINALIZADA'),
 								'RECUPERADO' => array(),
 								'CANCELADO' => array(),
-								'FINALIZADA' => array()
+								'FINALIZADA' => array(),
+								'BLOQUEADA' => array()
 							),
 
 							7 => array(
@@ -178,7 +187,8 @@ class VendaStatus extends VentoAdmin{
 									'INSTALAR' => array('CANCELADO','CONECTADO'),
 									'CANCELADO' => array(),
 									'RECUPERADO' => array(),
-									'CONECTADO' => array()
+									'CONECTADO' => array(),
+									'BLOQUEADA' => array()
 							),
 
 							10 => array (
@@ -345,6 +355,30 @@ class VendaStatus extends VentoAdmin{
 													
 													),
 
+													'blockUserMonitorExterno' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('MONITOR'),
+																		'Usuarios.acesso_usuario' => array('EXTERNO')
+																		),
+																'flux' => array()
+
+													)
+									),
+
+									'BLOQUEADA' => array (
+													
+													'userAdmin' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('ADMINISTRADOR')
+																		),
+																'flux' => array('PRE-ANALISE', 'CANCELADO')
+
+													),
+													
 													'blockUserMonitorExterno' => array(
 																
 																'==' => array (
@@ -611,6 +645,30 @@ class VendaStatus extends VentoAdmin{
 													)
 									),
 
+									'BLOQUEADA' => array (
+													
+													'userAdmin' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('ADMINISTRADOR')
+																		),
+																'flux' => array('PRE-ANALISE', 'CANCELADO')
+
+													),
+													
+													'blockUserMonitorExterno' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('MONITOR'),
+																		'Usuarios.acesso_usuario' => array('EXTERNO')
+																		),
+																'flux' => array()
+
+													)
+									),
+
 									'ANÁLISE' => array (
 													
 													'userAdmin' => array(
@@ -865,6 +923,30 @@ class VendaStatus extends VentoAdmin{
 
 													)
 
+									),
+
+									'BLOQUEADA' => array (
+													
+													'userAdmin' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('ADMINISTRADOR')
+																		),
+																'flux' => array('PRE-ANALISE', 'CANCELADO')
+
+													),
+													
+													'blockUserMonitorExterno' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('MONITOR'),
+																		'Usuarios.acesso_usuario' => array('EXTERNO')
+																		),
+																'flux' => array()
+
+													)
 									),
 
 									'DEVOLVIDO' => array (
@@ -1178,6 +1260,29 @@ class VendaStatus extends VentoAdmin{
 													)
 									),
 
+									'BLOQUEADA' => array (
+													
+													'userAdmin' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('ADMINISTRADOR')
+																		),
+																'flux' => array('PRE-ANALISE', 'CANCELADO')
+
+													),
+													
+													'blockUserMonitorExterno' => array(
+																
+																'==' => array (
+																	
+																		'Usuarios.tipo_usuario' => array('MONITOR'),
+																		'Usuarios.acesso_usuario' => array('EXTERNO')
+																		),
+																'flux' => array()
+
+													)
+									),
 									'CONSULTA' => array (
 
 													'userAdmin' => array(

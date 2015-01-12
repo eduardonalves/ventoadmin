@@ -211,21 +211,25 @@ $protocolo = date("ymdHi").$idTipoVenda.str_pad(($rowNumvenda+1),4, "0", STR_PAD
 */
 
 $status = $_POST['status'];
+// EXCESSAO PARA STATUS BLOQUEADA
 
-if( $status == 'nova-venda' ){
+
+if( isset($_POST['cpfduplicado']) && $_POST['cpfduplicado'] == 'duplicado' ){
 	
-	$status = 'CONSULTA';
-
+	$status='BLOQUEADA';
+	
 } else {
+
+	if( $status == 'nova-venda' ){
+		
+		$status = 'CONSULTA';
+
+	} else {
+		
+		$status = $_POST['status'];
+	}
 	
-	$status = $_POST['status'];
 }
-
-
-
-
-
-
 
 
 
@@ -257,7 +261,7 @@ if( isset($_SESSION['usuario'])){
 
 	if( $_POST['status'] == 'nova-venda' ){
 		
-		echo "window.location = '?p=clarofixo&o=&m=&t=&f=&s=CONSULTA&v=&i=&de=&di=&di2=&tpv=&tpentrega=&b=" . $cpf . "&ebt=n';";
+		echo "window.location = '?p=clarofixo&o=&m=&t=&f=&s=" + $status + "&v=&i=&de=&di=&di2=&tpv=&tpentrega=&b=" . $cpf . "&ebt=n';";
 		
 	}else{
 		
@@ -1084,7 +1088,29 @@ if(document.getElementById('operador').value == ''){ document.getElementById('eo
 
 /////// -- VERIFICAR SE EXISTEM ERROS -- ////////
 
-if(e!=0){ window.alert('ERRO: Preencha todos os campos indicados, corretamente'); $('body,html').animate({scrollTop: 150}, 800);} else { document.forms.inserir.submit(); }
+if(e!=0){ 
+	
+	window.alert('ERRO: Preencha todos os campos indicados, corretamente'); $('body,html').animate({scrollTop: 150}, 800);
+	
+	} else { 
+
+	
+		if ( $("#cpfduplicado").length > 0 && $("#cpfduplicado").val() == 'duplicado' ){
+	
+			var $nn = confirm("Já existe uma venda com este cpf no sistema. A venda será inserida como BLOQUEADA, e somente continuada com autorização de um Administrador.\n\nDeseja continuar?");
+
+			if ( $nn == true)
+			{
+				document.forms.inserir.submit();
+			}
+
+		} else {
+			
+			document.forms.inserir.submit();
+		}
+
+
+	}
 
 
 }

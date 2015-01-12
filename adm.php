@@ -18,6 +18,7 @@ function autoload($class) {
 
 }
 
+include_once "global-functions.php";
 
 if(!isset($_SESSION['nomobile'])){
 

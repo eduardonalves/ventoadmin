@@ -14,6 +14,7 @@ window.location = 'index.php'
 
 
 if(isset($_POST['nome'])){
+	
 //print_r($_POST);
 //die();
 // Dados do cliente
@@ -206,9 +207,14 @@ if  (strstr(strtolower($USUARIO['login']), 'internet'))
 	
 }
 
+// EXCESSAO PARA STATUS BLOQUEADA
 
 
-
+if( isset($_POST['cpfduplicado']) && $_POST['cpfduplicado'] == 'duplicado' ){
+	
+	$status='BLOQUEADA';
+	
+}
 
 
 
@@ -1115,7 +1121,29 @@ if(!document.getElementById('venci1').checked && !document.getElementById('venci
 
 /////// -- VERIFICAR SE EXISTEM ERROS -- ////////
 
-if(e!=0){ window.alert('ERRO: Preencha todos os campos indicados, corretamente'); $('body,html').animate({scrollTop: 150}, 800);} else { document.forms.inserir.submit(); }
+if(e!=0){ 
+	
+	window.alert('ERRO: Preencha todos os campos indicados, corretamente'); $('body,html').animate({scrollTop: 150}, 800);
+	
+	} else { 
+
+	
+		if ( $("#cpfduplicado").length > 0 && $("#cpfduplicado").val() == 'duplicado' ){
+	
+			var $nn = confirm("Já existe uma venda com este cpf no sistema. A venda será inserida como BLOQUEADA, e somente continuada com autorização de um Administrador.\n\nDeseja continuar?");
+
+			if ( $nn == true)
+			{
+				document.forms.inserir.submit();
+			}
+
+		} else {
+			
+			document.forms.inserir.submit();
+		}
+
+
+	}
 
 
 }
@@ -1717,7 +1745,7 @@ $(document).ready( function() {
 
 <td>CPF:</td>
 
-<td id="cpfinp"> <div id="loadcpf"></div> <input type="text" id="idcpf" name="icpf" onKeyPress="mascara(this,cpf)" onkeyup="checkcpf(this.value)" onChange="checkcpf(this.value)" maxlength="14" size="20" />
+<td id="cpfinp"> <div id="loadcpf"></div> <input type="text" id="idcpf" name="icpf" onKeyPress="mascara(this,cpf)" onkeyup="checkcpf(this.value)" onfocusout="checkcpf(this.value)" onChange="checkcpf(this.value)" maxlength="14" size="20" />
 
 <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
 <span class="erro" id="ecpf" style="display:none">Por favor, digite o CPF do cliente!</span>
@@ -1748,7 +1776,7 @@ $(document).ready( function() {
 
  Org. Exp: <input type="text" title="Orgão Expedidor" id="orgexp" name="orgexp" size="20" /><span class="campoobrigatorio" title="Campo Obrigatório">*</span>
 
- Data Exp: <input type="text" title="Data Expedição" id="dataexp" name="dataexp" onKeyPress="mascara(this,data)" maxlength="10" size="20" />
+ Data Exp: <input type="text" title="Data Expedição" id="dataexp" name="dataexp" onKeyPress="mascara(this,data)" maxlength="10" size="15" />
 
 <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
 <span class="erro" id="erg" style="display:none">Por favor, digite o RG do cliente!</span>
@@ -1765,7 +1793,7 @@ $(document).ready( function() {
 
 <!-- 
 
-<span class="campoobrigatorio" title="Campo ObrigatÃ³rio">*</span> 
+<span class="campoobrigatorio" title="Campo Obrigatório">*</span> 
 
 <span class="erro" id="eprofissao" style="display:none">Por favor, preencha a profissÃ£o do cliente!</span>
 

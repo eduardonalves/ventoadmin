@@ -47,6 +47,14 @@ if($_GET['m'] != ""){ $mes = $_GET['m']; } else {$mes = date("m");}
 if($_GET['an'] != ""){ $ano = $_GET['an']; } else {$ano = date("Y");}
 
 
+// *** Impedindo parceiros de visualizar meses anteriores
+if ($USUARIO['tipo_usuario'] == 'MONITOR' && $USUARIO['acesso_usuario'] == 'EXTERNO'){
+	
+	$mes = date("m");
+	$ano = date("Y");
+	
+}
+
 
 switch ($mes) {
 
@@ -171,7 +179,7 @@ if(isset($_GET['tipovenda'])){
 
 <script type="text/javascript" charset="utf-8"></script>
 
-<link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.7.3.custom.css" />
+<link rel="stylesheet" type=text/css href="css/ui-lightness/jquery-ui-1.7.3.custom.css" />
 
 
 
@@ -612,7 +620,7 @@ box-shadow:  0px 0px 10px 2px #999;
 
 <td style="font-size:14px; color:#999;">ESTAT&Iacute;STICAS (CLARO FIXO)</td>
 
-<td align="right"><img src="img/voltar.png" style="cursor:pointer" onclick="window.location = '?p=clarofixo'" /></td>
+<td align="right"><img src="img/voltar.png" style="cursor:pointer" onclick="window.location = '?p=clarotv'" /></td>
 
 </tr>
 
@@ -643,30 +651,47 @@ box-shadow:  0px 0px 10px 2px #999;
 <td>Mês: 
 
 <select name="m">
+<?php 
 
-<option value="01" <? if($mes == '01'){ ?> selected="selected" <? } ?>>JANEIRO</option>
+if ($USUARIO['tipo_usuario'] == 'MONITOR' && $USUARIO['acesso_usuario'] == 'EXTERNO'){
 
-<option value="02" <? if($mes == '02'){ ?> selected="selected" <? } ?>>FEVEREIRO</option>
+?>
 
-<option value="03" <? if($mes == '03'){ ?> selected="selected" <? } ?>>MARÇO</option>
+	<option value="<?php echo $mes; ?>" selected="selected"><?php echo $m;?></option>
 
-<option value="04" <? if($mes == '04'){ ?> selected="selected" <? } ?>>ABRIL</option>
+<?php
 
-<option value="05" <? if($mes == '05'){ ?> selected="selected" <? } ?>>MAIO</option>
+}else{
+	
+?>
 
-<option value="06" <? if($mes == '06'){ ?> selected="selected" <? } ?>>JUNHO</option>
+	<option value="01" <? if($mes == '01'){ ?> selected="selected" <? } ?>>JANEIRO</option>
 
-<option value="07" <? if($mes == '07'){ ?> selected="selected" <? } ?>>JULHO</option>
+	<option value="02" <? if($mes == '02'){ ?> selected="selected" <? } ?>>FEVEREIRO</option>
 
-<option value="08" <? if($mes == '08'){ ?> selected="selected" <? } ?>>AGOSTO</option>
+	<option value="03" <? if($mes == '03'){ ?> selected="selected" <? } ?>>MARÇO</option>
 
-<option value="09" <? if($mes == '09'){ ?> selected="selected" <? } ?>>SETEMBRO</option>
+	<option value="04" <? if($mes == '04'){ ?> selected="selected" <? } ?>>ABRIL</option>
 
-<option value="10" <? if($mes == '10'){ ?> selected="selected" <? } ?>>OUTUBRO</option>
+	<option value="05" <? if($mes == '05'){ ?> selected="selected" <? } ?>>MAIO</option>
 
-<option value="11" <? if($mes == '11'){ ?> selected="selected" <? } ?>>NOVEMBRO</option>
+	<option value="06" <? if($mes == '06'){ ?> selected="selected" <? } ?>>JUNHO</option>
 
-<option value="12" <? if($mes == '12'){ ?> selected="selected" <? } ?>>DEZEMBRO</option>
+	<option value="07" <? if($mes == '07'){ ?> selected="selected" <? } ?>>JULHO</option>
+
+	<option value="08" <? if($mes == '08'){ ?> selected="selected" <? } ?>>AGOSTO</option>
+
+	<option value="09" <? if($mes == '09'){ ?> selected="selected" <? } ?>>SETEMBRO</option>
+
+	<option value="10" <? if($mes == '10'){ ?> selected="selected" <? } ?>>OUTUBRO</option>
+
+	<option value="11" <? if($mes == '11'){ ?> selected="selected" <? } ?>>NOVEMBRO</option>
+
+	<option value="12" <? if($mes == '12'){ ?> selected="selected" <? } ?>>DEZEMBRO</option>
+
+<?php 
+}
+?>
 
 </select>
 
@@ -676,15 +701,26 @@ box-shadow:  0px 0px 10px 2px #999;
 
 <select name="an">
 
-<? $a = date('Y'); while($a > '2011'){ $an = $a--; ?>
+<?php if ($USUARIO['tipo_usuario'] == 'MONITOR' && $USUARIO['acesso_usuario'] == 'EXTERNO'){
+?>
+	<option value="<?php echo $ano; ?>" selected="selected"><?php echo $ano; ?></option>
+<?php
+}else{
+?>
+
+	<? $a = date('Y'); while($a > '2011'){ $an = $a--; ?>
 
 
 
-<option value="<?= $an; ?>" <? if($ano == $an){ ?> selected="selected" <? } ?>><?= $an; ?></option>
+	<option value="<?= $an; ?>" <? if($ano == $an){ ?> selected="selected" <? } ?>><?= $an; ?></option>
 
 
 
-<? } ?>
+	<? } ?>
+
+<?php
+}
+?>
 
 </select>
 <? if($USUARIO['tipo_usuario']=="ADMINISTRADOR"){ ?>
@@ -1032,8 +1068,6 @@ if($USUARIO['tipo_usuario'] == 'SUPERVISOR'){
 
 													  vendas_clarotv.status = 'FINALIZADA'),1,NULL)) AS vendasfinalizadas, 
 
-											COUNT(if((vendas_clarotv.data_contrato LIKE '%".$ano.$mes."%'),1,NULL)) AS vendascontrato, 
-											
 											COUNT(if((vendas_clarotv.data_instalacao LIKE '%".$ano.$mes."%' && 
 
 													  vendas_clarotv.status = 'FINALIZADA' &&
@@ -1083,8 +1117,6 @@ if($USUARIO['tipo_usuario'] == 'SUPERVISOR'){
 											COUNT(if((vendas_clarotv.data_instalacao LIKE '%".$ano.$mes."%' && 
 
 													  vendas_clarotv.status = 'FINALIZADA'),1,NULL)) AS vendasfinalizadas, 
-
-											COUNT(if((vendas_clarotv.data_contrato LIKE '%".$ano.$mes."%'),1,NULL)) AS vendascontrato, 
 
 											COUNT(if((vendas_clarotv.data_instalacao LIKE '%".$ano.$mes."%' && 
 
@@ -1148,8 +1180,6 @@ while($MONITORES = mysql_fetch_array($conMONITORES)){
 
 <td bgcolor="#ceedfc" width="100px">Vendas Finalizadas</td>
 
-<!-- <td bgcolor="#ceedfc" width="100px">Vendas c/ Contrato</td>
-
 <td bgcolor="#ceedfc" width="120px">Boleto / Cartão / PE</td>
 
 </tr>
@@ -1172,8 +1202,6 @@ $conOPERADORES = $conexao->query("SELECT operadores.nome AS nomeoperador,
 
 									   	    vendas_clarotv.status = 'FINALIZADA'),1,NULL)) AS vendasfinalizadas, 
 
-								  COUNT(if((vendas_clarotv.data_contrato LIKE '%".$ano.$mes."%'),1,NULL)) AS vendascontrato, 
-								  
 								  COUNT(if((vendas_clarotv.data_instalacao LIKE '%".$ano.$mes."%' && 
 
 										    vendas_clarotv.status = 'FINALIZADA' &&
@@ -1265,8 +1293,6 @@ if ($class=="tr2"){ //alterna a cor
 
 <td><?= ceil($OPERADORES['vendasfinalizadas']);?></td>
 
-<td><?= ceil($OPERADORES['vendascontrato']);?></td>
-
 <td title="<?= ceil($OPERADORES['vendasfinalizadasboleto'])." / ".
 
 	ceil($OPERADORES['vendasfinalizadascartao'])." / ".
@@ -1310,8 +1336,6 @@ if ($class=="tr2"){ //alterna a cor
 <td><?= $MONITORES['vendasfeitas'];?></td>
 
 <td><?= $MONITORES['vendasfinalizadas'];?></td>
-
-<td><?= $MONITORES['vendascontrato'];?></td>
 
 <td><?= ceil(($MONITORES['vendasfinalizadasboleto']*100)/$MONITORES['vendasfinalizadas'])."% / ".
 

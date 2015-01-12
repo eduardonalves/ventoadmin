@@ -1095,7 +1095,7 @@ if(e!=0){
 	} else { 
 
 	
-		if ( $("#cpfduplicado").length > 0 ){
+		if ( $("#cpfduplicado").length > 0 && $("#cpfduplicado").val() == 'duplicado' ){
 	
 			var $nn = confirm("Já existe uma venda com este cpf no sistema. A venda será inserida como BLOQUEADA, e somente continuada com autorização de um Administrador.\n\nDeseja continuar?");
 

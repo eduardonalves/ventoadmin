@@ -196,16 +196,17 @@ if  (strstr(strtolower($USUARIO['login']), 'internet'))
 
 
 
+// EXCESSAO PARA STATUS BLOQUEADA
 
 
+if( isset($_POST['cpfduplicado']) && $_POST['cpfduplicado'] == 'duplicado' ){
 	
-
+	$status='BLOQUEADA';
+	
+}
 
 
 $inserir = $conexao->query("INSERT INTO vendas_clarotv (protocolo,produto,tipoVenda,pessoa,nome,nome_mae,nascimento,cpf,rg,org_exp,data_exp,profissao,sexo,estado_civil,email,telefone,tipo_tel1,telefone2,tipo_tel2,telefone3,tipo_tel3,endereco,numero,lote,quadra,complemento,bairro,cidade,uf,cep,ponto_referencia,operador,monitor,plano,pagamento,data,data_venda,vencimento,valor,banco,agencia,conta_corrente,status, tipoBandalarga, tipoEntrega, sistema) VALUES ('".$protocolo."','2','".$tipoVenda."','".$pessoa."','".$nome."','".$nome_mae."','".$nascimento."','".$cpf."','".$rg."','".$org_exp."','".$data_exp."','".$profissao."','".$sexo."','".$estado_civil."','".$email."','".$telefone."','".$tipo_tel1."','".$telefone2."','".$tipo_tel2."','".$telefone3."','".$tipo_tel3."','".$endereco."','".$numero."','".$lote."','".$quadra."','".$complemento."','".$bairro."','".$cidade."','".$uf."','".$cep."','".$ponto_referencia."','".$operador."','".$monitor."','".$plano."','".$pagamento."','".$data."','".$data."','".$vencimento."','".$valor."','".$banco."','".$agencia."','".$conta_corrente."','".$status."','".$tipoBandaLarga."','".$tipoEntrega."','".$sistema."')") or die('Ocorreu um Erro ao inserir os dados!');
-
-
-
 
 
 //LOG
@@ -686,7 +687,30 @@ if(document.getElementById('vencimento').value == ''){ document.getElementById('
 
 
 
-if(e!=0){ window.alert('ERRO: Preencha todos os campos indicados, corretamente'); $('body,html').animate({scrollTop: 150}, 800);} else { document.forms.inserir.submit(); }
+if(e!=0){ 
+	
+	window.alert('ERRO: Preencha todos os campos indicados, corretamente'); $('body,html').animate({scrollTop: 150}, 800);
+	
+	} else { 
+
+	
+		if ( $("#cpfduplicado").length > 0 && $("#cpfduplicado").val() == 'duplicado' ){
+	
+			var $nn = confirm("Já existe uma venda com este cpf no sistema. A venda será inserida como BLOQUEADA, e somente continuada com autorização de um Administrador.\n\nDeseja continuar?");
+
+			if ( $nn == true)
+			{
+				document.forms.inserir.submit();
+			}
+
+		} else {
+			
+			document.forms.inserir.submit();
+		}
+
+
+	}
+
 
 	
 
@@ -1097,7 +1121,7 @@ $(document).ready( function() {
 
 <td id="rginp"><input type="text" id="rg" name="rg" size="20" maxlength="12"/> <span class="campoobrigatorio" title="Campo Obrigatório">*</span> Org. Exp: <input type="text" title="Orgão Expedidor" id="orgexp" name="orgexp" size="20" /> <span class="campoobrigatorio" title="Campo Obrigatório">*</span> 
 
- Data Exp: <input type="text" title="Data Expedição" id="dataexp" name="dataexp" onKeyPress="mascara(this,data)" maxlength="10" size="20" /> <span class="campoobrigatorio" title="Campo Obrigatório">*</span> 
+ Data Exp: <input type="text" title="Data Expedição" id="dataexp" name="dataexp" onKeyPress="mascara(this,data)" maxlength="10" size="15" /> <span class="campoobrigatorio" title="Campo Obrigatório">*</span> 
 
 
 

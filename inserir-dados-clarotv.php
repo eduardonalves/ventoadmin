@@ -639,7 +639,7 @@ $(document).ready( function() {
 
 <tr align="left" id="cpfl">
 <td>CPF:</td>
-<td id="cpfinp"> <div id="loadcpf"></div> <input type="text" id="idcpf" name="icpf" onKeyPress="mascara(this,cpf)" onkeyup="checkcpf(this.value)" onChange="checkcpf(this.value)" maxlength="14" size="20" />
+<td id="cpfinp"> <div id="loadcpf"></div> <input type="text" id="idcpf" name="icpf" onKeyPress="mascara(this,cpf)" onkeyup="checkcpf(this.value)" onfocusout="checkcpf(this.value)" onChange="checkcpf(this.value)" maxlength="14" size="20" />
 <span class="campoobrigatorio" title="Campo Obrigatório">*</span>
 <span class="erro" id="ecpf" style="display:none">Por favor, digite o CPF do cliente!</span>
 </td>

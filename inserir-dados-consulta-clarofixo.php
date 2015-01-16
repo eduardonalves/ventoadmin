@@ -252,7 +252,7 @@ $insert_log = $conexao->query("INSERT into log_sistema (data,usuario,evento) VAL
 
 <script type="text/javascript">
 	
-window.alert("Consulta incluída com sucesso!");
+alert("Consulta incluída com sucesso!");
 
 
 <?php
@@ -260,8 +260,8 @@ if( isset($_SESSION['usuario'])){
 
 
 	if( $_POST['status'] == 'nova-venda' ){
-		
-		echo "window.location = '?p=clarofixo&o=&m=&t=&f=&s=" + $status + "&v=&i=&de=&di=&di2=&tpv=&tpentrega=&b=" . $cpf . "&ebt=n';";
+
+		echo "window.location = '?p=clarofixo&o=&m=&t=&f=&s=" . $status . "&v=&i=&de=&di=&di2=&tpv=&tpentrega=&b=" . $cpf . "&ebt=n';";
 		
 	}else{
 		

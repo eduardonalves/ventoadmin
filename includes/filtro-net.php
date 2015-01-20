@@ -178,7 +178,7 @@ $quantVENDA = $conexao->query("SELECT *,
 							 ");
 */						 
 
-$conVENDA = $conexao->query("SELECT *,
+$conVENDA = $conexao->query("SELECT *, (select nome from usuarios where id=monitor) as monitor_nome, (select nome from operadores where operador_id=operador) as operador_nome, (select nome from usuarios where id=supervisor) as supervisor_nome, (select nome from usuarios where id=auditor) as auditor_nome,
 							vendas_clarotv.data AS data,
 							vendas_clarotv.id AS id,
 							
@@ -224,7 +224,7 @@ $conVENDA = $conexao->query("SELECT *,
 
 							 
 							 
-$quantVENDA = $conexao->query("SELECT *,
+$quantVENDA = $conexao->query("SELECT *, (select nome from usuarios where id=monitor) as monitor_nome, (select nome from operadores where operador_id=operador) as operador_nome, (select nome from usuarios where id=supervisor) as supervisor_nome, (select nome from usuarios where id=auditor) as auditor_nome,
 							vendas_clarotv.data AS data,
 							vendas_clarotv.id AS id,
 							

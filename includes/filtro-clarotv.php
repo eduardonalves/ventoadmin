@@ -177,7 +177,7 @@ $quantVENDA = $conexao->query("SELECT *,
 							 ");
 */						 
 
-$conVENDA = $conexao->query("SELECT *,
+$conVENDA = $conexao->query("SELECT *, (select nome from usuarios where id=monitor) as monitor_nome, (select nome from operadores where operador_id=operador) as operador_nome, (select nome from usuarios where id=supervisor) as supervisor_nome, (select nome from usuarios where id=auditor) as auditor_nome,
 							vendas_clarotv.data AS data,
 							vendas_clarotv.id AS id,
 							
@@ -218,7 +218,7 @@ $conVENDA = $conexao->query("SELECT *,
 
 							 
 							 
-$quantVENDA = $conexao->query("SELECT *,
+$quantVENDA = $conexao->query("SELECT *, (select nome from usuarios where id=monitor) as monitor_nome, (select nome from operadores where operador_id=operador) as operador_nome, (select nome from usuarios where id=supervisor) as supervisor_nome, (select nome from usuarios where id=auditor) as auditor_nome,
 							vendas_clarotv.data AS data,
 							vendas_clarotv.id AS id,
 							
@@ -252,6 +252,7 @@ $quantVENDA = $conexao->query("SELECT *,
 							 ORDER BY $ordem 
 						
 							 ");
+
 //$quantVENDA = $conexao->query("SELECT * FROM vendas_clarotv WHERE produto='1' && gravacao != '' && (contrato LIKE '%".$_GET['b']."%' || proposta LIKE '%".$_GET['b']."%' || nome LIKE '%".$_GET['b']."%' || cpf LIKE '%".$_GET['b']."%' || cep LIKE '%".$_GET['b']."%' || plano LIKE '%".$_GET['b']."%') && tipo_instalacao LIKE '%".$_GET['t']."%' && pagamento LIKE '%".$_GET['f']."%' && status IN (".$status.") && (data >= '".$datain."' && data <= '".$datafin."') && ((data_marcada LIKE '%".$in."%' && reagendamento1 = '') || reagendamento1 LIKE '%".$in."%') && data_instalacao LIKE '%".$di."%' && tipoVenda LIKE '%".$_GET['tpv']."%'  && tipoVenda LIKE '%".$_GET['tpv']."%' && monitor LIKE '%".$loginMONITOR."%'");
 
 $quantreg = mysql_num_rows($quantVENDA);
